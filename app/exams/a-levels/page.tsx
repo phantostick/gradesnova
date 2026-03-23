@@ -42,7 +42,7 @@ function FAQSection() {
         A-Level grade boundaries — frequently asked questions
       </h2>
       <p className="text-slate-400 text-sm mb-6">
-        Common questions about A-Level grade boundaries 2024, UCAS points, and university entry requirements.
+        Common questions about A-Level grade boundaries, UCAS points, and university entry requirements.
       </p>
       <div className="space-y-2" itemScope itemType="https://schema.org/FAQPage">
         {ALEVEL_FAQS.map((faq, i) => (
@@ -110,7 +110,7 @@ export default function ALevelCalculatorPage() {
   };
   const schemaTool = {
     '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'A-Level Grade Boundaries Calculator 2024',
+    name: 'A-Level Grade Boundaries Calculator (2024-2026)',
     url: 'https://gradesnova.com/exams/a-levels',
     description: 'Free A-Level grade boundaries calculator with UCAS points converter. Enter raw marks to find your A-Level grade for AQA, Edexcel, and OCR subjects.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
@@ -125,7 +125,7 @@ export default function ALevelCalculatorPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaTool) }} />
 
-      <main className="bg-[#0a0c14] min-h-screen">
+      <main className="bg-[#0a0c14] min-h-screen text-white">
         <Navbar />
 
         <header className="bg-[#0d0f1a] border-b border-white/6 py-10">
@@ -145,14 +145,14 @@ export default function ALevelCalculatorPage() {
               <span className="text-xs font-mono uppercase tracking-widest" style={{ color: `${COLOR}aa` }}>A-Level · AQA · Grades A* to E · UCAS points</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              A-Level Grade Boundaries 2024
+              A-Level Grade Boundaries (2024–2026)
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl">
-              Enter your raw mark to find your <strong className="text-white font-medium">A-Level grade</strong> and UCAS points. Includes Maths, Biology, Chemistry, Physics, Psychology, and more. Official AQA 2024 data — with UCAS points calculator and university entry comparison.
+              Enter your raw mark to find your <strong className="text-white font-medium">A-Level grade</strong> and UCAS points. Includes Maths, Biology, Chemistry, Physics, Psychology, and more. Currently displaying the official AQA 2024 data (latest mapped in system). 2026 boundaries will be published live on Results Day.
             </p>
             <div className="flex items-center gap-3 mt-4">
-              <span className="text-xs bg-pink-500/15 text-pink-400 border border-pink-500/20 px-3 py-1 rounded-full font-medium">2024 data</span>
-              <span className="text-xs text-slate-500">2026 boundaries published on Results Day — 13 Aug 2026</span>
+              <span className="text-xs bg-pink-500/15 text-pink-400 border border-pink-500/20 px-3 py-1 rounded-full font-medium">Data: AQA 2024</span>
+              <span className="text-xs text-slate-500">2026 boundaries pending — 13 Aug 2026</span>
             </div>
           </div>
         </header>
@@ -365,7 +365,7 @@ export default function ALevelCalculatorPage() {
                 );
               })}
             </div>
-            <p className="text-xs text-slate-600 mt-4">UCAS tariff 2024. University requirements are typical entry requirements and vary by course. Always check individual course requirements.</p>
+            <p className="text-xs text-slate-600 mt-4">UCAS tariff points guide. University requirements are typical entry requirements and vary by course.</p>
           </section>
 
           {/* Full grade boundaries table */}
@@ -415,7 +415,7 @@ export default function ALevelCalculatorPage() {
             <div>
               <h3 className="text-sm font-semibold text-white mb-1">A-Level Results Day 2026 — Thursday 13 August</h3>
               <p className="text-sm text-slate-400 leading-relaxed">
-                A-Level results and grade boundaries for 2026 will be published on <strong className="text-white">Thursday 13 August 2026</strong> at 8:00am. This is two weeks before GCSE results day (21 August). University clearing opens on results day. We will update this calculator with 2026 boundaries immediately when they are released.
+                A-Level results and grade boundaries for 2026 will be published on <strong className="text-white">Thursday 13 August 2026</strong> at 8:00am. This is two weeks before GCSE results day. We will update this calculator with 2026 boundaries immediately when they are released.
               </p>
             </div>
           </div>

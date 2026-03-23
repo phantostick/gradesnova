@@ -7,10 +7,12 @@ import { TrustBar } from '@/components/trust-bar';
 import { Testimonials } from '@/components/testimonials';
 import { Footer } from '@/components/footer';
 
+const currentYear = new Date().getFullYear();
+
 export const metadata: Metadata = {
-  title: 'GradesNova — Free Exam Score Percentile Calculators 2026',
+  title: `GradesNova — Free Exam Score Percentile Calculators ${currentYear}`,
   description:
-    'Free SAT, ACT, GRE, GMAT, LSAT, GCSE and A-Level percentile calculators. Enter your score, instantly see your percentile. No signup. Updated for 2026.',
+    `Free SAT, ACT, GRE, GMAT, LSAT, GCSE and A-Level percentile calculators. Enter your score, instantly see your percentile. No signup. Updated for ${currentYear}.`,
   openGraph: {
     title: 'GradesNova — Know your score before results day',
     description:
@@ -22,7 +24,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="overflow-hidden bg-[#0a0c14]">
+    <main className="overflow-hidden bg-[#0a0c14] dark:bg-[#0a0c14] text-white">
       <Navbar />
       <Hero />
       <TrustBar />

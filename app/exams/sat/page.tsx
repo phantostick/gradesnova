@@ -18,12 +18,12 @@ const COLOR = '#6366f1';
 
 const SAT_FAQS = [
   {
-    question: 'What is a good SAT score in 2026?',
-    answer: 'A good SAT score in 2026 depends on your target colleges. The national average SAT score is 1050. Scores above 1200 (74th percentile) are above average. A score of 1400 puts you in the top 6% nationally (94th percentile), which is competitive at selective universities. For Ivy League and highly selective schools, you typically need 1500 or above (97th+ percentile). For state schools and less selective colleges, scores in the 1000–1200 range are often sufficient.',
+    question: 'What is a good SAT score for the 2025–2026 cycle?',
+    answer: 'A good SAT score depends on your target colleges. The national average SAT score is 1050. Scores above 1200 (74th percentile) are above average. A score of 1400 puts you in the top 6% nationally (94th percentile), which is competitive at selective universities. For Ivy League and highly selective schools, you typically need 1500 or above (97th+ percentile).',
   },
   {
     question: 'What percentile is a 1200 SAT score?',
-    answer: 'A score of 1200 on the SAT is approximately the 74th percentile in 2026, meaning you scored higher than about 74% of all SAT test takers nationally. This is a solid above-average score that is competitive at many four-year universities.',
+    answer: 'A score of 1200 on the SAT is approximately the 74th percentile, meaning you scored higher than about 74% of all SAT test takers nationally. This is a solid above-average score that is competitive at many four-year universities.',
   },
   {
     question: 'What percentile is a 1400 SAT score?',
@@ -47,11 +47,11 @@ const SAT_FAQS = [
   },
   {
     question: 'What SAT score do I need for a scholarship?',
-    answer: 'Scholarship thresholds vary widely by institution and program. National Merit Scholarships typically require a selection index of 207–222 depending on your state, which corresponds to very high SAT scores (roughly 1400–1520+). Many universities offer merit scholarships starting at scores around 1200–1300. Full-ride scholarships at competitive schools often require 1450 or above. Always check the specific requirements at your target schools.',
+    answer: 'Scholarship thresholds vary widely by institution and program. National Merit Scholarships typically require a selection index of 207–222 depending on your state, which corresponds to very high SAT scores (roughly 1400–1520+). Many universities offer merit scholarships starting at scores around 1200–1300.',
   },
   {
     question: 'What is the difference between the SAT and ACT?',
-    answer: 'Both the SAT and ACT are standardized tests accepted by virtually all US colleges. The SAT (400–1600 scale) focuses more on data analysis and has no Science section. The ACT (1–36 scale) includes a Science section and its Math is generally considered more straightforward. The SAT gives more time per question. Most students perform similarly on both — try a practice test for each to see which suits you better.',
+    answer: 'Both the SAT and ACT are standardized tests accepted by virtually all US colleges. The SAT (400–1600 scale) focuses more on data analysis and has no Science section. The ACT (1–36 scale) includes a Science section and its Math is generally considered more straightforward. Most students perform similarly on both — try a practice test for each to see which suits you better.',
   },
   {
     question: 'What is the average SAT score?',
@@ -167,7 +167,6 @@ export default function SATCalculatorPage() {
   const ebrwPerc          = useMemo(() => getPercentile(ebrw, SAT_EBRW_PERCENTILES), [ebrw]);
   const context           = useMemo(() => getPercentileContext(compositePerc), [compositePerc]);
 
-  // Score-specific score benchmarks for the context section
   const scoreBenchmarks = [
     { score: 1600, pct: getPercentile(1600, SAT_COMPOSITE_PERCENTILES), label: 'Perfect score' },
     { score: 1500, pct: getPercentile(1500, SAT_COMPOSITE_PERCENTILES), label: 'Ivy-competitive' },
@@ -201,9 +200,9 @@ export default function SATCalculatorPage() {
   const schemaTool = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
-    name: 'SAT Score Calculator 2026',
+    name: 'SAT Score Calculator (2025–2026)',
     url: 'https://gradesnova.com/exams/sat',
-    description: 'Free SAT score percentile calculator. Enter your SAT composite, Math, or EBRW score to instantly see your national percentile ranking. Updated for 2026 with official College Board data.',
+    description: 'Free SAT score percentile calculator. Enter your SAT composite, Math, or EBRW score to instantly see your national percentile ranking for the 2025-2026 admissions cycle.',
     applicationCategory: 'EducationalApplication',
     operatingSystem: 'Any',
     browserRequirements: 'Requires JavaScript',
@@ -230,8 +229,6 @@ export default function SATCalculatorPage() {
         {/* Hero */}
         <header className="bg-[#0d0f1a] border-b border-white/6 py-10">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            {/* Breadcrumb */}
             <nav aria-label="Breadcrumb" className="mb-4">
               <ol className="flex items-center gap-2 text-xs text-slate-500">
                 <li><Link href="/" className="hover:text-white transition-colors">Home</Link></li>
@@ -247,10 +244,10 @@ export default function SATCalculatorPage() {
               <span className="text-xs font-mono text-indigo-400/70 uppercase tracking-widest">SAT · College Board · 400–1600</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              SAT Score Calculator 2026
+              SAT Score Calculator (2025–2026)
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl">
-              Enter your SAT score to instantly see your <strong className="text-white font-medium">national percentile ranking</strong> and exactly how you compare among all test takers. Includes Math and EBRW section breakdowns. Free, no signup, updated with 2026 College Board data.
+              Enter your SAT score to instantly see your <strong className="text-white font-medium">national percentile ranking</strong> and exactly how you compare among all test takers. Updated for the 2025–2026 admissions cycle using official College Board data.
             </p>
           </div>
         </header>
@@ -277,7 +274,7 @@ export default function SATCalculatorPage() {
                 ) : (
                   <>
                     <ScoreSlider label="Math (200–800)" value={math} min={200} max={800} step={10} avg={520} color={COLOR} onChange={setMath} />
-                    <ScoreSlider label="EBRW — Reading & Writing (200–800)" value={ebrw} min={200} max={800} step={10} avg={530} color="#a855f7" onChange={setEbrw} />
+                    <ScoreSlider label="EBRW (200–800)" value={ebrw} min={200} max={800} step={10} avg={530} color="#a855f7" onChange={setEbrw} />
                     <div className="border-t border-white/8 pt-4 flex items-center justify-between">
                       <span className="text-sm text-slate-400">Composite total</span>
                       <span className="text-xl font-bold text-white">{math + ebrw}</span>
@@ -286,20 +283,6 @@ export default function SATCalculatorPage() {
                 )}
               </div>
 
-              {/* Quick select */}
-              <div>
-                <p className="text-xs text-slate-600 mb-2 uppercase tracking-wider font-medium">Common scores</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {[800, 1000, 1100, 1200, 1300, 1400, 1500, 1600].map(s => (
-                    <button key={s} onClick={() => { setComposite(s); setActiveTab('composite'); }}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium border transition-all ${compositeScore === s ? 'bg-indigo-600/20 border-indigo-500/40 text-indigo-300' : 'bg-white/4 border-white/8 text-slate-400 hover:border-white/20 hover:text-white'}`}>
-                      {s}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Score benchmarks */}
               <div className="bg-[#12141f] border border-white/8 rounded-xl p-5">
                 <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Score benchmarks</p>
                 <div className="space-y-2">
@@ -342,7 +325,6 @@ export default function SATCalculatorPage() {
                 </div>
               </motion.div>
 
-              {/* Section breakdown */}
               <AnimatePresence>
                 {activeTab === 'sections' && (
                   <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
@@ -376,16 +358,15 @@ export default function SATCalculatorPage() {
             </div>
           </div>
 
-          {/* SAT percentile chart table */}
           <section className="mt-14" aria-labelledby="chart-heading">
             <h2 id="chart-heading" className="text-2xl font-bold text-white mb-2">
-              SAT score percentile chart 2026
+              SAT score percentile chart (2025–2026)
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Official SAT percentile data from College Board. The table below shows what percentile each SAT composite score corresponds to in 2026. Use this chart to compare your score against national averages and understand where you rank among all SAT test takers.
+              Official SAT percentile data from the College Board. The table below shows what percentile each SAT composite score corresponds to during the 2025–2026 admissions cycle.
             </p>
             <div className="overflow-hidden rounded-xl border border-white/8">
-              <table className="w-full text-sm" aria-label="SAT score percentile chart 2026">
+              <table className="w-full text-sm" aria-label="SAT score percentile chart 2025-2026">
                 <thead>
                   <tr className="bg-white/4 border-b border-white/8">
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">SAT score</th>
@@ -431,11 +412,10 @@ export default function SATCalculatorPage() {
               </table>
             </div>
             <p className="text-xs text-slate-600 mt-3">
-              Source: College Board SAT Suite of Assessments Annual Report 2023–2024. Percentiles based on college-bound seniors. Data updated for 2026.
+              Source: College Board SAT Suite of Assessments Annual Report. Data updated for the 2025–2026 admissions cycle.
             </p>
           </section>
 
-          {/* What your score means */}
           <section className="mt-12" aria-labelledby="tiers-heading">
             <h2 id="tiers-heading" className="text-2xl font-bold text-white mb-6">
               What does your SAT score mean for college admissions?
@@ -456,12 +436,8 @@ export default function SATCalculatorPage() {
             </div>
           </section>
 
-          {/* FAQ */}
-          <div className="mt-14">
-            <FAQSection />
-          </div>
+          <div className="mt-14"><FAQSection /></div>
 
-          {/* Internal links */}
           <section className="mt-12 bg-[#12141f] border border-white/7 rounded-2xl p-6" aria-labelledby="other-tools-heading">
             <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">Other free exam percentile calculators</h2>
             <div className="flex flex-wrap gap-2">
@@ -470,8 +446,6 @@ export default function SATCalculatorPage() {
                 { id: 'gre',      name: 'GRE Score Calculator',  color: '#a855f7' },
                 { id: 'gmat',     name: 'GMAT Score Calculator', color: '#f59e0b' },
                 { id: 'lsat',     name: 'LSAT Score Calculator', color: '#ef4444' },
-                { id: 'gcse',     name: 'GCSE Grade Predictor',       color: '#34d399' },
-                { id: 'a-levels', name: 'A-Level Grade Predictor',    color: '#ec4899' },
               ].map(e => (
                 <Link key={e.id} href={`/exams/${e.id}`}
                   className="px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all hover:scale-105"
@@ -482,7 +456,6 @@ export default function SATCalculatorPage() {
             </div>
           </section>
         </div>
-
         <Footer />
       </main>
     </>

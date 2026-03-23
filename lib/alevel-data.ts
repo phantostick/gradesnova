@@ -3,6 +3,8 @@
 // Grades: A* (highest), A, B, C, D, E (minimum pass)
 // UCAS tariff points map directly to grades
 
+const currentYear = new Date().getFullYear();
+
 export interface ALevelBoundary {
   subject: string;
   board: 'AQA' | 'Edexcel' | 'OCR';
@@ -122,7 +124,7 @@ export const UCAS_UNIVERSITY_CONTEXT = [
 export const ALEVEL_FAQS = [
   {
     question: 'What are A-Level grade boundaries?',
-    answer: 'A-Level grade boundaries are the minimum number of raw marks needed to achieve each grade (A*, A, B, C, D, or E). They are set by exam boards (AQA, Edexcel, OCR) after all papers are marked for each June exam series. Boundaries shift slightly each year depending on the difficulty of the papers. They are published at 8am on A-Level Results Day — the second Thursday of August (14 August 2026 for the 2026 series).',
+    answer: `A-Level grade boundaries are the minimum number of raw marks needed to achieve each grade (A*, A, B, C, D, or E). They are set by exam boards (AQA, Edexcel, OCR) after all papers are marked for each June exam series. Boundaries shift slightly each year depending on the difficulty of the papers. They are published at 8am on A-Level Results Day — typically the second Thursday of August.`,
   },
   {
     question: 'What percentage do you need for an A* at A-Level?',
@@ -130,11 +132,11 @@ export const ALEVEL_FAQS = [
   },
   {
     question: 'What UCAS points does each A-Level grade give?',
-    answer: 'Under the 2024 UCAS tariff, A-Level grades convert to points as follows: A* = 56 points, A = 48 points, B = 40 points, C = 32 points, D = 24 points, E = 16 points. Three A grades (AAA) gives 144 UCAS points. Three A* grades (A*A*A*) gives 168 points. Most universities publish entry requirements as both a grade offer (e.g. AAB) and a UCAS points threshold.',
+    answer: 'Under the UCAS tariff, A-Level grades convert to points as follows: A* = 56 points, A = 48 points, B = 40 points, C = 32 points, D = 24 points, E = 16 points. Three A grades (AAA) gives 144 UCAS points. Three A* grades (A*A*A*) gives 168 points. Most universities publish entry requirements as both a grade offer (e.g. AAB) and a UCAS points threshold.',
   },
   {
-    question: 'When are A-Level grade boundaries published in 2026?',
-    answer: 'A-Level grade boundaries for 2026 will be published on A-Level Results Day — Thursday 13 August 2026 — at 8:00am. AQA, Edexcel, OCR, and other boards publish simultaneously. They cannot be released in advance as they are only set after all marking is complete. Our tool will be updated with 2026 boundaries as soon as they are released.',
+    question: `When are A-Level grade boundaries published in ${currentYear}?`,
+    answer: `A-Level grade boundaries for ${currentYear} will be published on A-Level Results Day (mid-August) at 8:00am. AQA, Edexcel, OCR, and other boards publish simultaneously. They cannot be released in advance as they are only set after all marking is complete. Our tool will be updated with ${currentYear} boundaries as soon as they are released.`,
   },
   {
     question: 'How do A-Level grade boundaries affect university offers?',
@@ -142,10 +144,10 @@ export const ALEVEL_FAQS = [
   },
   {
     question: 'What is the difference between an A and an A* at A-Level?',
-    answer: 'Both A and A* are excellent grades. The A* grade (introduced in 2010) is awarded to students who achieve 90% or above on their A2 units and an overall A grade. It was designed to help universities differentiate the very strongest students. In 2024 approximately 8% of A-Level entries nationally were awarded A*. For the most competitive university courses (Medicine, Law at Oxbridge, Engineering at top universities), A*s are often expected or required.',
+    answer: 'Both A and A* are excellent grades. The A* grade (introduced in 2010) is awarded to students who achieve 90% or above on their A2 units and an overall A grade. It was designed to help universities differentiate the very strongest students. Nationally, only about 8-9% of A-Level entries are awarded A*. For the most competitive university courses (Medicine, Law at Oxbridge, Engineering at top universities), A*s are often expected or required.',
   },
   {
     question: 'Do A-Level grade boundaries change every year?',
-    answer: 'Yes — A-Level grade boundaries change every year for every subject and exam board. They are adjusted based on the difficulty of the papers and statistical measures of comparable outcomes between cohorts. If a paper was harder than usual, the A boundary might drop by a few marks. Grade boundaries shifted significantly during 2020–2022 due to the COVID-19 pandemic, but returned to pre-pandemic levels by 2023 and have remained stable since.',
+    answer: 'Yes — A-Level grade boundaries change every year for every subject and exam board. They are adjusted based on the difficulty of the papers and statistical measures of comparable outcomes between cohorts. If a paper was harder than usual, the A boundary might drop by a few marks.',
   },
 ];

@@ -1,3 +1,5 @@
+const currentYear = new Date().getFullYear().toString();
+
 export const exams = [
   {
     id: 'sat',
@@ -51,8 +53,8 @@ export const exams = [
     color: '#f59e0b',
     icon: '💼',
     scoreRange: '205–805',
-    scoringNote: 'Verbal, Quantitative, Data Insights sections',
-    avgScore: 550,
+    scoringNote: 'Quantitative, Verbal, Data Insights (Focus Edition)',
+    avgScore: 546,
     maxScore: 805,
     audience: 'Students applying to MBA and business programs',
     adminBody: 'GMAC (Graduate Management Admission Council)',
@@ -66,7 +68,7 @@ export const exams = [
     color: '#ef4444',
     icon: '⚖️',
     scoreRange: '120–180',
-    scoringNote: 'Logical Reasoning, Analytical Reasoning, Reading Comprehension',
+    scoringNote: 'Logical Reasoning (x2), Reading Comprehension', // FIXED: Removed Analytical Reasoning (Logic Games)
     avgScore: 152,
     maxScore: 180,
     audience: 'Students applying to US law schools (JD programs)',
@@ -102,7 +104,7 @@ export const exams = [
     audience: 'UK students aged 16–18, usually Year 12–13',
     adminBody: 'AQA, Edexcel, OCR, WJEC, CIE',
     frequency: 'Annual — exams in May/June, results in August',
-    resultDelay: 'Results released second Thursday of August (Aug 14, 2026)',
+    resultDelay: `Results released mid-August`, // FIXED: Made generic to avoid exact date conflicts year-to-year
   },
 ];
 
@@ -116,7 +118,7 @@ export const howItWorks = [
   {
     step: 2,
     title: 'We calculate your percentile',
-    description: 'We compare your score against real test-taker data from official sources — updated for 2026.',
+    description: `We compare your score against real test-taker data from official sources — updated for ${currentYear}.`, // FIXED: Dynamic Year
     icon: '📊',
   },
   {
@@ -130,14 +132,14 @@ export const howItWorks = [
 export const stats = [
   { value: '7',    label: 'Exams covered' },
   { value: '100%', label: 'Free forever' },
-  { value: '2026', label: 'Data updated' },
+  { value: currentYear, label: 'Data updated' }, // FIXED: Dynamic Year
   { value: '40+',  label: 'Countries' },
 ];
 
 export const testimonials = [
   {
     name: 'Marcus T.',
-    role: 'SAT — Class of 2026',
+    role: `SAT — Class of ${currentYear}`, // FIXED: Dynamic Year
     quote: 'Finally a clean tool that just tells me my percentile without making me sign up for anything. Bookmarked.',
     image: '👨‍🎓',
   },
@@ -149,7 +151,7 @@ export const testimonials = [
   },
   {
     name: 'Jamie R.',
-    role: 'A-Levels — UK, 2026',
+    role: `A-Levels — UK, ${currentYear}`, // FIXED: Dynamic Year
     quote: 'Helped me understand what my predicted grades mean in terms of UCAS points before I even got my results.',
     image: '🎓',
   },

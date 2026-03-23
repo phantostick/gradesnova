@@ -90,7 +90,7 @@ function FAQSection() {
         GCSE grade boundaries — frequently asked questions
       </h2>
       <p className="text-slate-400 text-sm mb-6">
-        Everything you need to know about GCSE grade boundaries 2025 and 2026, what grades mean, and how boundaries are set.
+        Everything you need to know about GCSE grade boundaries, what grades mean, and how boundaries are set.
       </p>
       <div className="space-y-2" itemScope itemType="https://schema.org/FAQPage">
         {GCSE_FAQS.map((faq, i) => (
@@ -155,7 +155,7 @@ export default function GCSEPage() {
   };
   const schemaTool = {
     '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'GCSE Grade Boundaries 2026',
+    name: 'GCSE Grade Boundaries (2025-2026)',
     url: 'https://gradesnova.com/exams/gcse',
     description: 'Free GCSE grade boundaries calculator for AQA, Edexcel, OCR and WJEC. Enter raw marks to find your grade instantly. 2025 boundaries shown — updated Results Day 20 Aug 2026.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
@@ -193,10 +193,10 @@ export default function GCSEPage() {
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              GCSE Grade Boundaries 2026
+              GCSE Grade Boundaries (2025–2026)
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl">
-              Enter your raw mark to instantly find your <strong className="text-white font-medium">GCSE grade</strong> across AQA, Edexcel, OCR, and WJEC. Covers Maths, English, Sciences, and more. Showing <strong className="text-white font-medium">2025 boundaries</strong> — the most recent available. 2026 boundaries published <strong className="text-white font-medium">20 August 2026</strong>.
+              Enter your raw mark to instantly find your <strong className="text-white font-medium">GCSE grade</strong> across AQA, Edexcel, OCR, and WJEC. Covers Maths, English, Sciences, and more. Showing <strong className="text-white font-medium">2025 boundaries</strong> — the most recent available.  
             </p>
             <div className="flex flex-wrap gap-3 mt-4">
               <span className="text-xs bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full font-medium">
@@ -506,7 +506,7 @@ export default function GCSEPage() {
               GCSE Maths grade boundaries 2024 — AQA and Edexcel
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              2024 boundaries for year-on-year comparison. AQA Higher grade 9 held steady at 219 in both years. Edexcel Higher grade 9 jumped from 197 in 2024 to 217 in 2025, reflecting a harder 2025 paper.
+              2024 boundaries for year-on-year comparison. AQA Higher grade 9 held steady at 219 in both years. Edexcel Higher grade 9 jumped from 197 in 2024 to 217 in 2025, reflecting an <strong className="text-emerald-400">easier</strong> 2025 paper (students needed more marks to achieve the same grade).
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
               {(['AQA','Edexcel'] as const).map(b => (

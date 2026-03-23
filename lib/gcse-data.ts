@@ -1,6 +1,7 @@
-// GCSE Grade Boundary Data — 2025 + 2024 historical
-// Sources: AQA, Edexcel, OCR, WJEC official June 2025 documents
-// Published on GCSE Results Day: Thursday 21 August 2025
+// GCSE Grade Boundary Data
+// Sources: AQA, Edexcel, OCR, WJEC official documents
+
+const currentYear = new Date().getFullYear();
 
 export interface GCSEBoundary {
   subject: string;
@@ -85,7 +86,6 @@ export const ALL_SUBJECTS_2025: GCSEBoundary[] = [
     boundaries: { 9:179, 8:165, 7:152, 6:134, 5:117, 4:100, 3:73, 2:46, 1:20 } },
 ];
 
-// Alias for backward compatibility
 export const GCSE_BOUNDARIES_2024 = ALL_SUBJECTS_2025;
 export const GCSE_BOUNDARIES_2025 = ALL_SUBJECTS_2025;
 
@@ -127,23 +127,23 @@ export const GCSE_FAQS = [
   },
   {
     question: 'What percentage do you need for a grade 9 GCSE?',
-    answer: 'The percentage required for a grade 9 varies by subject, board, and year. For AQA Maths Higher in 2025, the grade 9 boundary was 219 out of 240 marks (91%). For AQA English Language it was 119 out of 160 (74%). Grade 9 is awarded to the top approximately 3–5% of students nationally in each subject.',
+    answer: 'The percentage required for a grade 9 varies by subject, board, and year. For AQA Maths Higher, the grade 9 boundary is often around 90%. For AQA English Language it is often around 75%. Grade 9 is awarded to the top approximately 3–5% of students nationally in each subject.',
   },
   {
-    question: 'When are GCSE grade boundaries released in 2026?',
-    answer: 'GCSE grade boundaries for 2026 will be published on GCSE Results Day — Thursday 20 August 2026 — at 8:00am. All exam boards (AQA, Edexcel, OCR, WJEC) publish simultaneously. Boundaries cannot be predicted or released before results day as they are only finalised after all marking is complete.',
+    question: `When are GCSE grade boundaries released in ${currentYear}?`,
+    answer: `GCSE grade boundaries for ${currentYear} will be published on GCSE Results Day (typically the third Thursday of August) at 8:00am. All exam boards (AQA, Edexcel, OCR, WJEC) publish simultaneously. Boundaries cannot be predicted or released before results day as they are only finalised after all marking is complete.`,
   },
   {
     question: 'Why do GCSE grade boundaries change every year?',
-    answer: 'Boundaries change each year because exam papers vary in difficulty. Exam boards use a process called "comparable outcomes" to ensure that the same proportion of students achieve each grade as in previous years, adjusting for any differences in cohort ability. If a paper is harder, boundaries drop slightly; if easier, they rise. For example, AQA Maths Higher grade 9 was 219 in both 2024 and 2025, showing high stability, but Edexcel Higher grade 9 moved from 197 in 2024 to 217 in 2025 — a significant shift.',
+    answer: 'Boundaries change each year because exam papers vary in difficulty. Exam boards use a process called "comparable outcomes" to ensure that the same proportion of students achieve each grade as in previous years, adjusting for any differences in cohort ability. If a paper is harder, boundaries drop slightly; if easier, they rise.',
   },
   {
     question: 'What is the difference between AQA, Edexcel, OCR and WJEC grade boundaries?',
-    answer: 'Each exam board sets its own grade boundaries independently because each board writes its own papers. The same raw mark can mean a different grade on different boards. For example, a mark of 186 out of 240 in GCSE Maths Higher is a grade 8 at Edexcel in 2025, but would fall just below grade 8 at AQA (which required 191). However, the proportion of students achieving each grade is kept broadly consistent across all boards by Ofqual.',
+    answer: 'Each exam board sets its own grade boundaries independently because each board writes its own papers. The same raw mark can mean a different grade on different boards. However, the proportion of students achieving each grade is kept broadly consistent across all boards by Ofqual.',
   },
   {
     question: 'What is the difference between Higher and Foundation tier at GCSE?',
-    answer: 'Foundation tier covers grades 1–5 and is designed for students targeting grades 3–5. Higher tier covers grades 4–9 and is for students targeting 5–9. Grade 4 can be achieved on either tier. Ofqual rules require that on Higher papers, half the marks target grades 7–9 and half target grades 4–6. On Foundation, half the marks target grades 4–5 and half target grades 1–3. This is why grade 4 boundaries on Higher tier are often surprisingly low as a percentage of total marks.',
+    answer: 'Foundation tier covers grades 1–5 and is designed for students targeting grades 3–5. Higher tier covers grades 4–9 and is for students targeting 5–9. Grade 4 can be achieved on either tier. Ofqual rules require that on Higher papers, half the marks target grades 7–9 and half target grades 4–6. On Foundation, half the marks target grades 4–5 and half target grades 1–3.',
   },
   {
     question: 'How do the new 9-1 grades compare to the old A*-G grades?',
