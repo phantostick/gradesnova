@@ -2,105 +2,94 @@
 
 import Link from 'next/link';
 
-const examLinks = [
-  { id: 'sat',      name: 'SAT Percentile Calculator' },
-  { id: 'act',      name: 'ACT Percentile Calculator' },
-  { id: 'gre',      name: 'GRE Percentile Calculator' },
-  { id: 'gmat',     name: 'GMAT Percentile Calculator' },
-  { id: 'lsat',     name: 'LSAT Percentile Calculator' },
-  { id: 'gcse',     name: 'GCSE Grade Predictor' },
-  { id: 'a-levels', name: 'A-Level Grade Predictor' },
-];
-
 export function Footer() {
-  const year = new Date().getFullYear();
+  const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#080a12] border-t border-white/6">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid md:grid-cols-4 gap-10 mb-12">
-
-          {/* Brand */}
+    <footer className="bg-[#0a0c14] border-t border-white/10 pt-16 pb-8 mt-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+          {/* Brand Col */}
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4 group w-fit">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-emerald-400 flex items-center justify-center shadow-lg">
-                <span className="text-white font-bold text-sm">GN</span>
+            <Link href="/" className="flex items-center gap-2 mb-4">
+              <div className="w-7 h-7 bg-emerald-500 rounded-md flex items-center justify-center text-white font-bold text-base shadow-[0_0_10px_rgba(16,185,129,0.3)]">
+                G
               </div>
-              <span className="font-semibold text-white text-lg tracking-tight">
-                Grades<span className="text-indigo-400">Nova</span>
+              <span className="font-bold text-xl tracking-tight text-white">
+                Grades<span className="text-emerald-400">Nova</span>
               </span>
             </Link>
-            <p className="text-sm text-slate-500 leading-relaxed">
-              Know your score before results day. Free percentile calculators for every major exam.
+            <p className="text-sm text-slate-400 leading-relaxed mb-6">
+              Free, instant exam score percentile calculators. Know exactly where you stand before results day.
             </p>
           </div>
 
-          {/* Exams */}
+          {/* Calculators Col */}
           <div>
-            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">Exams</h4>
-            <ul className="space-y-2.5">
-              {examLinks.map(e => (
-                <li key={e.id}>
-                  <Link
-                    href={`/exams/${e.id}`}
-                    className="text-sm text-slate-500 hover:text-white transition-colors"
-                  >
-                    {e.name}
-                  </Link>
-                </li>
-              ))}
+            <h3 className="text-sm font-semibold text-white mb-4">US Admissions</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/exams/sat" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">SAT Calculator</Link>
+              </li>
+              <li>
+                <Link href="/exams/act" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">ACT Calculator</Link>
+              </li>
+            </ul>
+            
+            <h3 className="text-sm font-semibold text-white mt-6 mb-4">UK Qualifications</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/exams/gcse" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">GCSE Boundaries</Link>
+              </li>
+              <li>
+                <Link href="/exams/a-levels" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">A-Level Boundaries</Link>
+              </li>
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Grad School Col */}
           <div>
-            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">Resources</h4>
-            <ul className="space-y-2.5">
-              {[
-                ['/blog', 'Blog'],
-                ['/blog/what-is-a-good-sat-score', 'What is a good SAT score?'],
-                ['/blog/act-percentile-chart', 'ACT percentile chart'],
-                ['/blog/gre-score-percentile', 'GRE score percentile'],
-                ['/blog/lsat-percentile', 'LSAT percentile breakdown'],
-                ['/blog/gcse-grade-boundaries', 'GCSE grade boundaries'],
-              ].map(([href, label]) => (
-                <li key={href}>
-                  <Link href={href} className="text-sm text-slate-500 hover:text-white transition-colors">
-                    {label}
-                  </Link>
-                </li>
-              ))}
+            <h3 className="text-sm font-semibold text-white mb-4">Graduate Admissions</h3>
+            <ul className="space-y-3">
+              <li>
+                <Link href="/exams/gre" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">GRE Calculator</Link>
+              </li>
+              <li>
+                <Link href="/exams/gmat" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">GMAT Calculator</Link>
+              </li>
+              <li>
+                <Link href="/exams/lsat" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">LSAT Calculator</Link>
+              </li>
             </ul>
           </div>
 
-          {/* Legal */}
+          {/* Legal / Info Col */}
           <div>
-            <h4 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">Company</h4>
-            <ul className="space-y-2.5">
-              {[
-                ['/about', 'About'],
-                ['/contact', 'Contact'],
-                ['/privacy', 'Privacy Policy'],
-                ['/terms', 'Terms of Use'],
-              ].map(([href, label]) => (
-                <li key={href}>
-                  <Link href={href} className="text-sm text-slate-500 hover:text-white transition-colors">
-                    {label}
-                  </Link>
-                </li>
-              ))}
+            <h3 className="text-sm font-semibold text-white mb-4">Legal</h3>
+            <ul className="space-y-3">
+              <li>
+                <span className="text-sm text-slate-500 cursor-not-allowed">Privacy Policy</span>
+              </li>
+              <li>
+                <span className="text-sm text-slate-500 cursor-not-allowed">Terms of Service</span>
+              </li>
             </ul>
+            <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10">
+              <p className="text-xs text-slate-500 leading-relaxed">
+                GradesNova is not affiliated with, nor endorsed by, the College Board, ACT Inc., ETS, GMAC, LSAC, AQA, Edexcel, OCR, or WJEC. All trademarks are the property of their respective owners.
+              </p>
+            </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
-        <div className="border-t border-white/6 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-slate-600">
-            © {year} GradesNova. All rights reserved. Not affiliated with College Board, ACT, ETS, GMAC, LSAC, Ofqual or any exam body.
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-slate-500">
+            © {currentYear} GradesNova. All rights reserved.
           </p>
-          <p className="text-xs text-slate-600">
-            Data sourced from official exam bodies. Updated for 2026.
-          </p>
+          <div className="flex items-center gap-2 text-sm text-slate-500">
+            Built for the {currentYear - 1}–{currentYear} admissions cycle.
+          </div>
         </div>
       </div>
     </footer>

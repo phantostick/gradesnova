@@ -1,102 +1,97 @@
 'use client';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const examLinks = [
-  { id: 'sat',      name: 'SAT',      desc: 'Scholastic Assessment Test',    color: '#6366f1' },
-  { id: 'act',      name: 'ACT',      desc: 'American College Testing',      color: '#06b6d4' },
-  { id: 'gre',      name: 'GRE',      desc: 'Graduate Record Exam',          color: '#a855f7' },
-  { id: 'gmat',     name: 'GMAT',     desc: 'Graduate Management Test',      color: '#f59e0b' },
-  { id: 'lsat',     name: 'LSAT',     desc: 'Law School Admission Test',     color: '#ef4444' },
-  { id: 'gcse',     name: 'GCSE',     desc: 'General Certificate of Edu.',   color: '#34d399' },
-  { id: 'a-levels', name: 'A-Levels', desc: 'Advanced Level Qualifications', color: '#ec4899' },
+const EXAM_LINKS = [
+  { name: 'SAT Calculator', href: '/exams/sat', icon: '📐' },
+  { name: 'ACT Calculator', href: '/exams/act', icon: '✏️' },
+  { name: 'GRE Calculator', href: '/exams/gre', icon: '🎓' },
+  { name: 'GMAT Calculator', href: '/exams/gmat', icon: '💼' },
+  { name: 'LSAT Calculator', href: '/exams/lsat', icon: '⚖️' },
+  { name: 'GCSE Boundaries', href: '/exams/gcse', icon: '🏫' },
+  { name: 'A-Level Boundaries', href: '/exams/a-levels', icon: '📚' },
 ];
 
 export function Navbar() {
-  const [toolsOpen, setToolsOpen] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const pathname = usePathname();
 
+  // Handle scroll effect for navbar background
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setDropdownOpen(false);
+  }, [pathname]);
+
   return (
-    <motion.nav
-      initial={{ opacity: 0, y: -16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4 }}
-      className={`sticky top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#0a0c14]/95 backdrop-blur-xl border-b border-white/8 shadow-lg shadow-black/20'
-          : 'bg-[#0a0c14]/80 backdrop-blur-md border-b border-white/5'
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
+        isScrolled
+          ? 'bg-[#0a0c14]/80 backdrop-blur-md border-white/10 shadow-lg'
+          : 'bg-transparent border-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-indigo-500/25 group-hover:shadow-indigo-500/40 transition-shadow">
-              <span className="text-white font-bold text-sm tracking-tight">GN</span>
+          <Link href="/" className="flex items-center gap-2 group">
+            <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white font-bold text-lg group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+              G
             </div>
-            <span className="font-semibold text-lg text-white tracking-tight">
-              Grades<span className="text-indigo-400">Nova</span>
+            <span className="font-bold text-xl tracking-tight text-white">
+              Grades<span className="text-emerald-400">Nova</span>
             </span>
           </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1">
-
-            {/* Tools dropdown */}
-            <div className="relative">
-              <button
-                onMouseEnter={() => setToolsOpen(true)}
-                onMouseLeave={() => setToolsOpen(false)}
-                onClick={() => setToolsOpen(v => !v)}
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/6 transition-all"
-              >
-                Tools
-                <ChevronDown
-                  size={14}
-                  className={`transition-transform duration-200 ${toolsOpen ? 'rotate-180' : ''}`}
-                />
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            
+            {/* Tools Dropdown */}
+            <div 
+              className="relative"
+              onMouseEnter={() => setDropdownOpen(true)}
+              onMouseLeave={() => setDropdownOpen(false)}
+            >
+              <button className="flex items-center gap-1 text-sm font-medium text-slate-300 hover:text-white transition-colors py-2">
+                Calculators <ChevronDown size={14} className={`transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
               </button>
-
+              
               <AnimatePresence>
-                {toolsOpen && (
+                {dropdownOpen && (
                   <motion.div
-                    initial={{ opacity: 0, y: 6, scale: 0.97 }}
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 6, scale: 0.97 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     transition={{ duration: 0.15 }}
-                    onMouseEnter={() => setToolsOpen(true)}
-                    onMouseLeave={() => setToolsOpen(false)}
-                    className="absolute top-full left-0 mt-1.5 w-72 bg-[#12141f] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden"
+                    className="absolute top-full left-1/2 -translate-x-1/2 w-64 pt-2"
                   >
-                    <div className="p-2">
-                      {examLinks.map(exam => (
+                    <div className="bg-[#12141f] border border-white/10 rounded-xl shadow-xl overflow-hidden p-2 flex flex-col gap-1">
+                      {EXAM_LINKS.map((link) => (
                         <Link
-                          key={exam.id}
-                          href={`/exams/${exam.id}`}
-                          onClick={() => setToolsOpen(false)}
-                          className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/6 transition-colors group"
+                          key={link.href}
+                          href={link.href}
+                          className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                            pathname === link.href 
+                              ? 'bg-white/10 text-white font-medium' 
+                              : 'text-slate-400 hover:bg-white/5 hover:text-white'
+                          }`}
                         >
-                          <div
-                            className="w-8 h-8 rounded-md flex items-center justify-center text-xs font-bold shrink-0"
-                            style={{ backgroundColor: `${exam.color}20`, color: exam.color }}
-                          >
-                            {exam.name.slice(0, 2)}
-                          </div>
-                          <div>
-                            <p className="text-sm font-medium text-white group-hover:text-indigo-300 transition-colors">{exam.name}</p>
-                            <p className="text-xs text-slate-500">{exam.desc}</p>
-                          </div>
+                          <span className="text-base">{link.icon}</span>
+                          {link.name}
                         </Link>
                       ))}
                     </div>
@@ -104,67 +99,94 @@ export function Navbar() {
                 )}
               </AnimatePresence>
             </div>
+            
+            {/* Upgraded Links */}
+            <Link href="/#how-it-works" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+              Methodology
+            </Link>
+            
+            <Link href="/blog" className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-white transition-colors group">
+              Score Guides
+              <span className="text-[9px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded-full group-hover:bg-emerald-500/30 transition-colors">
+                New
+              </span>
+            </Link>
 
-            <Link href="/#how" className="px-3.5 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/6 transition-all">
-              How It Works
-            </Link>
-            <Link href="/blog" className="px-3.5 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/6 transition-all">
-              Blog
-            </Link>
-            <Link href="/about" className="px-3.5 py-2 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/6 transition-all">
-              About
+            <Link href="/contact" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+              Contact
             </Link>
           </div>
 
-          {/* Mobile menu button */}
-          <button
-            className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/6 transition-all"
-            onClick={() => setMobileOpen(v => !v)}
-          >
-            {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center">
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="text-slate-300 hover:text-white p-2"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile Navigation */}
       <AnimatePresence>
-        {mobileOpen && (
+        {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-white/8 bg-[#0a0c14]/98 backdrop-blur-xl overflow-hidden"
+            className="md:hidden bg-[#0d0f1a] border-b border-white/10 overflow-hidden"
           >
-            <div className="px-4 py-4 space-y-1">
-              <p className="text-xs font-medium text-slate-500 uppercase tracking-wider px-3 mb-2">Tools</p>
-              {examLinks.map(exam => (
-                <Link
-                  key={exam.id}
-                  href={`/exams/${exam.id}`}
-                  onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-white/6 transition-colors"
+            <div className="px-4 py-5 space-y-5">
+              <div>
+                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3 px-2">Calculators</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {EXAM_LINKS.map((link) => (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className={`flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                        pathname === link.href 
+                          ? 'bg-white/10 text-white font-medium' 
+                          : 'text-slate-400 hover:bg-white/5'
+                      }`}
+                    >
+                      <span>{link.icon}</span>
+                      <span className="truncate">{link.name.split(' ')[0]}</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="pt-5 border-t border-white/10 space-y-1">
+                <Link 
+                  href="/#how-it-works" 
+                  className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white"
                 >
-                  <div
-                    className="w-7 h-7 rounded-md flex items-center justify-center text-xs font-bold shrink-0"
-                    style={{ backgroundColor: `${exam.color}20`, color: exam.color }}
-                  >
-                    {exam.name.slice(0, 2)}
-                  </div>
-                  <span className="text-sm text-slate-300">{exam.name} Percentile Calculator</span>
+                  Methodology
                 </Link>
-              ))}
-              <div className="border-t border-white/8 my-2" />
-              {[['/#how', 'How It Works'], ['/blog', 'Blog'], ['/about', 'About']].map(([href, label]) => (
-                <Link key={href} href={href} onClick={() => setMobileOpen(false)}
-                  className="block px-3 py-2.5 rounded-lg text-sm text-slate-300 hover:text-white hover:bg-white/6 transition-all">
-                  {label}
+                <Link 
+                  href="/blog" 
+                  className="flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white"
+                >
+                  Score Guides
+                  <span className="text-[9px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded-full">
+                    New
+                  </span>
                 </Link>
-              ))}
+                <Link 
+                  href="/contact" 
+                  className="block px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-white/5 hover:text-white"
+                >
+                  Contact
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </nav>
   );
 }

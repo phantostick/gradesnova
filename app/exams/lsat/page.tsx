@@ -12,12 +12,12 @@ const COLOR = '#ef4444';
 
 const LSAT_FAQS = [
   {
-    question: 'What is a good LSAT score in 2026?',
-    answer: 'A good LSAT score in 2026 depends on your target law schools. The national average LSAT score is approximately 152. Scores of 160+ (85th percentile) are considered strong and competitive at many law schools. For T14 schools (the top 14 law programs), you generally need 168+ (96th percentile). Yale, Harvard, and Stanford Law typically have median LSAT scores of 173–175. For full scholarship consideration at lower-ranked schools, 160–165 is often sufficient.',
+    question: 'What is a good LSAT score for the 2025–2026 cycle?',
+    answer: 'A good LSAT score depends on your target law schools. The national average LSAT score is approximately 152. Scores of 160+ (85th percentile) are considered strong and competitive at many law schools. For T14 schools (the top 14 law programs), you generally need 168+ (96th percentile). Yale, Harvard, and Stanford Law typically have median LSAT scores of 173–175. For full scholarship consideration at lower-ranked schools, 160–165 is often sufficient.',
   },
   {
     question: 'What percentile is a 160 LSAT score?',
-    answer: 'A score of 160 on the LSAT is approximately the 85th percentile in 2026, meaning you scored higher than about 85% of all LSAT test takers. This is a strong score competitive at many law schools, though below the median for T14 programs.',
+    answer: 'A score of 160 on the LSAT is approximately the 85th percentile, meaning you scored higher than about 85% of all LSAT test takers. This is a strong score competitive at many law schools, though below the median for T14 programs.',
   },
   {
     question: 'What percentile is a 165 LSAT score?',
@@ -37,7 +37,7 @@ const LSAT_FAQS = [
   },
   {
     question: 'How many times can I take the LSAT?',
-    answer: 'LSAC allows you to take the LSAT up to three times in a single testing year (June to May), five times within the current and past five testing years, and a maximum of seven times in your lifetime. Most law schools see all your scores, though many focus primarily on your highest score. The LSAT is offered approximately 9 times per year.',
+    answer: 'LSAC allows you to take the LSAT up to three times in a single testing year (July to June), five times within the current and past five testing years, and a maximum of seven times in your lifetime. Most law schools see all your scores, though many focus primarily on your highest score. The LSAT is offered approximately 9 times per year.',
   },
   {
     question: 'How is the LSAT scored?',
@@ -158,7 +158,7 @@ export default function LSATCalculatorPage() {
   };
   const schemaTool = {
     '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'LSAT Score Calculator 2026',
+    name: 'LSAT Score Calculator (2025-2026)',
     url: 'https://gradesnova.com/exams/lsat',
     description: 'Free LSAT score percentile calculator with T14 law school median comparison. Enter your LSAT score to instantly see your national percentile ranking.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
@@ -175,7 +175,7 @@ export default function LSATCalculatorPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaTool) }} />
 
-      <main className="bg-[#0a0c14] min-h-screen">
+      <main className="bg-[#0a0c14] min-h-screen text-white">
         <Navbar />
 
         <header className="bg-[#0d0f1a] border-b border-white/6 py-10">
@@ -195,10 +195,10 @@ export default function LSATCalculatorPage() {
               <span className="text-xs font-mono uppercase tracking-widest" style={{ color: `${COLOR}aa` }}>LSAT · LSAC · 120–180</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              LSAT Score Calculator 2026
+              LSAT Score Calculator (2025–2026)
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl">
-              Enter your LSAT score to instantly see your <strong className="text-white font-medium">national percentile ranking</strong> and compare against T14 law school medians. Includes Harvard, Yale, Stanford Law, and more. Free, no signup, updated with official 2026 LSAC data.
+              Enter your LSAT score to instantly see your <strong className="text-white font-medium">national percentile ranking</strong> and compare against T14 law school medians. Includes Harvard, Yale, Stanford Law, and more. Updated for the 2025–2026 admissions cycle.
             </p>
           </div>
         </header>
@@ -318,7 +318,7 @@ export default function LSATCalculatorPage() {
                     Show all {LSAT_SCHOOL_MEDIANS.length} schools ↓
                   </button>
                 )}
-                <p className="text-[10px] text-slate-600 mt-4">Data: LSAC 2023–24 ABA 509 disclosures.</p>
+                <p className="text-[10px] text-slate-600 mt-4">Data: Recent LSAC ABA 509 disclosures.</p>
               </div>
             </div>
           </div>
@@ -326,13 +326,13 @@ export default function LSATCalculatorPage() {
           {/* LSAT percentile chart */}
           <section className="mt-14" aria-labelledby="chart-heading">
             <h2 id="chart-heading" className="text-2xl font-bold text-white mb-2">
-              LSAT score percentile chart 2026
+              LSAT score percentile chart (2025–2026)
             </h2>
             <p className="text-slate-400 text-sm mb-6">
               Official LSAT percentile data from LSAC. Shows what percentage of test takers score at or below each LSAT score. The LSAT score scale runs from 120 to 180. Use this chart to find the percentile for any LSAT score.
             </p>
             <div className="overflow-hidden rounded-xl border border-white/8">
-              <table className="w-full text-sm" aria-label="LSAT score percentile chart 2026">
+              <table className="w-full text-sm" aria-label="LSAT score percentile chart 2025-2026">
                 <thead>
                   <tr className="bg-white/4 border-b border-white/8">
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">LSAT score</th>
@@ -378,7 +378,7 @@ export default function LSATCalculatorPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-slate-600 mt-3">Source: LSAC LSAT Percentile Ranks 2022–2023. Based on scores from the three most recent testing years.</p>
+            <p className="text-xs text-slate-600 mt-3">Source: LSAC LSAT Percentile Ranks. Data updated for the 2025–2026 admissions cycle.</p>
           </section>
 
           {/* Score tiers */}
@@ -410,8 +410,8 @@ export default function LSATCalculatorPage() {
                 { id: 'act', name: 'ACT Score Calculator', color: '#06b6d4' },
                 { id: 'gre', name: 'GRE Score Calculator', color: '#a855f7' },
                 { id: 'gmat', name: 'GMAT Score Calculator', color: '#f59e0b' },
-                { id: 'gcse', name: 'GCSE Grade Predictor', color: '#34d399' },
-                { id: 'a-levels', name: 'A-Level Grade Predictor', color: '#ec4899' },
+                { id: 'gcse', name: 'GCSE Grade Boundaries', color: '#34d399' },
+                { id: 'a-levels', name: 'A-Level Grade Boundaries', color: '#ec4899' },
               ].map(e => (
                 <Link key={e.id} href={`/exams/${e.id}`}
                   className="px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all hover:scale-105"

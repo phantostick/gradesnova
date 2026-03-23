@@ -15,12 +15,12 @@ const COLOR = '#a855f7';
 
 const GRE_FAQS = [
   {
-    question: 'What is a good GRE score in 2026?',
-    answer: 'A good GRE score in 2026 depends on your target graduate programs. The average GRE scores are approximately 151 for Verbal Reasoning and 153 for Quantitative Reasoning. For competitive PhD programs in STEM, a Quant score of 163+ (68th percentile) is typically expected. For humanities PhD programs, a Verbal score of 158+ (82nd percentile) is often sought. Check average GRE scores at your specific target programs, as requirements vary widely by field and school.',
+    question: 'What is a good GRE score for the 2025–2026 cycle?',
+    answer: 'A good GRE score depends on your target graduate programs. The average GRE scores are approximately 151 for Verbal Reasoning and 153 for Quantitative Reasoning. For competitive PhD programs in STEM, a Quant score of 163+ (68th percentile) is typically expected. For humanities PhD programs, a Verbal score of 158+ (82nd percentile) is often sought. Check average GRE scores at your specific target programs, as requirements vary widely by field and school.',
   },
   {
     question: 'What percentile is a 160 GRE Verbal score?',
-    answer: 'A GRE Verbal score of 160 is approximately the 87th percentile in 2026 — you scored higher than about 87% of all GRE test takers on the Verbal section. This is an excellent Verbal score competitive at most graduate programs.',
+    answer: 'A GRE Verbal score of 160 is approximately the 87th percentile — you scored higher than about 87% of all GRE test takers on the Verbal section. This is an excellent Verbal score competitive at most graduate programs.',
   },
   {
     question: 'What percentile is a 160 GRE Quant score?',
@@ -40,7 +40,7 @@ const GRE_FAQS = [
   },
   {
     question: 'How long are GRE scores valid?',
-    answer: 'GRE scores are valid for five years from the date you took the test. For example, if you took the GRE in June 2022, those scores are valid through June 2027. You can take the GRE up to five times in any 12-month period, and no more than once every 21 days.',
+    answer: 'GRE scores are valid for five years from the date you took the test. You can take the GRE up to five times in any 12-month period, and no more than once every 21 days.',
   },
   {
     question: 'What GRE score do I need for a top PhD program?',
@@ -170,7 +170,7 @@ export default function GRECalculatorPage() {
   };
   const schemaTool = {
     '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'GRE Score Calculator 2026',
+    name: 'GRE Score Calculator (2025-2026)',
     url: 'https://gradesnova.com/exams/gre',
     description: 'Free GRE score percentile calculator. Enter GRE Verbal, Quant, and Analytical Writing scores to see national percentiles and compare by graduate program.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
@@ -185,7 +185,7 @@ export default function GRECalculatorPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaTool) }} />
 
-      <main className="bg-[#0a0c14] min-h-screen">
+      <main className="bg-[#0a0c14] min-h-screen text-white">
         <Navbar />
 
         <header className="bg-[#0d0f1a] border-b border-white/6 py-10">
@@ -205,10 +205,10 @@ export default function GRECalculatorPage() {
               <span className="text-xs font-mono uppercase tracking-widest" style={{ color: `${COLOR}aa` }}>GRE · ETS · Verbal & Quant 130–170</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              GRE Score Calculator 2026
+              GRE Score Calculator (2025–2026)
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl">
-              Enter your GRE Verbal, Quantitative, and Analytical Writing scores to instantly see your <strong className="text-white font-medium">national percentile rankings</strong> and compare against average scores by graduate program. Free, no signup, updated with 2026 ETS data.
+              Enter your GRE Verbal, Quantitative, and Analytical Writing scores to instantly see your <strong className="text-white font-medium">national percentile rankings</strong> and compare against average scores by graduate program. Updated for the 2025–2026 admissions cycle.
             </p>
           </div>
         </header>
@@ -329,14 +329,14 @@ export default function GRECalculatorPage() {
           {/* GRE percentile chart */}
           <section className="mt-14" aria-labelledby="chart-heading">
             <h2 id="chart-heading" className="text-2xl font-bold text-white mb-2">
-              GRE score percentile chart 2026
+              GRE score percentile chart (2025–2026)
             </h2>
             <p className="text-slate-400 text-sm mb-6">
               Official GRE Verbal and Quantitative percentile data from ETS. Note the key difference: a 160 on Verbal equals the 87th percentile, but a 160 on Quant is only the 54th percentile. This is because the GRE pool skews heavily toward high-Quant STEM applicants.
             </p>
             <div className="overflow-x-auto">
               <div className="overflow-hidden rounded-xl border border-white/8 min-w-[500px]">
-                <table className="w-full text-sm" aria-label="GRE Verbal and Quant percentile chart 2026">
+                <table className="w-full text-sm" aria-label="GRE Verbal and Quant percentile chart">
                   <thead>
                     <tr className="bg-white/4 border-b border-white/8">
                       <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Score</th>
@@ -373,7 +373,7 @@ export default function GRECalculatorPage() {
                 </table>
               </div>
             </div>
-            <p className="text-xs text-slate-600 mt-3">Source: ETS GRE Guide to the Use of Scores, 2022–2023. Updated for 2026.</p>
+            <p className="text-xs text-slate-600 mt-3">Source: ETS GRE Guide to the Use of Scores. Updated for the 2025–2026 admissions cycle.</p>
           </section>
 
           {/* Key insight callout */}
@@ -416,8 +416,8 @@ export default function GRECalculatorPage() {
                 { id: 'act',      name: 'ACT Score Calculator',  color: '#06b6d4' },
                 { id: 'lsat',     name: 'LSAT Score Calculator', color: '#ef4444' },
                 { id: 'gmat',     name: 'GMAT Score Calculator', color: '#f59e0b' },
-                { id: 'gcse',     name: 'GCSE Grade Predictor',       color: '#34d399' },
-                { id: 'a-levels', name: 'A-Level Grade Predictor',    color: '#ec4899' },
+                { id: 'gcse',     name: 'GCSE Grade Boundaries', color: '#34d399' },
+                { id: 'a-levels', name: 'A-Level Grade Boundaries', color: '#ec4899' },
               ].map(e => (
                 <Link key={e.id} href={`/exams/${e.id}`}
                   className="px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all hover:scale-105"
