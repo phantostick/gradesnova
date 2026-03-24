@@ -118,35 +118,23 @@ export function getPercentageFromMark(mark: number, maxMark: number): number {
 
 export const GCSE_FAQS = [
   {
-    question: 'What are GCSE grade boundaries?',
-    answer: 'GCSE grade boundaries are the minimum number of marks needed to achieve each grade from 1 to 9. They are set by exam boards (AQA, Edexcel, OCR, WJEC) after all marking is complete, and vary slightly each year depending on how difficult the papers were. This ensures fairness — if a paper is harder than usual, the grade boundaries are set lower so that students performing at the same level as in previous years receive the same grades. Boundaries are published at 8am on GCSE Results Day each August.',
+    question: 'How does the 9-1 GCSE grading system work?',
+    answer: 'Introduced in 2017, the 9-1 scale replaced the old A*-G system. 9 is the highest grade, awarded to the top 4-5% of students. A grade 4 is considered a "standard pass" (equivalent to an old C), and a grade 5 is a "strong pass" (equivalent to a high C/low B). Grades 7, 8, and 9 correspond to the old A and A* grades.',
   },
   {
-    question: 'What is a standard pass and a strong pass at GCSE?',
-    answer: 'Grade 4 is the "standard pass" — broadly equivalent to the old grade C. It is the minimum required for most further education, apprenticeships, and employment. Grade 5 is the "strong pass" — equivalent to a high C or low B. Most sixth forms and many universities require grade 5 in English and Maths for entry. Students who do not achieve a grade 4 in GCSE English Language or Maths are required to continue studying and resit those subjects.',
+    question: 'What happens if I don\'t get a grade 4 in Maths or English?',
+    answer: 'In the UK, achieving a grade 4 (standard pass) in both English Language and Mathematics is a government requirement. If you score a grade 3 or below, you will be required to resit the exams during your post-16 education until you pass or turn 18.',
   },
   {
-    question: 'What percentage do you need for a grade 9 GCSE?',
-    answer: 'The percentage required for a grade 9 varies by subject, board, and year. For AQA Maths Higher, the grade 9 boundary is often around 90%. For AQA English Language it is often around 75%. Grade 9 is awarded to the top approximately 3–5% of students nationally in each subject.',
+    question: 'What is the difference between Foundation and Higher tier boundaries?',
+    answer: 'Many GCSE subjects (like Maths and Sciences) are split into tiers. Foundation tier papers are easier, but the maximum grade you can achieve is a 5. Higher tier papers are more difficult and allow you to achieve grades 4 through 9. If you score below the boundary for a grade 4 on a Higher paper, you may receive a grade 3 as a safety net, but falling below that results in a U (Unclassified).',
   },
   {
-    question: `When are GCSE grade boundaries released in ${currentYear}?`,
-    answer: `GCSE grade boundaries for ${currentYear} will be published on GCSE Results Day (typically the third Thursday of August) at 8:00am. All exam boards (AQA, Edexcel, OCR, WJEC) publish simultaneously. Boundaries cannot be predicted or released before results day as they are only finalised after all marking is complete.`,
+    question: 'When will the 2026 GCSE grade boundaries be published?',
+    answer: 'By rule, exam boards (AQA, Edexcel, OCR, WJEC) do not publish grade boundaries until the morning of Results Day to prevent unnecessary panic. For the 2026 academic year, official GCSE boundaries will be released at exactly 8:00am on Thursday, 20 August 2026.',
   },
   {
-    question: 'Why do GCSE grade boundaries change every year?',
-    answer: 'Boundaries change each year because exam papers vary in difficulty. Exam boards use a process called "comparable outcomes" to ensure that the same proportion of students achieve each grade as in previous years, adjusting for any differences in cohort ability. If a paper is harder, boundaries drop slightly; if easier, they rise.',
-  },
-  {
-    question: 'What is the difference between AQA, Edexcel, OCR and WJEC grade boundaries?',
-    answer: 'Each exam board sets its own grade boundaries independently because each board writes its own papers. The same raw mark can mean a different grade on different boards. However, the proportion of students achieving each grade is kept broadly consistent across all boards by Ofqual.',
-  },
-  {
-    question: 'What is the difference between Higher and Foundation tier at GCSE?',
-    answer: 'Foundation tier covers grades 1–5 and is designed for students targeting grades 3–5. Higher tier covers grades 4–9 and is for students targeting 5–9. Grade 4 can be achieved on either tier. Ofqual rules require that on Higher papers, half the marks target grades 7–9 and half target grades 4–6. On Foundation, half the marks target grades 4–5 and half target grades 1–3.',
-  },
-  {
-    question: 'How do the new 9-1 grades compare to the old A*-G grades?',
-    answer: 'Grade 9 is above the old A*. Grades 8 and 7 correspond to A* and A. Grades 6, 5, and 4 cover B and C. Grades 3, 2, and 1 correspond to D, E, F, and G. The new system gives more differentiation at the top end. Grade 5 is the new "good pass" equivalent to what universities and employers previously considered a "B grade." The U grade (ungraded) remains the same in both systems.',
+    question: 'Do grade boundaries change every year?',
+    answer: 'Yes. Grade boundaries are not fixed percentages. After all exams are marked, senior examiners review the data. If a paper was exceptionally difficult compared to previous years, the boundaries will be lowered so students are not unfairly disadvantaged. If a paper was easier, boundaries will rise.',
   },
 ];

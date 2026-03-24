@@ -247,27 +247,23 @@ export function getPercentileContext(percentile: number): { label: string; color
 // SAT FAQ data for schema markup
 export const SAT_FAQS = [
   {
-    question: 'What is a good SAT score?',
-    answer: 'A good SAT score depends on your target colleges. The average SAT score is around 1050. Scores above 1200 are above average, scores above 1400 put you in the top 10%, and a 1580+ puts you in the top 1%. For highly selective universities like the Ivy League, you generally need 1500+.',
+    question: 'What is a good SAT score for the 2025–2026 admissions cycle?',
+    answer: 'A "good" score is entirely dependent on your target colleges. The national average is around 1050. A score of 1200 places you in the top 25% nationally and is highly competitive for most state universities. To be competitive at highly selective private colleges, aim for a 1400+ (top 6%). For Ivy League and top-tier institutions (MIT, Stanford), successful applicants typically score 1500 or higher (97th+ percentile).',
   },
   {
-    question: 'What percentile is a 1200 SAT score?',
-    answer: 'A score of 1200 on the SAT is approximately the 74th percentile, meaning you scored higher than about 74% of all test takers.',
+    question: 'How do SAT percentiles work on the Digital SAT?',
+    answer: 'Your percentile rank shows the percentage of students in a nationally representative sample who scored at or below your score. For example, if your composite score is 1350 and your percentile is 87, you scored higher than 87% of all test-takers. The College Board updates these percentile norms annually based on the graduating class data.',
   },
   {
-    question: 'What percentile is a 1400 SAT score?',
-    answer: 'A score of 1400 on the SAT is approximately the 94th percentile, placing you in the top 6% of all SAT test takers nationally.',
+    question: 'Do colleges look at my composite score or section percentiles?',
+    answer: 'Most colleges focus primarily on your composite score (out of 1600). However, engineering, computer science, and business programs will heavily scrutinize your Math section score and percentile. Conversely, humanities and journalism programs will look closely at your Evidence-Based Reading and Writing (EBRW) percentile.',
   },
   {
-    question: 'How is the SAT scored?',
-    answer: 'The SAT is scored on a scale of 400 to 1600. It has two sections: Math (200–800) and Evidence-Based Reading and Writing (200–800). The two section scores are added together to produce the composite score.',
+    question: 'What is SAT superscoring?',
+    answer: 'Superscoring is a policy used by many universities where they take your highest Math score and your highest EBRW score across all the different dates you took the SAT, and combine them to create a new, higher composite score. If your target colleges superscore, it is highly recommended to take the SAT at least twice.',
   },
   {
-    question: 'How many people take the SAT each year?',
-    answer: 'Over 2 million students take the SAT each year in the United States. The College Board administers the test multiple times throughout the year.',
-  },
-  {
-    question: 'Can I take the SAT multiple times?',
-    answer: 'Yes. Most students take the SAT 2–3 times. Many colleges consider your highest score, and some use "superscoring" — taking your highest section scores from different test dates.',
+    question: 'Is a 1000 on the SAT a bad score?',
+    answer: 'A 1000 is just slightly below the national average (approximately the 34th percentile). While it may not be competitive for highly selective universities, it is widely accepted at many regional public universities and less selective four-year colleges. With focused preparation, most students can improve a 1000 by 100–150 points.',
   },
 ];

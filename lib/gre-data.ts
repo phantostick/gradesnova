@@ -134,27 +134,19 @@ export function getGREPercentileContext(percentile: number, section: 'verbal' | 
 
 export const GRE_FAQS = [
   {
-    question: 'What is a good GRE score?',
-    answer: 'A good GRE score depends on your target programs. Average scores are about 151 for Verbal and 153 for Quantitative. Scores above 160 on either section are generally considered strong. Top PhD programs in STEM often expect 160+ Quant, while humanities programs value high Verbal scores (158+). Check the average scores for your specific programs.',
+    question: 'What is a good GRE score for the shorter format?',
+    answer: 'A "good" GRE score is highly specific to the graduate program you are applying to. Generally, a score above 158 on Verbal (82nd percentile) and 163 on Quant (68th percentile) is considered strong for master\'s programs. Top-tier PhD programs often expect scores in the 90th+ percentile for the section most relevant to their field.',
   },
   {
-    question: 'What percentile is a 160 GRE Verbal score?',
-    answer: 'A GRE Verbal score of 160 is approximately the 87th percentile, meaning you scored higher than about 87% of all GRE test takers.',
+    question: 'Why is a 160 Quant only the 54th percentile?',
+    answer: 'The GRE applicant pool is heavily skewed by international and domestic students applying to competitive STEM programs who score extremely well on the Quantitative section. Because so many test-takers score between 165 and 170, a score of 160 actually falls near the middle of the pack (54th percentile). In contrast, a 160 on Verbal places you in the 87th percentile.',
   },
   {
-    question: 'What percentile is a 160 GRE Quant score?',
-    answer: 'A GRE Quantitative score of 160 is approximately the 54th percentile. Quant scores have a different distribution than Verbal — many STEM applicants score 160+, so a 160 is roughly average for that pool. A 165+ is generally considered strong for STEM programs.',
+    question: 'Does my target program care about Analytical Writing (AW)?',
+    answer: 'It depends on the discipline. Humanities, social sciences, and journalism programs often look closely at the AW score (aim for a 4.5 or higher). STEM programs typically place very little weight on the AW score, focusing almost entirely on your Quantitative Reasoning performance.',
   },
   {
-    question: 'How is the GRE scored?',
-    answer: 'The GRE General Test has three sections: Verbal Reasoning (130–170), Quantitative Reasoning (130–170), and Analytical Writing (0–6, in half-point increments). The Verbal and Quant scores are in 1-point increments. Most programs care primarily about Verbal and Quant; AW is secondary unless you are applying to a writing-intensive field.',
-  },
-  {
-    question: 'How long are GRE scores valid?',
-    answer: 'GRE scores are valid for five years from the test date. You can take the GRE up to five times in any continuous 12-month period, and no more than once every 21 days.',
-  },
-  {
-    question: 'Do all graduate programs require the GRE?',
-    answer: 'No. Many graduate programs — including some top MBA, law, and medical schools — have made the GRE optional or eliminated it entirely. Always check your specific programs. However, many traditional PhD programs in STEM and social sciences still require it.',
+    question: 'How long are GRE scores valid for graduate applications?',
+    answer: 'GRE scores are valid for exactly five years from your test date. Because percentiles shift slightly year over year as the testing pool changes, ETS will report your scores using the most recent percentile tables available at the time you send your report.',
   },
 ];

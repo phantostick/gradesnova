@@ -181,27 +181,23 @@ export function getACTPercentileContext(percentile: number): { label: string; co
 
 export const ACT_FAQS = [
   {
-    question: 'What is a good ACT score?',
-    answer: 'The national average ACT score is 21. A score of 24 or above is generally considered above average. Scores of 28+ are competitive at selective colleges, and 33+ puts you in the top 3% of test takers. For highly selective schools, aim for 33–36.',
+    question: 'What is a good ACT score for 2025–2026?',
+    answer: 'The national average ACT composite score is approximately 21. Scoring a 24 puts you in the top 25% of test-takers, which is strong for many state universities. A score of 28 to 30 (top 10%) is highly competitive for selective colleges. For elite universities and the Ivy League, applicants typically aim for a 33 or higher (top 3% nationally).',
   },
   {
-    question: 'What percentile is a 24 ACT score?',
-    answer: 'A score of 24 on the ACT is approximately the 74th percentile, meaning you scored higher than about 74% of all test takers nationally.',
+    question: 'How is the ACT composite score calculated?',
+    answer: 'Your ACT composite score is the mathematical average of your four section scores: English, Math, Reading, and Science. Each section is scored from 1 to 36. If your average results in a decimal, the ACT rounds to the nearest whole number (e.g., an average of 28.5 rounds up to a 29 composite).',
   },
   {
-    question: 'What percentile is a 30 ACT score?',
-    answer: 'A score of 30 on the ACT is approximately the 93rd percentile, placing you in the top 7% of all ACT test takers.',
+    question: 'Why is my Science score percentile different from my Math percentile?',
+    answer: 'Percentiles are calculated individually for each section based on how all students performed nationwide. The Science section often has a steeper percentile curve, meaning missing just one or two questions can drop your percentile significantly compared to the Math or Reading sections.',
   },
   {
-    question: 'How is the ACT scored?',
-    answer: 'The ACT is scored on a scale of 1 to 36. It has four sections: English, Mathematics, Reading, and Science. Each section is scored 1–36, and the composite score is the average of all four section scores, rounded to the nearest whole number.',
+    question: 'Do colleges prefer the ACT or the SAT?',
+    answer: 'All US colleges and universities accept both the ACT and the SAT equally. There is no preference. You should take a practice test for both and focus on the one where you naturally score higher. The ACT is generally faster-paced and includes a dedicated Science section, whereas the SAT focuses slightly more on complex problem-solving.',
   },
   {
-    question: 'How many times can I take the ACT?',
-    answer: 'You can take the ACT as many times as you want. Most students take it 2–3 times. Many colleges accept your highest composite score, and some schools will superscore — taking the highest section scores from multiple sittings.',
-  },
-  {
-    question: 'SAT vs ACT: which should I take?',
-    answer: 'Both are accepted equally at virtually all US colleges. The ACT has a Science section and its Math is generally considered more straightforward. The SAT focuses more on data analysis and has no separate Science section. Try a practice test for each and go with the one where you naturally score higher.',
+    question: 'What is a good ACT Writing score?',
+    answer: 'The ACT Writing test is optional and scored separately on a scale of 2 to 12. The average score is roughly a 6.5. A score of 8 or higher is generally considered strong and places you in the top 15–20% of test-takers. Very few colleges require the Writing section today.',
   },
 ];

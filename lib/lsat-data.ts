@@ -99,27 +99,19 @@ export function getLSATPercentileContext(percentile: number): { label: string; c
 
 export const LSAT_FAQS = [
   {
-    question: 'What is a good LSAT score?',
-    answer: 'A good LSAT score depends on your target schools. The average LSAT score is around 152. Scores of 160+ (top 15%) are considered good for many law schools. To be competitive at T14 schools, you generally need 168+ (top 5%). Yale, Harvard, and Stanford typically have median LSAT scores of 173–175.',
+    question: 'What is a good LSAT score for the 2025–2026 cycle?',
+    answer: 'The median LSAT score nationally is about a 152. A score of 160 (85th percentile) is considered highly competitive for many regional and state law schools. To be competitive for the "T14" (the top 14 ranked law schools in the US), applicants generally need a score of 168 to 170+ (96th+ percentile).',
   },
   {
-    question: 'What percentile is a 160 LSAT score?',
-    answer: 'A score of 160 on the LSAT is approximately the 85th percentile, meaning you scored higher than about 85% of all LSAT test takers.',
+    question: 'How did the removal of Logic Games affect LSAT percentiles?',
+    answer: 'Starting in August 2024, the LSAC removed the Analytical Reasoning (Logic Games) section and replaced it with a second Logical Reasoning section. While the format changed, the LSAC ensures through statistical equating that the 120–180 scale remains consistent. A 170 today represents the same mastery of logical deduction and reading comprehension as a 170 did in previous years.',
   },
   {
-    question: 'What percentile is a 170 LSAT score?',
-    answer: 'A score of 170 on the LSAT is approximately the 97th percentile, placing you in the top 3% of all LSAT test takers. This is considered an exceptional score and is competitive at all law schools including the T14.',
-  },
-  {
-    question: 'How is the LSAT scored?',
-    answer: 'The LSAT is scored on a scale of 120 to 180. The raw score (number of correct answers) is converted to a scaled score using a process called equating, which accounts for slight differences in difficulty between test versions. There is no penalty for wrong answers.',
-  },
-  {
-    question: 'How many times can I take the LSAT?',
-    answer: 'You can take the LSAT up to three times in a single testing year, five times within the current and past five testing years, and a total of seven times in your lifetime. Law schools typically see all your scores, though many focus on your highest.',
+    question: 'Do law schools average multiple LSAT scores?',
+    answer: 'While law schools can see every time you took the LSAT, the American Bar Association (ABA) requires schools to report the highest score of their matriculating class. Because of this, the vast majority of law schools only care about your highest LSAT score and do not average them.',
   },
   {
     question: 'What LSAT score do I need for a full scholarship?',
-    answer: 'Full scholarship thresholds vary by school. At lower-ranked schools (ranked 50–100), a score of 160–165 can often earn significant merit aid. For T14 schools, you generally need 170+ to be considered for scholarships. Schools often use LSAT scores to award merit scholarships to students who improve their incoming class median.',
+    answer: 'Law school scholarships are heavily tied to LSAT scores because high scores boost the school\'s national ranking. If your LSAT score is significantly above a school\'s 75th percentile median (e.g., scoring a 165 at a school where the median is a 158), you are in a very strong position to negotiate substantial or full-tuition merit scholarships.',
   },
 ];
