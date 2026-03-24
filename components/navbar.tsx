@@ -109,12 +109,7 @@ export function Navbar() {
               Methodology
             </Link>
             
-            <Link href="/blog" className="flex items-center gap-1.5 text-sm font-medium text-slate-300 hover:text-white transition-colors group">
-              Score Guides
-              <span className="text-[9px] font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded-full group-hover:bg-emerald-500/30 transition-colors">
-                New
-              </span>
-            </Link>
+            
 
             <Link href="/contact" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
               Contact
