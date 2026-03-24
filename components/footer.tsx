@@ -68,10 +68,10 @@ export function Footer() {
             <h3 className="text-sm font-semibold text-white mb-4">Legal</h3>
             <ul className="space-y-3">
               <li>
-                <span className="text-sm text-slate-500 cursor-not-allowed">Privacy Policy</span>
+                <Link href="/privacy" className="text-sm text-slate-500 hover:text-emerald-400 transition-colors">Privacy Policy</Link>
               </li>
               <li>
-                <span className="text-sm text-slate-500 cursor-not-allowed">Terms of Service</span>
+                <Link href="/terms" className="text-sm text-slate-500 hover:text-emerald-400 transition-colors">Terms of Service</Link>
               </li>
             </ul>
             <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10">

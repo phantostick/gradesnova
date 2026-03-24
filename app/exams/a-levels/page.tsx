@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import {
-  ALEVEL_BOUNDARIES_2024, ALEVEL_GRADE_INFO, UCAS_POINTS,
+  ALEVEL_BOUNDARIES_2025, ALEVEL_GRADE_INFO, UCAS_POINTS,
   UCAS_UNIVERSITY_CONTEXT, GRADE_ORDER, getTotalUCASPoints,
   getGradeFromMark, getPercentageFromMark, ALEVEL_FAQS,
   type ALevel, type ALevelBoundary,
@@ -15,7 +15,7 @@ import Link from 'next/link';
 
 const COLOR = '#ec4899';
 
-const SUBJECTS = [...new Set(ALEVEL_BOUNDARIES_2024.map(b => b.subject))];
+const SUBJECTS = [...new Set(ALEVEL_BOUNDARIES_2025.map(b => b.subject))];
 
 function GradeDisplay({ grade }: { grade: ALevel | 'U' | null }) {
   if (!grade || grade === 'U') return null;
@@ -48,7 +48,9 @@ function FAQSection() {
         {ALEVEL_FAQS.map((faq, i) => (
           <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden"
             itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-            <button onClick={() => setOpen(open === i ? null : i)}
+            <button 
+              type="button"
+              onClick={(e) => { e.preventDefault(); setOpen(open === i ? null : i); }}
               className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
               aria-expanded={open === i}>
               <span className="text-sm font-medium text-white" itemProp="name">{faq.question}</span>
@@ -84,7 +86,7 @@ export default function ALevelCalculatorPage() {
   ]);
 
   const boundary = useMemo<ALevelBoundary | undefined>(() =>
-    ALEVEL_BOUNDARIES_2024.find(b => b.subject === subject)
+    ALEVEL_BOUNDARIES_2025.find(b => b.subject === subject)
   , [subject]);
 
   const grade     = useMemo(() => boundary && mark > 0 ? getGradeFromMark(mark, boundary) : null, [mark, boundary]);
@@ -93,7 +95,7 @@ export default function ALevelCalculatorPage() {
   const ucasFromGrade = grade && grade !== 'U' ? UCAS_POINTS[grade] : 0;
 
   const totalUCAS = useMemo(() =>
-    getTotalUCASPoints(aLevelGrades.filter(g => g.grade).map(g => g.grade as ALevel))
+    getTotalUCASPoints(aLevelGrades.filter(g => g.grade !== null).map(g => g.grade as ALevel))
   , [aLevelGrades]);
 
   const schemaBreadcrumb = {
@@ -110,7 +112,7 @@ export default function ALevelCalculatorPage() {
   };
   const schemaTool = {
     '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'A-Level Grade Boundaries Calculator (2024-2026)',
+    name: 'A-Level Grade Boundaries Calculator (2025-2026)',
     url: 'https://gradesnova.com/exams/a-levels',
     description: 'Free A-Level grade boundaries calculator with UCAS points converter. Enter raw marks to find your A-Level grade for AQA, Edexcel, and OCR subjects.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
@@ -145,13 +147,13 @@ export default function ALevelCalculatorPage() {
               <span className="text-xs font-mono uppercase tracking-widest" style={{ color: `${COLOR}aa` }}>A-Level · AQA · Grades A* to E · UCAS points</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              A-Level Grade Boundaries (2024–2026)
+              A-Level Grade Boundaries (2025–2026)
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl">
-              Enter your raw mark to find your <strong className="text-white font-medium">A-Level grade</strong> and UCAS points. Includes Maths, Biology, Chemistry, Physics, Psychology, and more. Currently displaying the official AQA 2024 data (latest mapped in system). 2026 boundaries will be published live on Results Day.
+              Enter your raw mark to find your <strong className="text-white font-medium">A-Level grade</strong> and UCAS points. Includes Maths, Biology, Chemistry, Physics, Psychology, and more. Currently displaying the official AQA 2025 data (latest mapped in system). 2026 boundaries will be published live on Results Day.
             </p>
             <div className="flex items-center gap-3 mt-4">
-              <span className="text-xs bg-pink-500/15 text-pink-400 border border-pink-500/20 px-3 py-1 rounded-full font-medium">Data: AQA 2024</span>
+              <span className="text-xs bg-pink-500/15 text-pink-400 border border-pink-500/20 px-3 py-1 rounded-full font-medium">Data: AQA 2025</span>
               <span className="text-xs text-slate-500">2026 boundaries pending — 13 Aug 2026</span>
             </div>
           </div>
@@ -167,7 +169,12 @@ export default function ALevelCalculatorPage() {
                 {/* Subject */}
                 <div>
                   <label htmlFor="alevel-subject" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Subject</label>
-                  <select id="alevel-subject" value={subject} onChange={e => setSubject(e.target.value)}
+                  <select id="alevel-subject" value={subject} 
+                    onChange={e => {
+                      setSubject(e.target.value);
+                      setMark(0);
+                      setInputVal('');
+                    }}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-pink-500/50 cursor-pointer">
                     {SUBJECTS.map(s => <option key={s} value={s} className="bg-[#12141f]">{s}</option>)}
                   </select>
@@ -181,9 +188,16 @@ export default function ALevelCalculatorPage() {
                   <input id="alevel-mark" type="number" min={0} max={boundary?.maxMark || 500}
                     value={inputVal}
                     onChange={e => {
-                      setInputVal(e.target.value);
-                      const n = parseInt(e.target.value);
-                      if (!isNaN(n) && n >= 0) setMark(Math.min(n, boundary?.maxMark || 500));
+                      const val = e.target.value;
+                      setInputVal(val);
+                      if (val === '') {
+                        setMark(0);
+                        return;
+                      }
+                      const parsed = parseInt(val, 10);
+                      if (!isNaN(parsed) && parsed >= 0) {
+                        setMark(Math.min(parsed, boundary?.maxMark || 500));
+                      }
                     }}
                     placeholder={`Enter mark (0–${boundary?.maxMark || '…'})`}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-lg font-mono text-white placeholder-slate-600 focus:outline-none focus:border-pink-500/50" />
@@ -198,7 +212,14 @@ export default function ALevelCalculatorPage() {
                         const threshold = boundary.boundaries[g];
                         const info = ALEVEL_GRADE_INFO[g];
                         return (
-                          <button key={g} onClick={() => { setMark(threshold); setInputVal(String(threshold)); }}
+                          <button 
+                            key={g} 
+                            type="button"
+                            onClick={(e) => { 
+                              e.preventDefault();
+                              setMark(threshold); 
+                              setInputVal(String(threshold)); 
+                            }}
                             className="px-2.5 py-1 rounded-lg text-xs border transition-all hover:scale-105"
                             style={{ backgroundColor: `${info.color}15`, borderColor: `${info.color}30`, color: info.color }}>
                             {g}: {threshold}
@@ -259,7 +280,7 @@ export default function ALevelCalculatorPage() {
                   <div className="flex flex-col items-center justify-center py-10 text-center">
                     <div className="w-16 h-16 rounded-2xl bg-white/4 flex items-center justify-center text-3xl mb-4" aria-hidden="true">📚</div>
                     <p className="text-slate-400 text-sm">Select a subject and enter your raw mark</p>
-                    <p className="text-xs text-slate-600 mt-2">AQA grade boundaries — June 2024</p>
+                    <p className="text-xs text-slate-600 mt-2">AQA grade boundaries — June 2025</p>
                   </div>
                 )}
               </div>
@@ -268,7 +289,7 @@ export default function ALevelCalculatorPage() {
               {boundary && (
                 <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
                   <h3 className="text-sm font-semibold text-slate-300 mb-4">
-                    {subject} grade boundaries — AQA 2024 (out of {boundary.maxMark})
+                    {subject} grade boundaries — AQA 2025 (out of {boundary.maxMark})
                   </h3>
                   <div className="space-y-2">
                     {GRADE_ORDER.map(g => {
@@ -315,7 +336,13 @@ export default function ALevelCalculatorPage() {
                   </select>
                   <div className="flex gap-1">
                     {(['A*', 'A', 'B', 'C', 'D', 'E'] as ALevel[]).map(g => (
-                      <button key={g} onClick={() => setALevelGrades(prev => prev.map((gr, j) => j === i ? { ...gr, grade: g } : gr))}
+                      <button 
+                        key={g} 
+                        type="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setALevelGrades(prev => prev.map((gr, j) => j === i ? { ...gr, grade: g } : gr));
+                        }}
                         className={`w-8 h-8 rounded-lg text-xs font-bold border transition-all ${entry.grade === g ? 'border-transparent text-white' : 'border-white/10 text-slate-500 hover:text-white hover:border-white/20'}`}
                         style={entry.grade === g ? { backgroundColor: ALEVEL_GRADE_INFO[g].color } : {}}>
                         {g}
@@ -327,13 +354,23 @@ export default function ALevelCalculatorPage() {
                       {entry.grade ? UCAS_POINTS[entry.grade] : '—'}
                     </span>
                   </div>
-                  <button onClick={() => setALevelGrades(prev => prev.filter((_, j) => j !== i))}
+                  <button 
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setALevelGrades(prev => prev.filter((_, j) => j !== i));
+                    }}
                     className="text-slate-600 hover:text-red-400 transition-colors shrink-0">
                     <Trash2 size={14} />
                   </button>
                 </div>
               ))}
-              <button onClick={() => setALevelGrades(prev => [...prev, { subject: 'Mathematics', grade: null }])}
+              <button 
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setALevelGrades(prev => [...prev, { subject: 'Mathematics', grade: null }]);
+                }}
                 className="flex items-center gap-2 text-xs text-slate-500 hover:text-white transition-colors mt-2">
                 <Plus size={14} /> Add another A-Level
               </button>
@@ -371,13 +408,13 @@ export default function ALevelCalculatorPage() {
           {/* Full grade boundaries table */}
           <section className="mt-14" aria-labelledby="table-heading">
             <h2 id="table-heading" className="text-2xl font-bold text-white mb-2">
-              A-Level grade boundaries 2024 — all subjects
+              A-Level grade boundaries 2025 — all subjects
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Official AQA A-Level grade boundaries from the June 2024 exam series. Shows the minimum raw marks needed for each grade. Boundaries change each year based on paper difficulty.
+              Official AQA A-Level grade boundaries from the June 2025 exam series. Shows the minimum raw marks needed for each grade. Boundaries change each year based on paper difficulty.
             </p>
             <div className="overflow-x-auto">
-              <table className="w-full text-sm min-w-[700px]" aria-label="A-Level grade boundaries 2024 AQA">
+              <table className="w-full text-sm min-w-[700px]" aria-label="A-Level grade boundaries 2025 AQA">
                 <thead>
                   <tr className="bg-white/4 border-b border-white/8">
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Subject</th>
@@ -391,7 +428,7 @@ export default function ALevelCalculatorPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {ALEVEL_BOUNDARIES_2024.map((b, i) => (
+                  {ALEVEL_BOUNDARIES_2025.map((b, i) => (
                     <tr key={i} className={`border-b border-white/5 last:border-0 ${i % 2 === 0 ? '' : 'bg-white/2'}`}>
                       <td className="px-4 py-2.5 text-slate-200 font-medium text-sm">{b.subject}</td>
                       <td className="px-3 py-2.5 text-center font-mono text-xs text-emerald-400 font-semibold">{b.boundaries['A*']}</td>
@@ -406,7 +443,7 @@ export default function ALevelCalculatorPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-slate-600 mt-3">Source: AQA A-Level grade boundaries June 2024. Board: AQA. 2026 boundaries published 13 August 2026.</p>
+            <p className="text-xs text-slate-600 mt-3">Source: AQA A-Level grade boundaries June 2025. Board: AQA. 2026 boundaries published 13 August 2026.</p>
           </section>
 
           {/* Results day callout */}
@@ -415,7 +452,7 @@ export default function ALevelCalculatorPage() {
             <div>
               <h3 className="text-sm font-semibold text-white mb-1">A-Level Results Day 2026 — Thursday 13 August</h3>
               <p className="text-sm text-slate-400 leading-relaxed">
-                A-Level results and grade boundaries for 2026 will be published on <strong className="text-white">Thursday 13 August 2026</strong> at 8:00am. This is two weeks before GCSE results day. We will update this calculator with 2026 boundaries immediately when they are released.
+                A-Level results and grade boundaries for 2026 will be published on <strong className="text-white">Thursday 13 August 2026</strong> at 8:00am. We will update this calculator with 2026 boundaries immediately when they are released.
               </p>
             </div>
           </div>
