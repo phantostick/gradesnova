@@ -1,27 +1,26 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next";
 
 // 1. HIGH-PERFORMANCE FONT LOADING
-// Subsetting to latin only, and using 'swap' prevents text from being invisible while loading
 const inter = Inter({ 
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 });
 
-// 2. SEPARATED VIEWPORT EXPORT (Next.js 14+ standard for faster parsing)
+// 2. SEPARATED VIEWPORT EXPORT (Next.js 14+ standard)
 export const viewport: Viewport = {
   themeColor: "#0a0c14",
   width: "device-width",
   initialScale: 1,
-  maximumScale: 5, // Allows accessibility zooming, but starts at 1x
+  maximumScale: 5,
 };
 
 // 3. FULLY OPTIMIZED SEO METADATA
 export const metadata: Metadata = {
-  metadataBase: new URL('https://gradesnova.com'), // Speeds up OpenGraph crawling
+  metadataBase: new URL('https://gradesnova.com'),
   title: {
     template: '%s | GradesNova',
     default: 'GradesNova — Free Exam Score Percentile Calculators',
@@ -31,7 +30,7 @@ export const metadata: Metadata = {
   authors: [{ name: 'GradesNova' }],
   icons: {
     icon: [
-      { url: '/image.svg', type: 'image/svg+xml' } // Your crisp vector favicon
+      { url: '/image.svg', type: 'image/svg+xml' }
     ],
     apple: '/image.svg',
   },
@@ -43,7 +42,7 @@ export const metadata: Metadata = {
     siteName: 'GradesNova',
     images: [
       {
-        url: '/image1.jpg', // Your social sharing card
+        url: '/image1.jpg',
         width: 1200,
         height: 630,
         alt: 'GradesNova Percentile Calculators',
@@ -76,11 +75,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // 'scroll-smooth' gives you smooth anchor linking with 0kb of JavaScript
     <html lang="en" className="dark scroll-smooth">
-      {/* 'antialiased' optimizes font rendering on macOS/iOS */}
       <body className={`${inter.className} antialiased bg-[#0a0c14] text-white min-h-screen flex flex-col selection:bg-emerald-500/30 selection:text-emerald-200`}>
         {children}
+        
+        {/* VERCEL ANALYTICS & SPEED INSIGHTS */}
+        <Analytics />
       </body>
     </html>
   );
