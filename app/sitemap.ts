@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: BASE_URL,
       lastModified: now,
-      changeFrequency: 'monthly',
+      changeFrequency: 'weekly',
       priority: 1.0,
     },
     {
