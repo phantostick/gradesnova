@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Menu, X, ChevronDown, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import Image from 'next/image';
 const EXAM_LINKS = [
   { name: 'SAT Calculator', href: '/exams/sat', icon: '📐' },
   { name: 'ACT Calculator', href: '/exams/act', icon: '✏️' },
@@ -49,13 +49,17 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-emerald-500 rounded-lg flex items-center justify-center text-white font-bold text-lg group-hover:scale-105 transition-transform shadow-[0_0_15px_rgba(16,185,129,0.3)]">
-              G
-            </div>
-            <span className="font-bold text-xl tracking-tight text-white">
-              Grades<span className="text-emerald-400">Nova</span>
-            </span>
-          </Link>
+  <Image 
+    src="/image.svg"  /* <-- Updated to image.svg */
+    alt="GradesNova Logo" 
+    width={32} 
+    height={32} 
+    className="group-hover:scale-105 transition-transform"
+  />
+  <span className="font-bold text-xl tracking-tight text-white">
+    Grades<span className="text-emerald-400">Nova</span>
+  </span>
+</Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">

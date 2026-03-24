@@ -1,94 +1,84 @@
-import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
-import './globals.css';
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
 
-const geist = Geist({
-  subsets: ['latin'],
-  variable: '--font-geist',
-  display: 'swap', // prevents FOIT — text shows immediately in fallback font
-  preload: true,
+// 1. HIGH-PERFORMANCE FONT LOADING
+// Subsetting to latin only, and using 'swap' prevents text from being invisible while loading
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
 });
 
-const geistMono = Geist_Mono({
-  subsets: ['latin'],
-  variable: '--font-geist-mono',
-  display: 'swap',
-  preload: false, // mono only used in code/score elements, not critical path
-});
+// 2. SEPARATED VIEWPORT EXPORT (Next.js 14+ standard for faster parsing)
+export const viewport: Viewport = {
+  themeColor: "#0a0c14",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5, // Allows accessibility zooming, but starts at 1x
+};
 
+// 3. FULLY OPTIMIZED SEO METADATA
 export const metadata: Metadata = {
+  metadataBase: new URL('https://gradesnova.com'), // Speeds up OpenGraph crawling
   title: {
-    default: 'GradesNova — Free Exam Percentile Calculators',
     template: '%s | GradesNova',
+    default: 'GradesNova — Free Exam Score Percentile Calculators',
   },
-  description:
-    'Free SAT, ACT, GRE, GMAT, LSAT, GCSE and A-Level percentile calculators. Enter your score and instantly see where you rank nationally. Updated for 2026.',
-  keywords: [
-    'SAT score calculator',
-    'ACT score calculator',
-    'GRE score calculator',
-    'LSAT score calculator',
-    'GCSE grade boundaries 2026',
-    'A-level grade boundaries 2026',
-    'exam score percentile',
-    'test score percentile 2026',
-  ],
+  description: 'Free, instant percentile calculators for SAT, ACT, GRE, GMAT, LSAT, GCSE and A-Levels. Know exactly where you stand before results day.',
+  keywords: ['SAT percentile', 'ACT score calculator', 'GRE percentiles', 'A-Level grade boundaries', 'GCSE 2025 boundaries'],
   authors: [{ name: 'GradesNova' }],
-  creator: 'GradesNova',
-  metadataBase: new URL('https://gradesnova.com'),
+  icons: {
+    icon: [
+      { url: '/image.svg', type: 'image/svg+xml' } // Your crisp vector favicon
+    ],
+    apple: '/image.svg',
+  },
   openGraph: {
+    title: 'GradesNova — Know your score before results day',
+    description: 'Free percentile calculators for SAT, ACT, GRE, GMAT, LSAT, GCSE and A-Levels.',
     type: 'website',
-    locale: 'en_US',
     url: 'https://gradesnova.com',
     siteName: 'GradesNova',
-    title: 'GradesNova — Free Exam Percentile Calculators',
-    description:
-      'Know your exam percentile before results day. Free calculators for SAT, ACT, GRE, GMAT, LSAT, GCSE and A-Levels.',
+    images: [
+      {
+        url: '/image1.jpg', // Your social sharing card
+        width: 1200,
+        height: 630,
+        alt: 'GradesNova Percentile Calculators',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'GradesNova — Free Exam Percentile Calculators',
-    description: 'Know your exam percentile before results day.',
+    title: 'GradesNova — Know your score before results day',
+    description: 'Free percentile calculators for SAT, ACT, GRE, GMAT, LSAT, GCSE and A-Levels.',
+    images: ['/image1.jpg'],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 };
 
-// Separate viewport export — required in Next.js 14+, fixes the deprecation warning
-export const viewport: Viewport = {
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 5,
-  themeColor: '#0a0c14',
-};
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+// 4. SERVER-RENDERED ROOT LAYOUT
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className="dark" style={{ scrollBehavior: 'smooth' }}>
-      <head>
-        {/*
-          scroll-restoration: 'manual' fixes the back-navigation blank page bug.
-          Next.js App Router doesn't restore scroll by default when navigating back;
-          this tells the browser to use its native scroll restoration instead.
-        */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              if ('scrollRestoration' in history) {
-                history.scrollRestoration = 'auto';
-              }
-            `,
-          }}
-        />
-      </head>
-      <body
-        className={`${geist.variable} ${geistMono.variable} font-sans antialiased bg-[#0a0c14] text-white`}
-        // Prevent layout shift from scrollbar appearing/disappearing
-        style={{ overflowY: 'scroll' }}
-      >
+    // 'scroll-smooth' gives you smooth anchor linking with 0kb of JavaScript
+    <html lang="en" className="dark scroll-smooth">
+      {/* 'antialiased' optimizes font rendering on macOS/iOS */}
+      <body className={`${inter.className} antialiased bg-[#0a0c14] text-white min-h-screen flex flex-col selection:bg-emerald-500/30 selection:text-emerald-200`}>
         {children}
       </body>
     </html>

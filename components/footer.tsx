@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-
+import Image from 'next/image';
 export function Footer() {
   const currentYear = new Date().getFullYear();
 
@@ -12,12 +12,19 @@ export function Footer() {
           {/* Brand Col */}
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-7 h-7 bg-emerald-500 rounded-md flex items-center justify-center text-white font-bold text-base shadow-[0_0_10px_rgba(16,185,129,0.3)]">
-                G
-              </div>
-              <span className="font-bold text-xl tracking-tight text-white">
-                Grades<span className="text-emerald-400">Nova</span>
-              </span>
+              {/* Logo */}
+<Link href="/" className="flex items-center gap-2 group">
+  <Image 
+    src="/image.svg"  /* <-- Updated to image.svg */
+    alt="GradesNova Logo" 
+    width={32} 
+    height={32} 
+    className="group-hover:scale-105 transition-transform"
+  />
+  <span className="font-bold text-xl tracking-tight text-white">
+    Grades<span className="text-emerald-400">Nova</span>
+  </span>
+</Link>
             </Link>
             <p className="text-sm text-slate-400 leading-relaxed mb-6">
               Free, instant exam score percentile calculators. Know exactly where you stand before results day.
