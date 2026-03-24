@@ -96,7 +96,9 @@ function FAQSection() {
         {GCSE_FAQS.map((faq, i) => (
           <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden"
             itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-            <button onClick={() => setOpen(open === i ? null : i)}
+            <button 
+              type="button"
+              onClick={(e) => { e.preventDefault(); setOpen(open === i ? null : i); }}
               className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
               aria-expanded={open === i}>
               <span className="text-sm font-medium text-white" itemProp="name">{faq.question}</span>
@@ -146,7 +148,7 @@ export default function GCSEPage() {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home',        item: 'https://gradesnova.com' },
       { '@type': 'ListItem', position: 2, name: 'Calculators', item: 'https://gradesnova.com/#exams' },
-      { '@type': 'ListItem', position: 3, name: 'GCSE Grade Boundaries 2026', item: 'https://gradesnova.com/exams/gcse' },
+      { '@type': 'ListItem', position: 3, name: 'GCSE Grade Boundaries', item: 'https://gradesnova.com/exams/gcse' },
     ],
   };
   const schemaFAQ = {
@@ -170,11 +172,11 @@ export default function GCSEPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaTool) }} />
 
-      <main className="bg-[#0a0c14] min-h-screen">
+      <main className="bg-[#0a0c14] min-h-screen text-white">
         <Navbar />
 
         {/* HEADER */}
-        <header className="bg-[#0d0f1a] border-b border-white/6 py-10">
+        <header className="bg-[#0d0f1a] border-b border-white/6 py-10 mt-16">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav aria-label="Breadcrumb" className="mb-4">
               <ol className="flex items-center gap-2 text-xs text-slate-500">
@@ -196,7 +198,7 @@ export default function GCSEPage() {
               GCSE Grade Boundaries (2025–2026)
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl">
-              Enter your raw mark to instantly find your <strong className="text-white font-medium">GCSE grade</strong> across AQA, Edexcel, OCR, and WJEC. Covers Maths, English, Sciences, and more. Showing <strong className="text-white font-medium">2025 boundaries</strong> — the most recent available.  
+              Enter your raw mark to instantly find your <strong className="text-white font-medium">GCSE grade</strong> across AQA, Edexcel, OCR, and WJEC. Covers Maths, English, Sciences, and more. Showing <strong className="text-white font-medium">2025 boundaries</strong> — the most recent available. 2026 boundaries published <strong className="text-white font-medium">20 August 2026</strong>.
             </p>
             <div className="flex flex-wrap gap-3 mt-4">
               <span className="text-xs bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full font-medium">
@@ -233,7 +235,7 @@ export default function GCSEPage() {
                     {(['AQA','Edexcel','OCR','WJEC'] as const).map(b => {
                       const avail = availBoards.includes(b);
                       return (
-                        <button key={b} onClick={() => avail && setBoard(b)} disabled={!avail}
+                        <button key={b} type="button" onClick={(e) => { e.preventDefault(); if (avail) setBoard(b); }} disabled={!avail}
                           className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-all
                             ${board === b && avail ? 'text-white' : avail ? 'bg-white/4 border-white/8 text-slate-400 hover:text-white' : 'border-white/5 text-slate-700 cursor-not-allowed'}`}
                           style={board === b && avail ? { backgroundColor: `${COLOR}20`, borderColor: `${COLOR}40` } : {}}>
@@ -249,7 +251,7 @@ export default function GCSEPage() {
                     <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Tier</p>
                     <div className="flex gap-2">
                       {availTiers.map(t => (
-                        <button key={t} onClick={() => setTier(t)}
+                        <button key={t} type="button" onClick={(e) => { e.preventDefault(); setTier(t); }}
                           className={`flex-1 py-2 rounded-xl text-sm font-medium border transition-all
                             ${tier === t ? 'text-white' : 'bg-white/4 border-white/8 text-slate-400 hover:text-white'}`}
                           style={tier === t ? { backgroundColor: `${COLOR}20`, borderColor: `${COLOR}40` } : {}}>
@@ -260,6 +262,7 @@ export default function GCSEPage() {
                   </div>
                 )}
 
+                {/* Mark Input + Slider */}
                 <div>
                   <label htmlFor="mark-input" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                     Your raw mark {boundary ? `(out of ${boundary.maxMark})` : ''}
@@ -267,12 +270,38 @@ export default function GCSEPage() {
                   <input id="mark-input" type="number" min={0} max={boundary?.maxMark ?? 300}
                     value={inputVal}
                     onChange={e => {
-                      setInputVal(e.target.value);
-                      const n = parseInt(e.target.value);
+                      const val = e.target.value;
+                      setInputVal(val);
+                      if (val === '') { setMark(0); return; }
+                      const n = parseInt(val, 10);
                       if (!isNaN(n) && n >= 0) setMark(Math.min(n, boundary?.maxMark ?? 300));
                     }}
                     placeholder={`0 – ${boundary?.maxMark ?? '…'}`}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xl font-mono text-white placeholder-slate-700 focus:outline-none focus:border-emerald-500/50" />
+
+                  {/* Interactive Slider */}
+                  {boundary && (
+                    <div className="mt-4">
+                      <div className="relative h-7 flex items-center mb-1">
+                        <div className="absolute w-full h-2 rounded-full bg-white/8" />
+                        <div className="absolute h-2 rounded-full transition-all duration-75"
+                          style={{ width: `${(mark / boundary.maxMark) * 100}%`, backgroundColor: COLOR, opacity: 0.8 }} />
+                        <input type="range" min={0} max={boundary.maxMark} step={1} value={mark}
+                          onChange={e => {
+                            const v = Number(e.target.value);
+                            setMark(v);
+                            setInputVal(String(v));
+                          }}
+                          className="absolute w-full h-full opacity-0 cursor-pointer" style={{ zIndex: 10 }} />
+                        <div className="absolute w-6 h-6 rounded-full border-2 border-white shadow-lg shadow-black/50 pointer-events-none transition-all duration-75"
+                          style={{ left: `calc(${(mark / boundary.maxMark) * 100}% - 12px)`, backgroundColor: COLOR }} />
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-[10px] text-slate-600 font-mono">0</span>
+                        <span className="text-[10px] text-slate-600 font-mono">{boundary.maxMark}</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {boundary && (
@@ -283,7 +312,7 @@ export default function GCSEPage() {
                         const t = boundary.boundaries[g];
                         if (!t) return null;
                         return (
-                          <button key={g} onClick={() => { setMark(t); setInputVal(String(t)); }}
+                          <button key={g} type="button" onClick={(e) => { e.preventDefault(); setMark(t); setInputVal(String(t)); }}
                             className="px-2.5 py-1 rounded-lg text-xs border transition-all hover:scale-105"
                             style={{ backgroundColor: `${GCSE_GRADE_INFO[g].color}12`, borderColor: `${GCSE_GRADE_INFO[g].color}25`, color: GCSE_GRADE_INFO[g].color }}>
                             {g}: {t}
@@ -444,7 +473,7 @@ export default function GCSEPage() {
 
             <div className="flex gap-2 mb-4 flex-wrap">
               {(['AQA','Edexcel','OCR','WJEC'] as const).map(b => (
-                <button key={b} onClick={() => setMathsBoard(b)}
+                <button key={b} type="button" onClick={(e) => { e.preventDefault(); setMathsBoard(b); }}
                   className={`px-4 py-2 rounded-xl text-sm font-medium border transition-all
                     ${mathsBoard === b ? 'text-white' : 'bg-white/4 border-white/8 text-slate-400 hover:text-white'}`}
                   style={mathsBoard === b ? { backgroundColor: `${COLOR}20`, borderColor: `${COLOR}40` } : {}}>

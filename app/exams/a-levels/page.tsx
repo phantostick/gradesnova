@@ -130,7 +130,7 @@ export default function ALevelCalculatorPage() {
       <main className="bg-[#0a0c14] min-h-screen text-white">
         <Navbar />
 
-        <header className="bg-[#0d0f1a] border-b border-white/6 py-10">
+        <header className="bg-[#0d0f1a] border-b border-white/6 py-10 mt-16">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav aria-label="Breadcrumb" className="mb-4">
               <ol className="flex items-center gap-2 text-xs text-slate-500">
@@ -180,7 +180,7 @@ export default function ALevelCalculatorPage() {
                   </select>
                 </div>
 
-                {/* Mark input */}
+                {/* Mark input + Slider */}
                 <div>
                   <label htmlFor="alevel-mark" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                     Your raw mark {boundary ? `(out of ${boundary.maxMark})` : ''}
@@ -190,10 +190,7 @@ export default function ALevelCalculatorPage() {
                     onChange={e => {
                       const val = e.target.value;
                       setInputVal(val);
-                      if (val === '') {
-                        setMark(0);
-                        return;
-                      }
+                      if (val === '') { setMark(0); return; }
                       const parsed = parseInt(val, 10);
                       if (!isNaN(parsed) && parsed >= 0) {
                         setMark(Math.min(parsed, boundary?.maxMark || 500));
@@ -201,6 +198,30 @@ export default function ALevelCalculatorPage() {
                     }}
                     placeholder={`Enter mark (0–${boundary?.maxMark || '…'})`}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-lg font-mono text-white placeholder-slate-600 focus:outline-none focus:border-pink-500/50" />
+
+                  {/* Interactive Slider */}
+                  {boundary && (
+                    <div className="mt-4">
+                      <div className="relative h-7 flex items-center mb-1">
+                        <div className="absolute w-full h-2 rounded-full bg-white/8" />
+                        <div className="absolute h-2 rounded-full transition-all duration-75"
+                          style={{ width: `${(mark / boundary.maxMark) * 100}%`, backgroundColor: COLOR, opacity: 0.8 }} />
+                        <input type="range" min={0} max={boundary.maxMark} step={1} value={mark}
+                          onChange={e => {
+                            const v = Number(e.target.value);
+                            setMark(v);
+                            setInputVal(String(v));
+                          }}
+                          className="absolute w-full h-full opacity-0 cursor-pointer" style={{ zIndex: 10 }} />
+                        <div className="absolute w-6 h-6 rounded-full border-2 border-white shadow-lg shadow-black/50 pointer-events-none transition-all duration-75"
+                          style={{ left: `calc(${(mark / boundary.maxMark) * 100}% - 12px)`, backgroundColor: COLOR }} />
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-[10px] text-slate-600 font-mono">0</span>
+                        <span className="text-[10px] text-slate-600 font-mono">{boundary.maxMark}</span>
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Quick grade buttons */}
