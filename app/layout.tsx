@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 // 1. HIGH-PERFORMANCE FONT LOADING
 // Subsetting to latin only, and using 'swap' prevents text from being invisible while loading
