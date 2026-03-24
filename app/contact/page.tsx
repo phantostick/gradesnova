@@ -51,11 +51,11 @@ export default function ContactPage() {
             The fastest way to reach us. We aim to reply within 48 hours for data corrections and feature requests.
           </p>
           <a
-            href="mailto:hello@gradesnova.com"
+            href="mailto:jeepredictor.in@gmail.com"
             className="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-3 rounded-xl font-semibold text-sm transition-all hover:shadow-lg hover:shadow-indigo-600/30 hover:-translate-y-0.5"
           >
             <span>✉️</span>
-            hello@gradesnova.com
+            jeepredictor.in@gmail.com
           </a>
         </div>
 
