@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 import "./globals.css";
 
 // 1. HIGH-PERFORMANCE FONT LOADING
@@ -81,6 +83,21 @@ export default function RootLayout({
         
         {/* VERCEL ANALYTICS & SPEED INSIGHTS */}
         <Analytics />
+        <SpeedInsights />
+
+        {/* GOOGLE ANALYTICS (Next.js Optimized) */}
+        <Script 
+          strategy="afterInteractive" 
+          src="https://www.googletagmanager.com/gtag/js?id=G-H5FHMWEGLB" 
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-H5FHMWEGLB');
+          `}
+        </Script>
       </body>
     </html>
   );
