@@ -112,7 +112,8 @@ function FAQSection() {
   style={{ maxHeight: open === i ? '600px' : '0px' }}>
   <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3"
     itemProp="text">{faq.answer}</p>
-</div>
+</div> 
+          </div> 
         ))}
       </div>
     </section>
