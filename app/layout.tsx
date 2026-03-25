@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 import "./globals.css";
 
@@ -81,9 +80,8 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased bg-[#0a0c14] text-white min-h-screen flex flex-col selection:bg-emerald-500/30 selection:text-emerald-200`}>
         {children}
         
-        {/* VERCEL ANALYTICS & SPEED INSIGHTS */}
+        {/* VERCEL ANALYTICS */}
         <Analytics />
-        <SpeedInsights />
 
         {/* GOOGLE ANALYTICS (Next.js Optimized) */}
         <Script 
