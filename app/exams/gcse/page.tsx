@@ -106,17 +106,13 @@ function FAQSection() {
                 ? <ChevronUp size={16} className="text-slate-400 shrink-0" />
                 : <ChevronDown size={16} className="text-slate-400 shrink-0" />}
             </button>
-            <AnimatePresence>
-              {open === i && (
-                <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.2 }} className="overflow-hidden"
-                  itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                  <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3"
-                    itemProp="text">{faq.answer}</p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+            <div
+  itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"
+  className="overflow-hidden transition-all duration-200"
+  style={{ maxHeight: open === i ? '600px' : '0px' }}>
+  <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3"
+    itemProp="text">{faq.answer}</p>
+</div>
         ))}
       </div>
     </section>
