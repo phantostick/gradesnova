@@ -128,23 +128,22 @@ function FAQSection() {
       <p className="text-slate-400 text-sm mb-6">
         Common questions about SAT scoring, percentiles, and what your score means for college admissions.
       </p>
-      <div className="space-y-2" itemScope itemType="https://schema.org/FAQPage">
+      <div className="space-y-2">
         {SAT_FAQS.map((faq, i) => (
-          <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden"
-            itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+          <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden">
             <button onClick={() => setOpen(open === i ? null : i)}
               className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
               aria-expanded={open === i}>
-              <span className="text-sm font-medium text-white" itemProp="name">{faq.question}</span>
+              <span className="text-sm font-medium text-white">{faq.question}</span>
               {open === i ? <ChevronUp size={16} className="text-slate-400 shrink-0" /> : <ChevronDown size={16} className="text-slate-400 shrink-0" />}
             </button>
             <div
-  itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"
-  className="overflow-hidden transition-all duration-200"
-  style={{ maxHeight: open === i ? '600px' : '0px' }}>
-  <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3"
-    itemProp="text">{faq.answer}</p>
-</div>
+              className="overflow-hidden transition-all duration-200"
+              style={{ maxHeight: open === i ? '600px' : '0px' }}>
+              <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3">
+                {faq.answer}
+              </p>
+            </div>
           </div>
         ))}
       </div>
@@ -223,7 +222,6 @@ export default function SATCalculatorPage() {
       <main className="bg-[#0a0c14] min-h-screen">
         <Navbar />
 
-        {/* Hero */}
         <header className="bg-[#0d0f1a] border-b border-white/6 py-10">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav aria-label="Breadcrumb" className="mb-4">
