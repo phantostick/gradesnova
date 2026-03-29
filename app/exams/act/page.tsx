@@ -116,23 +116,22 @@ function FAQSection() {
       <p className="text-slate-400 text-sm mb-6">
         Common questions about ACT scoring, percentiles, and what your score means.
       </p>
-      <div className="space-y-2" itemScope itemType="https://schema.org/FAQPage">
+      <div className="space-y-2">
         {ACT_FAQS.map((faq, i) => (
-          <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden"
-            itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+          <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden">
             <button onClick={() => setOpen(open === i ? null : i)}
               className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
               aria-expanded={open === i}>
-              <span className="text-sm font-medium text-white" itemProp="name">{faq.question}</span>
+              <span className="text-sm font-medium text-white">{faq.question}</span>
               {open === i ? <ChevronUp size={16} className="text-slate-400 shrink-0" /> : <ChevronDown size={16} className="text-slate-400 shrink-0" />}
             </button>
             <div
-  itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"
-  className="overflow-hidden transition-all duration-200"
-  style={{ maxHeight: open === i ? '600px' : '0px' }}>
-  <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3"
-    itemProp="text">{faq.answer}</p>
-</div>
+              className="overflow-hidden transition-all duration-200"
+              style={{ maxHeight: open === i ? '600px' : '0px' }}>
+              <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3">
+                {faq.answer}
+              </p>
+            </div>
           </div>
         ))}
       </div>
@@ -279,185 +278,95 @@ export default function ACTCalculatorPage() {
           </div>
 
           {/* ACT percentile chart */}
-
           <section className="mt-14" aria-labelledby="chart-heading">
-
             <h2 id="chart-heading" className="text-2xl font-bold text-white mb-2">
-
               ACT score percentile chart 2026
-
             </h2>
-
             <p className="text-slate-400 text-sm mb-6">
-
-              Official ACT composite percentile data from ACT, Inc. This chart shows the percentage of test takers who scored at or below each composite score in 2026. Use this table to see where any ACT score ranks nationally.
-
+              Official ACT composite percentile data from ACT, Inc. This chart shows the percentage of test takers who scored at or below each composite score in 2026.
             </p>
-
             <div className="overflow-hidden rounded-xl border border-white/8">
-
               <table className="w-full text-sm" aria-label="ACT composite score percentile chart 2026">
-
                 <thead>
-
                   <tr className="bg-white/4 border-b border-white/8">
-
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">ACT score</th>
-
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Percentile</th>
-
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider hidden sm:table-cell">Students beaten</th>
-
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider hidden md:table-cell">Admission tier</th>
-
                   </tr>
-
                 </thead>
-
                 <tbody>
-
                   {[
-
                     [36,'99','Top 1%','Perfect — all schools'],
-
                     [35,'99','Top 1%','All selective schools'],
-
                     [34,'98','Top 2%','All selective schools'],
-
                     [33,'97','Top 3%','Highly selective'],
-
                     [32,'96','Top 4%','Highly selective'],
-
                     [31,'95','Top 5%','Highly selective'],
-
                     [30,'93','Top 7%','Very selective'],
-
                     [28,'88','Top 12%','Selective'],
-
                     [27,'85','Top 15%','Selective'],
-
                     [25,'78','Top 22%','Above average'],
-
                     [24,'74','Top 26%','Above average'],
-
                     [22,'63','Top 37%','Average range'],
-
                     [21,'57','Top 43%','National average'],
-
                     [20,'51','Top 49%','Average range'],
-
                     [18,'38','Top 62%','Below average'],
-
                     [16,'25','Top 75%','Below average'],
-
                     [14,'13','Top 87%','Needs improvement'],
-
                     [12,'6','Top 94%','Needs improvement'],
-
                   ].map(([score, pct, beaten, tier], i) => {
-
                     const isYours = Number(score) === displayComposite;
-
                     return (
-
                       <tr key={score} className={`border-b border-white/5 last:border-0 ${isYours ? 'bg-cyan-500/10' : i % 2 === 0 ? '' : 'bg-white/2'}`}>
-
                         <td className="px-4 py-2.5 font-mono font-medium" style={{ color: isYours ? COLOR : undefined }}>
-
                           {score}
-
                           {isYours && <span className="ml-2 text-[10px] bg-cyan-500/20 text-cyan-300 px-1.5 py-0.5 rounded font-sans">your score</span>}
-
                         </td>
-
                         <td className="px-4 py-2.5 font-semibold" style={{ color: isYours ? COLOR : 'rgb(226,232,240)' }}>{pct}th</td>
-
                         <td className="px-4 py-2.5 text-slate-500 hidden sm:table-cell text-xs">{beaten} of test takers</td>
-
                         <td className="px-4 py-2.5 text-slate-500 hidden md:table-cell text-xs">{tier}</td>
-
                       </tr>
-
                     );
-
                   })}
-
                 </tbody>
-
               </table>
-
             </div>
-
             <p className="text-xs text-slate-600 mt-3">
-
               Source: ACT National Norms 2023. Percentiles based on graduating class data. Updated for 2026.
-
             </p>
-
           </section>
-
-
 
           {/* Score tiers */}
-
           <section className="mt-12" aria-labelledby="tiers-heading">
-
             <h2 id="tiers-heading" className="text-2xl font-bold text-white mb-6">
-
               What does your ACT score mean for college admissions?
-
             </h2>
-
             <div className="grid sm:grid-cols-3 gap-4">
-
               {[
-
                 { range: '28–36', label: 'Highly competitive', desc: 'Top 12% nationally. Strong candidacy at selective and highly selective universities, including many top-20 schools. Competitive for merit scholarships.', color: '#34d399' },
-
                 { range: '22–27', label: 'Above average',      desc: 'Top 37–15% nationally. Above the national average. Competitive at hundreds of quality four-year universities across the US.', color: COLOR },
-
                 { range: 'Below 22', label: 'Average or below', desc: 'At or below the national average of 21. Sufficient for many colleges. Most students who retest improve by 2–4 points with targeted preparation.', color: '#f59e0b' },
-
               ].map(tier => (
-
                 <article key={tier.range} className="bg-[#12141f] border border-white/7 rounded-xl p-5">
-
                   <div className="text-xs font-mono font-semibold mb-1.5 px-2 py-1 rounded-md w-fit"
-
                     style={{ backgroundColor: `${tier.color}15`, color: tier.color }}>{tier.range}</div>
-
                   <h3 className="text-sm font-semibold text-white mb-1.5">{tier.label}</h3>
-
                   <p className="text-xs text-slate-500 leading-relaxed">{tier.desc}</p>
-
                 </article>
-
               ))}
-
             </div>
-
           </section>
 
-
-
           {/* SAT crosswalk note */}
-
           <div className="mt-8 bg-[#12141f] border border-white/7 rounded-xl p-5 flex gap-4 items-start">
-
             <div className="text-2xl shrink-0" aria-hidden="true">🔄</div>
-
             <div>
-
               <h3 className="text-sm font-semibold text-white mb-1">ACT to SAT score conversion</h3>
-
               <p className="text-sm text-slate-400 leading-relaxed">
-
                 An ACT score of 21 is roughly equivalent to an SAT score of 1060. An ACT 28 ≈ SAT 1310. An ACT 33 ≈ SAT 1460. Both tests are accepted equally at all major US colleges and universities. Use our <Link href="/exams/sat" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">SAT percentile calculator</Link> to compare.
-
               </p>
-
             </div>
-
           </div>
 
           <div className="mt-14">
