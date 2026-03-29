@@ -109,23 +109,22 @@ function FAQSection() {
       <p className="text-slate-400 text-sm mb-6">
         Common questions about LSAT scoring, percentiles, and what your score means for law school admissions.
       </p>
-      <div className="space-y-2" itemScope itemType="https://schema.org/FAQPage">
+      <div className="space-y-2">
         {LSAT_FAQS.map((faq, i) => (
-          <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden"
-            itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
+          <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden">
             <button onClick={() => setOpen(open === i ? null : i)}
               className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
               aria-expanded={open === i}>
-              <span className="text-sm font-medium text-white" itemProp="name">{faq.question}</span>
+              <span className="text-sm font-medium text-white">{faq.question}</span>
               {open === i ? <ChevronUp size={16} className="text-slate-400 shrink-0" /> : <ChevronDown size={16} className="text-slate-400 shrink-0" />}
             </button>
             <div
-  itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"
-  className="overflow-hidden transition-all duration-200"
-  style={{ maxHeight: open === i ? '600px' : '0px' }}>
-  <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3"
-    itemProp="text">{faq.answer}</p>
-</div>
+              className="overflow-hidden transition-all duration-200"
+              style={{ maxHeight: open === i ? '600px' : '0px' }}>
+              <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3">
+                {faq.answer}
+              </p>
+            </div>
           </div>
         ))}
       </div>
@@ -292,7 +291,6 @@ export default function LSATCalculatorPage() {
                 </div>
               </motion.div>
 
-              {/* T14 comparison */}
               <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
                 <div className="flex items-center gap-2 mb-1">
                   <GraduationCap size={16} className="text-slate-400" aria-hidden="true" />
@@ -326,7 +324,7 @@ export default function LSATCalculatorPage() {
               LSAT score percentile chart (2025–2026)
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Official LSAT percentile data from LSAC. Shows what percentage of test takers score at or below each LSAT score. The LSAT score scale runs from 120 to 180. Use this chart to find the percentile for any LSAT score.
+              Official LSAT percentile data from LSAC. Shows what percentage of test takers score at or below each LSAT score.
             </p>
             <div className="overflow-hidden rounded-xl border border-white/8">
               <table className="w-full text-sm" aria-label="LSAT score percentile chart 2025-2026">
@@ -378,13 +376,12 @@ export default function LSATCalculatorPage() {
             <p className="text-xs text-slate-600 mt-3">Source: LSAC LSAT Percentile Ranks. Data updated for the 2025–2026 admissions cycle.</p>
           </section>
 
-          {/* Score tiers */}
           <section className="mt-12" aria-labelledby="tiers-heading">
             <h2 id="tiers-heading" className="text-2xl font-bold text-white mb-6">What does your LSAT score mean for law school admissions?</h2>
             <div className="grid sm:grid-cols-3 gap-4">
               {[
                 { range: '170–180', label: 'Elite',       desc: 'Top 3%. Competitive at all law schools. Scholarship potential everywhere. Harvard, Yale, and Stanford have medians of 174–175.', color: '#34d399' },
-                { range: '160–169', label: 'Competitive', desc: 'Top 15%. Strong candidacy at T14 schools. Competitive for merit scholarships at top-25 programs. Most law students score below 160.', color: COLOR },
+                { range: '160–169', label: 'Competitive', desc: 'Top 15%. Strong candidacy at T14 schools. Competitive for merit scholarships at top-25 programs.', color: COLOR },
                 { range: 'Below 160', label: 'Developing', desc: 'Below the typical T14 threshold. Competitive at many excellent law schools. Retaking often improves prospects significantly.', color: '#f59e0b' },
               ].map(tier => (
                 <article key={tier.range} className="bg-[#12141f] border border-white/7 rounded-xl p-5">
