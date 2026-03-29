@@ -44,25 +44,24 @@ function FAQSection() {
       <p className="text-slate-400 text-sm mb-6">
         Common questions about A-Level grade boundaries, UCAS points, and university entry requirements.
       </p>
-      <div className="space-y-2" itemScope itemType="https://schema.org/FAQPage">
+      <div className="space-y-2">
         {ALEVEL_FAQS.map((faq, i) => (
-          <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden"
-            itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-            <button 
+          <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden">
+            <button
               type="button"
               onClick={(e) => { e.preventDefault(); setOpen(open === i ? null : i); }}
               className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
               aria-expanded={open === i}>
-              <span className="text-sm font-medium text-white" itemProp="name">{faq.question}</span>
+              <span className="text-sm font-medium text-white">{faq.question}</span>
               {open === i ? <ChevronUp size={16} className="text-slate-400 shrink-0" /> : <ChevronDown size={16} className="text-slate-400 shrink-0" />}
             </button>
             <div
-  itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"
-  className="overflow-hidden transition-all duration-200"
-  style={{ maxHeight: open === i ? '600px' : '0px' }}>
-  <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3"
-    itemProp="text">{faq.answer}</p>
-</div>
+              className="overflow-hidden transition-all duration-200"
+              style={{ maxHeight: open === i ? '600px' : '0px' }}>
+              <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3">
+                {faq.answer}
+              </p>
+            </div>
           </div>
         ))}
       </div>
@@ -166,7 +165,7 @@ export default function ALevelCalculatorPage() {
                 {/* Subject */}
                 <div>
                   <label htmlFor="alevel-subject" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Subject</label>
-                  <select id="alevel-subject" value={subject} 
+                  <select id="alevel-subject" value={subject}
                     onChange={e => {
                       setSubject(e.target.value);
                       setMark(0);
@@ -230,13 +229,13 @@ export default function ALevelCalculatorPage() {
                         const threshold = boundary.boundaries[g];
                         const info = ALEVEL_GRADE_INFO[g];
                         return (
-                          <button 
-                            key={g} 
+                          <button
+                            key={g}
                             type="button"
-                            onClick={(e) => { 
+                            onClick={(e) => {
                               e.preventDefault();
-                              setMark(threshold); 
-                              setInputVal(String(threshold)); 
+                              setMark(threshold);
+                              setInputVal(String(threshold));
                             }}
                             className="px-2.5 py-1 rounded-lg text-xs border transition-all hover:scale-105"
                             style={{ backgroundColor: `${info.color}15`, borderColor: `${info.color}30`, color: info.color }}>
@@ -354,8 +353,8 @@ export default function ALevelCalculatorPage() {
                   </select>
                   <div className="flex gap-1">
                     {(['A*', 'A', 'B', 'C', 'D', 'E'] as ALevel[]).map(g => (
-                      <button 
-                        key={g} 
+                      <button
+                        key={g}
                         type="button"
                         onClick={(e) => {
                           e.preventDefault();
@@ -372,7 +371,7 @@ export default function ALevelCalculatorPage() {
                       {entry.grade ? UCAS_POINTS[entry.grade] : '—'}
                     </span>
                   </div>
-                  <button 
+                  <button
                     type="button"
                     onClick={(e) => {
                       e.preventDefault();
@@ -383,7 +382,7 @@ export default function ALevelCalculatorPage() {
                   </button>
                 </div>
               ))}
-              <button 
+              <button
                 type="button"
                 onClick={(e) => {
                   e.preventDefault();
