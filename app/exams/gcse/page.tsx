@@ -92,28 +92,27 @@ function FAQSection() {
       <p className="text-slate-400 text-sm mb-6">
         Everything you need to know about GCSE grade boundaries, what grades mean, and how boundaries are set.
       </p>
-      <div className="space-y-2" itemScope itemType="https://schema.org/FAQPage">
+      <div className="space-y-2">
         {GCSE_FAQS.map((faq, i) => (
-          <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden"
-            itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
-            <button 
+          <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden">
+            <button
               type="button"
               onClick={(e) => { e.preventDefault(); setOpen(open === i ? null : i); }}
               className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
               aria-expanded={open === i}>
-              <span className="text-sm font-medium text-white" itemProp="name">{faq.question}</span>
+              <span className="text-sm font-medium text-white">{faq.question}</span>
               {open === i
                 ? <ChevronUp size={16} className="text-slate-400 shrink-0" />
                 : <ChevronDown size={16} className="text-slate-400 shrink-0" />}
             </button>
             <div
-  itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer"
-  className="overflow-hidden transition-all duration-200"
-  style={{ maxHeight: open === i ? '600px' : '0px' }}>
-  <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3"
-    itemProp="text">{faq.answer}</p>
-</div> 
-          </div> 
+              className="overflow-hidden transition-all duration-200"
+              style={{ maxHeight: open === i ? '600px' : '0px' }}>
+              <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3">
+                {faq.answer}
+              </p>
+            </div>
+          </div>
         ))}
       </div>
     </section>
@@ -156,7 +155,7 @@ export default function GCSEPage() {
     '@context': 'https://schema.org', '@type': 'WebApplication',
     name: 'GCSE Grade Boundaries (2025-2026)',
     url: 'https://gradesnova.com/exams/gcse',
-    description: 'Free GCSE grade boundaries calculator for AQA, Edexcel, OCR and WJEC. Enter raw marks to find your grade instantly. 2025 boundaries shown — updated Results Day 20 Aug 2026.',
+    description: 'Free GCSE grade boundaries calculator for AQA, Edexcel, OCR and WJEC. Enter raw marks to find your grade instantly.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
@@ -172,7 +171,6 @@ export default function GCSEPage() {
       <main className="bg-[#0a0c14] min-h-screen text-white">
         <Navbar />
 
-        {/* HEADER */}
         <header className="bg-[#0d0f1a] border-b border-white/6 py-10 mt-16">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <nav aria-label="Breadcrumb" className="mb-4">
@@ -259,7 +257,6 @@ export default function GCSEPage() {
                   </div>
                 )}
 
-                {/* Mark Input + Slider */}
                 <div>
                   <label htmlFor="mark-input" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
                     Your raw mark {boundary ? `(out of ${boundary.maxMark})` : ''}
@@ -276,7 +273,6 @@ export default function GCSEPage() {
                     placeholder={`0 – ${boundary?.maxMark ?? '…'}`}
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xl font-mono text-white placeholder-slate-700 focus:outline-none focus:border-emerald-500/50" />
 
-                  {/* Interactive Slider */}
                   {boundary && (
                     <div className="mt-4">
                       <div className="relative h-7 flex items-center mb-1">
@@ -465,7 +461,7 @@ export default function GCSEPage() {
               GCSE Maths grade boundaries 2025 — AQA, Edexcel, OCR, WJEC
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Official GCSE Maths grade boundaries from all four major exam boards for June 2025, published on Results Day 21 August 2025. All marks out of 240 except OCR which uses a 300-mark paper (scaled equivalent shown in brackets).
+              Official GCSE Maths grade boundaries from all four major exam boards for June 2025, published on Results Day 21 August 2025.
             </p>
 
             <div className="flex gap-2 mb-4 flex-wrap">
@@ -492,7 +488,6 @@ export default function GCSEPage() {
               />
             </div>
 
-            {/* Summary all boards */}
             <div className="overflow-x-auto mt-6">
               <table className="w-full text-sm min-w-[580px]" aria-label="GCSE Maths all boards grade 9 and grade 4 boundaries 2025">
                 <thead>
@@ -521,9 +516,7 @@ export default function GCSEPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-slate-600 mt-3">
-              Source: AQA, Edexcel, OCR, WJEC official documents, published 21 August 2025. OCR raw marks out of 300 (scaled to 240: Higher grade 9 ≈ 206, grade 4 ≈ 38).
-            </p>
+            <p className="text-xs text-slate-600 mt-3">Source: AQA, Edexcel, OCR, WJEC official documents, published 21 August 2025.</p>
           </section>
 
           {/* ── MATHS 2024 ── */}
@@ -532,7 +525,7 @@ export default function GCSEPage() {
               GCSE Maths grade boundaries 2024 — AQA and Edexcel
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              2024 boundaries for year-on-year comparison. AQA Higher grade 9 held steady at 219 in both years. Edexcel Higher grade 9 jumped from 197 in 2024 to 217 in 2025, reflecting an <strong className="text-emerald-400">easier</strong> 2025 paper (students needed more marks to achieve the same grade).
+              2024 boundaries for year-on-year comparison.
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
               {(['AQA','Edexcel'] as const).map(b => (
@@ -599,15 +592,13 @@ export default function GCSEPage() {
             <div>
               <h3 className="text-sm font-semibold text-white mb-1">GCSE Results Day 2026 — Thursday 20 August 2026</h3>
               <p className="text-sm text-slate-400 leading-relaxed">
-                2026 GCSE grade boundaries will be published on <strong className="text-white">Thursday 20 August 2026 at 8:00am</strong> by AQA, Edexcel, OCR, and WJEC simultaneously. This calculator will be updated immediately when they are released. Until then, the 2025 boundaries above are the most recent available.
+                2026 GCSE grade boundaries will be published on <strong className="text-white">Thursday 20 August 2026 at 8:00am</strong> by AQA, Edexcel, OCR, and WJEC simultaneously.
               </p>
             </div>
           </div>
 
-          {/* ── FAQ ── */}
           <FAQSection />
 
-          {/* ── OTHER TOOLS ── */}
           <section className="bg-[#12141f] border border-white/7 rounded-2xl p-6" aria-labelledby="other-tools-heading">
             <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">Other free calculators</h2>
             <div className="flex flex-wrap gap-2">
@@ -627,7 +618,6 @@ export default function GCSEPage() {
               ))}
             </div>
           </section>
-
         </div>
         <Footer />
       </main>
