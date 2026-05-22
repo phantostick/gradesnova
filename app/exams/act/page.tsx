@@ -557,7 +557,7 @@ export default function ACTCalculatorPage() {
                     { school: 'Duke University',        range: '33-35', rate: '7%',  tier: 'Highly selective' },
                     { school: 'Dartmouth College',      range: '33-35', rate: '7%',  tier: 'Highly selective' },
                     { school: 'Johns Hopkins',          range: '33-35', rate: '7%',  tier: 'Highly selective' },
-                    { school: 'Northwestern University','33-35', rate: '7%',  tier: 'Highly selective' },
+                    { school: 'Northwestern University',range: '33-35', rate: '7%',  tier: 'Highly selective' },
                     { school: 'Vanderbilt University',  range: '33-35', rate: '9%',  tier: 'Highly selective' },
                     { school: 'Georgetown University',  range: '32-35', rate: '12%', tier: 'Very selective' },
                     { school: 'Notre Dame',             range: '33-35', rate: '13%', tier: 'Very selective' },
