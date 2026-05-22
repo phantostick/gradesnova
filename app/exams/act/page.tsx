@@ -566,7 +566,7 @@ export default function ACTCalculatorPage() {
                     { school: 'UC Berkeley',            range: '29-34', rate: '14%', tier: 'Selective' },
                     { school: 'UCLA',                   range: '28-34', rate: '9%',  tier: 'Selective' },
                     { school: 'Univ. of Virginia',      range: '31-34', rate: '18%', tier: 'Selective' },
-                    { school: 'Univ. of North Carolina','29-34', rate: '19%', tier: 'Selective' },
+                    { school: 'Univ. of North Carolina',range: '29-34', rate: '19%', tier: 'Selective' },
                     { school: 'Boston University',      range: '31-34', rate: '14%', tier: 'Selective' },
                   ].map((row, i) => {
                     const [lo, hi] = row.range.split('-').map(Number);
