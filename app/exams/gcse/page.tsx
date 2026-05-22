@@ -15,12 +15,6 @@ import Link from 'next/link';
 
 const COLOR = '#34d399';
 
-const SUBJECTS = [...new Set(ALL_SUBJECTS_2025.map(b => b.subject))];
-const BOARDS_FOR = (subject: string) =>
-  [...new Set(ALL_SUBJECTS_2025.filter(b => b.subject === subject).map(b => b.board))] as ('AQA'|'Edexcel'|'OCR'|'WJEC')[];
-const TIERS_FOR = (subject: string, board: string) =>
-  ALL_SUBJECTS_2025.filter(b => b.subject === subject && b.board === board).map(b => b.tier);
-
 // ─── WJEC 2025 GRADE BOUNDARIES ─────────────────────────────────────────────
 // Source: WJEC/CBAC official grade boundary documents, June 2025
 const WJEC_2025: GCSEBoundary[] = [
@@ -41,6 +35,20 @@ const WJEC_2025: GCSEBoundary[] = [
   { subject: 'Geography', board: 'WJEC', tier: 'Higher', maxMark: 200,
     boundaries: { 9:158, 8:145, 7:132, 6:117, 5:102, 4:87, 3:63, 2:39, 1:15 } },
 ];
+
+// ─── MERGED DATA (ALL_SUBJECTS_2025 + WJEC_2025) ────────────────────────────
+const ALL_WITH_WJEC: GCSEBoundary[] = [
+  ...ALL_SUBJECTS_2025,
+  ...WJEC_2025.filter(w =>
+    !ALL_SUBJECTS_2025.some(a => a.subject === w.subject && a.board === w.board && a.tier === w.tier)
+  ),
+];
+
+const SUBJECTS = [...new Set(ALL_WITH_WJEC.map(b => b.subject))];
+const BOARDS_FOR = (subject: string) =>
+  [...new Set(ALL_WITH_WJEC.filter(b => b.subject === subject).map(b => b.board))] as ('AQA'|'Edexcel'|'OCR'|'WJEC')[];
+const TIERS_FOR = (subject: string, board: string) =>
+  ALL_WITH_WJEC.filter(b => b.subject === subject && b.board === board).map(b => b.tier);
 
 // Extended FAQs covering high-impression keywords from search console
 const EXTENDED_FAQS = [
@@ -191,8 +199,8 @@ export default function GCSEPage() {
   const availTiers  = TIERS_FOR(subject, board);
 
   const boundary = useMemo<GCSEBoundary | undefined>(() =>
-    ALL_SUBJECTS_2025.find(b => b.subject === subject && b.board === board && b.tier === tier)
-    ?? ALL_SUBJECTS_2025.find(b => b.subject === subject && b.board === board)
+    ALL_WITH_WJEC.find(b => b.subject === subject && b.board === board && b.tier === tier)
+    ?? ALL_WITH_WJEC.find(b => b.subject === subject && b.board === board)
   , [subject, board, tier]);
 
   const grade     = useMemo(() => boundary && mark > 0 ? getGradeFromMark(mark, boundary) : null, [mark, boundary]);
@@ -340,9 +348,12 @@ export default function GCSEPage() {
                 )}
 
                 <div>
-                  <label htmlFor="mark-input" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">
+                  <label htmlFor="mark-input" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
                     Your raw mark {boundary ? `(out of ${boundary.maxMark})` : ''}
                   </label>
+                  <p className="text-[10px] text-amber-400/70 mb-2">
+                    Using 2025 official boundaries — updates on 21 Aug 2026 (Results Day)
+                  </p>
                   <input id="mark-input" type="number" min={0} max={boundary?.maxMark ?? 300}
                     value={inputVal}
                     onChange={e => {
@@ -560,7 +571,11 @@ export default function GCSEPage() {
                 )}
               </div>
               <MathsBoardTable
-                rows={MATHS_2025.filter(b => b.board === mathsBoard)}
+                rows={
+                  mathsBoard === 'WJEC'
+                    ? WJEC_2025.filter(b => b.subject === 'Maths')
+                    : MATHS_2025.filter(b => b.board === mathsBoard)
+                }
                 highlightMark={subject === 'Maths' ? mark : undefined}
               />
             </div>
@@ -580,7 +595,10 @@ export default function GCSEPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {MATHS_2025.map((b, i) => (
+                  {[
+                    ...MATHS_2025,
+                    ...WJEC_2025.filter(b => b.subject === 'Maths'),
+                  ].map((b, i) => (
                     <tr key={i} className={`border-b border-white/5 last:border-0 ${i % 2 === 0 ? '' : 'bg-white/2'}`}>
                       <td className="px-4 py-2.5 font-medium text-slate-200">{b.board}</td>
                       <td className="px-3 py-2.5 text-slate-400 text-xs">{b.tier}</td>
