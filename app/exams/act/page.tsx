@@ -344,7 +344,7 @@ export default function ACTCalculatorPage() {
                 Composite + section percentiles
               </span>
               <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">
-                Last updated: August 2025
+                Last updated: May 2026
               </span>
             </div>
           </div>
