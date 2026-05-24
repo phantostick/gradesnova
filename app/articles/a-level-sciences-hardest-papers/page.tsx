@@ -335,7 +335,7 @@ export default function ALevelSciencesPage() {
                 {
                   icon: '⚛️',
                   title: "Physics if you're strong in Maths",
-                  body: 'Physics' compressed grade spread means mathematical precision converts directly into grade improvements. If you score well in quantitative questions, the boundary structure rewards you. If you struggle with calculations, it amplifies the issue.',
+                  body: "Physics' compressed grade spread means mathematical precision converts directly into grade improvements. If you score well in quantitative questions, the boundary structure rewards you. If you struggle with calculations, it amplifies the issue.",
                   color: '#a855f7',
                 },
                 {
