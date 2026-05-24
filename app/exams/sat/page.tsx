@@ -204,13 +204,6 @@ export default function SATCalculatorPage() {
     browserRequirements: 'Requires JavaScript',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.8',
-      reviewCount: '312',
-      bestRating: '5',
-      worstRating: '1',
-    },
   };
 
   return (
