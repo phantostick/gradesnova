@@ -391,8 +391,7 @@ export default function GCSEPage() {
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.8', reviewCount: '312', bestRating: '5', worstRating: '1' },
-    dateModified: '2025-08-21',
+    dateModified: '2026-05-24',
   };
   const schemaDataset = {
     '@context': 'https://schema.org', '@type': 'Dataset',
