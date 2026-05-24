@@ -160,7 +160,6 @@ export default function LSATCalculatorPage() {
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '178', bestRating: '5', worstRating: '1' },
   };
 
   const pct = ((score - 120) / 60) * 100;
