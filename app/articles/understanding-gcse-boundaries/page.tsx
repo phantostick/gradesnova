@@ -119,7 +119,7 @@ export default function GradeBoundariesExplainedPage() {
                 {
                   step: '01',
                   title: 'Papers are marked',
-                  body: 'Every student's paper is marked by examiners — either human markers or on-screen marking systems. This produces a raw score for each student.',
+                  body: "Every student's paper is marked by examiners — either human markers or on-screen marking systems. This produces a raw score for each student.",
                   color: '#6366f1',
                 },
                 {
