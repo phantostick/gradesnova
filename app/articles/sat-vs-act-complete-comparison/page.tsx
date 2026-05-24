@@ -1,32 +1,32 @@
 // app/articles/sat-vs-act-complete-comparison/page.tsx
-import type { Metadata } from &apos;next&apos;;
-import { Navbar } from &apos;@/components/navbar&apos;;
-import { Footer } from &apos;@/components/footer&apos;;
-import Link from &apos;next/link&apos;;
+import type { Metadata } from 'next';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: &apos;SAT vs ACT: Complete Comparison 2025 | GradesNova&apos;,
-  description: &apos;SAT vs ACT: compare scoring, structure, difficulty, and which test suits you best. Includes 2025 score ranges, section breakdowns, and a free percentile calculator.&apos;,
-  alternates: { canonical: &apos;https://gradesnova.com/articles/sat-vs-act-complete-comparison&apos; },
+  title: 'SAT vs ACT: Complete Comparison 2025 | GradesNova',
+  description: 'SAT vs ACT: compare scoring, structure, difficulty, and which test suits you best. Includes 2025 score ranges, section breakdowns, and a free percentile calculator.',
+  alternates: { canonical: 'https://gradesnova.com/articles/sat-vs-act-complete-comparison' },
   openGraph: {
-    title: &apos;SAT vs ACT: Complete Comparison 2025&apos;,
-    description: &apos;SAT vs ACT: compare scoring, structure, difficulty, and which test suits you best in 2025.&apos;,
-    url: &apos;https://gradesnova.com/articles/sat-vs-act-complete-comparison&apos;,
-    type: &apos;article&apos;,
-    siteName: &apos;GradesNova&apos;,
+    title: 'SAT vs ACT: Complete Comparison 2025',
+    description: 'SAT vs ACT: compare scoring, structure, difficulty, and which test suits you best in 2025.',
+    url: 'https://gradesnova.com/articles/sat-vs-act-complete-comparison',
+    type: 'article',
+    siteName: 'GradesNova',
   },
   robots: { index: true, follow: true },
 };
 
 const jsonLd = {
-  &apos;@context&apos;: &apos;https://schema.org&apos;,
-  &apos;@type&apos;: &apos;Article&apos;,
-  headline: &apos;SAT vs ACT: Complete Comparison 2025&apos;,
-  description: &apos;A full comparison of the SAT and ACT covering scoring, structure, content, and which exam is right for you.&apos;,
-  url: &apos;https://gradesnova.com/articles/sat-vs-act-complete-comparison&apos;,
-  author: { &apos;@type&apos;: &apos;Organization&apos;, name: &apos;GradesNova&apos; },
-  publisher: { &apos;@type&apos;: &apos;Organization&apos;, name: &apos;GradesNova&apos;, url: &apos;https://gradesnova.com&apos; },
-  dateModified: &apos;2025-05-24&apos;,
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'SAT vs ACT: Complete Comparison 2025',
+  description: 'A full comparison of the SAT and ACT covering scoring, structure, content, and which exam is right for you.',
+  url: 'https://gradesnova.com/articles/sat-vs-act-complete-comparison',
+  author: { '@type': 'Organization', name: 'GradesNova' },
+  publisher: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
+  dateModified: '2025-05-24',
 };
 
 export default function SatVsActPage() {
@@ -73,7 +73,7 @@ export default function SatVsActPage() {
                 <span className="text-lg" aria-hidden="true">📊</span>
                 <span className="text-xs text-slate-400 font-medium">SAT Score Range</span>
               </div>
-              <p className="text-2xl font-bold font-mono" style={{ color: &apos;#6366f1&apos; }}>400–1600</p>
+              <p className="text-2xl font-bold font-mono" style={{ color: '#6366f1' }}>400–1600</p>
               <p className="text-xs text-slate-500 mt-0.5">Two sections × 800 pts each</p>
             </div>
             <div className="bg-[#12141f] border border-white/8 rounded-xl p-4">
@@ -81,7 +81,7 @@ export default function SatVsActPage() {
                 <span className="text-lg" aria-hidden="true">📈</span>
                 <span className="text-xs text-slate-400 font-medium">ACT Score Range</span>
               </div>
-              <p className="text-2xl font-bold font-mono" style={{ color: &apos;#06b6d4&apos; }}>1–36</p>
+              <p className="text-2xl font-bold font-mono" style={{ color: '#06b6d4' }}>1–36</p>
               <p className="text-xs text-slate-500 mt-0.5">Four sections averaged</p>
             </div>
             <div className="bg-[#12141f] border border-white/8 rounded-xl p-4">
@@ -89,7 +89,7 @@ export default function SatVsActPage() {
                 <span className="text-lg" aria-hidden="true">⏱️</span>
                 <span className="text-xs text-slate-400 font-medium">Test Duration</span>
               </div>
-              <p className="text-2xl font-bold font-mono" style={{ color: &apos;#a855f7&apos; }}>2h 14m / 2h 55m</p>
+              <p className="text-2xl font-bold font-mono" style={{ color: '#a855f7' }}>2h 14m / 2h 55m</p>
               <p className="text-xs text-slate-500 mt-0.5">SAT (digital) / ACT</p>
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function SatVsActPage() {
               As of 2024, the SAT is fully digital and adaptive: the difficulty of your second module adjusts based on how you did in the first. The ACT remains a fixed paper test (with a digital option at some centres), and it moves significantly faster — students answer roughly one question per minute across all four sections.
             </p>
             <p className="text-slate-400 leading-relaxed">
-              The ACT includes a dedicated Science section; the SAT does not. However, the SAT&apos;s Math section goes deeper into algebra and data analysis. Neither exam penalises wrong answers, so you should always guess rather than leave a question blank.
+              The ACT includes a dedicated Science section; the SAT does not. However, the SAT's Math section goes deeper into algebra and data analysis. Neither exam penalises wrong answers, so you should always guess rather than leave a question blank.
             </p>
           </section>
 
@@ -127,12 +127,12 @@ export default function SatVsActPage() {
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   {[
-                    { section: &apos;Reading & Writing&apos;, exam: &apos;SAT&apos;, q: &apos;54&apos;, time: &apos;64 min&apos;, spq: &apos;71s&apos;, color: &apos;#6366f1&apos; },
-                    { section: &apos;Math&apos;, exam: &apos;SAT&apos;, q: &apos;44&apos;, time: &apos;70 min&apos;, spq: &apos;95s&apos;, color: &apos;#6366f1&apos; },
-                    { section: &apos;English&apos;, exam: &apos;ACT&apos;, q: &apos;75&apos;, time: &apos;45 min&apos;, spq: &apos;36s&apos;, color: &apos;#06b6d4&apos; },
-                    { section: &apos;Mathematics&apos;, exam: &apos;ACT&apos;, q: &apos;60&apos;, time: &apos;60 min&apos;, spq: &apos;60s&apos;, color: &apos;#06b6d4&apos; },
-                    { section: &apos;Reading&apos;, exam: &apos;ACT&apos;, q: &apos;40&apos;, time: &apos;35 min&apos;, spq: &apos;53s&apos;, color: &apos;#06b6d4&apos; },
-                    { section: &apos;Science&apos;, exam: &apos;ACT&apos;, q: &apos;40&apos;, time: &apos;35 min&apos;, spq: &apos;53s&apos;, color: &apos;#06b6d4&apos; },
+                    { section: 'Reading & Writing', exam: 'SAT', q: '54', time: '64 min', spq: '71s', color: '#6366f1' },
+                    { section: 'Math', exam: 'SAT', q: '44', time: '70 min', spq: '95s', color: '#6366f1' },
+                    { section: 'English', exam: 'ACT', q: '75', time: '45 min', spq: '36s', color: '#06b6d4' },
+                    { section: 'Mathematics', exam: 'ACT', q: '60', time: '60 min', spq: '60s', color: '#06b6d4' },
+                    { section: 'Reading', exam: 'ACT', q: '40', time: '35 min', spq: '53s', color: '#06b6d4' },
+                    { section: 'Science', exam: 'ACT', q: '40', time: '35 min', spq: '53s', color: '#06b6d4' },
                   ].map((row, i) => (
                     <tr key={i} className="hover:bg-white/2 transition-colors">
                       <td className="px-4 py-3 text-slate-300">{row.section}</td>
@@ -176,7 +176,7 @@ export default function SatVsActPage() {
               The ACT Science section is the single biggest structural difference between the two tests. It is not a biology or chemistry test — it tests your ability to read graphs, interpret data, and evaluate competing scientific hypotheses quickly. Students who are strong data readers tend to find ACT Science manageable; students who read slowly under pressure often struggle with its pace.
             </p>
             <p className="text-slate-400 leading-relaxed mb-4">
-              SAT Math covers fewer topics than ACT Math but goes deeper. The digital SAT removed the no-calculator section, so you now use a calculator throughout. ACT Math covers trigonometry and matrices — topics that do not appear on the SAT. If your school hasn&apos;t covered trig yet, the SAT may be the safer choice.
+              SAT Math covers fewer topics than ACT Math but goes deeper. The digital SAT removed the no-calculator section, so you now use a calculator throughout. ACT Math covers trigonometry and matrices — topics that do not appear on the SAT. If your school hasn't covered trig yet, the SAT may be the safer choice.
             </p>
             <p className="text-slate-400 leading-relaxed mb-4">
               On reading comprehension, the SAT now uses shorter, more focused passages with each question tied to a specific piece of evidence. The ACT uses longer passages with a wider range of question types. Students who prefer zooming in on targeted evidence tend to prefer the SAT; students who read fast and can hold longer texts in mind often score higher on the ACT.
@@ -235,8 +235,8 @@ export default function SatVsActPage() {
             <h2 id="related-heading" className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Related articles</h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {[
-                { title: &apos;ACT vs SAT Difficulty Comparison&apos;, href: &apos;/articles/act-vs-sat-difficulty-comparison&apos;, color: &apos;#06b6d4&apos; },
-                { title: &apos;SAT vs AP Exams Explained&apos;, href: &apos;/articles/sat-vs-ap-exams-explained&apos;, color: &apos;#6366f1&apos; },
+                { title: 'ACT vs SAT Difficulty Comparison', href: '/articles/act-vs-sat-difficulty-comparison', color: '#06b6d4' },
+                { title: 'SAT vs AP Exams Explained', href: '/articles/sat-vs-ap-exams-explained', color: '#6366f1' },
               ].map((a) => (
                 <Link key={a.href} href={a.href} className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/16 transition-colors group">
                   <p className="text-sm font-semibold text-white group-hover:brightness-110 transition-all leading-snug">{a.title}</p>
