@@ -83,6 +83,14 @@ export default function RootLayout({
         {/* VERCEL ANALYTICS */}
         <Analytics />
 
+        {/* GOOGLE ADSENSE */}
+        <Script 
+          async 
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8146074127975041" 
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
+
         {/* GOOGLE ANALYTICS (Next.js Optimized) */}
         <Script 
           strategy="afterInteractive" 
