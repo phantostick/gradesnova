@@ -322,7 +322,7 @@ export default function ALevelSciencesPage() {
               {[
                 {
                   icon: '🎯',
-                  title: 'Chemistry if you're targeting top medicine/STEM',
+                  title: "Chemistry if you're targeting top medicine/STEM",
                   body: 'The high A* boundary means top performers are genuinely tested. If you consistently score over 80% in practice, Chemistry rewards precision and breadth. One underperforming paper matters significantly.',
                   color: '#6366f1',
                 },
