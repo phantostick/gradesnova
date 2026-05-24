@@ -4,7 +4,7 @@ import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import "./globals.css";
 
-// 1. HIGH-PERFORMANCE FONT LOADING
+// 1. HIGH-PERFORMANCE FONT LOADING 
 const inter = Inter({ 
   subsets: ["latin"],
   display: "swap",
