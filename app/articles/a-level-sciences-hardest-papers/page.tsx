@@ -341,7 +341,7 @@ export default function ALevelSciencesPage() {
                 {
                   icon: '📊',
                   title: 'Taking all three? Chemistry is your limiting factor',
-                  body: 'Triple science students should treat Chemistry as the hardest boundary target and allocate revision time accordingly. Meeting Chemistry's A* boundary is the hardest of the three consistent objectives.',
+                  body: "Triple science students should treat Chemistry as the hardest boundary target and allocate revision time accordingly. Meeting Chemistry's A* boundary is the hardest of the three consistent objectives.",
                   color: '#f59e0b',
                 },
               ].map((tip) => (
