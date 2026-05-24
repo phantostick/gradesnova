@@ -1,32 +1,32 @@
 // app/articles/gre-vs-gmat-which-exam-should-you-take/page.tsx
-import type { Metadata } from &apos;next&apos;;
-import { Navbar } from &apos;@/components/navbar&apos;;
-import { Footer } from &apos;@/components/footer&apos;;
-import Link from &apos;next/link&apos;;
+import type { Metadata } from 'next';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: &apos;GRE vs GMAT: Which Exam Should You Take in 2025? | GradesNova&apos;,
-  description: &apos;GRE vs GMAT 2025: compare structure, scoring, difficulty, and acceptance at top MBA programs. Find out which exam suits your strengths and target schools.&apos;,
-  alternates: { canonical: &apos;https://gradesnova.com/articles/gre-vs-gmat-which-exam-should-you-take&apos; },
+  title: 'GRE vs GMAT: Which Exam Should You Take in 2025? | GradesNova',
+  description: 'GRE vs GMAT 2025: compare structure, scoring, difficulty, and acceptance at top MBA programs. Find out which exam suits your strengths and target schools.',
+  alternates: { canonical: 'https://gradesnova.com/articles/gre-vs-gmat-which-exam-should-you-take' },
   openGraph: {
-    title: &apos;GRE vs GMAT: Which Exam Should You Take in 2025?&apos;,
-    description: &apos;GRE vs GMAT: compare structure, scoring, difficulty, and MBA program acceptance for 2025.&apos;,
-    url: &apos;https://gradesnova.com/articles/gre-vs-gmat-which-exam-should-you-take&apos;,
-    type: &apos;article&apos;,
-    siteName: &apos;GradesNova&apos;,
+    title: 'GRE vs GMAT: Which Exam Should You Take in 2025?',
+    description: 'GRE vs GMAT: compare structure, scoring, difficulty, and MBA program acceptance for 2025.',
+    url: 'https://gradesnova.com/articles/gre-vs-gmat-which-exam-should-you-take',
+    type: 'article',
+    siteName: 'GradesNova',
   },
   robots: { index: true, follow: true },
 };
 
 const jsonLd = {
-  &apos;@context&apos;: &apos;https://schema.org&apos;,
-  &apos;@type&apos;: &apos;Article&apos;,
-  headline: &apos;GRE vs GMAT: Which Exam Should You Take in 2025?&apos;,
-  description: &apos;A complete comparison of the GRE and GMAT covering scoring, structure, MBA acceptance, and which exam to choose.&apos;,
-  url: &apos;https://gradesnova.com/articles/gre-vs-gmat-which-exam-should-you-take&apos;,
-  author: { &apos;@type&apos;: &apos;Organization&apos;, name: &apos;GradesNova&apos; },
-  publisher: { &apos;@type&apos;: &apos;Organization&apos;, name: &apos;GradesNova&apos;, url: &apos;https://gradesnova.com&apos; },
-  dateModified: &apos;2025-05-24&apos;,
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'GRE vs GMAT: Which Exam Should You Take in 2025?',
+  description: 'A complete comparison of the GRE and GMAT covering scoring, structure, MBA acceptance, and which exam to choose.',
+  url: 'https://gradesnova.com/articles/gre-vs-gmat-which-exam-should-you-take',
+  author: { '@type': 'Organization', name: 'GradesNova' },
+  publisher: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
+  dateModified: '2025-05-24',
 };
 
 export default function GreVsGmatPage() {
@@ -54,7 +54,7 @@ export default function GreVsGmatPage() {
               GRE vs GMAT: Which Exam Should You Take in 2025?
             </h1>
             <p className="text-slate-400 leading-relaxed text-base">
-              Both tests open doors to top graduate programs — but they reward different skills. Here&apos;s exactly how GRE and GMAT compare on structure, scoring, and strategic fit.
+              Both tests open doors to top graduate programs — but they reward different skills. Here's exactly how GRE and GMAT compare on structure, scoring, and strategic fit.
             </p>
             <div className="flex items-center gap-4 mt-5 text-xs text-slate-500">
               <span>Updated May 2025</span>
@@ -73,7 +73,7 @@ export default function GreVsGmatPage() {
                 <span className="text-lg" aria-hidden="true">📊</span>
                 <span className="text-xs text-slate-400 font-medium">GRE Score Range</span>
               </div>
-              <p className="text-2xl font-bold font-mono" style={{ color: &apos;#a855f7&apos; }}>260–340</p>
+              <p className="text-2xl font-bold font-mono" style={{ color: '#a855f7' }}>260–340</p>
               <p className="text-xs text-slate-500 mt-0.5">Verbal + Quant (130–170 each)</p>
             </div>
             <div className="bg-[#12141f] border border-white/8 rounded-xl p-4">
@@ -81,7 +81,7 @@ export default function GreVsGmatPage() {
                 <span className="text-lg" aria-hidden="true">📈</span>
                 <span className="text-xs text-slate-400 font-medium">GMAT Focus Range</span>
               </div>
-              <p className="text-2xl font-bold font-mono" style={{ color: &apos;#f59e0b&apos; }}>205–805</p>
+              <p className="text-2xl font-bold font-mono" style={{ color: '#f59e0b' }}>205–805</p>
               <p className="text-xs text-slate-500 mt-0.5">Three sections, new format since 2023</p>
             </div>
             <div className="bg-[#12141f] border border-white/8 rounded-xl p-4">
@@ -89,7 +89,7 @@ export default function GreVsGmatPage() {
                 <span className="text-lg" aria-hidden="true">⏱️</span>
                 <span className="text-xs text-slate-400 font-medium">Test Duration</span>
               </div>
-              <p className="text-2xl font-bold font-mono" style={{ color: &apos;#34d399&apos; }}>1h 58m / 2h 15m</p>
+              <p className="text-2xl font-bold font-mono" style={{ color: '#34d399' }}>1h 58m / 2h 15m</p>
               <p className="text-xs text-slate-500 mt-0.5">GRE (at home) / GMAT Focus</p>
             </div>
           </div>
@@ -98,13 +98,13 @@ export default function GreVsGmatPage() {
           <section aria-labelledby="overview-heading">
             <h2 id="overview-heading" className="text-2xl font-bold text-white mb-4">GRE vs GMAT: what&apos;s the core difference?</h2>
             <p className="text-slate-400 leading-relaxed mb-4">
-              The GRE General Test, administered by ETS, is accepted for admission to graduate programs across almost every discipline — MBA, law, medicine, science, humanities. The GMAT Focus Edition, administered by GMAC, is designed specifically for business school. Nearly all top MBA programs now accept both scores, but the GMAT remains the traditional choice for business, while the GRE opens broader optionality if you&apos;re undecided between an MBA and other graduate degrees.
+              The GRE General Test, administered by ETS, is accepted for admission to graduate programs across almost every discipline — MBA, law, medicine, science, humanities. The GMAT Focus Edition, administered by GMAC, is designed specifically for business school. Nearly all top MBA programs now accept both scores, but the GMAT remains the traditional choice for business, while the GRE opens broader optionality if you're undecided between an MBA and other graduate degrees.
             </p>
             <p className="text-slate-400 leading-relaxed mb-4">
               The GMAT Focus Edition launched in 2023, replacing the original GMAT. It dropped the Sentence Correction and Integrated Reasoning sections and introduced Data Insights as a standalone section. The new format is shorter (2 hours 15 minutes versus 3+ hours for the old GMAT) and is fully computer-adaptive at the question level.
             </p>
             <p className="text-slate-400 leading-relaxed">
-              The GRE, by contrast, emphasises vocabulary and analytical writing more heavily, and its Quant section is slightly less demanding than the GMAT&apos;s for students targeting elite business programs. If you have strong verbal skills and weaker data reasoning, the GRE may play better for you.
+              The GRE, by contrast, emphasises vocabulary and analytical writing more heavily, and its Quant section is slightly less demanding than the GMAT's for students targeting elite business programs. If you have strong verbal skills and weaker data reasoning, the GRE may play better for you.
             </p>
           </section>
 
@@ -112,7 +112,7 @@ export default function GreVsGmatPage() {
           <section aria-labelledby="structure-heading">
             <h2 id="structure-heading" className="text-2xl font-bold text-white mb-4">Structure and format: GRE vs GMAT Focus Edition</h2>
             <p className="text-slate-400 leading-relaxed mb-5">
-              The 2023 GMAT Focus Edition changed the business school landscape significantly. Here&apos;s how the two exams look side by side.
+              The 2023 GMAT Focus Edition changed the business school landscape significantly. Here's how the two exams look side by side.
             </p>
             <div className="overflow-x-auto rounded-xl border border-white/8">
               <table className="w-full text-sm min-w-[500px]" aria-label="GRE and GMAT Focus Edition section structure comparison">
@@ -125,18 +125,18 @@ export default function GreVsGmatPage() {
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   {[
-                    { feature: &apos;Sections&apos;, gre: &apos;Verbal, Quant, Analytical Writing&apos;, gmat: &apos;Verbal, Quant Reasoning, Data Insights&apos; },
-                    { feature: &apos;Score scale&apos;, gre: &apos;130–170 per section; 0–6 writing&apos;, gmat: &apos;60–90 per section; 205–805 composite&apos; },
-                    { feature: &apos;Total questions&apos;, gre: &apos;~82 scored&apos;, gmat: &apos;64 scored&apos; },
-                    { feature: &apos;Adaptive format&apos;, gre: &apos;Section-adaptive&apos;, gmat: &apos;Question-adaptive&apos; },
-                    { feature: &apos;Calculator&apos;, gre: &apos;On-screen for Quant&apos;, gmat: &apos;On-screen for Quant & Data Insights&apos; },
-                    { feature: &apos;At-home option&apos;, gre: &apos;Yes (ScoreSelect)&apos;, gmat: &apos;Yes&apos; },
-                    { feature: &apos;Score validity&apos;, gre: &apos;5 years&apos;, gmat: &apos;5 years&apos; },
-                    { feature: &apos;Cost (approx.)&apos;, gre: &apos;USD $220&apos;, gmat: &apos;USD $275&apos; },
+                    { feature: 'Sections', gre: 'Verbal, Quant, Analytical Writing', gmat: 'Verbal, Quant Reasoning, Data Insights' },
+                    { feature: 'Score scale', gre: '130–170 per section; 0–6 writing', gmat: '60–90 per section; 205–805 composite' },
+                    { feature: 'Total questions', gre: '~82 scored', gmat: '64 scored' },
+                    { feature: 'Adaptive format', gre: 'Section-adaptive', gmat: 'Question-adaptive' },
+                    { feature: 'Calculator', gre: 'On-screen for Quant', gmat: 'On-screen for Quant & Data Insights' },
+                    { feature: 'At-home option', gre: 'Yes (ScoreSelect)', gmat: 'Yes' },
+                    { feature: 'Score validity', gre: '5 years', gmat: '5 years' },
+                    { feature: 'Cost (approx.)', gre: 'USD $220', gmat: 'USD $275' },
                   ].map((row, i) => (
                     <tr key={i} className="hover:bg-white/2 transition-colors">
                       <td className="px-4 py-3 text-slate-300 font-medium">{row.feature}</td>
-                      <td className="px-4 py-3 text-slate-400" style={{ color: &apos;#a855f780&apos; }}><span className="text-slate-400">{row.gre}</span></td>
+                      <td className="px-4 py-3 text-slate-400" style={{ color: '#a855f780' }}><span className="text-slate-400">{row.gre}</span></td>
                       <td className="px-4 py-3 text-slate-400">{row.gmat}</td>
                     </tr>
                   ))}
@@ -153,7 +153,7 @@ export default function GreVsGmatPage() {
               The short answer is no — at least officially. Harvard Business School, Wharton, Stanford GSB, LBS, INSEAD, and virtually every other top MBA program explicitly state they have no preference between the two exams and evaluate them equivalently.
             </p>
             <p className="text-slate-400 leading-relaxed mb-4">
-              In practice, historical data shows GRE applicants have been admitted at similar rates to GMAT applicants at most schools. However, GMAT scores are still more commonly listed in admitted student profiles on official school websites (because more applicants historically submitted GMAT scores), which can create a misleading impression. If a school reports a "median GMAT of 730," it doesn&apos;t mean GRE applicants are disadvantaged — it reflects the historical composition of the class.
+              In practice, historical data shows GRE applicants have been admitted at similar rates to GMAT applicants at most schools. However, GMAT scores are still more commonly listed in admitted student profiles on official school websites (because more applicants historically submitted GMAT scores), which can create a misleading impression. If a school reports a "median GMAT of 730," it doesn't mean GRE applicants are disadvantaged — it reflects the historical composition of the class.
             </p>
 
             <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-5 flex gap-4 items-start">
@@ -169,13 +169,13 @@ export default function GreVsGmatPage() {
           <section aria-labelledby="difficulty-heading">
             <h2 id="difficulty-heading" className="text-2xl font-bold text-white mb-4">Which is harder — GRE or GMAT?</h2>
             <p className="text-slate-400 leading-relaxed mb-4">
-              Difficulty is personal. The GMAT Quant section is widely considered more demanding than GRE Quant for students applying to business schools — it focuses heavily on data sufficiency questions, a unique question type that tests whether you have enough information to solve a problem rather than asking you to actually solve it. These require a different mode of thinking and trip up students who haven&apos;t specifically prepared for them.
+              Difficulty is personal. The GMAT Quant section is widely considered more demanding than GRE Quant for students applying to business schools — it focuses heavily on data sufficiency questions, a unique question type that tests whether you have enough information to solve a problem rather than asking you to actually solve it. These require a different mode of thinking and trip up students who haven't specifically prepared for them.
             </p>
             <p className="text-slate-400 leading-relaxed mb-4">
-              GRE Verbal, by contrast, includes a higher volume of advanced vocabulary questions (Text Completion, Sentence Equivalence) than the GMAT. If you&apos;re a non-native English speaker or haven&apos;t studied SAT-style vocabulary, GRE Verbal can feel punishing. GMAT Verbal (in the Focus Edition) is primarily critical reasoning and reading comprehension — skills that feel more natural for many international students.
+              GRE Verbal, by contrast, includes a higher volume of advanced vocabulary questions (Text Completion, Sentence Equivalence) than the GMAT. If you're a non-native English speaker or haven't studied SAT-style vocabulary, GRE Verbal can feel punishing. GMAT Verbal (in the Focus Edition) is primarily critical reasoning and reading comprehension — skills that feel more natural for many international students.
             </p>
             <p className="text-slate-400 leading-relaxed">
-              The new GMAT Data Insights section combines elements of integrated reasoning and data interpretation. Students from quantitative or finance backgrounds often find it manageable; students with pure humanities backgrounds tend to find it challenging. Practice with official GMAT Focus mock tests before assuming it&apos;s the easier option.
+              The new GMAT Data Insights section combines elements of integrated reasoning and data interpretation. Students from quantitative or finance backgrounds often find it manageable; students with pure humanities backgrounds tend to find it challenging. Practice with official GMAT Focus mock tests before assuming it's the easier option.
             </p>
           </section>
 
@@ -183,7 +183,7 @@ export default function GreVsGmatPage() {
           <section aria-labelledby="choose-heading">
             <h2 id="choose-heading" className="text-2xl font-bold text-white mb-4">GRE or GMAT: which should you take?</h2>
             <p className="text-slate-400 leading-relaxed mb-5">
-              Use this framework to decide. If you&apos;re still unsure after applying it, take a free official practice test for each and compare your scores using an ETS concordance tool.
+              Use this framework to decide. If you're still unsure after applying it, take a free official practice test for each and compare your scores using an ETS concordance tool.
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
               <div className="bg-[#12141f] border border-purple-500/20 rounded-xl p-5">
@@ -224,8 +224,8 @@ export default function GreVsGmatPage() {
             <h2 id="related-heading" className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Related articles</h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {[
-                { title: &apos;GRE vs CAT for MBA Abroad&apos;, href: &apos;/articles/gre-vs-cat-for-mba-abroad&apos;, color: &apos;#a855f7&apos; },
-                { title: &apos;SAT vs ACT: Complete Comparison&apos;, href: &apos;/articles/sat-vs-act-complete-comparison&apos;, color: &apos;#6366f1&apos; },
+                { title: 'GRE vs CAT for MBA Abroad', href: '/articles/gre-vs-cat-for-mba-abroad', color: '#a855f7' },
+                { title: 'SAT vs ACT: Complete Comparison', href: '/articles/sat-vs-act-complete-comparison', color: '#6366f1' },
               ].map((a) => (
                 <Link key={a.href} href={a.href} className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/16 transition-colors group">
                   <p className="text-sm font-semibold text-white group-hover:brightness-110 transition-all leading-snug">{a.title}</p>
