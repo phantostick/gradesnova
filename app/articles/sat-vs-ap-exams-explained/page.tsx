@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: 'SAT vs AP Exams: understand the difference in purpose, scoring, college credit, and how both fit into your college application strategy. Updated for 2025.',
   alternates: { canonical: 'https://gradesnova.com/articles/sat-vs-ap-exams-explained' },
   openGraph: {
-    title: 'SAT vs AP Exams Explained 2025: What's the Difference?',
+    title: "SAT vs AP Exams Explained 2025: What's the Difference?",
     description: 'SAT vs AP Exams: purpose, scoring, college credit, and how both fit your 2025 application strategy.',
     url: 'https://gradesnova.com/articles/sat-vs-ap-exams-explained',
     type: 'article',
