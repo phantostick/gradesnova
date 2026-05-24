@@ -74,7 +74,6 @@ export function Footer() {
             <h3 className="text-sm font-semibold text-white mb-4">Articles & Resources</h3>
             <ul className="space-y-3">
               <li><Link href="/articles/sat-vs-act-complete-comparison" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">SAT vs ACT</Link></li>
-              <li><Link href="/articles/act-vs-sat-difficulty-comparison" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">ACT vs SAT Difficulty</Link></li>
               <li><Link href="/articles/sat-vs-ap-exams-explained" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">SAT vs AP Exams</Link></li>
               <li><Link href="/articles/sat-vs-jee-for-indian-students" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">SAT vs JEE</Link></li>
               <li><Link href="/articles/gre-vs-gmat-which-exam-should-you-take" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">GRE vs GMAT</Link></li>
