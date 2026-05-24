@@ -114,7 +114,6 @@ export default function ALevelCalculatorPage() {
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
-    aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '198', bestRating: '5', worstRating: '1' },
   };
 
   return (
