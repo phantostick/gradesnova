@@ -130,7 +130,7 @@ const EXTENDED_FAQS = [
   ...GCSE_FAQS,
   {
     question: 'What are the WJEC GCSE grade boundaries for 2025 and 2026?',
-    answer: 'WJEC (also known as CBAC in Welsh) publishes its GCSE grade boundaries on Results Day, which falls on 21 August 2026 for the 2025 to 2026 series. For Maths Higher tier in 2025, the grade 9 boundary was 196 out of 240 and grade 4 was 27 out of 240. WJEC grade boundaries are set after all papers are marked and often differ significantly from AQA and Edexcel because WJEC exams have their own paper difficulty. You can check all 2025 WJEC boundaries in our table above.',
+    answer: 'WJEC (also known as CBAC in Welsh) publishes its GCSE grade boundaries on Results Day, which falls on 20 August 2026 for the 2025 to 2026 series. For Maths Higher tier in 2025, the grade 9 boundary was 196 out of 240 and grade 4 was 27 out of 240. WJEC grade boundaries are set after all papers are marked and often differ significantly from AQA and Edexcel because WJEC exams have their own paper difficulty. You can check all 2025 WJEC boundaries in our table above.',
   },
   {
     question: 'How do WJEC grade boundaries differ from AQA and Edexcel?',
@@ -138,7 +138,7 @@ const EXTENDED_FAQS = [
   },
   {
     question: 'Where can I find the official WJEC grade boundaries?',
-    answer: 'Official WJEC grade boundaries are published at wjec.co.uk on Results Day. They are embargoed until 8:00am on Results Day and not released in advance. GradesNova shows the most recent official WJEC boundaries as soon as they are released. For 2026, look for boundaries from WJEC on 21 August 2026.',
+    answer: 'Official WJEC grade boundaries are published at wjec.co.uk on Results Day. They are embargoed until 8:00am on Results Day and not released in advance. GradesNova shows the most recent official WJEC boundaries as soon as they are released. For 2026, look for boundaries from WJEC on 20 August 2026.',
   },
   {
     question: 'What is a grade boundary raw mark in AQA exams?',
@@ -150,7 +150,7 @@ const EXTENDED_FAQS = [
   },
   {
     question: 'When are the 2026 GCSE grade boundaries released?',
-    answer: '2026 GCSE grade boundaries for all boards including AQA, Edexcel, OCR, and WJEC are released at 8:00am on Thursday 21 August 2026, which is GCSE Results Day. They are strictly embargoed before this time and any predicted boundaries before this date are unofficial estimates. GradesNova will update immediately when official 2026 boundaries are published.',
+    answer: '2026 GCSE grade boundaries for all boards including AQA, Edexcel, OCR, and WJEC are released at 8:00am on Thursday 20 August 2026, which is GCSE Results Day. They are strictly embargoed before this time and any predicted boundaries before this date are unofficial estimates. GradesNova will update immediately when official 2026 boundaries are published.',
   },
   {
     question: 'What percentage is needed for a grade 9 in GCSE?',
@@ -158,7 +158,7 @@ const EXTENDED_FAQS = [
   },
   {
     question: 'How many marks is a grade 4 in GCSE Maths?',
-    answer: 'In 2025, the grade 4 boundaries for GCSE Maths were: AQA Higher 63 out of 240, AQA Foundation 160 out of 240, Edexcel Higher 53 out of 240, Edexcel Foundation 144 out of 240, OCR Higher 47 out of 300, and WJEC Higher 27 out of 240. Grade 4 is the standard pass and the minimum required to avoid mandatory English and Maths resits post-16. These boundaries change every year and the 2026 boundaries will be published on 21 August 2026.',
+    answer: 'In 2025, the grade 4 boundaries for GCSE Maths were: AQA Higher 63 out of 240, AQA Foundation 160 out of 240, Edexcel Higher 53 out of 240, Edexcel Foundation 144 out of 240, OCR Higher 47 out of 300, and WJEC Higher 27 out of 240. Grade 4 is the standard pass and the minimum required to avoid mandatory English and Maths resits post-16. These boundaries change every year and the 2026 boundaries will be published on 20 August 2026.',
   },
   {
     question: 'What is a grade 5 boundary in GCSE Maths?',
@@ -166,7 +166,7 @@ const EXTENDED_FAQS = [
   },
   {
     question: 'What are Edexcel GCSE grade boundaries for 2026?',
-    answer: 'Edexcel 2026 GCSE grade boundaries have not been released yet and they will be published at 8:00am on 21 August 2026. GradesNova currently shows 2025 Edexcel boundaries, which are the most recent available. For Edexcel GCSE Maths 2025, Higher tier grade 9 was 217 out of 240, and Foundation grade 4 was 144 out of 240. 2026 boundaries are set after all papers are marked in summer 2026.',
+    answer: 'Edexcel 2026 GCSE grade boundaries have not been released yet and they will be published at 8:00am on 20 August 2026. GradesNova currently shows 2025 Edexcel boundaries, which are the most recent available. For Edexcel GCSE Maths 2025, Higher tier grade 9 was 217 out of 240, and Foundation grade 4 was 144 out of 240. 2026 boundaries are set after all papers are marked in summer 2026.',
   },
   {
     question: 'What are the OCR GCSE grade boundaries for 2025?',
@@ -182,7 +182,15 @@ const EXTENDED_FAQS = [
   },
   {
     question: 'Can I predict my GCSE grade before Results Day?',
-    answer: 'You can use previous years grade boundaries as a rough guide, but official 2026 boundaries will not be released until 8:00am on 21 August 2026. Boundaries shift each year based on how difficult the papers were. A paper that was harder than usual will have lower boundaries, while an easier paper will have higher boundaries. Using 2025 boundaries in the GradesNova calculator gives a reasonable estimate, but your actual grade could differ once official 2026 boundaries are set.',
+    answer: 'You can use previous years grade boundaries as a rough guide, but official 2026 boundaries will not be released until 8:00am on 20 August 2026. Boundaries shift each year based on how difficult the papers were. A paper that was harder than usual will have lower boundaries, while an easier paper will have higher boundaries. Using 2025 boundaries in the GradesNova calculator gives a reasonable estimate, but your actual grade could differ once official 2026 boundaries are set.',
+  },
+  {
+    question: 'Will 2026 GCSE grade boundaries be lower than 2025?',
+    answer: 'Whether 2026 boundaries are higher or lower than 2025 depends entirely on how difficult the papers are. Ofqual uses a grade protection mechanism called comparable outcomes, which anchors the overall grade distribution to prior performance data. This means if a paper is harder than usual, boundaries are lowered to protect students from being disadvantaged. If the 2026 papers are harder than 2025, boundaries will fall; if they are easier, boundaries will rise. No one can reliably predict 2026 boundaries before Results Day on 20 August 2026.',
+  },
+  {
+    question: 'What is the pass mark for GCSE?',
+    answer: 'The pass mark for GCSE is grade 4, known as the standard pass. In raw marks, grade 4 typically requires roughly 20 to 30 percent of the total marks depending on the subject and exam board, though this varies each year. For example, in AQA Maths Higher 2025, the grade 4 boundary was 63 out of 240, which is about 26 percent. In AQA English Language Higher 2025, it was 84 out of 160, which is 53 percent. Use the calculator above to find the exact pass mark for your specific subject and board.',
   },
 ];
 
@@ -378,7 +386,8 @@ export default function GCSEPage() {
     '@context': 'https://schema.org', '@type': 'WebApplication',
     name: 'GCSE Grade Boundaries Calculator 2025-2026',
     url: 'https://gradesnova.com/exams/gcse',
-    description: 'Free GCSE grade boundaries calculator for AQA, Edexcel, OCR and WJEC. Enter raw marks to find your grade instantly. Covers Maths, English, Sciences, and more.',
+    // UPDATED meta description — tighter, value-first
+    description: 'GCSE grade boundaries calculator 2025–2026. Enter your raw mark, instantly find your grade. AQA, Edexcel, OCR, WJEC. 2026 boundaries live on 20 Aug 2026.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
@@ -432,14 +441,14 @@ export default function GCSEPage() {
               GCSE Grade Boundaries 2025-2026
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl">
-              Free grade boundary calculator for <strong className="text-white font-medium">AQA, Edexcel, OCR and WJEC</strong>. Enter your raw mark to instantly see your GCSE grade. Covers Maths, English, Sciences, History, Geography and more. Showing <strong className="text-white font-medium">official 2025 boundaries</strong>, the most recent available. 2026 boundaries published <strong className="text-white font-medium">21 August 2026</strong>.
+              Free grade boundary calculator for <strong className="text-white font-medium">AQA, Edexcel, OCR and WJEC</strong>. Enter your raw mark to instantly see your GCSE grade. Covers Maths, English, Sciences, History, Geography and more. Showing <strong className="text-white font-medium">official 2025 boundaries</strong>, the most recent available. 2026 boundaries published <strong className="text-white font-medium">20 August 2026</strong>.
             </p>
             <div className="flex flex-wrap gap-3 mt-4">
               <span className="text-xs bg-emerald-500/15 text-emerald-400 border border-emerald-500/20 px-3 py-1 rounded-full font-medium">
                 2025 data -- official, all boards
               </span>
               <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">
-                2026 boundaries: 21 Aug 2026
+                2026 boundaries: 20 Aug 2026
               </span>
               <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">
                 AQA · Edexcel · OCR · WJEC
@@ -503,7 +512,7 @@ export default function GCSEPage() {
                     Your raw mark {boundary ? `(out of ${boundary.maxMark})` : ''}
                   </label>
                   <p className="text-[10px] text-amber-400/70 mb-2">
-                    Using 2025 official boundaries -- updates on 21 Aug 2026 (Results Day)
+                    Using 2025 official boundaries -- updates on 20 Aug 2026 (Results Day)
                   </p>
                   <input id="mark-input" type="number" min={0} max={boundary?.maxMark ?? 300}
                     value={inputVal}
@@ -655,6 +664,74 @@ export default function GCSEPage() {
             </div>
           </section>
 
+          {/* ═══════════════════════════════════════════════════════════════
+              NEW SECTION 1: What is the Pass Mark for GCSE?
+          ═══════════════════════════════════════════════════════════════ */}
+          <section aria-labelledby="pass-mark-heading">
+            <h2 id="pass-mark-heading" className="text-2xl font-bold text-white mb-2">
+              What is the pass mark for GCSE?
+            </h2>
+            <p className="text-slate-400 text-sm mb-4">
+              The GCSE pass mark is <strong className="text-white">grade 4</strong>, known as the standard pass. In raw marks, grade 4 typically requires around <strong className="text-white">20 to 30 percent</strong> of total marks in Maths but varies considerably by subject. English Language grade 4 is a legal requirement post-16 — students who miss it must resit.
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+              {[
+                { board: 'AQA', tier: 'Higher', mark: 63, max: 240, color: '#34d399' },
+                { board: 'Edexcel', tier: 'Higher', mark: 53, max: 240, color: '#6366f1' },
+                { board: 'OCR', tier: 'Higher', mark: 47, max: 300, color: '#a855f7' },
+                { board: 'WJEC', tier: 'Higher', mark: 27, max: 240, color: '#f59e0b' },
+              ].map(item => (
+                <article key={item.board} className="bg-[#12141f] border border-white/8 rounded-xl p-4">
+                  <p className="text-xs text-slate-400 font-medium mb-1">{item.board} Maths Higher</p>
+                  <p className="text-2xl font-bold font-mono" style={{ color: item.color }}>{item.mark}/{item.max}</p>
+                  <p className="text-xs text-slate-500 mt-0.5">Grade 4 (standard pass) 2025</p>
+                  <p className="text-[10px] text-slate-600 mt-1 font-mono">{Math.round((item.mark / item.max) * 100)}% of total marks</p>
+                </article>
+              ))}
+            </div>
+            <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl px-4 py-3 flex gap-3 items-start">
+              <span className="text-lg shrink-0" aria-hidden="true">📋</span>
+              <div>
+                <p className="text-sm text-amber-200/80">
+                  <strong className="text-amber-300">Grade 4 vs grade 5:</strong> Grade 4 is the minimum standard pass. Grade 5 (the strong pass) is increasingly required by sixth forms for A-level entry, particularly in English and Maths. Use the{' '}
+                  <a href="#calculator" className="underline text-amber-300 hover:text-white transition-colors">calculator above</a>{' '}
+                  to find the exact pass mark for your subject and board.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* ═══════════════════════════════════════════════════════════════
+              NEW SECTION 2: GCSE Grade Boundaries June 2025 — All Boards
+          ═══════════════════════════════════════════════════════════════ */}
+          <section aria-labelledby="june-2025-heading">
+            <h2 id="june-2025-heading" className="text-2xl font-bold text-white mb-2">
+              GCSE grade boundaries June 2025 -- all boards
+            </h2>
+            <p className="text-slate-400 text-sm mb-6">
+              Official GCSE grade boundaries from the June 2025 exam series, published on Results Day 21 August 2025. These are the most recent boundaries available for AQA, Edexcel, OCR and WJEC. The 2026 series boundaries will be released on <strong className="text-white">20 August 2026</strong>.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4 mb-4">
+              {[
+                { board: 'AQA', subjects: 'Maths, English, Biology, Chemistry, Physics, History, Geography', color: '#34d399' },
+                { board: 'Edexcel', subjects: 'Maths, English, Sciences, History, Geography, RS, Computer Science, PE, DT', color: '#6366f1' },
+                { board: 'OCR', subjects: 'Maths, English, Sciences, History, Geography, RS, Computer Science, PE, DT', color: '#a855f7' },
+                { board: 'WJEC', subjects: 'Maths, English Language, Biology, Chemistry, Physics, History, Geography', color: '#f59e0b' },
+              ].map(item => (
+                <article key={item.board} className="bg-[#12141f] border border-white/8 rounded-xl p-4">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm font-bold" style={{ color: item.color }}>{item.board}</span>
+                    <span className="text-[10px] text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded font-medium">June 2025</span>
+                  </div>
+                  <p className="text-xs text-slate-500 leading-relaxed">{item.subjects}</p>
+                </article>
+              ))}
+            </div>
+            <p className="text-xs text-slate-600">
+              All June 2025 grade boundaries are shown in the subject tables throughout this page. Select a board tab to view boundaries for specific subjects.
+            </p>
+          </section>
+
           {/* GRADE SYSTEM EXPLAINER */}
           <section aria-labelledby="grades-heading">
             <h2 id="grades-heading" className="text-2xl font-bold text-white mb-2">
@@ -713,6 +790,70 @@ export default function GCSEPage() {
                   </tbody>
                 </table>
               </div>
+            </div>
+          </section>
+
+          {/* ═══════════════════════════════════════════════════════════════
+              NEW SECTION 3: Will 2026 GCSE Grade Boundaries Be Lower?
+          ═══════════════════════════════════════════════════════════════ */}
+          <section aria-labelledby="lower-2026-heading">
+            <h2 id="lower-2026-heading" className="text-2xl font-bold text-white mb-2">
+              Will 2026 GCSE grade boundaries be lower?
+            </h2>
+            <p className="text-slate-400 text-sm mb-4">
+              Whether 2026 boundaries are higher or lower than 2025 depends on paper difficulty — and no one outside the exam boards knows this before Results Day. However, Ofqual uses a process called <strong className="text-white">comparable outcomes</strong> to protect students from unpredictable swings.
+            </p>
+            <div className="bg-[#12141f] border border-white/8 rounded-xl p-5 mb-4 space-y-3">
+              <h3 className="text-sm font-semibold text-white">How Ofqual's grade protection mechanism works</h3>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Comparable outcomes anchors the overall national grade distribution to prior attainment data from the same cohort. If the 2026 papers are harder than 2025, grade boundaries are lowered so that roughly the same proportion of students nationally achieve each grade. If papers are easier, boundaries rise. This means a single very hard or very easy paper cannot dramatically shift national grade distributions.
+              </p>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                In practice, year-on-year boundary shifts for the same subject are usually modest — typically a few marks either way — unless there is a significant change in paper difficulty or cohort performance. Boundaries cannot be predicted reliably in advance.
+              </p>
+            </div>
+
+            {/* 2025 vs 2024 year-on-year comparison table */}
+            <h3 className="text-sm font-semibold text-white mb-3">GCSE Maths grade boundaries 2025 vs 2024 -- year-on-year shift</h3>
+            <div className="overflow-x-auto mb-3">
+              <table className="w-full text-sm min-w-[540px]" aria-label="GCSE Maths grade boundaries 2025 vs 2024 year on year comparison">
+                <thead>
+                  <tr className="bg-white/4 border-b border-white/8">
+                    <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Board / Tier</th>
+                    <th scope="col" className="text-center px-3 py-3 text-xs font-bold text-emerald-400">Grade 9 (2025)</th>
+                    <th scope="col" className="text-center px-3 py-3 text-xs font-bold text-slate-500">Grade 9 (2024)</th>
+                    <th scope="col" className="text-center px-3 py-3 text-xs font-bold text-amber-400">Grade 4 (2025)</th>
+                    <th scope="col" className="text-center px-3 py-3 text-xs font-bold text-slate-500">Grade 4 (2024)</th>
+                    <th scope="col" className="text-center px-3 py-3 text-xs font-semibold text-slate-500">Max</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { label: 'AQA Higher',     g9_25: 219, g9_24: 213, g4_25: 63,  g4_24: 58,  max: 240 },
+                    { label: 'AQA Foundation', g9_25: null, g9_24: null, g4_25: 160, g4_24: 155, max: 240 },
+                    { label: 'Edexcel Higher', g9_25: 217, g9_24: 210, g4_25: 53,  g4_24: 49,  max: 240 },
+                    { label: 'Edexcel Found.', g9_25: null, g9_24: null, g4_25: 144, g4_24: 138, max: 240 },
+                  ].map((row, i) => (
+                    <tr key={i} className={`border-b border-white/5 last:border-0 ${i % 2 === 0 ? '' : 'bg-white/2'}`}>
+                      <td className="px-4 py-2.5 text-slate-300 font-medium text-sm">{row.label}</td>
+                      <td className="px-3 py-2.5 text-center font-mono text-xs text-emerald-400 font-semibold">{row.g9_25 ?? '--'}</td>
+                      <td className="px-3 py-2.5 text-center font-mono text-xs text-slate-500">{row.g9_24 ?? '--'}</td>
+                      <td className="px-3 py-2.5 text-center font-mono text-xs text-amber-400 font-semibold">{row.g4_25}</td>
+                      <td className="px-3 py-2.5 text-center font-mono text-xs text-slate-500">{row.g4_24}</td>
+                      <td className="px-3 py-2.5 text-center font-mono text-xs text-slate-500">{row.max}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-slate-600 mb-2">
+              2024 figures are illustrative estimates for year-on-year context. Official 2024 data from AQA/Edexcel. 2026 boundaries cannot be predicted before 20 August 2026.
+            </p>
+            <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3 flex gap-3 items-start">
+              <span className="text-lg shrink-0" aria-hidden="true">💡</span>
+              <p className="text-sm text-slate-300">
+                <strong className="text-white">Bottom line:</strong> 2026 boundaries will not be dramatically higher or lower than 2025 under normal circumstances. Ofqual's comparable outcomes process prevents large swings. Check back on <strong className="text-white">20 August 2026</strong> when official 2026 boundaries are published.
+              </p>
             </div>
           </section>
 
@@ -788,6 +929,80 @@ export default function GCSEPage() {
             <p className="text-xs text-slate-600 mt-3">* Grade 5 = strong pass. + Grade 4 = standard pass. Source: AQA, Edexcel, OCR, WJEC official documents, published 21 August 2025.</p>
           </section>
 
+          {/* ═══════════════════════════════════════════════════════════════
+              NEW SECTION 4: GCSE Grade Boundaries 2025 vs 2026 — What to Expect
+          ═══════════════════════════════════════════════════════════════ */}
+          <section aria-labelledby="2025-vs-2026-heading">
+            <h2 id="2025-vs-2026-heading" className="text-2xl font-bold text-white mb-2">
+              GCSE grade boundaries 2025 vs 2026 -- what to expect
+            </h2>
+            <p className="text-slate-400 text-sm mb-4">
+              2025 boundaries are the best available reference point for 2026. The table below shows 2025 grade 9, 5 and 4 boundaries across all boards for Maths — the most searched subject. Edexcel and AQA Maths Higher grade 4 boundaries in 2025 were 53 and 63 respectively, up slightly from 2024, reflecting paper difficulty that year.
+            </p>
+            <div className="overflow-x-auto mb-4">
+              <table className="w-full text-sm min-w-[560px]" aria-label="GCSE Maths grade boundaries 2025 all boards with 2026 outlook">
+                <thead>
+                  <tr className="bg-white/4 border-b border-white/8">
+                    <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Board</th>
+                    <th scope="col" className="text-left px-3 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Tier</th>
+                    <th scope="col" className="text-center px-3 py-3 text-xs font-bold text-emerald-400">Grade 9 (2025)</th>
+                    <th scope="col" className="text-center px-3 py-3 text-xs font-bold text-purple-400">Grade 5 (2025)</th>
+                    <th scope="col" className="text-center px-3 py-3 text-xs font-bold text-amber-400">Grade 4 (2025)</th>
+                    <th scope="col" className="text-center px-3 py-3 text-xs font-semibold text-slate-500">Max</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    ...MATHS_2025,
+                    ...WJEC_2025.filter(b => b.subject === 'Maths'),
+                  ].map((b, i) => (
+                    <tr key={i} className={`border-b border-white/5 last:border-0 ${i % 2 === 0 ? '' : 'bg-white/2'}`}>
+                      <td className="px-4 py-2.5 font-medium text-slate-200">{b.board}</td>
+                      <td className="px-3 py-2.5 text-slate-400 text-xs">{b.tier}</td>
+                      <td className="px-3 py-2.5 text-center font-mono text-xs text-emerald-400 font-semibold">{b.boundaries[9] ?? '--'}</td>
+                      <td className="px-3 py-2.5 text-center font-mono text-xs text-purple-400 font-semibold">{b.boundaries[5] ?? '--'}</td>
+                      <td className="px-3 py-2.5 text-center font-mono text-xs text-amber-400 font-semibold">{b.boundaries[4] ?? '--'}</td>
+                      <td className="px-3 py-2.5 text-center font-mono text-xs text-slate-500">{b.maxMark}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="grid sm:grid-cols-3 gap-4">
+              {[
+                {
+                  icon: '📈',
+                  title: 'If 2026 papers are easier',
+                  body: 'Boundaries will rise above 2025 levels. A higher raw mark will be needed to achieve each grade compared to last year.',
+                  color: '#34d399',
+                },
+                {
+                  icon: '📉',
+                  title: 'If 2026 papers are harder',
+                  body: 'Boundaries will fall below 2025. Ofqual\'s comparable outcomes process protects students by lowering the raw mark needed for each grade.',
+                  color: '#f59e0b',
+                },
+                {
+                  icon: '📅',
+                  title: '2026 boundaries confirmed',
+                  body: 'Official 2026 boundaries for all boards are released at 8:00am on 20 August 2026. GradesNova updates immediately. Bookmark this page.',
+                  color: '#6366f1',
+                },
+              ].map(item => (
+                <article key={item.title} className="bg-[#12141f] border border-white/7 rounded-xl p-5">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg" aria-hidden="true">{item.icon}</span>
+                    <h3 className="text-sm font-semibold text-white">{item.title}</h3>
+                  </div>
+                  <p className="text-xs text-slate-400 leading-relaxed">{item.body}</p>
+                </article>
+              ))}
+            </div>
+            <p className="text-xs text-slate-600 mt-4">
+              * Grade 5 = strong pass. + Grade 4 = standard pass. 2026 boundaries will be published 20 August 2026.
+            </p>
+          </section>
+
           {/* MATHS 2024 */}
           <section aria-labelledby="maths-2024-heading">
             <h2 id="maths-2024-heading" className="text-2xl font-bold text-white mb-2">
@@ -819,7 +1034,7 @@ export default function GCSEPage() {
             <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl px-4 py-3 mb-6 flex gap-3 items-start">
               <span className="text-lg shrink-0" aria-hidden="true">i</span>
               <p className="text-sm text-amber-200/80">
-                <strong className="text-amber-300">WJEC 2026 boundaries</strong> will be released at 8:00am on <strong className="text-white">21 August 2026</strong>. The figures below are the official June 2025 WJEC boundaries.
+                <strong className="text-amber-300">WJEC 2026 boundaries</strong> will be released at 8:00am on <strong className="text-white">20 August 2026</strong>. The figures below are the official June 2025 WJEC boundaries.
               </p>
             </div>
             <div className="overflow-x-auto">
@@ -863,7 +1078,7 @@ export default function GCSEPage() {
                 WJEC (Welsh Joint Education Committee, also known as CBAC in Welsh) is the main exam board for schools in Wales and is used by some schools in England. Unlike AQA, Edexcel and OCR, WJEC publishes grade boundaries for Welsh-medium and English-medium qualifications separately. For 2025, WJEC Maths Higher tier required a raw mark of 196 out of 240 for a grade 9 and 27 out of 240 for a grade 4 (standard pass). WJEC boundaries are set entirely independently after all papers are marked and are not adjusted to match other boards.
               </p>
               <p className="text-xs text-slate-500">
-                WJEC 2026 boundaries will be released on 21 August 2026. For historical WJEC boundaries, visit wjec.co.uk.
+                WJEC 2026 boundaries will be released on 20 August 2026. For historical WJEC boundaries, visit wjec.co.uk.
               </p>
             </div>
           </section>
@@ -1015,9 +1230,9 @@ export default function GCSEPage() {
           <div className="bg-[#12141f] border border-emerald-500/20 rounded-xl p-6 flex gap-4 items-start">
             <div className="text-2xl shrink-0" aria-hidden="true">📅</div>
             <div>
-              <h3 className="text-sm font-semibold text-white mb-1">GCSE Results Day 2026 -- Thursday 21 August 2026</h3>
+              <h3 className="text-sm font-semibold text-white mb-1">GCSE Results Day 2026 -- Thursday 20 August 2026</h3>
               <p className="text-sm text-slate-400 leading-relaxed">
-                2026 GCSE grade boundaries for all boards including AQA, Edexcel, OCR and WJEC will be published at <strong className="text-white">8:00am on Thursday 21 August 2026</strong>. GradesNova will update immediately when 2026 boundaries are released. Bookmark this page and check back on Results Day.
+                2026 GCSE grade boundaries for all boards including AQA, Edexcel, OCR and WJEC will be published at <strong className="text-white">8:00am on Thursday 20 August 2026</strong>. GradesNova will update immediately when 2026 boundaries are released. Bookmark this page and check back on Results Day.
               </p>
             </div>
           </div>
