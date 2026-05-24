@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Article',
-  headline: 'SAT vs AP Exams Explained 2025: What's the Difference?',
+  headline: "SAT vs AP Exams Explained 2025: What's the Difference?",
   description: 'A clear explanation of how the SAT and AP Exams differ in purpose, scoring, and value for college admissions.',
   url: 'https://gradesnova.com/articles/sat-vs-ap-exams-explained',
   author: { '@type': 'Organization', name: 'GradesNova' },
