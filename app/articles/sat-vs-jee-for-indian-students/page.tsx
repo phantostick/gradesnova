@@ -1,32 +1,32 @@
 // app/articles/sat-vs-jee-for-indian-students/page.tsx
-import type { Metadata } from &apos;next&apos;;
-import { Navbar } from &apos;@/components/navbar&apos;;
-import { Footer } from &apos;@/components/footer&apos;;
-import Link from &apos;next/link&apos;;
+import type { Metadata } from 'next';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: &apos;SAT vs JEE for Indian Students 2025: Which Should You Take? | GradesNova&apos;,
-  description: &apos;SAT vs JEE Main/Advanced for Indian students: compare difficulty, syllabus, global recognition, and how to decide based on your target college and career goals.&apos;,
-  alternates: { canonical: &apos;https://gradesnova.com/articles/sat-vs-jee-for-indian-students&apos; },
+  title: 'SAT vs JEE for Indian Students 2025: Which Should You Take? | GradesNova',
+  description: 'SAT vs JEE Main/Advanced for Indian students: compare difficulty, syllabus, global recognition, and how to decide based on your target college and career goals.',
+  alternates: { canonical: 'https://gradesnova.com/articles/sat-vs-jee-for-indian-students' },
   openGraph: {
-    title: &apos;SAT vs JEE for Indian Students 2025: Which Should You Take?&apos;,
-    description: &apos;SAT vs JEE for Indian students: difficulty, syllabus, global recognition, and how to decide which path to take.&apos;,
-    url: &apos;https://gradesnova.com/articles/sat-vs-jee-for-indian-students&apos;,
-    type: &apos;article&apos;,
-    siteName: &apos;GradesNova&apos;,
+    title: 'SAT vs JEE for Indian Students 2025: Which Should You Take?',
+    description: 'SAT vs JEE for Indian students: difficulty, syllabus, global recognition, and how to decide which path to take.',
+    url: 'https://gradesnova.com/articles/sat-vs-jee-for-indian-students',
+    type: 'article',
+    siteName: 'GradesNova',
   },
   robots: { index: true, follow: true },
 };
 
 const jsonLd = {
-  &apos;@context&apos;: &apos;https://schema.org&apos;,
-  &apos;@type&apos;: &apos;Article&apos;,
-  headline: &apos;SAT vs JEE for Indian Students 2025: Which Should You Take?&apos;,
-  description: &apos;A complete guide for Indian students comparing the SAT and JEE Main/Advanced on difficulty, syllabus, and university options.&apos;,
-  url: &apos;https://gradesnova.com/articles/sat-vs-jee-for-indian-students&apos;,
-  author: { &apos;@type&apos;: &apos;Organization&apos;, name: &apos;GradesNova&apos; },
-  publisher: { &apos;@type&apos;: &apos;Organization&apos;, name: &apos;GradesNova&apos;, url: &apos;https://gradesnova.com&apos; },
-  dateModified: &apos;2025-05-24&apos;,
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'SAT vs JEE for Indian Students 2025: Which Should You Take?',
+  description: 'A complete guide for Indian students comparing the SAT and JEE Main/Advanced on difficulty, syllabus, and university options.',
+  url: 'https://gradesnova.com/articles/sat-vs-jee-for-indian-students',
+  author: { '@type': 'Organization', name: 'GradesNova' },
+  publisher: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
+  dateModified: '2025-05-24',
 };
 
 export default function SatVsJeePage() {
@@ -73,7 +73,7 @@ export default function SatVsJeePage() {
                 <span className="text-lg" aria-hidden="true">🎯</span>
                 <span className="text-xs text-slate-400 font-medium">JEE Advanced Cutoff (Gen)</span>
               </div>
-              <p className="text-2xl font-bold font-mono" style={{ color: &apos;#f59e0b&apos; }}>~35%</p>
+              <p className="text-2xl font-bold font-mono" style={{ color: '#f59e0b' }}>~35%</p>
               <p className="text-xs text-slate-500 mt-0.5">Minimum qualifying marks 2024</p>
             </div>
             <div className="bg-[#12141f] border border-white/8 rounded-xl p-4">
@@ -81,7 +81,7 @@ export default function SatVsJeePage() {
                 <span className="text-lg" aria-hidden="true">📊</span>
                 <span className="text-xs text-slate-400 font-medium">SAT Score (MIT admit median)</span>
               </div>
-              <p className="text-2xl font-bold font-mono" style={{ color: &apos;#6366f1&apos; }}>1570</p>
+              <p className="text-2xl font-bold font-mono" style={{ color: '#6366f1' }}>1570</p>
               <p className="text-xs text-slate-500 mt-0.5">75th percentile, Class of 2028</p>
             </div>
             <div className="bg-[#12141f] border border-white/8 rounded-xl p-4">
@@ -89,7 +89,7 @@ export default function SatVsJeePage() {
                 <span className="text-lg" aria-hidden="true">🌏</span>
                 <span className="text-xs text-slate-400 font-medium">JEE Main Registrations</span>
               </div>
-              <p className="text-2xl font-bold font-mono" style={{ color: &apos;#34d399&apos; }}>~13L</p>
+              <p className="text-2xl font-bold font-mono" style={{ color: '#34d399' }}>~13L</p>
               <p className="text-xs text-slate-500 mt-0.5">Approx. candidates in 2024</p>
             </div>
           </div>
@@ -98,13 +98,13 @@ export default function SatVsJeePage() {
           <section aria-labelledby="overview-heading">
             <h2 id="overview-heading" className="text-2xl font-bold text-white mb-4">SAT vs JEE: two exams for two completely different goals</h2>
             <p className="text-slate-400 leading-relaxed mb-4">
-              The SAT (Scholastic Assessment Test), administered by College Board, is the primary undergraduate admissions test for US colleges and is widely accepted by universities in the UK, Canada, Singapore, and other countries. JEE Main and JEE Advanced are India&apos;s national engineering entrance exams, used exclusively to admit students to NITs, IITs, and other centrally funded technical institutions.
+              The SAT (Scholastic Assessment Test), administered by College Board, is the primary undergraduate admissions test for US colleges and is widely accepted by universities in the UK, Canada, Singapore, and other countries. JEE Main and JEE Advanced are India's national engineering entrance exams, used exclusively to admit students to NITs, IITs, and other centrally funded technical institutions.
             </p>
             <p className="text-slate-400 leading-relaxed mb-4">
               No IIT accepts SAT scores for admission; no US college accepts JEE scores as a substitute for the SAT. These are separate pathways to separate institutions. Many ambitious Indian students — particularly those targeting both IITs and US universities — prepare for both simultaneously, though this requires careful time management given the significant difference in content depth.
             </p>
             <p className="text-slate-400 leading-relaxed">
-              The question isn&apos;t really "which is better" — it&apos;s "which institutions do you want to attend?" Your answer to that question should drive your exam preparation strategy.
+              The question isn't really "which is better" — it's "which institutions do you want to attend?" Your answer to that question should drive your exam preparation strategy.
             </p>
           </section>
 
@@ -123,13 +123,13 @@ export default function SatVsJeePage() {
                 </thead>
                 <tbody className="divide-y divide-white/5">
                   {[
-                    { f: &apos;Administering body&apos;, sat: &apos;College Board (US)&apos;, main: &apos;NTA (India)&apos;, adv: &apos;IIT (rotating)&apos; },
-                    { f: &apos;Score range&apos;, sat: &apos;400–1600&apos;, main: &apos;-120 to 300&apos;, adv: &apos;Varies by paper&apos; },
-                    { f: &apos;Subjects tested&apos;, sat: &apos;English, Maths&apos;, main: &apos;PCM + English/aptitude&apos;, adv: &apos;PCM only&apos; },
-                    { f: &apos;Test format&apos;, sat: &apos;Digital, adaptive&apos;, main: &apos;CBT&apos;, adv: &apos;Paper-based&apos; },
-                    { f: &apos;Attempts allowed&apos;, sat: &apos;Unlimited&apos;, main: &apos;3 per year (up to 3 years)&apos;, adv: &apos;2 lifetime&apos; },
-                    { f: &apos;Eligibility&apos;, sat: &apos;Open globally&apos;, main: &apos;Indian Class 12 students&apos;, adv: &apos;JEE Main qualified only&apos; },
-                    { f: &apos;University access&apos;, sat: &apos;US, UK, global&apos;, main: &apos;NITs, IIITs, GFTIs&apos;, adv: &apos;IITs only&apos; },
+                    { f: 'Administering body', sat: 'College Board (US)', main: 'NTA (India)', adv: 'IIT (rotating)' },
+                    { f: 'Score range', sat: '400–1600', main: '-120 to 300', adv: 'Varies by paper' },
+                    { f: 'Subjects tested', sat: 'English, Maths', main: 'PCM + English/aptitude', adv: 'PCM only' },
+                    { f: 'Test format', sat: 'Digital, adaptive', main: 'CBT', adv: 'Paper-based' },
+                    { f: 'Attempts allowed', sat: 'Unlimited', main: '3 per year (up to 3 years)', adv: '2 lifetime' },
+                    { f: 'Eligibility', sat: 'Open globally', main: 'Indian Class 12 students', adv: 'JEE Main qualified only' },
+                    { f: 'University access', sat: 'US, UK, global', main: 'NITs, IIITs, GFTIs', adv: 'IITs only' },
                   ].map((row, i) => (
                     <tr key={i} className="hover:bg-white/2 transition-colors">
                       <td className="px-4 py-3 text-slate-300 font-medium">{row.f}</td>
@@ -167,10 +167,10 @@ export default function SatVsJeePage() {
           <section aria-labelledby="both-heading">
             <h2 id="both-heading" className="text-2xl font-bold text-white mb-4">Can Indian students prepare for both SAT and JEE?</h2>
             <p className="text-slate-400 leading-relaxed mb-4">
-              Yes — and many do. The typical strategy for Class 11–12 students targeting both IITs and foreign universities is to treat JEE preparation as the primary workload (given its depth and competition) and dedicate focused blocks in Class 11 or during summer vacations to SAT preparation. The SAT can be taken multiple times and is available year-round, giving you scheduling flexibility that JEE&apos;s fixed exam calendar does not.
+              Yes — and many do. The typical strategy for Class 11–12 students targeting both IITs and foreign universities is to treat JEE preparation as the primary workload (given its depth and competition) and dedicate focused blocks in Class 11 or during summer vacations to SAT preparation. The SAT can be taken multiple times and is available year-round, giving you scheduling flexibility that JEE's fixed exam calendar does not.
             </p>
             <p className="text-slate-400 leading-relaxed mb-4">
-              It&apos;s worth noting that some leading Indian private universities — including Ashoka University, FLAME University, and Krea University — have begun accepting SAT scores for their undergraduate admissions. This expands the SAT&apos;s utility for Indian students beyond purely overseas applications.
+              It's worth noting that some leading Indian private universities — including Ashoka University, FLAME University, and Krea University — have begun accepting SAT scores for their undergraduate admissions. This expands the SAT's utility for Indian students beyond purely overseas applications.
             </p>
             <p className="text-slate-400 leading-relaxed">
               If your ambition is specifically the IITs and you have no strong interest in overseas study, investing heavily in SAT prep diverts time better spent on JEE Advanced. Be strategic: write down your target institutions before committing to a dual-exam strategy.
@@ -194,8 +194,8 @@ export default function SatVsJeePage() {
             <h2 id="related-heading" className="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-4">Related articles</h2>
             <div className="grid sm:grid-cols-2 gap-3">
               {[
-                { title: &apos;SAT vs ACT: Complete Comparison&apos;, href: &apos;/articles/sat-vs-act-complete-comparison&apos;, color: &apos;#6366f1&apos; },
-                { title: &apos;GRE vs CAT for MBA Abroad&apos;, href: &apos;/articles/gre-vs-cat-for-mba-abroad&apos;, color: &apos;#a855f7&apos; },
+                { title: 'SAT vs ACT: Complete Comparison', href: '/articles/sat-vs-act-complete-comparison', color: '#6366f1' },
+                { title: 'GRE vs CAT for MBA Abroad', href: '/articles/gre-vs-cat-for-mba-abroad', color: '#a855f7' },
               ].map((a) => (
                 <Link key={a.href} href={a.href} className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/16 transition-colors group">
                   <p className="text-sm font-semibold text-white group-hover:brightness-110 transition-all leading-snug">{a.title}</p>
