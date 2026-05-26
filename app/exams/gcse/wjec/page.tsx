@@ -5,7 +5,6 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { WJECCalculatorClient } from './wjec-calculator-client';
 
 // ─────────────────────────────────────────────
 // SEO METADATA — single confident year, front-loaded keyword, <60 chars title
@@ -62,7 +61,8 @@ export const metadata: Metadata = {
 };
 
 // ─────────────────────────────────────────────
-// STRUCTURED DATA
+// STRUCTURED DATA — BreadcrumbList + WebApplication + Dataset + FAQPage
+// All four schemas required for rich results; Dataset with isBasedOn for GEO/AI citation
 // ─────────────────────────────────────────────
 const jsonLdBreadcrumb = {
   '@context': 'https://schema.org',
@@ -361,11 +361,6 @@ export default function WJECGCSEPage() {
               </p>
             </div>
           </div>
-
-          {/* ══════════════════════════════════════
-              THE INTERACTIVE CALCULATOR
-          ══════════════════════════════════════ */}
-          <WJECCalculatorClient />
 
           {/* ══════════════════════════════════════
               MAIN BOUNDARY TABLE — all subjects
@@ -745,9 +740,9 @@ export default function WJECGCSEPage() {
             </h2>
             <div className="flex flex-wrap gap-3">
               {[
-                { name: 'AQA Grade Boundaries 2026',     href: '/exams/gcse/aqa',     color: '#34d399' },
+                { name: 'AQA Grade Boundaries 2026',     href: '/exams/gcse/aqa',    color: '#34d399' },
                 { name: 'Edexcel Grade Boundaries 2026', href: '/exams/gcse/edexcel', color: '#6366f1' },
-                { name: 'OCR Grade Boundaries 2026',     href: '/exams/gcse/ocr',     color: '#a855f7' },
+                { name: 'OCR Grade Boundaries 2026',     href: '/exams/gcse/ocr',    color: '#a855f7' },
                 { name: 'All Boards — GCSE 2026',        href: '/exams/gcse',         color: '#f59e0b' },
               ].map(b => (
                 <Link
