@@ -1,0 +1,23 @@
+# GradesNova - AI-Ready Documentation
+
+## Overview
+GradesNova is a specialized academic platform providing predictive analysis for exam grade boundaries, focusing on GCSE, A-Level, and international post-graduate entrance exams (GRE, LSAT, etc.).
+
+## Core Data & Services
+- **Exam Boundary Predictions**: Real-time analysis of grade boundaries for major UK exam boards including AQA, Edexcel, OCR, and WJEC.
+- **Exam Comparison Tool**: Data-driven comparisons for academic choices (e.g., SAT vs. ACT, GRE vs. GMAT, GRE vs. CAT).
+- **Predictive Modelling**: Insights into how grade boundaries influence university admissions and clearing decisions.
+
+## Site Structure & Navigation
+- **Home**: Main portal at `/`
+- **Exams**: Specific exam data available at `/exams/[slug]`
+  - Exam boards supported: AQA, Edexcel, OCR, WJEC[cite: 1]
+- **Articles**: Academic trend analysis and guides at `/articles/`[cite: 1]
+  - Key topics: Results day preparation, grade boundary trends, and international MBA/Undergrad exam comparisons.[cite: 1]
+- **Utilities**: Calculators and status checks for exam results.[cite: 1]
+
+## Methodology
+Data is compiled based on historical trends, current year syllabus changes, and statistical forecasting models developed by GradesNova.[cite: 1]
+
+## Contact
+For data collaborations or administrative queries, visit the contact page at `/contact`.[cite: 1]
