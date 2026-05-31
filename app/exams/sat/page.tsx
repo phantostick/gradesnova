@@ -25,6 +25,10 @@ const COLOR = '#6366f1';
 
 const SAT_FAQS = [
   {
+    question: 'How do I use this SAT score calculator?',
+    answer: 'Using this free SAT score calculator is simple. Drag the slider to your SAT composite score (400–1600) to instantly see your national percentile ranking, ACT equivalent score, and how you compare against top college SAT ranges. If you want to calculate from section scores, switch to the "By section" tab and enter your Math score (200–800) and EBRW score (200–800) — the calculator will show individual section percentiles and your composite total. All results update in real time. No sign-up required.',
+  },
+  {
     question: 'What is a good SAT score for 2025–2026?',
     answer: 'A good SAT score depends on your target colleges. The national average SAT composite score is approximately 1050. Scores above 1200 (74th percentile) are above average and competitive at many four-year universities. A score of 1400 places you in the top 6% nationally (94th percentile), which is competitive at selective universities. For Ivy League and highly selective schools — Harvard, Yale, Princeton, MIT, Stanford — you typically need 1500 or above (97th+ percentile). The Digital SAT, introduced in 2024, uses the same 400–1600 scale.',
   },
@@ -198,8 +202,8 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section aria-labelledby="faq-heading">
-      <h2 id="faq-heading" className="text-2xl font-bold text-white mb-2">SAT score calculator — frequently asked questions</h2>
-      <p className="text-slate-400 text-sm mb-6">Common questions about SAT scoring, percentiles, the national average, and what your score means for college admissions.</p>
+      <h2 id="faq-heading" className="text-2xl font-bold text-white mb-2">SAT Score Calculator — Frequently Asked Questions</h2>
+      <p className="text-slate-400 text-sm mb-6">Common questions about how to use our SAT score calculator, SAT scoring, percentiles, the national average, and what your score means for college admissions in 2026.</p>
       <div className="space-y-2">
         {SAT_FAQS.map((faq, i) => (
           <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden">
@@ -272,22 +276,22 @@ export default function SATCalculatorPage() {
   };
   const schemaTool = {
     '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'SAT Score Calculator (2025–2026)',
+    name: 'SAT Score Calculator 2026',
     url: 'https://gradesnova.com/exams/sat',
-    description: 'Free SAT score percentile calculator. Enter your SAT composite, Math, or EBRW score to instantly see your national percentile ranking for the 2025-2026 admissions cycle.',
+    description: 'Free SAT score calculator 2026. Enter your SAT composite, Math, or EBRW score to instantly calculate your national percentile ranking for the 2025-2026 admissions cycle. Includes SAT-to-ACT conversion and college SAT score ranges.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
-    dateModified: '2025-08-01',
+    dateModified: '2026-05-31',
   };
   const schemaDataset = {
     '@context': 'https://schema.org', '@type': 'Dataset',
-    name: 'SAT Score Percentile Chart 2025–2026',
-    description: 'Complete SAT composite score to national percentile mapping using official College Board data. Includes section percentiles for Math and EBRW.',
+    name: 'SAT Score Calculator & Percentile Chart 2026',
+    description: 'Complete SAT composite score to national percentile mapping using official College Board data. Free SAT score calculator for 2025-2026 admissions cycle. Includes section percentiles for Math and EBRW.',
     url: 'https://gradesnova.com/exams/sat',
     creator: { '@type': 'Organization', name: 'GradesNova' },
-    dateModified: '2025-08-01',
-    keywords: 'SAT score percentile, SAT national average, SAT score chart, SAT calculator 2026',
+    dateModified: '2026-05-31',
+    keywords: 'SAT score calculator 2026, SAT score percentile, SAT national average, SAT score chart, sat score calculator',
     spatialCoverage: 'United States',
   };
 
@@ -318,10 +322,10 @@ export default function SATCalculatorPage() {
               <span className="text-xs font-mono text-indigo-400/70 uppercase tracking-widest">SAT · College Board · 400–1600</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              SAT Score Calculator (2025–2026)
+              SAT Score Calculator 2026
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl mb-4">
-              Enter your SAT score to instantly see your <strong className="text-white font-medium">national percentile ranking</strong>, SAT-to-ACT conversion, and how you compare against top college SAT ranges. Updated with official College Board data for the 2025–2026 admissions cycle.
+              Free <strong className="text-white font-medium">SAT score calculator</strong> for the 2025–2026 admissions cycle. Enter your SAT composite, Math, or EBRW score to instantly calculate your national percentile ranking, SAT-to-ACT conversion, and how you compare to top college ranges. Updated with official College Board data.
             </p>
             <div className="flex flex-wrap gap-2">
               {[
@@ -342,6 +346,11 @@ export default function SATCalculatorPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
 
           {/* CALCULATOR */}
+          <section aria-labelledby="calculator-heading">
+            <h2 id="calculator-heading" className="text-2xl font-bold text-white mb-2">SAT Score Calculator — Enter Your Score</h2>
+            <p className="text-slate-400 text-sm mb-6 max-w-3xl">
+              Use this free <strong className="text-white">SAT score calculator</strong> to find your 2026 percentile ranking in seconds. Drag the slider to your SAT composite score (400–1600) or switch to "By section" to enter your Math and EBRW scores separately. The calculator instantly shows your national percentile, ACT equivalent, and where you stand against top colleges.
+            </p>
           <div className="grid lg:grid-cols-5 gap-8">
             {/* LEFT */}
             <div className="lg:col-span-2 space-y-5">
@@ -495,8 +504,7 @@ export default function SATCalculatorPage() {
               </div>
             </div>
           </div>
-
-          {/* NATIONAL AVERAGE SECTION */}
+          </section>
           <section aria-labelledby="avg-heading">
             <h2 id="avg-heading" className="text-2xl font-bold text-white mb-4">What is the Average SAT Score in 2025–2026?</h2>
             <p className="text-slate-400 text-sm mb-6 leading-relaxed max-w-3xl">
@@ -523,9 +531,9 @@ export default function SATCalculatorPage() {
 
           {/* PERCENTILE TABLE */}
           <section aria-labelledby="chart-heading">
-            <h2 id="chart-heading" className="text-2xl font-bold text-white mb-2">SAT Score Percentile Chart 2025–2026</h2>
+            <h2 id="chart-heading" className="text-2xl font-bold text-white mb-2">SAT Score Calculator — Full Percentile Chart 2026</h2>
             <p className="text-slate-400 text-sm mb-6">
-              Complete SAT composite score to national percentile table using official College Board data. Your score is highlighted. The national average SAT score is 1050. A 1400 equals the 94th percentile.
+              Use our SAT score calculator above or browse the complete SAT composite score to national percentile table below, based on official College Board data. Your score is highlighted. The national average SAT score is 1050. A 1400 equals the 94th percentile.
             </p>
             <div className="overflow-hidden rounded-xl border border-white/8">
               <table className="w-full text-sm" aria-label="SAT score percentile chart 2025-2026">
@@ -565,9 +573,9 @@ export default function SATCalculatorPage() {
 
           {/* WHAT DOES YOUR SAT SCORE MEAN */}
           <section aria-labelledby="tiers-heading">
-            <h2 id="tiers-heading" className="text-2xl font-bold text-white mb-4">What Does Your SAT Score Mean for College Admissions?</h2>
+            <h2 id="tiers-heading" className="text-2xl font-bold text-white mb-4">What Does Your SAT Score Mean? Calculator Results Explained</h2>
             <p className="text-slate-400 text-sm mb-6 max-w-3xl">
-              Your SAT score is one factor in college admissions, but context matters. Here is how different score ranges translate into admissions competitiveness for the 2025–2026 cycle.
+              Once you calculate your SAT score percentile above, use this guide to understand what your result means for college admissions in the 2025–2026 cycle.
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
@@ -702,7 +710,7 @@ export default function SATCalculatorPage() {
 
           {/* OTHER CALCULATORS */}
           <section className="bg-[#12141f] border border-white/7 rounded-2xl p-6" aria-labelledby="other-tools-heading">
-            <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">Other free exam percentile calculators</h2>
+            <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">More free score calculators — ACT, GRE, GMAT & more</h2>
             <div className="flex flex-wrap gap-2">
               {[
                 { id: 'act',      name: 'ACT Score Calculator',  color: '#06b6d4' },
