@@ -28,6 +28,10 @@ const COLOR = '#06b6d4';
 
 const ACT_FAQS = [
   {
+    question: 'How do I use this ACT score calculator?',
+    answer: 'This free ACT score calculator takes your score and instantly shows your national percentile ranking for 2026. Drag the slider to your ACT composite score (1–36) or switch to "By section" and enter your English, Math, Reading, and Science scores separately — the calculator will compute your composite and show section-level percentiles. Your ACT-to-SAT equivalent appears automatically. Everything updates in real time with no sign-up needed.',
+  },
+  {
     question: 'What is a good ACT score in 2025–2026?',
     answer: 'A good ACT score depends on your target colleges. The national average ACT composite score is 21. A score of 24 (74th percentile) is above average and competitive at many four-year universities. Scores of 28 or above (88th percentile) are strong for selective schools. A score of 30 or above (93rd percentile) is competitive at highly selective schools, and 33 or above (97th percentile) puts you in the top 3%, competitive at the most elite universities including Ivy League schools, MIT, and Stanford.',
   },
@@ -219,8 +223,8 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section aria-labelledby="faq-heading">
-      <h2 id="faq-heading" className="text-2xl font-bold text-white mb-2">ACT score percentile — frequently asked questions</h2>
-      <p className="text-slate-400 text-sm mb-6">Common questions about ACT scoring, percentiles, the national average ACT score in 2026, and what scores get you into top schools.</p>
+      <h2 id="faq-heading" className="text-2xl font-bold text-white mb-2">ACT Score Calculator — Frequently Asked Questions</h2>
+      <p className="text-slate-400 text-sm mb-6">Common questions about our ACT score calculator, ACT scoring, percentiles, the national average ACT score in 2026, and what scores get you into top schools.</p>
       <div className="space-y-2">
         {ACT_FAQS.map((faq, i) => (
           <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden">
@@ -283,22 +287,22 @@ export default function ACTCalculatorPage() {
   };
   const schemaTool = {
     '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'ACT Score Calculator 2025–2026',
+    name: 'ACT Score Calculator 2026',
     url: 'https://gradesnova.com/exams/act',
-    description: 'Free ACT score percentile calculator. Enter your ACT composite or section scores to instantly see your national percentile ranking. Updated for 2025–2026.',
+    description: 'Free ACT score calculator 2026. Enter your ACT composite or section scores to instantly calculate your national percentile ranking. Includes ACT-to-SAT conversion and top college score ranges. Updated for 2025–2026.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
-    dateModified: '2025-08-01',
+    dateModified: '2026-05-31',
   };
   const schemaDataset = {
     '@context': 'https://schema.org', '@type': 'Dataset',
-    name: 'ACT Score Percentile Chart 2025–2026',
-    description: 'Complete ACT composite score to national percentile mapping based on official ACT national norms. Includes section percentiles for English, Math, Reading, and Science.',
+    name: 'ACT Score Calculator & Percentile Chart 2026',
+    description: 'Complete ACT composite score to national percentile mapping based on official ACT national norms. Free ACT score calculator for 2025-2026. Includes section percentiles for English, Math, Reading, and Science.',
     url: 'https://gradesnova.com/exams/act',
     creator: { '@type': 'Organization', name: 'GradesNova' },
-    dateModified: '2025-08-01',
-    keywords: 'ACT score percentile, ACT national average, ACT score chart, ACT calculator 2026',
+    dateModified: '2026-05-31',
+    keywords: 'ACT score calculator 2026, ACT score percentile, ACT national average, ACT score chart, act calculator 2026',
     spatialCoverage: 'United States',
   };
 
@@ -330,10 +334,10 @@ export default function ACTCalculatorPage() {
               <span className="text-xs font-mono uppercase tracking-widest" style={{ color: `${COLOR}aa` }}>ACT · ACT, Inc. · Composite 1–36</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              ACT Score Percentile Calculator (2025–2026)
+              ACT Score Calculator 2026
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl mb-4">
-              Enter your ACT composite or section scores to instantly see your <strong className="text-white font-medium">national percentile ranking</strong>. The <strong className="text-white font-medium">national average ACT score in 2025–2026 is 21</strong> — see exactly how you compare. Includes section breakdowns, ACT-to-SAT conversion, and college ranges. Updated with official ACT national norms.
+              Free <strong className="text-white font-medium">ACT score calculator</strong> for 2025–2026. Enter your ACT composite or section scores to instantly calculate your <strong className="text-white font-medium">national percentile ranking</strong>. The <strong className="text-white font-medium">national average ACT score in 2026 is 21</strong> — see exactly how you compare. Includes ACT-to-SAT conversion and college score ranges. Updated with official ACT norms.
             </p>
             <div className="flex flex-wrap gap-2">
               {[
@@ -354,6 +358,11 @@ export default function ACTCalculatorPage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
 
           {/* CALCULATOR */}
+          <section aria-labelledby="calculator-heading">
+            <h2 id="calculator-heading" className="text-2xl font-bold text-white mb-2">ACT Score Calculator — Enter Your Score</h2>
+            <p className="text-slate-400 text-sm mb-6 max-w-3xl">
+              Use this free <strong className="text-white">ACT score calculator</strong> to find your 2026 national percentile instantly. Drag the slider to your ACT composite score (1–36) or switch to "By section" to calculate from your English, Math, Reading, and Science scores. Results update in real time.
+            </p>
           <div className="grid lg:grid-cols-5 gap-8">
             {/* LEFT */}
             <div className="lg:col-span-2 space-y-5">
@@ -512,6 +521,7 @@ export default function ACTCalculatorPage() {
               </div>
             </div>
           </div>
+          </section>
 
           {/* NATIONAL AVERAGE */}
           <section aria-labelledby="avg-heading">
@@ -587,9 +597,9 @@ export default function ACTCalculatorPage() {
 
           {/* PERCENTILE TABLE */}
           <section aria-labelledby="chart-heading">
-            <h2 id="chart-heading" className="text-2xl font-bold text-white mb-2">ACT Score Percentile Chart 2025–2026</h2>
+            <h2 id="chart-heading" className="text-2xl font-bold text-white mb-2">ACT Score Calculator — Full Percentile Chart 2026</h2>
             <p className="text-slate-400 text-sm mb-6">
-              Complete ACT composite score to national percentile table based on official ACT, Inc. national norms. The national average ACT score is 21. A score of 28 equals the 88th percentile. A score of 33 equals the 97th percentile.
+              Use the ACT score calculator above or browse the complete composite score to national percentile table below, based on official ACT, Inc. national norms. The national average ACT score is 21. A score of 28 equals the 88th percentile. A score of 33 equals the 97th percentile.
             </p>
             <div className="overflow-hidden rounded-xl border border-white/8">
               <table className="w-full text-sm" aria-label="ACT composite score percentile chart 2025-2026">
@@ -736,7 +746,7 @@ export default function ACTCalculatorPage() {
 
           {/* OTHER CALCULATORS */}
           <section className="bg-[#12141f] border border-white/7 rounded-2xl p-6" aria-labelledby="other-tools-heading">
-            <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">Other free exam percentile calculators</h2>
+            <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">More free score calculators — SAT, GRE, GMAT & more</h2>
             <div className="flex flex-wrap gap-2">
               {[
                 { id: 'sat',      name: 'SAT Score Calculator',     color: '#6366f1' },
