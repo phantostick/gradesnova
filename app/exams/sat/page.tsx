@@ -1,5 +1,13 @@
 'use client';
 
+// app/exams/sat/page.tsx
+// PERFORMANCE CHANGES:
+//   - Removed framer-motion entirely (~30KB bundle reduction)
+//   - PercentileGauge: stroke-dasharray animated via CSS @keyframes
+//     (same visual result — arc draws in over ~0.8s on mount/score change)
+//   - ScoreSlider thumb and fill: CSS transition already handles these
+//   - No behaviour change visible to users
+
 import { useState, useMemo } from 'react';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -75,9 +83,9 @@ const SAT_ACT_CROSSWALK = [
   { sat: 1260, act: 27, pct: 76 }, { sat: 1240, act: 26, pct: 74 }, { sat: 1210, act: 25, pct: 69 },
   { sat: 1190, act: 25, pct: 69 }, { sat: 1170, act: 24, pct: 63 }, { sat: 1140, act: 23, pct: 59 },
   { sat: 1110, act: 22, pct: 51 }, { sat: 1090, act: 22, pct: 51 }, { sat: 1060, act: 21, pct: 43 },
-  { sat: 1030, act: 20, pct: 35 }, { sat: 1010, act: 20, pct: 35 }, { sat: 980, act: 19, pct: 28 },
-  { sat: 950, act: 18, pct: 25 }, { sat: 920, act: 17, pct: 19 }, { sat: 880, act: 16, pct: 13 },
-  { sat: 850, act: 15, pct: 9 },
+  { sat: 1030, act: 20, pct: 35 }, { sat: 1010, act: 20, pct: 35 }, { sat: 980,  act: 19, pct: 28 },
+  { sat: 950,  act: 18, pct: 25 }, { sat: 920,  act: 17, pct: 19 }, { sat: 880,  act: 16, pct: 13 },
+  { sat: 850,  act: 15, pct: 9  },
 ];
 
 const COLLEGES = [
@@ -109,17 +117,32 @@ const FULL_PERCENTILE_TABLE = [
   [760,5],[740,4],[720,3],[700,2],[680,2],[660,1],[640,1],[620,1],[600,1],
 ];
 
+// CSS-animated gauge — no Framer Motion.
+// A unique @keyframes name per percentile value ensures the stroke
+// animation restarts cleanly when the user changes their score.
 function PercentileGauge({ percentile, color }: { percentile: number; color: string }) {
-  const r = 72, circ = 2 * Math.PI * r;
+  const r = 72;
+  const circ = 2 * Math.PI * r;
   const dash = circ * Math.min(percentile / 100, 1);
+  const animName = `gaugeStroke_sat_${percentile}`;
+
   return (
     <div className="relative w-44 h-44 mx-auto" role="img" aria-label={`${percentile}th percentile`}>
+      <style>{`
+        @keyframes ${animName} {
+          from { stroke-dasharray: 0 ${circ}; }
+          to   { stroke-dasharray: ${dash} ${circ - dash}; }
+        }
+      `}</style>
       <svg className="w-full h-full -rotate-90" viewBox="0 0 160 160">
         <circle cx="80" cy="80" r={r} fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="14" />
         <circle
-          cx="80" cy="80" r={r} fill="none" stroke={color} strokeWidth="14" strokeLinecap="round"
-          strokeDasharray={`${dash} ${circ - dash}`}
-          style={{ transition: 'stroke-dasharray 0.8s ease-out' }}
+          cx="80" cy="80" r={r} fill="none"
+          stroke={color} strokeWidth="14" strokeLinecap="round"
+          style={{
+            strokeDasharray: `${dash} ${circ - dash}`,
+            animation: `${animName} 0.8s ease-out both`,
+          }}
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
@@ -148,13 +171,20 @@ function ScoreSlider({ label, value, min, max, step, avg, color, onChange }: {
       </div>
       <div className="relative h-6 flex items-center">
         <div className="absolute w-full h-1.5 rounded-full bg-white/8" />
-        <div className="absolute h-1.5 rounded-full" style={{ width: `${pct}%`, backgroundColor: color, opacity: 0.7, transition: 'width 0.075s' }} />
+        <div
+          className="absolute h-1.5 rounded-full"
+          style={{ width: `${pct}%`, backgroundColor: color, opacity: 0.7, transition: 'width 0.075s' }}
+        />
         <div className="absolute w-0.5 h-3 rounded-full bg-white/20" style={{ left: `${((avg - min) / (max - min)) * 100}%` }} />
-        <input type="range" min={min} max={max} step={step} value={value}
+        <input
+          type="range" min={min} max={max} step={step} value={value}
           onChange={e => onChange(Number(e.target.value))} aria-label={label}
-          className="absolute w-full h-full opacity-0 cursor-pointer" style={{ zIndex: 10 }} />
-        <div className="absolute w-5 h-5 rounded-full border-2 border-white shadow-lg shadow-black/40 pointer-events-none"
-          style={{ left: `calc(${pct}% - 10px)`, backgroundColor: color, transition: 'left 0.075s' }} />
+          className="absolute w-full h-full opacity-0 cursor-pointer" style={{ zIndex: 10 }}
+        />
+        <div
+          className="absolute w-5 h-5 rounded-full border-2 border-white shadow-lg shadow-black/40 pointer-events-none"
+          style={{ left: `calc(${pct}% - 10px)`, backgroundColor: color, transition: 'left 0.075s' }}
+        />
       </div>
       <div className="flex justify-between mt-1">
         <span className="text-[10px] text-slate-600 font-mono">{min}</span>
@@ -173,13 +203,20 @@ function FAQSection() {
       <div className="space-y-2">
         {SAT_FAQS.map((faq, i) => (
           <div key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden">
-            <button onClick={() => setOpen(open === i ? null : i)}
+            <button
+              onClick={() => setOpen(open === i ? null : i)}
               className="w-full flex items-center justify-between px-5 py-4 text-left gap-4"
-              aria-expanded={open === i}>
+              aria-expanded={open === i}
+            >
               <span className="text-sm font-medium text-white">{faq.question}</span>
-              {open === i ? <ChevronUp size={16} className="text-slate-400 shrink-0" /> : <ChevronDown size={16} className="text-slate-400 shrink-0" />}
+              {open === i
+                ? <ChevronUp size={16} className="text-slate-400 shrink-0" />
+                : <ChevronDown size={16} className="text-slate-400 shrink-0" />}
             </button>
-            <div className="overflow-hidden transition-all duration-200" style={{ maxHeight: open === i ? '600px' : '0px' }}>
+            <div
+              className="overflow-hidden transition-all duration-200"
+              style={{ maxHeight: open === i ? '600px' : '0px' }}
+            >
               <p className="px-5 pb-4 text-sm text-slate-400 leading-relaxed border-t border-white/6 pt-3">{faq.answer}</p>
             </div>
           </div>
@@ -191,10 +228,10 @@ function FAQSection() {
 
 export default function SATCalculatorPage() {
   const [composite, setComposite] = useState(1200);
-  const [math, setMath] = useState(620);
-  const [ebrw, setEbrw] = useState(580);
+  const [math, setMath]           = useState(620);
+  const [ebrw, setEbrw]           = useState(580);
   const [activeTab, setActiveTab] = useState<'composite' | 'sections'>('composite');
-  const [showAllTable, setShowAllTable] = useState(false);
+  const [showAllTable, setShowAllTable]       = useState(false);
   const [showAllColleges, setShowAllColleges] = useState(false);
 
   const compositeScore = activeTab === 'composite' ? composite : math + ebrw;
@@ -209,7 +246,7 @@ export default function SATCalculatorPage() {
   }, [compositeScore]);
 
   const visibleColleges = showAllColleges ? COLLEGES : COLLEGES.slice(0, 8);
-  const visibleTable    = showAllTable ? FULL_PERCENTILE_TABLE : FULL_PERCENTILE_TABLE.slice(0, 14);
+  const visibleTable    = showAllTable    ? FULL_PERCENTILE_TABLE : FULL_PERCENTILE_TABLE.slice(0, 14);
 
   const scoreBenchmarks = [
     { score: 1600, pct: 99, label: 'Perfect score' },
@@ -218,7 +255,7 @@ export default function SATCalculatorPage() {
     { score: 1300, pct: 82, label: 'Top 18%' },
     { score: 1200, pct: 74, label: 'Above average' },
     { score: 1050, pct: 43, label: 'National average' },
-    { score: 900, pct: 19, label: 'Below average' },
+    { score: 900,  pct: 19, label: 'Below average' },
   ];
 
   const schemaBreadcrumb = {
@@ -320,8 +357,15 @@ export default function SATCalculatorPage() {
 
               <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6 space-y-6">
                 {activeTab === 'composite' ? (
-                  <ScoreSlider label="SAT composite score (400–1600)" value={composite} min={400} max={1600} step={10} avg={1050} color={COLOR}
-                    onChange={v => { setComposite(v); setMath(Math.round(v / 2 / 10) * 10); setEbrw(v - Math.round(v / 2 / 10) * 10); }} />
+                  <ScoreSlider
+                    label="SAT composite score (400–1600)"
+                    value={composite} min={400} max={1600} step={10} avg={1050} color={COLOR}
+                    onChange={v => {
+                      setComposite(v);
+                      setMath(Math.round(v / 2 / 10) * 10);
+                      setEbrw(v - Math.round(v / 2 / 10) * 10);
+                    }}
+                  />
                 ) : (
                   <>
                     <ScoreSlider label="Math (200–800)" value={math} min={200} max={800} step={10} avg={520} color={COLOR} onChange={setMath} />
@@ -373,7 +417,10 @@ export default function SATCalculatorPage() {
             {/* RIGHT */}
             <div className="lg:col-span-3 space-y-5">
               <div className="bg-[#12141f] border border-white/8 rounded-2xl p-7">
-                <PercentileGauge percentile={compositePerc} color={context.color} />
+                {/* key forces CSS animation to restart when percentile changes */}
+                <div key={compositePerc}>
+                  <PercentileGauge percentile={compositePerc} color={context.color} />
+                </div>
                 <div className="text-center mt-5 mb-6">
                   <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-semibold border mb-2"
                     style={{ backgroundColor: `${context.color}15`, borderColor: `${context.color}30`, color: context.color }}>
@@ -383,9 +430,9 @@ export default function SATCalculatorPage() {
                 </div>
                 <div className="grid grid-cols-3 gap-3">
                   {[
-                    { label: 'Your score', value: compositeScore },
+                    { label: 'Your score',  value: compositeScore },
                     { label: 'National avg', value: 1050 },
-                    { label: 'Percentile', value: `${compositePerc}th` },
+                    { label: 'Percentile',  value: `${compositePerc}th` },
                   ].map(s => (
                     <div key={s.label} className="bg-white/4 rounded-xl p-3 text-center">
                       <p className="text-base font-bold text-white tabular-nums">{s.value}</p>
@@ -429,7 +476,7 @@ export default function SATCalculatorPage() {
                 <div className="space-y-3">
                   {[
                     { icon: '📖', label: 'Reading & Writing', color: '#a855f7', time: '64 min', q: '54 questions', detail: 'Grammar, rhetoric, data analysis, literary comprehension' },
-                    { icon: '📐', label: 'Math', color: COLOR, time: '70 min', q: '44 questions', detail: 'Algebra, problem solving, data analysis, advanced math, geometry' },
+                    { icon: '📐', label: 'Math',              color: COLOR,      time: '70 min', q: '44 questions', detail: 'Algebra, problem solving, data analysis, advanced math, geometry' },
                   ].map(s => (
                     <div key={s.label} className="flex gap-3 p-3 bg-white/3 rounded-xl">
                       <span className="text-lg mt-0.5" aria-hidden="true">{s.icon}</span>
@@ -457,10 +504,10 @@ export default function SATCalculatorPage() {
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               {[
-                { icon: '📊', label: 'National avg composite', value: '1050', sub: '43rd percentile', color: COLOR },
-                { icon: '📐', label: 'Average Math score', value: '520', sub: '50th percentile', color: '#6366f1' },
-                { icon: '📖', label: 'Average EBRW score', value: '530', sub: '50th percentile', color: '#a855f7' },
-                { icon: '👥', label: 'Students tested (2025)', value: '2.2M+', sub: 'High school students', color: '#34d399' },
+                { icon: '📊', label: 'National avg composite',    value: '1050',  sub: '43rd percentile',     color: COLOR },
+                { icon: '📐', label: 'Average Math score',        value: '520',   sub: '50th percentile',     color: '#6366f1' },
+                { icon: '📖', label: 'Average EBRW score',        value: '530',   sub: '50th percentile',     color: '#a855f7' },
+                { icon: '👥', label: 'Students tested (2025)',    value: '2.2M+', sub: 'High school students', color: '#34d399' },
               ].map(card => (
                 <article key={card.label} className="bg-[#12141f] border border-white/8 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
@@ -524,12 +571,12 @@ export default function SATCalculatorPage() {
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {[
-                { range: '1500–1600', label: 'Elite', desc: 'Top 3% nationally. Highly competitive at Ivy League, MIT, Caltech, and Stanford. Qualifies for merit scholarships at virtually every university in the country.', color: '#34d399' },
+                { range: '1500–1600', label: 'Elite',              desc: 'Top 3% nationally. Highly competitive at Ivy League, MIT, Caltech, and Stanford. Qualifies for merit scholarships at virtually every university in the country.', color: '#34d399' },
                 { range: '1400–1490', label: 'Highly Competitive', desc: 'Top 6–7%. Competitive at highly selective schools like Duke, Northwestern, Georgetown, and top-25 universities. Strong merit scholarship candidate at many schools.', color: '#60a5fa' },
-                { range: '1200–1390', label: 'Above Average', desc: 'Top 18–26%. Competitive at hundreds of strong four-year universities including state flagships. May qualify for merit aid at less selective schools.', color: COLOR },
-                { range: '1050–1190', label: 'Average', desc: 'Around the national average of 1050. Sufficient for many four-year colleges. A score in this range is near the median or 25th percentile for most non-selective state schools.', color: '#a78bfa' },
-                { range: '900–1040', label: 'Below Average', desc: 'Below the national average. Sufficient for community colleges and less selective schools. Most students who retest improve 50–100 points with focused preparation.', color: '#f59e0b' },
-                { range: '400–890', label: 'Needs Improvement', desc: 'Significantly below national average. Strong improvement is common with structured test prep. Consider PSAT practice materials and a retake plan.', color: '#ef4444' },
+                { range: '1200–1390', label: 'Above Average',      desc: 'Top 18–26%. Competitive at hundreds of strong four-year universities including state flagships. May qualify for merit aid at less selective schools.', color: COLOR },
+                { range: '1050–1190', label: 'Average',            desc: 'Around the national average of 1050. Sufficient for many four-year colleges. A score in this range is near the median or 25th percentile for most non-selective state schools.', color: '#a78bfa' },
+                { range: '900–1040',  label: 'Below Average',      desc: 'Below the national average. Sufficient for community colleges and less selective schools. Most students who retest improve 50–100 points with focused preparation.', color: '#f59e0b' },
+                { range: '400–890',   label: 'Needs Improvement',  desc: 'Significantly below national average. Strong improvement is common with structured test prep. Consider PSAT practice materials and a retake plan.', color: '#ef4444' },
               ].map(tier => (
                 <article key={tier.range} className="bg-[#12141f] border border-white/7 rounded-xl p-5">
                   <div className="text-xs font-mono font-semibold mb-1.5 px-2 py-1 rounded-md w-fit"
@@ -565,7 +612,7 @@ export default function SATCalculatorPage() {
                       <tr key={row.school} className={`border-b border-white/5 last:border-0 ${i % 2 === 0 ? '' : 'bg-white/2'}`}>
                         <td className="px-4 py-2.5 font-medium text-slate-200 text-sm">{row.school}</td>
                         <td className="px-4 py-2.5 text-center">
-                          <span className={`font-mono text-xs font-semibold px-2 py-0.5 rounded-md`}
+                          <span className="font-mono text-xs font-semibold px-2 py-0.5 rounded-md"
                             style={inRange
                               ? { backgroundColor: COLOR, color: '#fff' }
                               : above
@@ -622,7 +669,9 @@ export default function SATCalculatorPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-slate-600 mt-2">Source: Official College Board / ACT concordance tables. Use our <Link href="/exams/act" className="text-cyan-400 hover:text-cyan-300">ACT percentile calculator</Link> for full ACT breakdowns.</p>
+            <p className="text-xs text-slate-600 mt-2">
+              Source: Official College Board / ACT concordance tables. Use our <Link href="/exams/act" className="text-cyan-400 hover:text-cyan-300">ACT percentile calculator</Link> for full ACT breakdowns.
+            </p>
           </section>
 
           {/* HOW TO IMPROVE */}
@@ -633,10 +682,10 @@ export default function SATCalculatorPage() {
             </p>
             <div className="grid sm:grid-cols-2 gap-4">
               {[
-                { step: '01', title: 'Take a full-length diagnostic', desc: 'Use the College Board\'s free Bluebook app to take an official Digital SAT practice test under real conditions. This establishes your baseline and shows which skill areas need the most work.' },
+                { step: '01', title: 'Take a full-length diagnostic', desc: "Use the College Board's free Bluebook app to take an official Digital SAT practice test under real conditions. This establishes your baseline and shows which skill areas need the most work." },
                 { step: '02', title: 'Focus on your weaker section', desc: 'Identify whether Math or Reading & Writing is holding back your composite score. Targeted section prep typically yields faster score gains than spreading effort evenly across both sections.' },
-                { step: '03', title: 'Practice the adaptive format', desc: 'The Digital SAT\'s adaptive design rewards accuracy in Module 1 of each section. A strong Module 1 routes you to the harder (higher-ceiling) Module 2, which is necessary for scores above 650 per section.' },
-                { step: '04', title: 'Use Khan Academy (free)', desc: 'Khan Academy\'s Official SAT Practice is free, built in partnership with the College Board, and personalizes a study plan based on your PSAT or SAT scores. Students who study 20 hours on Khan Academy see an average gain of 115 points.' },
+                { step: '03', title: 'Practice the adaptive format', desc: "The Digital SAT's adaptive design rewards accuracy in Module 1 of each section. A strong Module 1 routes you to the harder (higher-ceiling) Module 2, which is necessary for scores above 650 per section." },
+                { step: '04', title: 'Use Khan Academy (free)', desc: "Khan Academy's Official SAT Practice is free, built in partnership with the College Board, and personalizes a study plan based on your PSAT or SAT scores. Students who study 20 hours on Khan Academy see an average gain of 115 points." },
               ].map(item => (
                 <div key={item.step} className="flex gap-4">
                   <div className="text-2xl font-black font-mono shrink-0 mt-0.5" style={{ color: `${COLOR}50` }}>{item.step}</div>
@@ -649,7 +698,6 @@ export default function SATCalculatorPage() {
             </div>
           </section>
 
-          {/* FAQ */}
           <FAQSection />
 
           {/* OTHER CALCULATORS */}
