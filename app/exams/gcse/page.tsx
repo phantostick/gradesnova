@@ -229,23 +229,31 @@ export default function GCSEMainPage() {
           {/* ── CALCULATOR (client component) ── */}
           <GCSECalculatorClient />
           {/* ── ESSENTIAL RESOURCES ── */}
-<section aria-labelledby="resources-heading" className="grid grid-cols-2 md:grid-cols-4 gap-4">
-  <Link href="/exams/gcse/guide" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
-    <span className="text-xl">📖</span>
-    <span className="text-sm font-semibold text-slate-200">GCSE Guide</span>
-  </Link>
-  <Link href="/exams/gcse/revision-tips" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
-    <span className="text-xl">🧠</span>
-    <span className="text-sm font-semibold text-slate-200">Revision Tips</span>
-  </Link>
-  <Link href="/exams/gcse/results-day" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
-    <span className="text-xl">📊</span>
-    <span className="text-sm font-semibold text-slate-200">Results Day</span>
-  </Link>
-  <Link href="/exams/gcse/grade-boundaries-explained" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
-    <span className="text-xl">💡</span>
-    <span className="text-sm font-semibold text-slate-200">Boundaries Explained</span>
-  </Link>
+{/* ── ESSENTIAL RESOURCES ── */}
+<section aria-labelledby="resources-heading" className="mt-12">
+  <div className="mb-6">
+    <h2 id="resources-heading" className="text-xl font-bold text-white mb-2">Essential GCSE Resources</h2>
+    <p className="text-slate-400 text-sm">Everything you need to master your exams, from study strategies to understanding how your final grades are calculated.</p>
+  </div>
+  
+  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <Link href="/exams/gcse/guide" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
+      <span className="text-xl">📖</span>
+      <span className="text-sm font-semibold text-slate-200">GCSE Guide</span>
+    </Link>
+    <Link href="/exams/gcse/revision-tips" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
+      <span className="text-xl">🧠</span>
+      <span className="text-sm font-semibold text-slate-200">Revision Tips</span>
+    </Link>
+    <Link href="/exams/gcse/results-day" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
+      <span className="text-xl">📊</span>
+      <span className="text-sm font-semibold text-slate-200">Results Day</span>
+    </Link>
+    <Link href="/exams/gcse/grade-boundaries-explained" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
+      <span className="text-xl">💡</span>
+      <span className="text-sm font-semibold text-slate-200">Boundaries Explained</span>
+    </Link>
+  </div>
 </section>
           {/* ── KEY STATS ── */}
           <section aria-labelledby="key-stats-heading">
