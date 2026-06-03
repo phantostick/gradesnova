@@ -14,12 +14,12 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Edexcel GCSE Grade Boundaries 2025 | All Subjects | GradesNova',
+  title: 'Edexcel GCSE Grade Boundaries 2025-26',
   description:
     'Official Edexcel GCSE grade boundaries from June 2025. Maths Higher grade 9 was 217/240, grade 4 was 53/240. English Language grade 9 was 122/160. All subjects — Biology, Chemistry, Physics, History, Geography. 2026 boundaries published 20 August 2026.',
   alternates: { canonical: 'https://gradesnova.com/exams/gcse/edexcel' },
   openGraph: {
-    title: 'Edexcel GCSE Grade Boundaries 2025 | All Subjects | GradesNova',
+    title: 'Edexcel GCSE Grade Boundaries 2025-26',
     description:
       'Official Pearson Edexcel grade boundaries June 2025. Maths Higher: grade 9 = 217/240, grade 4 = 53/240. All subjects. Updated live 20 August 2026 on Results Day.',
     url: 'https://gradesnova.com/exams/gcse/edexcel',
@@ -60,7 +60,7 @@ const jsonLdTool = {
 const jsonLdDataset = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
-  name: 'Edexcel GCSE Grade Boundaries 2025',
+  name: 'Edexcel GCSE Grade Boundaries 2025-26',
   description:
     'Official Pearson Edexcel GCSE grade boundary data from the June 2025 examination series. Updated on GCSE Results Day 20 August 2026 when 2026 data is released.',
   url: 'https://gradesnova.com/exams/gcse/edexcel',
@@ -218,7 +218,7 @@ export default function EdexcelGCSEPage() {
 
             {/* H1 — leads with 2025 (the year with actual data) */}
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              Edexcel GCSE Grade Boundaries 2025
+              Edexcel GCSE Grade Boundaries 2025-26
             </h1>
 
             <div className="flex flex-wrap items-center gap-2 mb-4">
