@@ -228,7 +228,25 @@ export default function GCSEMainPage() {
 
           {/* ── CALCULATOR (client component) ── */}
           <GCSECalculatorClient />
-
+          {/* ── ESSENTIAL RESOURCES ── */}
+<section aria-labelledby="resources-heading" className="grid grid-cols-2 md:grid-cols-4 gap-4">
+  <Link href="/exams/gcse/guide" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
+    <span className="text-xl">📖</span>
+    <span className="text-sm font-semibold text-slate-200">GCSE Guide</span>
+  </Link>
+  <Link href="/exams/gcse/revision-tips" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
+    <span className="text-xl">🧠</span>
+    <span className="text-sm font-semibold text-slate-200">Revision Tips</span>
+  </Link>
+  <Link href="/exams/gcse/results-day" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
+    <span className="text-xl">📊</span>
+    <span className="text-sm font-semibold text-slate-200">Results Day</span>
+  </Link>
+  <Link href="/exams/gcse/grade-boundaries-explained" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
+    <span className="text-xl">💡</span>
+    <span className="text-sm font-semibold text-slate-200">Boundaries Explained</span>
+  </Link>
+</section>
           {/* ── KEY STATS ── */}
           <section aria-labelledby="key-stats-heading">
             <h2 id="key-stats-heading" className="text-2xl font-bold text-white mb-2">GCSE Maths grade 9 boundaries 2025 — all boards</h2>
