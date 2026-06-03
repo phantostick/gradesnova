@@ -232,27 +232,69 @@ export default function GCSEMainPage() {
 {/* ── ESSENTIAL RESOURCES ── */}
 <section aria-labelledby="resources-heading" className="mt-12">
   <div className="mb-6">
-    <h2 id="resources-heading" className="text-xl font-bold text-white mb-2">Essential GCSE Resources</h2>
-    <p className="text-slate-400 text-sm">Everything you need to master your exams, from study strategies to understanding how your final grades are calculated.</p>
+    <h2 id="resources-heading" className="text-xl font-bold text-white mb-2">
+      Essential GCSE Resources
+    </h2>
+    <p className="text-slate-400 text-sm max-w-2xl">
+      Study smarter with revision advice, grade boundary explanations,
+      exam guides, and results day support for GCSE students.
+    </p>
   </div>
-  
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <Link href="/exams/gcse/guide" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
-      <span className="text-xl">📖</span>
-      <span className="text-sm font-semibold text-slate-200">GCSE Guide</span>
+
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+    
+    <Link
+      href="/exams/gcse/guide"
+      className="group bg-[#12141f] border border-white/8 rounded-xl p-5 hover:border-white/20 hover:bg-[#151826] transition-all flex flex-col gap-2"
+    >
+      <span className="text-2xl">📖</span>
+      <span className="text-sm font-semibold text-slate-100">
+        GCSE Guide
+      </span>
+      <p className="text-xs text-slate-400 leading-relaxed">
+        Learn how GCSEs work, grading systems, subjects, and exam formats.
+      </p>
     </Link>
-    <Link href="/exams/gcse/revision-tips" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
-      <span className="text-xl">🧠</span>
-      <span className="text-sm font-semibold text-slate-200">Revision Tips</span>
+
+    <Link
+      href="/exams/gcse/revision-tips"
+      className="group bg-[#12141f] border border-white/8 rounded-xl p-5 hover:border-white/20 hover:bg-[#151826] transition-all flex flex-col gap-2"
+    >
+      <span className="text-2xl">🧠</span>
+      <span className="text-sm font-semibold text-slate-100">
+        Revision Tips
+      </span>
+      <p className="text-xs text-slate-400 leading-relaxed">
+        Effective study methods, revision schedules, and exam preparation tips.
+      </p>
     </Link>
-    <Link href="/exams/gcse/results-day" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
-      <span className="text-xl">📊</span>
-      <span className="text-sm font-semibold text-slate-200">Results Day</span>
+
+    <Link
+      href="/exams/gcse/results-day"
+      className="group bg-[#12141f] border border-white/8 rounded-xl p-5 hover:border-white/20 hover:bg-[#151826] transition-all flex flex-col gap-2"
+    >
+      <span className="text-2xl">📊</span>
+      <span className="text-sm font-semibold text-slate-100">
+        Results Day
+      </span>
+      <p className="text-xs text-slate-400 leading-relaxed">
+        Understand grade releases, remark options, and next steps after exams.
+      </p>
     </Link>
-    <Link href="/exams/gcse/grade-boundaries-explained" className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all flex flex-col gap-2">
-      <span className="text-xl">💡</span>
-      <span className="text-sm font-semibold text-slate-200">Boundaries Explained</span>
+
+    <Link
+      href="/exams/gcse/grade-boundaries-explained"
+      className="group bg-[#12141f] border border-white/8 rounded-xl p-5 hover:border-white/20 hover:bg-[#151826] transition-all flex flex-col gap-2"
+    >
+      <span className="text-2xl">💡</span>
+      <span className="text-sm font-semibold text-slate-100">
+        Boundaries Explained
+      </span>
+      <p className="text-xs text-slate-400 leading-relaxed">
+        See how grade boundaries are calculated and what marks you need.
+      </p>
     </Link>
+
   </div>
 </section>
           {/* ── KEY STATS ── */}
