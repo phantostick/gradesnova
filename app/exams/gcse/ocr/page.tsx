@@ -208,6 +208,10 @@ export default function OCRGCSEPage() {
   const gradeInfo = useMemo(() => grade ? GCSE_GRADE_INFO[grade] : null, [grade]);
   const pct       = useMemo(() => boundary && mark > 0 ? getPercentageFromMark(mark, boundary.maxMark) : null, [mark, boundary]);
 
+  // DYNAMIC PATHWAY URL
+  const subjectSlug = subject.toLowerCase().replace(/\s+/g, '-');
+  const pathwayUrl = `/exams/gcse/${subjectSlug}`;
+
   // SCHEMA MARKUP
   const schemaBreadcrumb = {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList',
@@ -261,6 +265,8 @@ export default function OCRGCSEPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaDataset) }} />
 
       <main className="bg-[#0a0c14] min-h-screen text-white">
+        {/* We can safely remove <Navbar /> and <Footer /> here if they are already in the layout,
+            but keeping them exactly as requested so we don't change anything else. */}
         <Navbar />
 
         {/* HEADER */}
@@ -454,6 +460,24 @@ export default function OCRGCSEPage() {
                   </div>
                 )}
               </div>
+
+              {/* --- DYNAMIC PATHWAY CTA --- */}
+              <Link href={pathwayUrl} className="block group">
+                <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 border border-purple-500/20 rounded-2xl p-6 hover:border-purple-500/40 transition-all flex items-center justify-between shadow-lg shadow-black/10">
+                  <div>
+                    <h3 className="text-purple-400 font-bold text-lg mb-1 group-hover:text-purple-300 transition-colors">
+                      {grade ? `Check what a Grade ${grade} in ${subject} can get you` : `Check what a GCSE in ${subject} can get you`}
+                    </h3>
+                    <p className="text-slate-400 text-sm">
+                      Explore A-Level requirements, university degrees, and career pathways.
+                    </p>
+                  </div>
+                  <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center group-hover:bg-purple-500/30 group-hover:scale-105 transition-all">
+                    <span className="text-purple-400 text-xl font-bold">→</span>
+                  </div>
+                </div>
+              </Link>
+              {/* ----------------------------- */}
 
               {boundary && mark > 0 && (
                 <div className="bg-[#12141f] border border-white/8 rounded-2xl p-5">
