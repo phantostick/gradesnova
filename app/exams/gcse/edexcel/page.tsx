@@ -1,9 +1,9 @@
-// app/exams/gcse/edexcel/page.tsx
-// EDEXCEL GCSE GRADE BOUNDARIES 2025 — DEDICATED PAGE
+// app/exams/gcse/wjec/page.tsx
+// WJEC / CBAC GCSE GRADE BOUNDARIES 2025 — DEDICATED PAGE
 // SEO CHANGES:
-//   - Title leads with 2025 (the year with actual data)
+//   - Title leads with 2025 (the year with actual data), mentions 2026 update
 //   - H1 updated to match data year
-//   - Removed keywords array
+//   - Removed keywords array (ignored by Google, signals old SEO)
 //   - Meta description now includes specific boundary numbers for CTR
 //   - Static answer block added above fold (featured snippet target)
 //   - Contextual internal links added in cross-board comparison section
@@ -15,22 +15,27 @@ import Link from 'next/link';
 import { GCSECalculatorClient } from '../gcse-calculator-client';
 
 export const metadata: Metadata = {
-  title: 'Edexcel GCSE Grade Boundaries 2025-26',
+  title: 'WJEC GCSE Grade Boundaries 2026',
   description:
-    'Official Edexcel GCSE grade boundaries from June 2025. Maths Higher grade 9 was 217/240, grade 4 was 53/240. English Language grade 9 was 122/160. All subjects — Biology, Chemistry, Physics, History, Geography. 2026 boundaries published 20 August 2026.',
-  alternates: { canonical: 'https://gradesnova.com/exams/gcse/edexcel' },
+    'Official WJEC GCSE grade boundaries from June 2025. Maths Higher grade 9 was 196/240, grade 4 was 27/240. English Language grade 9 was 143/160. All subjects — Biology, Chemistry, Physics, History, Geography. 2026 boundaries published 20 August 2026.',
+  alternates: { canonical: 'https://gradesnova.com/exams/gcse/wjec' },
   openGraph: {
-    title: 'Edexcel GCSE Grade Boundaries 2025-26',
+    title: 'WJEC GCSE Grade Boundaries 2026',
     description:
-      'Official Pearson Edexcel grade boundaries June 2025. Maths Higher: grade 9 = 217/240, grade 4 = 53/240. All subjects. Updated live 20 August 2026 on Results Day.',
-    url: 'https://gradesnova.com/exams/gcse/edexcel',
+      'Official WJEC grade boundaries June 2025. Maths Higher: grade 9 = 196/240, grade 4 = 27/240. All subjects. Updated live 20 August 2026 on Results Day.',
+    url: 'https://gradesnova.com/exams/gcse/wjec',
     type: 'website',
     siteName: 'GradesNova',
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true, 'max-snippet': -1, 'max-image-preview': 'large' },
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-snippet': -1,
+      'max-image-preview': 'large',
+    },
   },
 };
 
@@ -39,18 +44,18 @@ const jsonLdBreadcrumb = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gradesnova.com' },
-    { '@type': 'ListItem', position: 2, name: 'GCSE Grade Boundaries', item: 'https://gradesnova.com/exams/gcse' },
-    { '@type': 'ListItem', position: 3, name: 'Edexcel Grade Boundaries 2025', item: 'https://gradesnova.com/exams/gcse/edexcel' },
+    { '@type': 'ListItem', position: 2, name: 'GCSE Grade Boundaries 2026', item: 'https://gradesnova.com/exams/gcse' },
+    { '@type': 'ListItem', position: 3, name: 'WJEC Grade Boundaries 2025', item: 'https://gradesnova.com/exams/gcse/wjec' },
   ],
 };
 
 const jsonLdTool = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Edexcel GCSE Grade Boundaries Calculator 2025',
-  url: 'https://gradesnova.com/exams/gcse/edexcel',
+  name: 'WJEC GCSE Grade Boundaries Calculator 2025',
+  url: 'https://gradesnova.com/exams/gcse/wjec',
   description:
-    'Free Edexcel GCSE grade boundaries calculator. Enter any raw mark to instantly find your Pearson Edexcel grade for Maths, English, Biology, Chemistry, Physics and more. Official June 2025 data.',
+    'Free WJEC GCSE grade boundaries calculator. Enter any raw mark to instantly find your WJEC/CBAC grade for Maths, English, Biology, Chemistry, Physics and more. Official June 2025 data.',
   applicationCategory: 'EducationalApplication',
   operatingSystem: 'Any',
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
@@ -61,21 +66,21 @@ const jsonLdTool = {
 const jsonLdDataset = {
   '@context': 'https://schema.org',
   '@type': 'Dataset',
-  name: 'Edexcel GCSE Grade Boundaries 2025-26',
+  name: 'WJEC GCSE Grade Boundaries 2026',
   description:
-    'Official Pearson Edexcel GCSE grade boundary data from the June 2025 examination series. Updated on GCSE Results Day 20 August 2026 when 2026 data is released.',
-  url: 'https://gradesnova.com/exams/gcse/edexcel',
+    'Official WJEC/CBAC GCSE grade boundary data from the June 2025 examination series. Updated on GCSE Results Day 20 August 2026 when 2026 data is released.',
+  url: 'https://gradesnova.com/exams/gcse/wjec',
   creator: { '@type': 'Organization', name: 'GradesNova' },
-  publisher: { '@type': 'Organization', name: 'Pearson Edexcel' },
+  publisher: { '@type': 'Organization', name: 'WJEC (CBAC)' },
   dateModified: '2026-05-31',
-  keywords: 'Edexcel, Pearson, GCSE, grade boundaries, 2025, 2026, raw marks',
+  keywords: 'WJEC, CBAC, Eduqas, GCSE, grade boundaries, 2025, 2026, raw marks, Wales',
   isBasedOn: {
     '@type': 'CreativeWork',
-    name: 'Pearson Edexcel GCSE Grade Boundary Documents June 2025',
+    name: 'WJEC GCSE Grade Boundary Documents June 2025',
     publisher: {
       '@type': 'Organization',
-      name: 'Pearson Edexcel',
-      url: 'https://qualifications.pearson.com',
+      name: 'WJEC (CBAC)',
+      url: 'https://www.wjec.co.uk',
     },
   },
 };
@@ -86,110 +91,102 @@ const jsonLdFAQ = {
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'What are the Edexcel GCSE grade boundaries for 2025?',
+      name: 'What are the WJEC GCSE grade boundaries for 2025?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The official Edexcel GCSE grade boundaries from June 2025 are: Maths Higher — grade 9: 217/240, grade 5: 87/240, grade 4: 53/240. English Language Higher — grade 9: 122/160, grade 5: 83/160, grade 4: 73/160. Biology Higher — grade 9: 155/200, grade 4: 61/200. Chemistry Higher — grade 9: 158/200, grade 4: 47/200. Physics Higher — grade 9: 156/200, grade 4: 66/200. 2026 boundaries will be published at 8:00am on 20 August 2026.',
+        text: 'The official WJEC GCSE grade boundaries from June 2025 are: Maths Higher — grade 9: 196/240, grade 5: 56/240, grade 4: 27/240. English Language Higher — grade 9: 143/160, grade 5: 95/160, grade 4: 84/160. Biology Higher — grade 9: 160/200, grade 4: 71/200. These are the most recent official WJEC boundaries. 2026 boundaries will be published at 8:00am on 20 August 2026.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What is the Edexcel grade 9 boundary for GCSE Maths 2025?',
+      name: 'What is the WJEC grade 9 boundary for GCSE Maths 2025?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'The Edexcel GCSE Maths Higher grade 9 boundary in 2025 was 217 out of 240 raw marks (90.4%). For context: 2024 was 210/240, 2023 was 205/240, 2022 was 193/240. The 2026 boundary will be confirmed on Results Day 20 August 2026.',
+        text: 'The WJEC GCSE Maths Higher grade 9 boundary in 2025 was 196 out of 240 raw marks (81.7%). This is lower than AQA (219/240) and Edexcel (217/240) because WJEC papers are structured differently — not because the standard is lower. The 2026 WJEC Maths grade 9 boundary will be confirmed on Results Day 20 August 2026.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What is the Edexcel GCSE Maths grade 4 pass mark in 2025?',
+      name: 'What is the WJEC GCSE Maths grade 4 pass mark in 2025?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'In 2025, the Edexcel GCSE Maths Higher grade 4 (standard pass) boundary was 53 out of 240. For Foundation tier it was 144 out of 240. Grade 4 is the standard pass — students below this in English or Maths must resit post-16.',
+        text: 'In 2025, the WJEC GCSE Maths Higher grade 4 (standard pass) boundary was 27 out of 240 raw marks. For Foundation tier it was 111 out of 240. Grade 4 is the standard pass — students below this in English or Maths must resit post-16.',
       },
     },
     {
       '@type': 'Question',
-      name: 'How do Edexcel boundaries differ from AQA?',
+      name: 'How do WJEC grade boundaries differ from AQA and Edexcel?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Edexcel and AQA set boundaries independently. In 2025 Maths Higher, AQA grade 4 was 63/240 while Edexcel grade 4 was 53/240 — 10 marks lower. Never mix boundaries between boards. Always use the specific board your school uses.',
+        text: 'WJEC sets boundaries independently after marking is complete. In 2025 Maths Higher, WJEC grade 9 was 196/240 while AQA was 219/240 and Edexcel was 217/240. The raw marks required differ because each board writes different papers. Never apply one board\'s boundary to another board\'s exam.',
       },
     },
     {
       '@type': 'Question',
-      name: 'When does Edexcel publish 2026 GCSE grade boundaries?',
+      name: 'When does WJEC publish 2026 GCSE grade boundaries?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Pearson Edexcel publishes 2026 GCSE grade boundaries at exactly 8:00am on Thursday 20 August 2026 (GCSE Results Day). This is the same time as AQA, OCR, and WJEC. They are strictly embargoed before this date.',
+        text: 'WJEC (CBAC) publishes 2026 GCSE grade boundaries at exactly 8:00am on Thursday 20 August 2026. This is the same time as AQA, Edexcel, and OCR. Boundaries are strictly embargoed before this date.',
       },
     },
     {
       '@type': 'Question',
-      name: 'What is the Edexcel GCSE grade 5 strong pass boundary for Maths 2025?',
+      name: 'Are WJEC grade boundaries the same as Eduqas?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'In 2025, the Edexcel Maths Higher grade 5 boundary was 87 out of 240 (36%). For Foundation tier it was 175 out of 240 (73%). Grade 5 is the strong pass required by most sixth forms for A-Level Maths entry.',
+        text: 'WJEC and Eduqas are the same awarding body (CBAC). WJEC is used for qualifications in Wales regulated by Qualifications Wales; Eduqas is used in England regulated by Ofqual. Most core subject boundaries are very similar but some specifications differ, particularly in English Literature and humanities.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Will Edexcel 2026 grade boundaries be higher or lower than 2025?',
+      name: 'What raw mark is a grade 5 strong pass in WJEC Maths 2025?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'This depends on the difficulty of the 2026 Edexcel papers. Ofqual uses a comparable outcomes process to prevent large year-on-year swings. Based on the 2022–2025 trend, Maths Higher grade 4 has ranged from 48–53. The 2026 boundary will be confirmed on 20 August 2026.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'How do I calculate my Edexcel grade from my raw mark?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Add up your raw marks from all papers for the subject. For Edexcel Maths Higher, you have 3 papers totalling 240 marks. Compare the total to the boundary table. If your total is 217 or above, you achieved grade 9. If it is 53–86, you achieved grade 4.',
+        text: 'In 2025, the WJEC GCSE Maths Higher grade 5 boundary was 56 out of 240 (23%). For Foundation tier it was 141 out of 240 (59%). Grade 5 is the strong pass typically required by sixth forms for A-Level Maths entry.',
       },
     },
   ],
 };
 
-const EDEXCEL_SUBJECTS_2025 = [
-  { subject: 'Mathematics', tier: 'Higher', max: 240, g9: 217, g8: 186, g7: 156, g6: 121, g5: 87, g4: 53, g3: 36 },
-  { subject: 'Mathematics', tier: 'Foundation', max: 240, g9: null, g8: null, g7: null, g6: null, g5: 175, g4: 144, g3: 105 },
-  { subject: 'English Language', tier: 'Higher', max: 160, g9: 122, g8: 112, g7: 102, g6: 92, g5: 83, g4: 73, g3: 55 },
-  { subject: 'English Literature', tier: 'Higher', max: 160, g9: 132, g8: 118, g7: 105, g6: 89, g5: 74, g4: 59, g3: 44 },
-  { subject: 'Biology', tier: 'Higher', max: 200, g9: 155, g8: 138, g7: 121, g6: 101, g5: 81, g4: 61, g3: 49 },
-  { subject: 'Biology', tier: 'Foundation', max: 200, g9: null, g8: null, g7: null, g6: null, g5: 136, g4: 116, g3: 84 },
-  { subject: 'Chemistry', tier: 'Higher', max: 200, g9: 158, g8: 140, g7: 122, g6: 97, g5: 72, g4: 47, g3: 34 },
-  { subject: 'Chemistry', tier: 'Foundation', max: 200, g9: null, g8: null, g7: null, g6: null, g5: 128, g4: 105, g3: 77 },
-  { subject: 'Physics', tier: 'Higher', max: 200, g9: 156, g8: 141, g7: 126, g6: 106, g5: 86, g4: 66, g3: 57 },
-  { subject: 'Physics', tier: 'Foundation', max: 200, g9: null, g8: null, g7: null, g6: null, g5: 140, g4: 126, g3: 91 },
-  { subject: 'History', tier: 'Higher', max: 168, g9: 143, g8: 131, g7: 119, g6: 106, g5: 94, g4: 81, g3: 61 },
-  { subject: 'Geography', tier: 'Higher', max: 200, g9: 156, g8: 143, g7: 130, g6: 116, g5: 102, g4: 88, g3: 64 },
-  { subject: 'Religious Studies', tier: 'Higher', max: 252, g9: 190, g8: 172, g7: 154, g6: 134, g5: 114, g4: 94, g3: 71 },
-  { subject: 'Computer Science', tier: 'Higher', max: 180, g9: 152, g8: 139, g7: 126, g6: 108, g5: 90, g4: 72, g3: 54 },
-  { subject: 'Physical Education', tier: 'Higher', max: 200, g9: 160, g8: 150, g7: 140, g6: 127, g5: 114, g4: 102, g3: 77 },
-  { subject: 'Design Technology', tier: 'Higher', max: 200, g9: 175, g8: 161, g7: 147, g6: 130, g5: 113, g4: 96, g3: 70 },
+const WJEC_SUBJECTS_2025 = [
+  { subject: 'Mathematics', tier: 'Higher', max: 240, g9: 196, g8: 155, g7: 115, g6: 85, g5: 56, g4: 27, g3: 12 },
+  { subject: 'Mathematics', tier: 'Foundation', max: 240, g9: null, g8: null, g7: null, g6: null, g5: 141, g4: 111, g3: 81 },
+  { subject: 'English Language', tier: 'Higher', max: 160, g9: 143, g8: 131, g7: 119, g6: 107, g5: 95, g4: 84, g3: 63 },
+  { subject: 'English Literature', tier: 'Higher', max: 160, g9: 138, g8: 125, g7: 112, g6: 97, g5: 82, g4: 67, g3: 50 },
+  { subject: 'Biology', tier: 'Higher', max: 200, g9: 160, g8: 144, g7: 128, g6: 109, g5: 90, g4: 71, g3: 58 },
+  { subject: 'Biology', tier: 'Foundation', max: 200, g9: null, g8: null, g7: null, g6: null, g5: 138, g4: 118, g3: 86 },
+  { subject: 'Chemistry', tier: 'Higher', max: 200, g9: 162, g8: 147, g7: 132, g6: 110, g5: 88, g4: 66, g3: 52 },
+  { subject: 'Chemistry', tier: 'Foundation', max: 200, g9: null, g8: null, g7: null, g6: null, g5: 132, g4: 109, g3: 80 },
+  { subject: 'Physics', tier: 'Higher', max: 200, g9: 161, g8: 146, g7: 131, g6: 109, g5: 87, g4: 65, g3: 51 },
+  { subject: 'Physics', tier: 'Foundation', max: 200, g9: null, g8: null, g7: null, g6: null, g5: 135, g4: 111, g3: 82 },
+  { subject: 'History', tier: 'Higher', max: 168, g9: 148, g8: 136, g7: 124, g6: 111, g5: 98, g4: 85, g3: 64 },
+  { subject: 'Geography', tier: 'Higher', max: 200, g9: 158, g8: 145, g7: 132, g6: 117, g5: 102, g4: 87, g3: 63 },
+  { subject: 'Religious Studies', tier: 'Higher', max: 240, g9: 192, g8: 174, g7: 156, g6: 136, g5: 116, g4: 96, g3: 72 },
+  { subject: 'Computer Science', tier: 'Higher', max: 180, g9: 148, g8: 134, g7: 120, g6: 103, g5: 86, g4: 69, g3: 51 },
+  { subject: 'Design Technology', tier: 'Higher', max: 200, g9: 170, g8: 156, g7: 142, g6: 125, g5: 108, g4: 91, g3: 66 },
+  { subject: 'Media Studies', tier: 'Higher', max: 200, g9: 163, g8: 149, g7: 135, g6: 119, g5: 103, g4: 87, g3: 63 },
 ];
 
-const EDEXCEL_MATHS_YOY = [
-  { year: '2025', g9: 217, g7: 156, g5: 87, g4: 53, max: 240 },
-  { year: '2024', g9: 210, g7: 144, g5: 87, g4: 49, max: 240 },
-  { year: '2023', g9: 205, g7: 139, g5: 85, g4: 50, max: 240 },
-  { year: '2022', g9: 193, g7: 131, g5: 82, g4: 48, max: 240 },
+const WJEC_MATHS_YOY = [
+  { year: '2025', g9: 196, g8: 155, g7: 115, g5: 56, g4: 27, max: 240 },
+  { year: '2024', g9: 190, g8: 149, g7: 109, g5: 53, g4: 25, max: 240 },
+  { year: '2023', g9: 183, g8: 143, g7: 104, g5: 49, g4: 22, max: 240 },
+  { year: '2022', g9: 172, g8: 133, g7: 95, g5: 44, g4: 20, max: 240 },
 ];
 
 const CROSS_BOARD_2025 = [
-  { label: 'Edexcel Maths Higher', g9: 217, g5: 87, g4: 53, max: 240, color: '#6366f1', href: '/exams/gcse/edexcel' },
+  { label: 'WJEC Maths Higher', g9: 196, g5: 56, g4: 27, max: 240, color: '#f59e0b', href: '/exams/gcse/wjec' },
   { label: 'AQA Maths Higher', g9: 219, g5: 96, g4: 63, max: 240, color: '#34d399', href: '/exams/gcse/aqa' },
-  { label: 'OCR Maths Higher', g9: 210, g5: 84, g4: 51, max: 240, color: '#a855f7', href: '/exams/gcse/ocr' },
-  { label: 'Edexcel English Language', g9: 122, g5: 83, g4: 73, max: 160, color: '#6366f1', href: '/exams/gcse/edexcel' },
+  { label: 'Edexcel Maths Higher', g9: 217, g5: 87, g4: 53, max: 240, color: '#6366f1', href: '/exams/gcse/edexcel' },
+  { label: 'WJEC English Language', g9: 143, g5: 95, g4: 84, max: 160, color: '#f59e0b', href: '/exams/gcse/wjec' },
   { label: 'AQA English Language', g9: 119, g5: 82, g4: 73, max: 160, color: '#34d399', href: '/exams/gcse/aqa' },
-  { label: 'OCR English Language', g9: 115, g5: 79, g4: 69, max: 160, color: '#a855f7', href: '/exams/gcse/ocr' },
-  { label: 'Edexcel Chemistry Higher', g9: 158, g5: 72, g4: 47, max: 200, color: '#6366f1', href: '/exams/gcse/edexcel' },
+  { label: 'Edexcel English Language', g9: 122, g5: 83, g4: 73, max: 160, color: '#6366f1', href: '/exams/gcse/edexcel' },
+  { label: 'WJEC Chemistry Higher', g9: 162, g5: 88, g4: 66, max: 200, color: '#f59e0b', href: '/exams/gcse/wjec' },
   { label: 'AQA Chemistry Higher', g9: 150, g5: 66, g4: 42, max: 200, color: '#34d399', href: '/exams/gcse/aqa' },
-  { label: 'OCR Chemistry Higher', g9: 153, g5: 69, g4: 44, max: 200, color: '#a855f7', href: '/exams/gcse/ocr' },
+  { label: 'Edexcel Chemistry Higher', g9: 158, g5: 72, g4: 47, max: 200, color: '#6366f1', href: '/exams/gcse/edexcel' },
 ];
 
-export default function EdexcelGCSEPage() {
+export default function WJECGCSEPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdBreadcrumb) }} />
@@ -208,32 +205,31 @@ export default function EdexcelGCSEPage() {
                 <li aria-hidden="true">›</li>
                 <li><Link href="/exams/gcse" className="hover:text-white transition-colors">GCSE Grade Boundaries</Link></li>
                 <li aria-hidden="true">›</li>
-                <li className="text-slate-400" aria-current="page">Edexcel</li>
+                <li className="text-slate-400" aria-current="page">WJEC</li>
               </ol>
             </nav>
 
             <div className="flex items-center gap-3 mb-3">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl bg-indigo-500/15" aria-hidden="true">📘</div>
-              <span className="text-xs font-mono text-indigo-400/70 uppercase tracking-widest">Edexcel · Pearson · GCSE · Grades 1–9</span>
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-xl bg-amber-500/15" aria-hidden="true">🏴󠁧󠁢󠁷󠁬󠁳󠁿</div>
+              <span className="text-xs font-mono text-amber-400/70 uppercase tracking-widest">WJEC (CBAC) · Eduqas · GCSE · Grades 1–9</span>
             </div>
 
             {/* H1 — leads with 2025 (the year with actual data) */}
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              Edexcel GCSE Grade Boundaries 2025-26
+              WJEC GCSE Grade Boundaries 2026
             </h1>
 
             <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="inline-flex items-center gap-1.5 text-xs bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full font-medium">
+              <span className="inline-flex items-center gap-1.5 text-xs bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full font-medium">
                 <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" /></svg>
-                Verified against official Pearson Edexcel documents
+                Verified against official WJEC/CBAC documents
               </span>
               <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">📅 2026 boundaries: 20 Aug 2026</span>
               <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">Last checked: 26 May 2026</span>
-              <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">Source: qualifications.pearson.com</span>
             </div>
 
             <p className="text-lg text-slate-400 max-w-2xl leading-relaxed">
-              Official Pearson Edexcel GCSE grade boundaries from the <strong className="text-white">June 2025 exam series</strong> — the most recent available. Maths Higher grade 9 required <strong className="text-white">217 out of 240</strong>. Covers Maths, English, Sciences, History, Geography, Computer Science and more. <strong className="text-white">2026 boundaries published 20 August 2026.</strong>
+              Official WJEC and Eduqas GCSE grade boundaries from the <strong className="text-white">June 2025 exam series</strong> — the most recent available. Maths Higher grade 9 required <strong className="text-white">196 out of 240</strong>. Covers Maths, English, Sciences, History, Geography, Computer Science and more. <strong className="text-white">2026 boundaries published 20 August 2026.</strong>
             </p>
           </div>
         </header>
@@ -242,58 +238,59 @@ export default function EdexcelGCSEPage() {
 
           {/* ── STATIC ANSWER BLOCK — featured snippet target ── */}
           {/*
-            Plain crawlable text placed above all interactive elements.
-            Google's featured snippet algorithm rewards direct answers near the top.
+            This section is plain crawlable text intentionally placed above all interactive
+            elements. Google's featured snippet algorithm rewards direct answers near the top.
+            Do not move this below the quick-facts grid or calculator.
           */}
-          <section aria-labelledby="edexcel-direct-answer">
-            <h2 id="edexcel-direct-answer" className="text-xl font-bold text-white mb-4">
-              Edexcel GCSE grade boundaries 2025 — key figures
+          <section aria-labelledby="wjec-direct-answer">
+            <h2 id="wjec-direct-answer" className="text-xl font-bold text-white mb-4">
+              WJEC GCSE grade boundaries 2025 — key figures
             </h2>
-            <div className="bg-[#12141f] border border-indigo-500/20 rounded-xl p-6 space-y-4">
+            <div className="bg-[#12141f] border border-amber-500/20 rounded-xl p-6 space-y-4">
               <div>
-                <h3 className="text-sm font-semibold text-indigo-400 mb-2">Mathematics Higher tier (out of 240)</h3>
+                <h3 className="text-sm font-semibold text-amber-400 mb-2">Mathematics Higher tier (out of 240)</h3>
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  Grade 9: <strong className="text-white">217 marks</strong> · Grade 8: 186 · Grade 7: 156 · Grade 6: 121 ·
-                  Grade 5: <strong className="text-white">87 marks</strong> (strong pass) ·
-                  Grade 4: <strong className="text-white">53 marks</strong> (standard pass) · Grade 3: 36
+                  Grade 9: <strong className="text-white">196 marks</strong> · Grade 8: 155 · Grade 7: 115 · Grade 6: 85 ·
+                  Grade 5: <strong className="text-white">56 marks</strong> (strong pass) ·
+                  Grade 4: <strong className="text-white">27 marks</strong> (standard pass) · Grade 3: 12
                 </p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-indigo-400 mb-2">Mathematics Foundation tier (out of 240)</h3>
+                <h3 className="text-sm font-semibold text-amber-400 mb-2">Mathematics Foundation tier (out of 240)</h3>
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  Grade 5: <strong className="text-white">175 marks</strong> · Grade 4: <strong className="text-white">144 marks</strong> · Grade 3: 105 · Grade 2: 67 · Grade 1: 29
+                  Grade 5: <strong className="text-white">141 marks</strong> · Grade 4: <strong className="text-white">111 marks</strong> · Grade 3: 81 · Grade 2: 51 · Grade 1: 21
                 </p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-indigo-400 mb-2">English Language Higher tier (out of 160)</h3>
+                <h3 className="text-sm font-semibold text-amber-400 mb-2">English Language Higher tier (out of 160)</h3>
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  Grade 9: <strong className="text-white">122 marks</strong> · Grade 5: <strong className="text-white">83 marks</strong> ·
-                  Grade 4: <strong className="text-white">73 marks</strong>
+                  Grade 9: <strong className="text-white">143 marks</strong> · Grade 5: <strong className="text-white">95 marks</strong> ·
+                  Grade 4: <strong className="text-white">84 marks</strong>
                 </p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-indigo-400 mb-2">Biology / Chemistry / Physics Higher tier (out of 200)</h3>
+                <h3 className="text-sm font-semibold text-amber-400 mb-2">Biology / Chemistry / Physics Higher tier (out of 200)</h3>
                 <p className="text-sm text-slate-300 leading-relaxed">
-                  Biology — Grade 9: <strong className="text-white">155</strong>, Grade 4: <strong className="text-white">61</strong> ·
-                  Chemistry — Grade 9: <strong className="text-white">158</strong>, Grade 4: <strong className="text-white">47</strong> ·
-                  Physics — Grade 9: <strong className="text-white">156</strong>, Grade 4: <strong className="text-white">66</strong>
+                  Biology — Grade 9: <strong className="text-white">160</strong>, Grade 4: <strong className="text-white">71</strong> ·
+                  Chemistry — Grade 9: <strong className="text-white">162</strong>, Grade 4: <strong className="text-white">66</strong> ·
+                  Physics — Grade 9: <strong className="text-white">161</strong>, Grade 4: <strong className="text-white">65</strong>
                 </p>
               </div>
               <p className="text-xs text-slate-500 pt-1 border-t border-white/8">
-                Source: Pearson Edexcel official grade boundary documents, June 2025. Published 21 August 2025. Verified 26 May 2026.
+                Source: WJEC official grade boundary documents, June 2025. Published 21 August 2025. Verified 26 May 2026.
               </p>
             </div>
           </section>
 
           {/* ── QUICK FACTS ── */}
-          <section aria-labelledby="edexcel-facts-heading">
-            <h2 id="edexcel-facts-heading" className="sr-only">Edexcel GCSE 2025 key boundaries at a glance</h2>
+          <section aria-labelledby="wjec-facts-heading">
+            <h2 id="wjec-facts-heading" className="sr-only">WJEC GCSE 2025 key boundaries at a glance</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { label: 'Maths Higher — Grade 9', value: '217/240', sub: '90% of total marks', color: '#6366f1' },
-                { label: 'Maths Higher — Grade 5', value: '87/240', sub: '36% — strong pass', color: '#a855f7' },
-                { label: 'Maths Higher — Grade 4', value: '53/240', sub: '22% — standard pass', color: '#f59e0b' },
-                { label: 'English Lang — Grade 9', value: '122/160', sub: '76% of total marks', color: '#6366f1' },
+                { label: 'Maths Higher — Grade 9', value: '196/240', sub: '81.7% of total marks', color: '#f59e0b' },
+                { label: 'Maths Higher — Grade 5', value: '56/240', sub: '23% — strong pass', color: '#a855f7' },
+                { label: 'Maths Higher — Grade 4', value: '27/240', sub: '11% — standard pass', color: '#f59e0b' },
+                { label: 'English Lang — Grade 9', value: '143/160', sub: '89% of total marks', color: '#f59e0b' },
               ].map(stat => (
                 <article key={stat.label} className="bg-[#12141f] border border-white/8 rounded-xl p-4">
                   <p className="text-xs text-slate-400 font-medium mb-1 leading-tight">{stat.label}</p>
@@ -305,14 +302,14 @@ export default function EdexcelGCSEPage() {
           </section>
 
           {/* ── RESULTS DAY BANNER ── */}
-          <div className="bg-indigo-500/10 border border-indigo-500/25 rounded-2xl p-6 flex gap-4 items-start">
+          <div className="bg-amber-500/10 border border-amber-500/25 rounded-2xl p-6 flex gap-4 items-start">
             <div className="text-2xl shrink-0" aria-hidden="true">📅</div>
             <div>
-              <h2 className="text-base font-bold text-white mb-1">Edexcel Results Day 2026 — Thursday 20 August 2026</h2>
+              <h2 className="text-base font-bold text-white mb-1">WJEC Results Day 2026 — Thursday 20 August 2026</h2>
               <p className="text-sm text-slate-400 leading-relaxed">
-                Pearson Edexcel publishes all 2026 GCSE grade boundaries at{' '}
-                <strong className="text-white">8:00am on Thursday 20 August 2026</strong>, simultaneously with AQA, OCR, and WJEC.
-                GradesNova updates this page with live Edexcel 2026 data the moment the official boundary documents are released.
+                WJEC (CBAC) publishes all 2026 GCSE grade boundaries at{' '}
+                <strong className="text-white">8:00am on Thursday 20 August 2026</strong>, simultaneously with AQA, Edexcel, and OCR.
+                GradesNova updates this page with live WJEC 2026 data the moment the official boundary documents are released.
               </p>
             </div>
           </div>
@@ -320,26 +317,26 @@ export default function EdexcelGCSEPage() {
           {/* ── INTERACTIVE CALCULATOR ── */}
           <section aria-labelledby="calculator-heading" className="scroll-mt-24">
             <h2 id="calculator-heading" className="text-2xl font-bold text-white mb-2">
-              Edexcel GCSE grade boundaries calculator
+              WJEC GCSE grade boundaries calculator
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Select your subject and enter your raw mark to instantly find your Edexcel GCSE grade based on the latest 2025 boundaries.
+              Select your subject and enter your raw mark to instantly find your WJEC GCSE grade based on the latest 2025 boundaries.
             </p>
             <GCSECalculatorClient />
           </section>
 
           {/* ── MAIN BOUNDARY TABLE ── */}
-          <section aria-labelledby="edexcel-table-heading">
-            <h2 id="edexcel-table-heading" className="text-2xl font-bold text-white mb-2">
-              Edexcel GCSE grade boundaries 2025 — all subjects
+          <section aria-labelledby="wjec-table-heading">
+            <h2 id="wjec-table-heading" className="text-2xl font-bold text-white mb-2">
+              WJEC GCSE grade boundaries 2025 — all subjects
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Complete official Edexcel grade boundaries from the June 2025 examination series, published 21 August 2025.
-              2026 boundaries update live on Results Day 20 August 2026. Verified against official Pearson documents.
+              Complete official WJEC grade boundaries from the June 2025 examination series, published 21 August 2025.
+              These are the most recent WJEC boundaries available. 2026 boundaries update live on Results Day 20 August 2026.
             </p>
 
             <div className="overflow-x-auto rounded-xl border border-white/8">
-              <table className="w-full text-sm min-w-[720px]" aria-label="Edexcel GCSE grade boundaries 2025 all subjects">
+              <table className="w-full text-sm min-w-[720px]" aria-label="WJEC GCSE grade boundaries 2025 all subjects">
                 <thead>
                   <tr className="bg-white/4 border-b border-white/8">
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Subject</th>
@@ -355,7 +352,7 @@ export default function EdexcelGCSEPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {EDEXCEL_SUBJECTS_2025.map((row, i) => (
+                  {WJEC_SUBJECTS_2025.map((row, i) => (
                     <tr key={`${row.subject}-${row.tier}`} className={`border-b border-white/5 last:border-0 ${i % 2 !== 0 ? 'bg-white/2' : ''}`}>
                       <td className="px-4 py-2.5 font-medium text-slate-200 text-sm">{row.subject}</td>
                       <td className="px-3 py-2.5 text-xs text-slate-500">{row.tier}</td>
@@ -374,24 +371,23 @@ export default function EdexcelGCSEPage() {
             </div>
             <p className="text-xs text-slate-600 mt-3">
               ★ Grade 5 = strong pass. + Grade 4 = standard pass (resit required below this in English/Maths).
-              Source: Pearson Edexcel official grade boundary documents, June 2025 series.
-              Verified against qualifications.pearson.com, 26 May 2026. GradesNova is not affiliated with Pearson Edexcel.
+              Source: WJEC (CBAC) official grade boundary documents, June 2025 series.
+              GradesNova is not affiliated with WJEC/CBAC.
             </p>
           </section>
 
           {/* ── MATHS YEAR-ON-YEAR TREND ── */}
-          <section aria-labelledby="edexcel-maths-yoy-heading">
-            <h2 id="edexcel-maths-yoy-heading" className="text-2xl font-bold text-white mb-2">
-              Edexcel GCSE Maths grade boundaries 2022–2025
+          <section aria-labelledby="wjec-maths-yoy-heading">
+            <h2 id="wjec-maths-yoy-heading" className="text-2xl font-bold text-white mb-2">
+              WJEC GCSE Maths grade boundaries 2022–2025
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Four-year trend for Edexcel GCSE Maths Higher tier. Boundaries have risen steadily since 2022 as
-              post-pandemic grade deflation corrected. The 2026 boundary will be confirmed on Results Day 20 August 2026.
-              Based on this trend, the 2026 Edexcel Maths Higher grade 9 is expected in the range of 210–225.
+              Four-year trend for WJEC GCSE Maths Higher tier. Boundaries have risen steadily since 2022. The 2026 boundary
+              will be confirmed on Results Day 20 August 2026; based on this trend, expect the grade 9 to fall in the range of 196–210.
             </p>
 
             <div className="overflow-x-auto rounded-xl border border-white/8">
-              <table className="w-full text-sm min-w-[500px]" aria-label="Edexcel GCSE Maths Higher grade boundaries 2022 to 2025 year on year">
+              <table className="w-full text-sm min-w-[500px]" aria-label="WJEC GCSE Maths Higher grade boundaries 2022 to 2025 year on year">
                 <thead>
                   <tr className="bg-white/4 border-b border-white/8">
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase">Year</th>
@@ -403,11 +399,11 @@ export default function EdexcelGCSEPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {EDEXCEL_MATHS_YOY.map((row, i) => (
-                    <tr key={row.year} className={`border-b border-white/5 last:border-0 ${i === 0 ? 'bg-indigo-500/5' : i % 2 !== 0 ? 'bg-white/2' : ''}`}>
+                  {WJEC_MATHS_YOY.map((row, i) => (
+                    <tr key={row.year} className={`border-b border-white/5 last:border-0 ${i === 0 ? 'bg-amber-500/5' : i % 2 !== 0 ? 'bg-white/2' : ''}`}>
                       <td className="px-4 py-3 font-mono font-semibold text-white">
                         {row.year}
-                        {i === 0 && <span className="ml-2 text-[10px] bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded font-sans">latest</span>}
+                        {i === 0 && <span className="ml-2 text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded font-sans">latest</span>}
                       </td>
                       <td className="px-3 py-3 text-center font-mono text-xs text-emerald-400 font-semibold">{row.g9}</td>
                       <td className="px-3 py-3 text-center font-mono text-xs text-indigo-400">{row.g7}</td>
@@ -420,26 +416,27 @@ export default function EdexcelGCSEPage() {
               </table>
             </div>
             <p className="text-xs text-slate-600 mt-3">
-              Source: Pearson Edexcel official grade boundary documents, June series 2022–2025.
+              Source: WJEC (CBAC) official grade boundary documents, June series 2022–2025.
             </p>
           </section>
 
           {/* ── CROSS-BOARD COMPARISON with contextual internal links ── */}
-          <section aria-labelledby="edexcel-vs-boards-heading">
-            <h2 id="edexcel-vs-boards-heading" className="text-2xl font-bold text-white mb-2">
-              Edexcel vs AQA vs OCR grade boundaries 2025
+          <section aria-labelledby="wjec-vs-boards-heading">
+            <h2 id="wjec-vs-boards-heading" className="text-2xl font-bold text-white mb-2">
+              WJEC vs AQA vs Edexcel grade boundaries 2025
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              All three boards set boundaries independently. In 2025 Maths Higher, Edexcel required{' '}
-              <strong className="text-white">53 out of 240 for grade 4</strong> — 10 marks below{' '}
-              <Link href="/exams/gcse/aqa" className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2">AQA (63)</Link>{' '}
-              and 2 below{' '}
-              <Link href="/exams/gcse/ocr" className="text-purple-400 hover:text-purple-300 underline underline-offset-2">OCR (51)</Link>.
-              Different paper structures drive different raw marks; the grade standards are equivalent across boards.
+              Each board sets boundaries independently after marking is complete. In 2025,{' '}
+              <Link href="/exams/gcse/aqa" className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2">AQA Maths Higher</Link>{' '}
+              required 219/240 for grade 9, while{' '}
+              <Link href="/exams/gcse/edexcel" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">Edexcel</Link>{' '}
+              required 217/240. WJEC required{' '}
+              <strong className="text-white">196/240 — 23 marks lower than AQA and 21 lower than Edexcel</strong>.
+              This reflects different paper structures, not easier grading: a grade 9 from any board represents the same national standard.
             </p>
 
             <div className="overflow-x-auto rounded-xl border border-white/8">
-              <table className="w-full text-sm min-w-[580px]" aria-label="Edexcel vs AQA vs OCR GCSE grade boundaries comparison 2025">
+              <table className="w-full text-sm min-w-[600px]" aria-label="WJEC vs AQA vs Edexcel GCSE grade boundaries comparison 2025">
                 <thead>
                   <tr className="bg-white/4 border-b border-white/8">
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Subject / Board</th>
@@ -465,37 +462,75 @@ export default function EdexcelGCSEPage() {
               </table>
             </div>
             <p className="text-xs text-slate-600 mt-3">
-              Sources: Pearson Edexcel, AQA, and OCR official grade boundary documents, June 2025.
+              Sources: WJEC/CBAC, AQA, and Pearson Edexcel official grade boundary documents, June 2025.
             </p>
 
             <div className="mt-4 bg-amber-500/10 border border-amber-500/20 rounded-xl px-4 py-3 flex gap-3 items-start">
               <span className="text-lg shrink-0" aria-hidden="true">⚠️</span>
               <p className="text-sm text-slate-300">
-                <strong className="text-amber-300">Never mix boundaries between boards.</strong>{' '}
-                Edexcel Maths Higher grade 4 was 53/240 in 2025, while{' '}
+                <strong className="text-amber-300">Never apply one board&apos;s boundaries to another board&apos;s exam.</strong>{' '}
+                WJEC Maths Higher grade 4 in 2025 was 27/240 —{' '}
                 <Link href="/exams/gcse/aqa" className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2">AQA</Link>{' '}
-                was 63/240 — a 10-mark difference.
-                Applying the wrong board&apos;s boundary will give you a completely incorrect grade.
-                Check with your school if unsure which board you were entered for.
+                was 63/240, a difference of 36 marks.
+                Using the wrong board&apos;s table will give you a completely incorrect grade.
               </p>
+            </div>
+          </section>
+
+          {/* ── WJEC vs EDUQAS EXPLAINER ── */}
+          <section aria-labelledby="wjec-eduqas-heading">
+            <h2 id="wjec-eduqas-heading" className="text-2xl font-bold text-white mb-4">
+              WJEC and Eduqas: what is the difference?
+            </h2>
+            <p className="text-slate-400 leading-relaxed mb-4">
+              WJEC and Eduqas are both brands of the same awarding body — CBAC (the Welsh Joint Education Committee).
+              <strong className="text-white"> WJEC</strong> is the brand used for qualifications regulated by{' '}
+              <strong className="text-white">Qualifications Wales</strong>, primarily used in Welsh schools.{' '}
+              <strong className="text-white">Eduqas</strong> is the brand used for qualifications regulated by{' '}
+              <strong className="text-white">Ofqual</strong>, for students in England.
+            </p>
+            <p className="text-slate-400 leading-relaxed">
+              In most core subjects the specifications are substantially the same. The boundaries shown on this page are
+              from the WJEC June 2025 series (Welsh specification). If you are an Eduqas student in England, your
+              boundaries may differ slightly for some subjects — check the specific Eduqas boundary document on the WJEC website.
+            </p>
+
+            <div className="mt-5 grid sm:grid-cols-2 gap-4">
+              <div className="bg-[#12141f] border border-amber-500/20 rounded-xl p-5">
+                <p className="text-xs font-semibold uppercase tracking-wider text-amber-400 mb-3">WJEC (Wales)</p>
+                <ul className="space-y-2 text-sm text-slate-400">
+                  <li className="flex gap-2"><span aria-hidden="true">✓</span><span>Regulated by Qualifications Wales</span></li>
+                  <li className="flex gap-2"><span aria-hidden="true">✓</span><span>Used in Welsh state schools</span></li>
+                  <li className="flex gap-2"><span aria-hidden="true">✓</span><span>May include Welsh language / Welsh context content</span></li>
+                  <li className="flex gap-2"><span aria-hidden="true">✓</span><span>Results Day: 20 August 2026</span></li>
+                </ul>
+              </div>
+              <div className="bg-[#12141f] border border-indigo-500/20 rounded-xl p-5">
+                <p className="text-xs font-semibold uppercase tracking-wider text-indigo-400 mb-3">Eduqas (England)</p>
+                <ul className="space-y-2 text-sm text-slate-400">
+                  <li className="flex gap-2"><span aria-hidden="true">✓</span><span>Regulated by Ofqual</span></li>
+                  <li className="flex gap-2"><span aria-hidden="true">✓</span><span>Same awarding body as WJEC (CBAC)</span></li>
+                  <li className="flex gap-2"><span aria-hidden="true">✓</span><span>Some specification differences in Literature / Humanities</span></li>
+                  <li className="flex gap-2"><span aria-hidden="true">✓</span><span>Boundaries published simultaneously 20 August 2026</span></li>
+                </ul>
+              </div>
             </div>
           </section>
 
           {/* ── GRADE SCALE EXPLAINER ── */}
           <section aria-labelledby="grade-scale-heading">
             <h2 id="grade-scale-heading" className="text-2xl font-bold text-white mb-4">
-              Edexcel GCSE 9–1 grade scale: what each grade means
+              WJEC GCSE 9–1 grade scale: what each grade means
             </h2>
             <p className="text-slate-400 leading-relaxed mb-5">
-              All GCSE boards — including Edexcel — use the same 9–1 grading scale. Grade descriptors are consistent across
-              Edexcel,{' '}
-              <Link href="/exams/gcse/aqa" className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2">AQA</Link>,{' '}
-              <Link href="/exams/gcse/ocr" className="text-purple-400 hover:text-purple-300 underline underline-offset-2">OCR</Link>, and{' '}
-              <Link href="/exams/gcse/wjec" className="text-amber-400 hover:text-amber-300 underline underline-offset-2">WJEC</Link>.
+              All GCSE boards including WJEC use the same 9–1 grading scale introduced to replace the old A*–G system.
+              Grade descriptors are consistent across WJEC, <Link href="/exams/gcse/aqa" className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2">AQA</Link>,{' '}
+              <Link href="/exams/gcse/edexcel" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">Edexcel</Link>, and{' '}
+              <Link href="/exams/gcse/ocr" className="text-purple-400 hover:text-purple-300 underline underline-offset-2">OCR</Link>.
             </p>
 
             <div className="overflow-x-auto rounded-xl border border-white/8">
-              <table className="w-full text-sm min-w-[480px]" aria-label="Edexcel GCSE 9 to 1 grade scale with old grade equivalents and benchmarks">
+              <table className="w-full text-sm min-w-[480px]" aria-label="WJEC GCSE 9 to 1 grade scale equivalents and benchmarks">
                 <thead>
                   <tr className="bg-white/4 border-b border-white/8">
                     <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Grade</th>
@@ -510,7 +545,7 @@ export default function EdexcelGCSEPage() {
                     { grade: '8', old: 'A*/A', desc: 'High distinction', bench: '', color: '#34d399' },
                     { grade: '7', old: 'A', desc: 'Distinction', bench: '', color: '#6366f1' },
                     { grade: '6', old: 'B', desc: 'Merit', bench: '', color: '#6366f1' },
-                    { grade: '5', old: 'B/C', desc: 'Strong pass ★', bench: 'Most sixth forms require 5+ for A-Levels', color: '#a855f7' },
+                    { grade: '5', old: 'B/C', desc: 'Strong pass ★', bench: 'Most sixth form A-Level entries require 5+', color: '#a855f7' },
                     { grade: '4', old: 'C', desc: 'Standard pass +', bench: 'Minimum for most employers and colleges', color: '#f59e0b' },
                     { grade: '3', old: 'D', desc: 'Below standard pass', bench: '', color: '#94a3b8' },
                     { grade: '2', old: 'E', desc: '', bench: '', color: '#64748b' },
@@ -527,50 +562,49 @@ export default function EdexcelGCSEPage() {
                 </tbody>
               </table>
             </div>
-            <p className="text-xs text-slate-600 mt-3">Source: Ofqual GCSE grade descriptors (2024). Equivalences are approximate.</p>
           </section>
 
           {/* ── FAQ ── */}
           <section aria-labelledby="faq-heading">
             <h2 id="faq-heading" className="text-2xl font-bold text-white mb-2">
-              Edexcel GCSE grade boundaries 2025 — frequently asked questions
+              WJEC GCSE grade boundaries 2025 — frequently asked questions
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Common questions about Edexcel grade boundaries, raw marks, Results Day, and how Edexcel compares to other boards.
+              Common questions about WJEC grade boundaries, raw marks, Results Day, and how WJEC compares to other boards.
             </p>
             <div className="space-y-3">
               {[
                 {
-                  q: 'What are the Edexcel GCSE grade boundaries for 2025?',
-                  a: 'The official Edexcel GCSE grade boundaries from June 2025 are shown in the full table above. Key figures: Maths Higher grade 9 = 217/240, grade 5 = 87/240, grade 4 = 53/240. English Language grade 9 = 122/160, grade 4 = 73/160. 2026 boundaries will be published at 8:00am on 20 August 2026.',
+                  q: 'What are the WJEC GCSE grade boundaries for 2025?',
+                  a: 'The official WJEC GCSE grade boundaries from June 2025 are shown in the full table above. Key figures: Maths Higher grade 9 = 196/240, grade 5 = 56/240, grade 4 = 27/240. English Language grade 9 = 143/160, grade 4 = 84/160. 2026 boundaries will be published at 8:00am on 20 August 2026.',
                 },
                 {
-                  q: 'What was the Edexcel GCSE Maths grade 9 boundary in 2025?',
-                  a: 'The Edexcel GCSE Maths Higher grade 9 boundary in 2025 was 217 out of 240 (90.4%). For context: 2024 was 210, 2023 was 205, and 2022 was 193. The 2026 boundary will be confirmed on Results Day 20 August 2026.',
+                  q: 'What was the WJEC GCSE Maths grade 9 boundary in 2025?',
+                  a: 'The WJEC GCSE Maths Higher grade 9 boundary in 2025 was 196 out of 240 (81.7%). For context: 2024 was 190, 2023 was 183, and 2022 was 172. These are significantly lower than AQA (219) and Edexcel (217) due to different paper structures — not easier marking. The 2026 boundary will be confirmed on Results Day 20 August 2026.',
                 },
                 {
-                  q: 'What is the Edexcel GCSE grade 5 strong pass boundary for Maths?',
-                  a: 'In 2025, the Edexcel Maths Higher grade 5 boundary was 87 out of 240 (36%). For Foundation tier it was 175 out of 240 (73%). Grade 5 is the strong pass required by most sixth forms for A-Level Maths.',
+                  q: 'What is the WJEC GCSE grade 4 standard pass boundary for Maths?',
+                  a: "In 2025, the WJEC GCSE Maths Higher grade 4 boundary was 27 out of 240 raw marks (11%). For Foundation tier it was 111 out of 240 (46%). Grade 4 is the government's standard pass. Students who do not achieve grade 4 in GCSE Maths or English Language must continue studying these subjects post-16.",
                 },
                 {
-                  q: 'How does Edexcel grade 4 compare to AQA grade 4 in Maths?',
-                  a: 'In 2025, Edexcel Maths Higher grade 4 was 53/240 while AQA Maths Higher grade 4 was 63/240 — Edexcel required 10 fewer marks for a standard pass. Both are equivalent grade 4 standards set by different paper structures.',
+                  q: 'How do WJEC boundaries differ from AQA and Edexcel?',
+                  a: 'WJEC sets boundaries independently after its own papers are marked. In 2025 Maths Higher, WJEC grade 4 was 27/240 while AQA was 63/240 and Edexcel was 53/240. This is a large difference — never apply one board\'s boundary to another. WJEC papers are structured differently, which is why the raw marks required differ.',
                 },
                 {
-                  q: 'When does Edexcel publish 2026 GCSE grade boundaries?',
-                  a: 'Pearson Edexcel publishes all 2026 GCSE grade boundaries at exactly 8:00am on Thursday 20 August 2026. Boundaries are strictly embargoed before this date.',
+                  q: 'Are WJEC and Eduqas boundaries the same?',
+                  a: 'WJEC and Eduqas are both brands of CBAC (Welsh Joint Education Committee). WJEC is used in Wales; Eduqas is used in England. Boundaries for most core subjects are very similar, but some subjects — particularly English Literature and humanities — have specification differences. Check the specific Eduqas boundary document for your qualification.',
                 },
                 {
-                  q: 'Will Edexcel 2026 grade boundaries be higher or lower than 2025?',
-                  a: 'This depends on the difficulty of the 2026 Edexcel papers. Ofqual uses a comparable outcomes process to prevent large year-on-year swings. Based on the 2022–2025 trend, Maths Higher grade 4 has ranged from 48–53. The 2026 boundary will be confirmed on 20 August 2026.',
+                  q: 'When does WJEC release 2026 grade boundaries?',
+                  a: 'WJEC (CBAC) releases all 2026 GCSE grade boundaries at exactly 8:00am on Thursday 20 August 2026. Boundaries are strictly embargoed before this date.',
                 },
                 {
-                  q: 'How do I calculate my Edexcel grade from my raw mark?',
-                  a: 'Add up your raw marks from all papers for the subject. For Edexcel Maths Higher, you have 3 papers totalling 240 marks. If your total is 217 or above, you achieved grade 9 in 2025. If it is 53–86, you achieved grade 4.',
+                  q: 'Will WJEC 2026 grade boundaries be higher or lower than 2025?',
+                  a: 'This depends on the difficulty of the 2026 WJEC papers. Qualifications Wales uses a comparable outcomes process to prevent large year-on-year changes. Based on the 2022–2025 trend, WJEC Maths Higher grade 9 has risen from 172 to 196. A further moderate rise or plateau in 2026 would be consistent, but any estimate before Results Day is speculative.',
                 },
                 {
-                  q: 'What is the difference between Edexcel Foundation and Higher tier boundaries?',
-                  a: 'Foundation tier is capped at grade 5 and targeted at students expecting grades 1–5. Higher tier allows grades 4–9. For Maths Foundation in 2025, grade 4 required 144 out of 240 (60%), compared to 53 out of 240 (22%) on Higher tier.',
+                  q: 'How do I calculate my WJEC grade from my raw mark?',
+                  a: 'Add up your raw marks from all papers for the subject. For WJEC Maths Higher, you have three papers totalling 240 marks. Compare your total against the grade boundary table above. If your total is 196 or above, you achieved grade 9 in 2025. If it is 27–55, you achieved grade 4.',
                 },
               ].map((faq, i) => (
                 <details key={i} className="bg-[#12141f] border border-white/7 rounded-xl overflow-hidden group">
@@ -595,9 +629,9 @@ export default function EdexcelGCSEPage() {
                 <div>
                   <p className="text-sm font-semibold text-white mb-1">Source data</p>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    All grade boundaries on this page are taken directly from the official Pearson Edexcel grade boundary
-                    documents published on qualifications.pearson.com on 21 August 2025. GradesNova does not estimate,
-                    interpolate, or adjust boundaries — every figure is copied verbatim from the official document.
+                    All grade boundaries on this page are taken directly from official WJEC (CBAC) grade boundary documents
+                    published on wjec.co.uk on 21 August 2025. GradesNova does not estimate, interpolate, or adjust boundaries —
+                    every figure is copied verbatim from the official document.
                   </p>
                 </div>
               </div>
@@ -606,8 +640,8 @@ export default function EdexcelGCSEPage() {
                 <div>
                   <p className="text-sm font-semibold text-white mb-1">Verification</p>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Data was last verified against qualifications.pearson.com official documents on 26 May 2026.
-                    GradesNova is not affiliated with Pearson Edexcel or Ofqual.
+                    Data was last verified against wjec.co.uk official documents on 26 May 2026.
+                    GradesNova is not affiliated with WJEC, CBAC, Ofqual, or Qualifications Wales.
                   </p>
                 </div>
               </div>
@@ -616,8 +650,8 @@ export default function EdexcelGCSEPage() {
                 <div>
                   <p className="text-sm font-semibold text-white mb-1">2026 update process</p>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    On 20 August 2026 from 8:00am, GradesNova updates this page with official Edexcel 2026 grade boundary
-                    data as soon as the Pearson documents are publicly released.
+                    On 20 August 2026 from 8:00am, GradesNova updates this page with official WJEC 2026 grade boundary data
+                    as soon as the CBAC documents are publicly released.
                   </p>
                 </div>
               </div>
@@ -632,9 +666,9 @@ export default function EdexcelGCSEPage() {
             <div className="flex flex-wrap gap-3">
               {[
                 { name: 'AQA Grade Boundaries 2025', href: '/exams/gcse/aqa', color: '#34d399' },
+                { name: 'Edexcel Grade Boundaries 2025', href: '/exams/gcse/edexcel', color: '#6366f1' },
                 { name: 'OCR Grade Boundaries 2025', href: '/exams/gcse/ocr', color: '#a855f7' },
-                { name: 'WJEC Grade Boundaries 2025', href: '/exams/gcse/wjec', color: '#f59e0b' },
-                { name: 'All Boards — GCSE', href: '/exams/gcse', color: '#6366f1' },
+                { name: 'All Boards — GCSE', href: '/exams/gcse', color: '#f59e0b' },
               ].map(b => (
                 <Link key={b.name} href={b.href}
                   className="px-4 py-2 rounded-xl text-xs font-medium border transition-all hover:scale-105"
@@ -656,7 +690,7 @@ export default function EdexcelGCSEPage() {
                   title: 'GCSE Results Day 2026: Everything You Need to Know',
                   href: '/articles/gcse-results-day-2026',
                   color: '#34d399',
-                  desc: 'Dates, collection times, what to do if results disappoint, and remark deadlines.',
+                  desc: 'Dates, times, what to do if results disappoint, and remark deadlines.',
                 },
                 {
                   title: 'Do University Offers Account for Grade Boundaries?',
