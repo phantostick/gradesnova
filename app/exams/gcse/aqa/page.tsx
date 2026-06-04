@@ -5,6 +5,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { GCSECalculatorClient } from '../gcse-calculator-client';
 
 export const metadata: Metadata = {
   title: 'AQA GCSE Grade Boundaries 2026 | Raw Mark Calculator',
@@ -301,6 +302,17 @@ export default function AQAGCSEPage() {
               </p>
             </div>
           </div>
+
+          {/* ── INTERACTIVE CALCULATOR ── */}
+          <section aria-labelledby="calculator-heading" className="scroll-mt-24">
+            <h2 id="calculator-heading" className="text-2xl font-bold text-white mb-2">
+              AQA GCSE grade boundaries calculator
+            </h2>
+            <p className="text-slate-400 text-sm mb-6">
+              Select your subject and enter your raw mark to instantly find your AQA GCSE grade based on the latest 2025 boundaries.
+            </p>
+            <GCSECalculatorClient />
+          </section>
 
           {/* ── MAIN BOUNDARY TABLE ── */}
           <section aria-labelledby="all-subjects-heading">
