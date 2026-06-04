@@ -548,6 +548,26 @@ export default function ACTCalculatorPage() {
             </div>
           </section>
 
+          {/* ESSENTIAL RESOURCES */}
+          <section aria-labelledby="resources-heading">
+            <h2 id="resources-heading" className="text-2xl font-bold text-white mb-4">Essential ACT Resources</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
+              {[
+                { name: 'ACT Study Guide', path: '/guide', icon: '📘' },
+                { name: 'Revision Tips', path: '/revision-tips', icon: '💡' },
+                { name: 'Results Day Guide', path: '/results-day', icon: '📅' },
+                { name: 'Prep Tips', path: '/prep-tips', icon: '🎯' },
+                { name: 'Understanding Scores', path: '/scores', icon: '📊' },
+              ].map(res => (
+                <Link key={res.path} href={`/exams/act${res.path}`}
+                  className="bg-[#12141f] border border-white/8 rounded-xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/5 transition-colors group">
+                  <span className="text-2xl mb-2 group-hover:scale-110 transition-transform" aria-hidden="true">{res.icon}</span>
+                  <span className="text-sm font-medium text-slate-300 group-hover:text-white transition-colors">{res.name}</span>
+                </Link>
+              ))}
+            </div>
+          </section>
+
           {/* WHAT IS A GOOD ACT SCORE */}
           <section aria-labelledby="tiers-heading">
             <h2 id="tiers-heading" className="text-2xl font-bold text-white mb-4">What is a Good ACT Score in 2025–2026?</h2>
@@ -578,10 +598,10 @@ export default function ACTCalculatorPage() {
             <h2 id="facts-heading" className="sr-only">ACT key facts 2025–2026</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { icon: '📊', label: 'National average',   value: '21',     sub: 'Composite (51st pct)',            color: COLOR },
+                { icon: '📊', label: 'National average',   value: '21',     sub: 'Composite (51st pct)',             color: COLOR },
                 { icon: '🎯', label: 'Top 10% threshold',  value: '29',     sub: '91st percentile',                 color: '#34d399' },
-                { icon: '🏆', label: 'Ivy League range',   value: '34–36',  sub: '98th–99th percentile',            color: '#a855f7' },
-                { icon: '📅', label: 'Test dates / year',  value: '7',      sub: 'Feb Apr Jun Jul Sep Oct Dec',     color: '#f59e0b' },
+                { icon: '🏆', label: 'Ivy League range',   value: '34–36',  sub: '98th–99th percentile',             color: '#a855f7' },
+                { icon: '📅', label: 'Test dates / year',  value: '7',      sub: 'Feb Apr Jun Jul Sep Oct Dec',       color: '#f59e0b' },
               ].map(card => (
                 <article key={card.label} className="bg-[#12141f] border border-white/8 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
