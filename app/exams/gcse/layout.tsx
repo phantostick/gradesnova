@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
 
 // ─── TARGET KEYWORDS (from search console data, May 2026) ────────────────────
 // High-impression, low-click opportunities (positions 5-10, need to break top 3):
@@ -109,5 +111,11 @@ export const metadata: Metadata = {
 };
 
 export default function GCSELayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return (
+    <>
+      <Navbar />
+      {children}
+      <Footer />
+    </>
+  );
 }
