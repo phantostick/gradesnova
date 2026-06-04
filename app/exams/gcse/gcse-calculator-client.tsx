@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import {
   ALL_SUBJECTS_2025,
   GCSE_GRADE_INFO,
@@ -13,7 +14,7 @@ import {
 
 const COLOR = '#34d399'; // Default main theme color
 
-// ── LOCAL BOARD DATA (as previously defined in your mega-page) ──
+// ── LOCAL BOARD DATA ──
 const WJEC_2025: GCSEBoundary[] = [
   { subject: 'Maths', board: 'WJEC', tier: 'Higher', maxMark: 240, boundaries: { 9:196, 8:155, 7:115, 6:85, 5:56, 4:27, 3:12 } },
   { subject: 'Maths', board: 'WJEC', tier: 'Foundation', maxMark: 240, boundaries: { 5:141, 4:111, 3:81, 2:51, 1:21 } },
@@ -87,10 +88,19 @@ function GradeBox({ grade, info }: { grade: number; info: typeof GCSE_GRADE_INFO
   );
 }
 
+interface CalculatorProps {
+  initialBoard?: 'AQA' | 'Edexcel' | 'OCR' | 'WJEC';
+  initialSubject?: string;
+}
+
 // ── MAIN CLIENT EXPORT ──
-export function GCSECalculatorClient() {
-  const [subject,  setSubject]  = useState('Maths');
-  const [board,    setBoard]    = useState<'AQA'|'Edexcel'|'OCR'|'WJEC'>('AQA');
+// Removed the "default" keyword here so it properly imports as a named component
+export function GCSECalculatorClient({ 
+  initialBoard = 'AQA', 
+  initialSubject = 'Maths' 
+}: CalculatorProps) {
+  const [subject,  setSubject]  = useState(initialSubject);
+  const [board,    setBoard]    = useState<'AQA'|'Edexcel'|'OCR'|'WJEC'>(initialBoard);
   const [tier,     setTier]     = useState<'Higher'|'Foundation'>('Higher');
   const [inputVal, setInputVal] = useState('');
   const [mark,     setMark]     = useState(0);
@@ -120,6 +130,10 @@ export function GCSECalculatorClient() {
   const grade     = useMemo(() => boundary && mark > 0 ? getGradeFromMark(mark, boundary) : null, [mark, boundary]);
   const gradeInfo = useMemo(() => grade ? GCSE_GRADE_INFO[grade] : null, [grade]);
   const pct       = useMemo(() => boundary && mark > 0 ? getPercentageFromMark(mark, boundary.maxMark) : null, [mark, boundary]);
+
+  // Generate dynamic subject slug for routing
+  const subjectSlug = subject.toLowerCase().replace(/\s+/g, '-');
+  const pathwayUrl = `/exams/gcse/${subjectSlug}/sixth-form`;
 
   return (
     <div className="grid lg:grid-cols-5 gap-8" id="calculator">
@@ -242,7 +256,7 @@ export function GCSECalculatorClient() {
         </div>
       </div>
 
-      {/* Result */}
+      {/* Result Area */}
       <div className="lg:col-span-3 space-y-5">
         <div className="bg-[#12141f] border border-white/8 rounded-2xl p-7 min-h-[280px] flex flex-col justify-center shadow-lg shadow-black/20">
           {grade && gradeInfo ? (
@@ -287,8 +301,26 @@ export function GCSECalculatorClient() {
           )}
         </div>
 
+        {/* --- DYNAMIC PATHWAY CTA --- */}
+        <Link href={pathwayUrl} className="block group">
+          <div className="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 rounded-2xl p-6 hover:border-emerald-500/40 transition-all flex items-center justify-between shadow-lg shadow-black/10">
+            <div>
+              <h3 className="text-emerald-400 font-bold text-lg mb-1 group-hover:text-emerald-300 transition-colors">
+                {grade ? `Check what a Grade ${grade} in ${subject} can get you` : `Check what a GCSE in ${subject} can get you`}
+              </h3>
+              <p className="text-slate-400 text-sm">
+                Explore A-Level requirements, university degrees, and career pathways.
+              </p>
+            </div>
+            <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30 group-hover:scale-105 transition-all">
+              <span className="text-emerald-400 text-xl font-bold">→</span>
+            </div>
+          </div>
+        </Link>
+        {/* ----------------------------- */}
+
         {boundary && mark > 0 && (
-          <div className="bg-[#12141f] border border-white/8 rounded-2xl p-5">
+          <div className="bg-[#12141f] border border-white/8 rounded-2xl p-5 shadow-lg shadow-black/20">
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">
               {subject} {tier} — {board} Boundaries
             </p>
