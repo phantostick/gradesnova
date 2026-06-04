@@ -12,6 +12,7 @@
 
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { GCSECalculatorClient } from '../gcse-calculator-client';
 
 export const metadata: Metadata = {
   title: 'Edexcel GCSE Grade Boundaries 2025-26',
@@ -315,6 +316,17 @@ export default function EdexcelGCSEPage() {
               </p>
             </div>
           </div>
+
+          {/* ── INTERACTIVE CALCULATOR ── */}
+          <section aria-labelledby="calculator-heading" className="scroll-mt-24">
+            <h2 id="calculator-heading" className="text-2xl font-bold text-white mb-2">
+              Edexcel GCSE grade boundaries calculator
+            </h2>
+            <p className="text-slate-400 text-sm mb-6">
+              Select your subject and enter your raw mark to instantly find your Edexcel GCSE grade based on the latest 2025 boundaries.
+            </p>
+            <GCSECalculatorClient />
+          </section>
 
           {/* ── MAIN BOUNDARY TABLE ── */}
           <section aria-labelledby="edexcel-table-heading">
