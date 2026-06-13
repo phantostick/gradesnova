@@ -76,6 +76,18 @@ const SAT_FAQS = [
     question: 'Should I take the SAT or ACT?',
     answer: 'Both the SAT and ACT are accepted equally by virtually all US colleges. The SAT (400–1600 scale) emphasizes data analysis and has two sections. The ACT (1–36 scale) includes a dedicated Science section and is generally considered slightly more straightforward in Math. Research suggests most students score similarly on both. We recommend taking a free practice test for each to see which format plays to your strengths.',
   },
+  {
+    question: 'How many questions can I miss on the SAT to get a 1500?',
+    answer: 'To score approximately 1500 on the Digital SAT, you generally need to answer around 88–92 of the 98 scored questions correctly — meaning you can miss roughly 6–10 questions across both sections combined. However, because the Digital SAT is section-adaptive, the exact number of questions you can miss depends on which Module 2 you are routed into. If your Module 1 performance earns you the harder Module 2, you have access to a higher score ceiling, and the conversion table for that harder module may allow slightly more incorrect answers while still reaching 1500. Students aiming for 1500 should target no more than 3–4 errors per section. Strong performance in Module 1 is essential because it gates your access to the harder module, which is the only path to scores above approximately 1400 in each section.',
+  },
+  {
+    question: 'What is the difference between the SAT User Percentile and Nationally Representative Sample Percentile?',
+    answer: 'Your College Board score report shows two different percentiles, and understanding the difference matters for interpreting your results correctly. The SAT User Percentile (also called the "Percentile — SAT Users") compares your score only against other students in the current year who actually took the SAT — a self-selected group of college-bound students who tend to be academically motivated. This is the percentile most commonly cited and the one used on this calculator. The Nationally Representative Sample Percentile, by contrast, compares your score against a statistically representative sample of all US 11th and 12th graders, including those who never took the SAT. Because many lower-achieving students do not take the SAT, the Nationally Representative Sample Percentile is typically 5–10 points higher than the User Percentile for the same score. For college admissions purposes, admissions officers use and understand the User Percentile, which is the more meaningful comparison.',
+  },
+  {
+    question: 'How do I convert my SAT score to an ACT score?',
+    answer: 'The College Board and ACT, Inc. publish an official concordance table that maps SAT composite scores to their ACT equivalent. Common conversions: 1600 SAT = 36 ACT (99th percentile); 1500 SAT = 34 ACT (97th percentile); 1400 SAT = 31 ACT (94th percentile); 1300 SAT = 28 ACT (82nd percentile); 1200 SAT = 25 ACT (74th percentile); 1100 SAT = 22 ACT (51st percentile); 1000 SAT = 19 ACT (34th percentile). These concordances are based on large-scale statistical studies and represent the score a student would be equally likely to earn on each test. The SAT to ACT conversion tool on this page uses the official concordance table and highlights your equivalent score automatically. If you have taken both tests, colleges will typically evaluate whichever score you submit on its own merits rather than converting between them.',
+  },
 ];
 
 const SAT_ACT_CROSSWALK = [
@@ -202,7 +214,7 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section aria-labelledby="faq-heading">
-      <h2 id="faq-heading" className="text-2xl font-bold text-white mb-2">SAT Score Calculator — Frequently Asked Questions</h2>
+      <h2 id="faq-heading" className="text-2xl font-bold text-white mb-2">Frequently Asked Questions About Digital SAT Scoring</h2>
       <p className="text-slate-400 text-sm mb-6">Common questions about how to use our SAT score calculator, SAT scoring, percentiles, the national average, and what your score means for college admissions in 2026.</p>
       <div className="space-y-2">
         {SAT_FAQS.map((faq, i) => (
@@ -505,6 +517,97 @@ export default function SATCalculatorPage() {
             </div>
           </div>
           </section>
+
+          {/* UNDERSTANDING THE DIGITAL SAT SCORING SYSTEM — NEW SECTION */}
+          <section aria-labelledby="scoring-system-heading">
+            <h2 id="scoring-system-heading" className="text-2xl font-bold text-white mb-4">Understanding the Digital SAT Scoring System</h2>
+            <p className="text-slate-400 text-sm mb-5 max-w-3xl leading-relaxed">
+              The Digital SAT, administered by the College Board since spring 2024, uses a multistage adaptive scoring model that differs significantly from the paper-based SAT it replaced. Understanding how the Digital SAT converts your performance into a scaled score helps you interpret your results, plan your test strategy, and set realistic score goals.
+            </p>
+
+            <div className="space-y-5 mb-8">
+              <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
+                <h3 className="text-base font-semibold text-white mb-3">How Multistage Adaptive Testing Works</h3>
+                <p className="text-sm text-slate-400 leading-relaxed mb-3">
+                  The Digital SAT is divided into two sections — Reading and Writing (RW) and Math — each of which contains two modules. Every student receives the same Module 1 for each section. Your performance in Module 1 determines which Module 2 you are routed to: a higher-difficulty module or a lower-difficulty module. This routing decision is made automatically by the testing platform based on how many questions you answered correctly in Module 1.
+                </p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  The higher-difficulty Module 2 contains harder questions and has a <strong className="text-white">higher score ceiling</strong> — it is the only path to section scores above approximately 650–700 out of 800. The lower-difficulty Module 2 has an <strong className="text-white">upper cap on the score you can achieve</strong>. This means your accuracy in Module 1 has a disproportionate impact on your final scaled score. Students aiming for scores above 1400 must prioritize Module 1 accuracy above all else.
+                </p>
+              </div>
+
+              <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
+                <h3 className="text-base font-semibold text-white mb-3">From Raw Score to Scaled Score (200–800 per section)</h3>
+                <p className="text-sm text-slate-400 leading-relaxed mb-3">
+                  Each section of the Digital SAT contains 54 questions (RW) or 44 questions (Math), of which 4 questions per section are unscored experimental items used by the College Board to calibrate future tests. You will not know which questions are unscored, so treat every question as if it counts. Your raw score is the count of scored questions you answer correctly — there is no penalty for wrong answers on the Digital SAT.
+                </p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Your raw score is then converted to a scaled score on a 200–800 scale using an <strong className="text-white">Item Response Theory (IRT)</strong> model that accounts for the difficulty of the specific questions you saw, which module you were routed to, and statistical equating across test forms. The College Board does not publish precise raw-to-scaled conversion tables for the Digital SAT, because the adaptive nature of the test means no two students see the exact same sequence of questions.
+                </p>
+              </div>
+
+              <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
+                <h3 className="text-base font-semibold text-white mb-3">Composite Score and Score Reporting</h3>
+                <p className="text-sm text-slate-400 leading-relaxed mb-3">
+                  Your SAT composite score is the sum of your Math section score (200–800) and your Reading and Writing section score (200–800), giving a total composite range of 400–1600. The College Board reports scores within approximately 2–5 days of your test date for the Digital SAT, significantly faster than the paper-based SAT. Your score report includes your composite score, section scores, subscores (such as Heart of Algebra, Problem Solving and Data Analysis, and Passport to Advanced Math for Math), cross-test scores, and two types of percentiles — the User Percentile and the Nationally Representative Sample Percentile.
+                </p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  The College Board also provides a score band — a range of plus or minus a few points around your reported score — that reflects the inherent measurement precision of any standardized test. This means a student who scores 1350 and another who scores 1360 are performing at essentially the same level, within the margin of measurement error.
+                </p>
+              </div>
+            </div>
+
+            <h3 className="text-lg font-semibold text-white mb-4">Digital SAT Percentiles vs. Scaled Scores</h3>
+            <p className="text-slate-400 text-sm mb-5 leading-relaxed max-w-3xl">
+              A scaled score tells you how many points you earned; a percentile tells you how that score compares to other test takers. Both are reported on your score report, but they measure different things. The table below maps key Digital SAT composite scores to their approximate User Percentile — the percentile most commonly referenced in college admissions, which compares you against students who actually took the SAT in a given year.
+            </p>
+            <p className="text-slate-400 text-sm mb-5 leading-relaxed max-w-3xl">
+              Percentile rankings can be counterintuitive at the high end of the scale. Because so few students score in the 1550–1600 range, even a 50-point drop from a perfect 1600 to a 1550 still keeps you in the 99th percentile. By contrast, in the 1000–1200 range, each 50-point increment moves you roughly 8–10 percentile points, representing a meaningful jump in competitive positioning for college admissions. This is why students who are already scoring above 1450 often see diminishing admissions returns from further score improvement, while students in the 1100–1350 range can significantly open up their college options by improving 100–150 points.
+            </p>
+            <div className="overflow-x-auto rounded-xl border border-white/8 mb-4">
+              <table className="w-full text-sm min-w-[480px]" aria-label="Digital SAT scaled score to percentile comparison table">
+                <thead>
+                  <tr className="bg-white/4 border-b border-white/8">
+                    <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">SAT composite</th>
+                    <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">User percentile</th>
+                    <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider hidden sm:table-cell">Students you outscored</th>
+                    <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider hidden md:table-cell">Admissions context</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { score: 1600, pct: 99, beat: '~99% of test takers', context: 'Perfect score; competitive everywhere' },
+                    { score: 1550, pct: 99, beat: '~99% of test takers', context: 'All Ivy League, MIT, Stanford' },
+                    { score: 1500, pct: 97, beat: '~97% of test takers', context: 'Ivy League competitive range' },
+                    { score: 1450, pct: 95, beat: '~95% of test takers', context: 'Top 15 universities' },
+                    { score: 1400, pct: 94, beat: '~94% of test takers', context: 'Top 25 universities' },
+                    { score: 1350, pct: 91, beat: '~91% of test takers', context: 'Selective universities' },
+                    { score: 1300, pct: 82, beat: '~82% of test takers', context: 'Many selective schools' },
+                    { score: 1200, pct: 74, beat: '~74% of test takers', context: 'Above average; many 4-year colleges' },
+                    { score: 1100, pct: 52, beat: '~52% of test takers', context: 'Around national average' },
+                    { score: 1050, pct: 43, beat: '~43% of test takers', context: 'National average' },
+                    { score: 1000, pct: 35, beat: '~35% of test takers', context: 'Below average' },
+                    { score: 900,  pct: 19, beat: '~19% of test takers', context: 'Less selective colleges' },
+                  ].map((row, i) => {
+                    const isYours = row.score === compositeScore;
+                    return (
+                      <tr key={row.score} className={`border-b border-white/5 last:border-0 ${isYours ? 'bg-indigo-500/10' : i % 2 === 0 ? '' : 'bg-white/2'}`}>
+                        <td className="px-4 py-2.5 font-mono font-semibold" style={{ color: isYours ? COLOR : 'rgb(226,232,240)' }}>
+                          {row.score}
+                          {isYours && <span className="ml-2 text-[10px] bg-indigo-500/20 text-indigo-300 px-1.5 py-0.5 rounded font-sans">your score</span>}
+                        </td>
+                        <td className="px-4 py-2.5 text-center font-bold" style={{ color: isYours ? COLOR : 'rgb(226,232,240)' }}>{row.pct}th</td>
+                        <td className="px-4 py-2.5 text-center text-xs text-slate-500 hidden sm:table-cell">{row.beat}</td>
+                        <td className="px-4 py-2.5 text-xs text-slate-500 hidden md:table-cell">{row.context}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-slate-600">SAT User Percentiles based on official College Board data for the 2025–2026 testing year.</p>
+          </section>
+
           <section aria-labelledby="avg-heading">
             <h2 id="avg-heading" className="text-2xl font-bold text-white mb-4">What is the Average SAT Score in 2025–2026?</h2>
             <p className="text-slate-400 text-sm mb-6 leading-relaxed max-w-3xl">
