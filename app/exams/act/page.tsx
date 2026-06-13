@@ -87,6 +87,14 @@ const ACT_FAQS = [
     question: 'How many times can I take the ACT?',
     answer: 'ACT, Inc. does not impose a limit on how many times you can take the ACT. Most students take it 2–3 times. Many colleges superscore — taking the highest composite across multiple test dates — so retaking can meaningfully improve your standing. The ACT is offered in February, April, June, July, September, October, and December each year.',
   },
+  {
+    question: 'Does the ACT Writing section affect my composite score?',
+    answer: 'No. The optional ACT Writing (Essay) test does not affect your ACT composite score in any way. Your composite is calculated solely from the four required sections: English, Mathematics, Reading, and Science. The Writing test is scored separately on a scale of 2–12, based on four domain scores (Ideas and Analysis, Development and Support, Organization, and Language Use). While some colleges previously required the Writing test, the vast majority of US universities no longer require or consider it for admission. Before registering, check each college\'s specific requirements — if none of your target schools require it, you can safely skip it and save both time and money.',
+  },
+  {
+    question: 'How do colleges calculate an ACT Superscore?',
+    answer: 'An ACT Superscore is calculated by taking your highest section score from each of your test dates and averaging those four best-ever scores into a new composite. For example, if you scored English 28, Math 30, Reading 26, Science 27 in April, and then English 32, Math 29, Reading 30, Science 28 in October, your Superscore would use English 32, Math 30, Reading 30, Science 28 — giving a Superscore composite of approximately 30. Not every college superscores the ACT; policies vary by institution. Schools that do superscore officially state so on their admissions pages. If your target college superscores, retaking the ACT with a focus on improving just one or two weaker sections is a highly efficient strategy for raising your effective composite score.',
+  },
 ];
 
 const ACT_FULL_TABLE = [
@@ -223,7 +231,7 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
   return (
     <section aria-labelledby="faq-heading">
-      <h2 id="faq-heading" className="text-2xl font-bold text-white mb-2">ACT Score Calculator — Frequently Asked Questions</h2>
+      <h2 id="faq-heading" className="text-2xl font-bold text-white mb-2">Frequently Asked Questions About ACT Scores</h2>
       <p className="text-slate-400 text-sm mb-6">Common questions about our ACT score calculator, ACT scoring, percentiles, the national average ACT score in 2026, and what scores get you into top schools.</p>
       <div className="space-y-2">
         {ACT_FAQS.map((faq, i) => (
@@ -521,6 +529,89 @@ export default function ACTCalculatorPage() {
               </div>
             </div>
           </div>
+          </section>
+
+          {/* HOW IS YOUR ACT SCORE CALCULATED — NEW SECTION */}
+          <section aria-labelledby="scoring-heading">
+            <h2 id="scoring-heading" className="text-2xl font-bold text-white mb-4">How is Your ACT Score Calculated?</h2>
+            <p className="text-slate-400 text-sm mb-5 max-w-3xl leading-relaxed">
+              Understanding how ACT scoring works helps you set realistic improvement targets and interpret your score report accurately. The ACT uses a two-stage process — raw scores are first tallied, then converted to scaled scores — before a final composite is calculated from your four section scores.
+            </p>
+            <div className="space-y-5 mb-8">
+              <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
+                <h3 className="text-base font-semibold text-white mb-3">Step 1: Raw Score</h3>
+                <p className="text-sm text-slate-400 leading-relaxed mb-3">
+                  Your raw score for each section is simply the number of questions you answered correctly. There is <strong className="text-white">no penalty for wrong or skipped answers</strong> on the ACT, which means you should always fill in every answer — even a guess gives you a 20–25% chance of earning a point. For the ACT English section, a perfect raw score is 75 (75 questions). For Mathematics it is 60, and for both Reading and Science it is 40 each, giving a maximum total raw score across all four sections of 215.
+                </p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Because different test forms (administered on different dates) can vary slightly in difficulty, ACT, Inc. uses a statistical process called <strong className="text-white">equating</strong> to ensure that a 28 earned in April represents exactly the same level of achievement as a 28 earned in October. This is why two students with the same raw score on different test dates may occasionally receive different scaled scores.
+                </p>
+              </div>
+
+              <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
+                <h3 className="text-base font-semibold text-white mb-3">Step 2: Scaled Section Scores (1–36)</h3>
+                <p className="text-sm text-slate-400 leading-relaxed mb-3">
+                  Each raw score is converted to a scaled score on the familiar 1–36 range using a conversion table specific to that test form. These conversion tables are developed by ACT, Inc. through statistical analysis of how students perform and are not published in advance. The conversion is not linear — the relationship between raw points and scaled points shifts depending on the difficulty level of a particular form. On an easier form, you may need to answer more questions correctly to reach a given scaled score, while a harder form may allow you to miss more questions and still achieve the same scaled score.
+                </p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Each of the four sections — English, Mathematics, Reading, and Science — produces its own scaled score between 1 and 36. These four scores also generate sub-scores and cross-test scores that appear on your detailed score report, measuring specific skills like STEM readiness and English Language Arts (ELA) proficiency. These supplemental scores do not affect your composite.
+                </p>
+              </div>
+
+              <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
+                <h3 className="text-base font-semibold text-white mb-3">Step 3: ACT Composite Score</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Your ACT composite score is the <strong className="text-white">simple arithmetic average</strong> of your four section scaled scores, rounded to the nearest whole number. Fractions of 0.5 or above are rounded up. For example: English 28 + Math 30 + Reading 26 + Science 28 = 112 ÷ 4 = 28.0, which rounds to a composite of <strong className="text-white">28</strong>. If the average were 28.5, it would round up to a composite of 29. This rounding rule matters: improving a single section by just 2 points can move your composite up by 1 point, making targeted section prep highly efficient.
+                </p>
+              </div>
+            </div>
+
+            <h3 className="text-lg font-semibold text-white mb-4">ACT Raw Score to Scaled Score Conversion Matrix</h3>
+            <p className="text-slate-400 text-sm mb-5 leading-relaxed max-w-3xl">
+              The table below shows approximate raw-score-to-scaled-score conversions for each ACT section, based on a typical test form of average difficulty. Actual conversions vary by test date due to equating. Use this as a planning guide to understand how many questions you can afford to miss while targeting a specific scaled score in each section.
+            </p>
+            <div className="overflow-x-auto rounded-xl border border-white/8 mb-4">
+              <table className="w-full text-sm min-w-[540px]" aria-label="ACT raw score to scaled score conversion table">
+                <thead>
+                  <tr className="bg-white/4 border-b border-white/8">
+                    <th scope="col" className="text-left px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Scaled score</th>
+                    <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">English<br /><span className="font-normal normal-case">(75 Q)</span></th>
+                    <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Math<br /><span className="font-normal normal-case">(60 Q)</span></th>
+                    <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Reading<br /><span className="font-normal normal-case">(40 Q)</span></th>
+                    <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Science<br /><span className="font-normal normal-case">(40 Q)</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { scaled: 36, eng: '75',    math: '60',    read: '40',    sci: '40' },
+                    { scaled: 35, eng: '74',    math: '58–59', read: '39',    sci: '39' },
+                    { scaled: 34, eng: '72–73', math: '56–57', read: '38',    sci: '38' },
+                    { scaled: 33, eng: '70–71', math: '54–55', read: '37',    sci: '37' },
+                    { scaled: 32, eng: '68–69', math: '52–53', read: '36',    sci: '36' },
+                    { scaled: 31, eng: '66–67', math: '50–51', read: '35',    sci: '35' },
+                    { scaled: 30, eng: '63–65', math: '47–49', read: '34',    sci: '33–34' },
+                    { scaled: 28, eng: '58–60', math: '43–45', read: '31–32', sci: '30–31' },
+                    { scaled: 26, eng: '52–55', math: '38–40', read: '27–29', sci: '26–28' },
+                    { scaled: 24, eng: '46–49', math: '33–35', read: '24–26', sci: '23–24' },
+                    { scaled: 22, eng: '40–43', math: '28–30', read: '20–22', sci: '19–21' },
+                    { scaled: 20, eng: '33–36', math: '23–25', read: '17–19', sci: '16–18' },
+                    { scaled: 18, eng: '27–30', math: '18–20', read: '14–15', sci: '13–14' },
+                    { scaled: 16, eng: '21–24', math: '13–15', read: '11–12', sci: '10–11' },
+                    { scaled: 14, eng: '15–18', math: '9–11',  read: '8–9',   sci: '7–8' },
+                    { scaled: 12, eng: '9–12',  math: '5–7',   read: '5–6',   sci: '4–5' },
+                  ].map((row, i) => (
+                    <tr key={row.scaled} className={`border-b border-white/5 last:border-0 ${i % 2 === 0 ? '' : 'bg-white/2'}`}>
+                      <td className="px-4 py-2.5 font-mono font-bold" style={{ color: COLOR }}>{row.scaled}</td>
+                      <td className="px-4 py-2.5 text-center text-xs text-slate-300 font-mono">{row.eng}</td>
+                      <td className="px-4 py-2.5 text-center text-xs text-slate-300 font-mono">{row.math}</td>
+                      <td className="px-4 py-2.5 text-center text-xs text-slate-300 font-mono">{row.read}</td>
+                      <td className="px-4 py-2.5 text-center text-xs text-slate-300 font-mono">{row.sci}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-slate-600">Approximate values based on typical ACT test-form difficulty. Actual conversions vary by administration date due to statistical equating. Source: ACT, Inc. published score conversion guides.</p>
           </section>
 
           {/* NATIONAL AVERAGE */}
