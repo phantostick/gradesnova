@@ -667,22 +667,12 @@ export default function ACTCalculatorPage() {
 
                     {!scienceOptOut ? (
                       <>
-                        <div className="flex items-center justify-end gap-1.5 mb-1.5">
-                          <button onClick={() => setRawScience(v => Math.max(0, v - 1))}
-                            className="w-6 h-6 rounded-md bg-white/8 text-slate-300 hover:bg-white/15 transition-colors text-sm font-bold flex items-center justify-center">−</button>
-                          <span className="text-sm font-bold tabular-nums w-8 text-center" style={{ color: '#34d399' }}>{rawScience}</span>
-                          <button onClick={() => setRawScience(v => Math.min(40, v + 1))}
-                            className="w-6 h-6 rounded-md bg-white/8 text-slate-300 hover:bg-white/15 transition-colors text-sm font-bold flex items-center justify-center">+</button>
-                        </div>
-                        <div className="h-1.5 bg-white/8 rounded-full overflow-hidden">
-                          <div className="h-full rounded-full transition-all duration-200"
-                            style={{ width: `${(rawScience / 40) * 100}%`, backgroundColor: '#34d399' }} />
-                        </div>
-                        <div className="flex justify-between mt-0.5">
-                          <span className="text-[10px] text-slate-600">0</span>
-                          <span className="text-[10px] font-semibold" style={{ color: '#34d399' }}>→ scaled {scaledScience}</span>
-                          <span className="text-[10px] text-slate-600">40</span>
-                        </div>
+                       <ModuleInput
+  label="correct out of 40"
+  value={rawScience} max={40} color="#34d399"
+  scaledScore={scaledScience}
+  onChange={setRawScience}
+/>
                       </>
                     ) : (
                       <p className="text-[10px] text-slate-600 mt-1.5">Science skipped — composite averaged from English, Math &amp; Reading only.</p>
