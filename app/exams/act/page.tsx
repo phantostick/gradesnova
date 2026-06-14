@@ -14,6 +14,7 @@
 //   - Expanded internal nav hub
 //   - Hub nav links near top
 //   - More explicit "last updated" signal in page body
+//   - CALCULATOR UPDATE: raw correct answers → scaled score (Enhanced ACT format)
 
 import { useState, useMemo } from 'react';
 import { Navbar } from '@/components/navbar';
@@ -45,11 +46,46 @@ function ordinal(n: number): string {
   }
 }
 
+// ─── Enhanced ACT (post-April 2025) raw → scaled conversion tables ────────────
+// Source: ACT, Inc. published score guides for the Enhanced ACT format.
+// English: 50 Q, Math: 45 Q, Reading: 36 Q, Science: 40 Q (optional)
+
+const ENG_CONVERSION: Record<number, number> = {
+  50:36,49:36,48:36,47:35,46:35,45:34,44:34,43:33,42:32,41:31,
+  40:30,39:29,38:28,37:25,36:24,35:24,34:23,33:22,32:22,31:21,
+  30:21,29:20,28:20,27:19,26:18,25:18,24:17,23:16,22:16,21:15,
+  20:14,19:14,18:13,17:12,16:11,15:10,14:9,13:9,12:8,11:8,
+  10:7,9:7,8:6,7:6,6:5,5:4,4:4,3:3,2:2,1:1,0:1,
+};
+const MATH_CONVERSION: Record<number, number> = {
+  45:36,44:36,43:35,42:35,41:34,40:33,39:32,38:32,37:31,36:30,
+  35:29,34:28,33:28,32:27,31:27,30:26,29:26,28:25,27:24,26:24,
+  25:23,24:22,23:22,22:21,21:20,20:20,19:19,18:19,17:18,16:18,
+  15:18,14:17,13:17,12:16,11:16,10:16,9:15,8:15,7:14,6:14,
+  5:13,4:12,3:11,2:9,1:6,0:1,
+};
+const READING_CONVERSION: Record<number, number> = {
+  36:36,35:36,34:35,33:33,32:33,31:32,30:31,29:29,28:28,27:27,
+  26:26,25:25,24:24,23:23,22:22,21:21,20:20,19:20,18:19,17:18,
+  16:17,15:16,14:15,13:14,12:14,11:13,10:12,9:12,8:11,7:11,
+  6:10,5:9,4:7,3:6,2:4,1:2,0:1,
+};
+const SCIENCE_CONVERSION: Record<number, number> = {
+  40:36,39:36,38:36,37:35,36:34,35:33,34:32,33:30,32:29,31:28,
+  30:26,29:25,28:25,27:24,26:24,25:23,24:22,23:22,22:21,21:20,
+  20:20,19:19,18:18,17:18,16:17,15:17,14:16,13:16,12:15,11:14,
+  10:13,9:12,8:11,7:10,6:9,5:8,4:7,3:6,2:4,1:3,0:1,
+};
+
+function rawToScaled(raw: number, table: Record<number, number>): number {
+  return table[Math.max(0, raw)] ?? 1;
+}
+
 // ─── FAQs ─────────────────────────────────────────────────────────────────────
 const ACT_FAQS = [
   {
     question: 'How do I use this ACT score calculator?',
-    answer: 'This free ACT score calculator takes your score and instantly shows your national percentile ranking for 2026. Drag the slider to your ACT composite score (1–36) or switch to "By section" and enter your English, Math, Reading, and Science scores separately — the calculator will compute your composite and show section-level percentiles. Your ACT-to-SAT equivalent appears automatically. Everything updates in real time with no sign-up needed.',
+    answer: 'This free ACT score calculator takes your raw correct answers per section and instantly converts them to scaled scores (1–36) and a national percentile ranking for 2026. Enter how many questions you answered correctly in English (out of 50), Math (out of 45), Reading (out of 36), and Science (out of 40 — optional under the Enhanced ACT). The calculator computes your composite from those scaled section scores and shows where you stand nationally. No sign-up needed.',
   },
   {
     question: 'What changed about the ACT in 2025?',
@@ -247,36 +283,38 @@ function PercentileGauge({ percentile, color }: { percentile: number; color: str
   );
 }
 
-function ScoreSlider({ label, value, min, max, step, avg, color, onChange }: {
-  label: string; value: number; min: number; max: number;
-  step: number; avg: number; color: string; onChange: (v: number) => void;
+// ─── Raw score module input ───────────────────────────────────────────────────
+function ModuleInput({
+  label, value, max, color, scaledScore, onChange,
+}: {
+  label: string; value: number; max: number; color: string; scaledScore: number; onChange: (v: number) => void;
 }) {
-  const pct = ((value - min) / (max - min)) * 100;
   return (
     <div>
-      <div className="flex items-center justify-between mb-2">
-        <label className="text-sm font-medium text-slate-300">{label}</label>
-        <div className="flex items-center gap-2">
-          <span className="text-xs text-slate-500">avg {avg}</span>
-          <span className="text-base font-bold tabular-nums" style={{ color }}>{value}</span>
+      <div className="flex items-center justify-between mb-1.5">
+        <label className="text-xs font-medium text-slate-300">{label}</label>
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={() => onChange(Math.max(0, value - 1))}
+            className="w-6 h-6 rounded-md bg-white/8 text-slate-300 hover:bg-white/15 transition-colors text-sm font-bold flex items-center justify-center"
+          >−</button>
+          <span className="text-sm font-bold tabular-nums w-8 text-center" style={{ color }}>{value}</span>
+          <button
+            onClick={() => onChange(Math.min(max, value + 1))}
+            className="w-6 h-6 rounded-md bg-white/8 text-slate-300 hover:bg-white/15 transition-colors text-sm font-bold flex items-center justify-center"
+          >+</button>
         </div>
       </div>
-      <div className="relative h-6 flex items-center">
-        <div className="absolute w-full h-1.5 rounded-full bg-white/8" />
+      <div className="h-1.5 bg-white/8 rounded-full overflow-hidden">
         <div
-          className="absolute h-1.5 rounded-full"
-          style={{ width: `${pct}%`, backgroundColor: color, opacity: 0.7, transition: 'width 0.075s' }}
+          className="h-full rounded-full transition-all duration-200"
+          style={{ width: `${(value / max) * 100}%`, backgroundColor: color }}
         />
-        <div className="absolute w-0.5 h-3 rounded-full bg-white/20" style={{ left: `${((avg - min) / (max - min)) * 100}%` }} />
-        <input
-          type="range" min={min} max={max} step={step} value={value}
-          onChange={e => onChange(Number(e.target.value))} aria-label={label}
-          className="absolute w-full h-full opacity-0 cursor-pointer" style={{ zIndex: 10 }}
-        />
-        <div
-          className="absolute w-5 h-5 rounded-full border-2 border-white shadow-lg shadow-black/40 pointer-events-none"
-          style={{ left: `calc(${pct}% - 10px)`, backgroundColor: color, transition: 'left 0.075s' }}
-        />
+      </div>
+      <div className="flex justify-between mt-0.5">
+        <span className="text-[10px] text-slate-600">0</span>
+        <span className="text-[10px] font-semibold" style={{ color }}>→ scaled {scaledScore}</span>
+        <span className="text-[10px] text-slate-600">{max}</span>
       </div>
     </div>
   );
@@ -316,28 +354,41 @@ function FAQSection() {
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 export default function ACTCalculatorPage() {
-  const [mode, setMode]           = useState<'composite' | 'sections'>('composite');
-  const [composite, setComposite] = useState(21);
-  const [english, setEnglish]     = useState(20);
-  const [math, setMath]           = useState(20);
-  const [reading, setReading]     = useState(21);
-  const [science, setScience]     = useState(20);
-  const [showFullTable, setShowFullTable]   = useState(false);
-  const [showAllColleges, setShowAllColleges] = useState(false);
-  const [showAllStates, setShowAllStates]   = useState(false);
+  // Raw score inputs — Enhanced ACT question counts
+  const [rawEng,     setRawEng]     = useState(35); // out of 50
+  const [rawMath,    setRawMath]    = useState(30); // out of 45
+  const [rawReading, setRawReading] = useState(24); // out of 36
+  const [rawScience, setRawScience] = useState(28); // out of 40
+  const [scienceOptOut, setScienceOptOut] = useState(false);
 
-  const derivedComposite = useMemo(() => Math.round((english + math + reading + science) / 4), [english, math, reading, science]);
-  const displayComposite = mode === 'composite' ? composite : derivedComposite;
-  const compositePerc    = useMemo(() => getPercentile(displayComposite, ACT_COMPOSITE_PERCENTILES), [displayComposite]);
-  const englishPerc      = useMemo(() => getPercentile(english, ACT_ENGLISH_PERCENTILES), [english]);
-  const mathPerc         = useMemo(() => getPercentile(math, ACT_MATH_PERCENTILES), [math]);
-  const readingPerc      = useMemo(() => getPercentile(reading, ACT_READING_PERCENTILES), [reading]);
-  const sciencePerc      = useMemo(() => getPercentile(science, ACT_SCIENCE_PERCENTILES), [science]);
-  const context          = useMemo(() => getACTPercentileContext(compositePerc), [compositePerc]);
+  const [showFullTable,    setShowFullTable]    = useState(false);
+  const [showAllColleges,  setShowAllColleges]  = useState(false);
+  const [showAllStates,    setShowAllStates]    = useState(false);
 
-  const satEquiv = useMemo(() => ACT_SAT_CROSSWALK.find(r => r.act === displayComposite)?.sat ?? null, [displayComposite]);
+  // Scaled section scores derived from raw inputs
+  const scaledEng     = useMemo(() => rawToScaled(rawEng,     ENG_CONVERSION),     [rawEng]);
+  const scaledMath    = useMemo(() => rawToScaled(rawMath,    MATH_CONVERSION),    [rawMath]);
+  const scaledReading = useMemo(() => rawToScaled(rawReading, READING_CONVERSION), [rawReading]);
+  const scaledScience = useMemo(() => rawToScaled(rawScience, SCIENCE_CONVERSION), [rawScience]);
+
+  // Composite: average of 3 (English, Math, Reading) if Science opted out, else 4
+  const displayComposite = useMemo(() => {
+    const sections = scienceOptOut
+      ? [scaledEng, scaledMath, scaledReading]
+      : [scaledEng, scaledMath, scaledReading, scaledScience];
+    return Math.round(sections.reduce((a, b) => a + b, 0) / sections.length);
+  }, [scaledEng, scaledMath, scaledReading, scaledScience, scienceOptOut]);
+
+  const compositePerc = useMemo(() => getPercentile(displayComposite, ACT_COMPOSITE_PERCENTILES), [displayComposite]);
+  const englishPerc   = useMemo(() => getPercentile(scaledEng,     ACT_ENGLISH_PERCENTILES),  [scaledEng]);
+  const mathPerc      = useMemo(() => getPercentile(scaledMath,    ACT_MATH_PERCENTILES),     [scaledMath]);
+  const readingPerc   = useMemo(() => getPercentile(scaledReading, ACT_READING_PERCENTILES),  [scaledReading]);
+  const sciencePerc   = useMemo(() => getPercentile(scaledScience, ACT_SCIENCE_PERCENTILES),  [scaledScience]);
+  const context       = useMemo(() => getACTPercentileContext(compositePerc), [compositePerc]);
+
+  const satEquiv        = useMemo(() => ACT_SAT_CROSSWALK.find(r => r.act === displayComposite)?.sat ?? null, [displayComposite]);
   const visibleColleges = showAllColleges ? COLLEGES : COLLEGES.slice(0, 8);
-  const visibleStates   = showAllStates ? STATE_AVERAGES : STATE_AVERAGES.slice(0, 7);
+  const visibleStates   = showAllStates   ? STATE_AVERAGES : STATE_AVERAGES.slice(0, 7);
 
   // ─── Schema ──────────────────────────────────────────────────────────────────
   const schemaBreadcrumb = {
@@ -348,7 +399,6 @@ export default function ACTCalculatorPage() {
       { '@type': 'ListItem', position: 3, name: 'ACT Score Calculator', item: 'https://gradesnova.com/exams/act' },
     ],
   };
-  // ─── FAQ SCHEMA (was missing — now added for rich result eligibility) ─────
   const schemaFAQ = {
     '@context': 'https://schema.org', '@type': 'FAQPage',
     mainEntity: ACT_FAQS.map(f => ({
@@ -360,7 +410,7 @@ export default function ACTCalculatorPage() {
     '@context': 'https://schema.org', '@type': 'WebApplication',
     name: 'ACT Score Calculator 2026',
     url: 'https://gradesnova.com/exams/act',
-    description: 'Free ACT score calculator 2026. Enter your ACT composite or section scores to instantly calculate your national percentile ranking. Includes 2025 Enhanced ACT format, ACT-to-SAT conversion and top college score ranges. Updated for 2025–2026.',
+    description: 'Free ACT score calculator 2026. Enter your raw correct answers per section to instantly calculate your scaled scores and national percentile ranking. Includes 2025 Enhanced ACT format, ACT-to-SAT conversion and top college score ranges. Updated for 2025–2026.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
@@ -387,20 +437,19 @@ export default function ACTCalculatorPage() {
     author: { '@type': 'Organization', name: 'GradesNova Editorial Team' },
   };
 
-  // ─── Table of contents items ──────────────────────────────────────────────
   const TOC_ITEMS = [
-    { href: '#calculator',      label: 'ACT score calculator' },
-    { href: '#enhanced-act',    label: '2025 Enhanced ACT format' },
-    { href: '#how-scored',      label: 'How ACT scoring works' },
-    { href: '#national-average',label: 'National average ACT score' },
-    { href: '#what-is-good',    label: 'What is a good ACT score?' },
-    { href: '#percentile-table',label: 'Full percentile chart' },
-    { href: '#colleges',        label: 'College score ranges' },
-    { href: '#test-dates',      label: 'ACT test dates 2025–2026' },
-    { href: '#act-sat',         label: 'ACT to SAT conversion' },
-    { href: '#state-averages',  label: 'Average ACT score by state' },
-    { href: '#improve',         label: 'How to improve your score' },
-    { href: '#faq',             label: 'FAQs' },
+    { href: '#calculator',       label: 'ACT score calculator' },
+    { href: '#enhanced-act',     label: '2025 Enhanced ACT format' },
+    { href: '#how-scored',       label: 'How ACT scoring works' },
+    { href: '#national-average', label: 'National average ACT score' },
+    { href: '#what-is-good',     label: 'What is a good ACT score?' },
+    { href: '#percentile-table', label: 'Full percentile chart' },
+    { href: '#colleges',         label: 'College score ranges' },
+    { href: '#test-dates',       label: 'ACT test dates 2025–2026' },
+    { href: '#act-sat',          label: 'ACT to SAT conversion' },
+    { href: '#state-averages',   label: 'Average ACT score by state' },
+    { href: '#improve',          label: 'How to improve your score' },
+    { href: '#faq',              label: 'FAQs' },
   ];
 
   return (
@@ -456,12 +505,12 @@ export default function ACTCalculatorPage() {
               ACT Score Calculator 2026
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl mb-4">
-              Free <strong className="text-white font-medium">ACT score calculator</strong> for 2025–2026. Enter your ACT composite or section scores to instantly calculate your <strong className="text-white font-medium">national percentile ranking</strong>. The <strong className="text-white font-medium">national average ACT score in 2026 is 21</strong> — see exactly how you compare. Includes the <strong className="text-white font-medium">2025 Enhanced ACT format change</strong>, ACT-to-SAT conversion, and college score ranges. Updated with official ACT norms.
+              Free <strong className="text-white font-medium">ACT score calculator</strong> for 2025–2026. Enter your raw correct answers per section to instantly convert them to scaled scores and calculate your <strong className="text-white font-medium">national percentile ranking</strong>. The <strong className="text-white font-medium">national average ACT score in 2026 is 21</strong> — see exactly how you compare. Includes the <strong className="text-white font-medium">2025 Enhanced ACT format</strong>, ACT-to-SAT conversion, and college score ranges. Updated with official ACT norms.
             </p>
             <div className="flex flex-wrap gap-2">
               {[
                 ['Official ACT norms 2025–2026', COLOR],
-                ['Composite + 4 section percentiles', '#a855f7'],
+                ['Raw → scaled score converter', '#a855f7'],
                 ['2025 Enhanced ACT covered', '#f59e0b'],
                 ['ACT → SAT conversion', '#6366f1'],
                 ['Last updated: June 2026', '#34d399'],
@@ -564,38 +613,86 @@ export default function ACTCalculatorPage() {
 
           {/* ── CALCULATOR ── */}
           <section id="calculator" aria-labelledby="calculator-heading">
-            <h2 id="calculator-heading" className="text-2xl font-bold text-white mb-2">ACT Score Calculator — Enter Your Score</h2>
+            <h2 id="calculator-heading" className="text-2xl font-bold text-white mb-2">ACT Score Calculator — Enhanced ACT (2025 Format)</h2>
             <p className="text-slate-400 text-sm mb-6 max-w-3xl">
-              Use this free <strong className="text-white">ACT score calculator</strong> to find your 2026 national percentile instantly. Drag the slider to your ACT composite score (1–36) or switch to "By section" to calculate from your English, Math, Reading, and Science scores. Results update in real time.
+              Enter the number of questions you answered correctly in each section of the <strong className="text-white">Enhanced ACT</strong> (post-April 2025: English 50 Q, Math 45 Q, Reading 36 Q, Science 40 Q optional). The calculator converts your raw correct answers to scaled scores (1–36) and computes your composite and national percentile instantly.
             </p>
-            <div className="grid lg:grid-cols-5 gap-8">
-              {/* LEFT */}
-              <div className="lg:col-span-2 space-y-5">
-                <div className="flex bg-white/5 rounded-xl p-1 gap-1" role="tablist" aria-label="Score input mode">
-                  {(['composite', 'sections'] as const).map(tab => (
-                    <button key={tab} role="tab" aria-selected={mode === tab} onClick={() => setMode(tab)}
-                      className={`flex-1 py-2 rounded-lg text-sm font-medium transition-all ${mode === tab ? 'text-white shadow-lg' : 'text-slate-400 hover:text-white'}`}
-                      style={mode === tab ? { backgroundColor: COLOR, boxShadow: `0 4px 14px ${COLOR}40` } : {}}>
-                      {tab === 'composite' ? 'Composite' : 'By section'}
-                    </button>
-                  ))}
-                </div>
 
+            <div className="grid lg:grid-cols-5 gap-8">
+              {/* LEFT — raw score inputs */}
+              <div className="lg:col-span-2 space-y-5">
                 <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6 space-y-6">
-                  {mode === 'composite' ? (
-                    <ScoreSlider label="ACT composite score (1–36)" value={composite} min={1} max={36} step={1} avg={21} color={COLOR} onChange={setComposite} />
-                  ) : (
-                    <>
-                      <ScoreSlider label="English (1–36)" value={english} min={1} max={36} step={1} avg={20} color={COLOR} onChange={setEnglish} />
-                      <ScoreSlider label="Math (1–36)" value={math} min={1} max={36} step={1} avg={20} color="#6366f1" onChange={setMath} />
-                      <ScoreSlider label="Reading (1–36)" value={reading} min={1} max={36} step={1} avg={21} color="#a855f7" onChange={setReading} />
-                      <ScoreSlider label="Science (1–36)" value={science} min={1} max={36} step={1} avg={20} color="#34d399" onChange={setScience} />
-                      <div className="border-t border-white/8 pt-4 flex items-center justify-between">
-                        <span className="text-sm text-slate-400">Composite (average of 4)</span>
-                        <span className="text-xl font-bold text-white">{derivedComposite}</span>
+
+                  <ModuleInput
+                    label="English — correct out of 50"
+                    value={rawEng} max={50} color={COLOR}
+                    scaledScore={scaledEng}
+                    onChange={setRawEng}
+                  />
+
+                  <ModuleInput
+                    label="Math — correct out of 45"
+                    value={rawMath} max={45} color="#6366f1"
+                    scaledScore={scaledMath}
+                    onChange={setRawMath}
+                  />
+
+                  <ModuleInput
+                    label="Reading — correct out of 36"
+                    value={rawReading} max={36} color="#a855f7"
+                    scaledScore={scaledReading}
+                    onChange={setRawReading}
+                  />
+
+                  {/* Science (optional) */}
+                  <div>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <div className="flex items-center gap-2">
+                        <label className="text-xs font-medium text-slate-300">Science — correct out of 40</label>
+                        <span className="text-[10px] text-amber-400/80 font-medium">(optional)</span>
                       </div>
-                    </>
-                  )}
+                      <button
+                        onClick={() => setScienceOptOut(v => !v)}
+                        className="text-[10px] font-semibold px-2.5 py-1 rounded-full border transition-all"
+                        style={scienceOptOut
+                          ? { backgroundColor: 'rgba(255,255,255,0.06)', borderColor: 'rgba(255,255,255,0.1)', color: '#64748b' }
+                          : { backgroundColor: '#34d39920', borderColor: '#34d39940', color: '#34d399' }}>
+                        {scienceOptOut ? 'Skipped' : 'Taken'}
+                      </button>
+                    </div>
+
+                    {!scienceOptOut ? (
+                      <>
+                        <div className="flex items-center justify-end gap-1.5 mb-1.5">
+                          <button onClick={() => setRawScience(v => Math.max(0, v - 1))}
+                            className="w-6 h-6 rounded-md bg-white/8 text-slate-300 hover:bg-white/15 transition-colors text-sm font-bold flex items-center justify-center">−</button>
+                          <span className="text-sm font-bold tabular-nums w-8 text-center" style={{ color: '#34d399' }}>{rawScience}</span>
+                          <button onClick={() => setRawScience(v => Math.min(40, v + 1))}
+                            className="w-6 h-6 rounded-md bg-white/8 text-slate-300 hover:bg-white/15 transition-colors text-sm font-bold flex items-center justify-center">+</button>
+                        </div>
+                        <div className="h-1.5 bg-white/8 rounded-full overflow-hidden">
+                          <div className="h-full rounded-full transition-all duration-200"
+                            style={{ width: `${(rawScience / 40) * 100}%`, backgroundColor: '#34d399' }} />
+                        </div>
+                        <div className="flex justify-between mt-0.5">
+                          <span className="text-[10px] text-slate-600">0</span>
+                          <span className="text-[10px] font-semibold" style={{ color: '#34d399' }}>→ scaled {scaledScience}</span>
+                          <span className="text-[10px] text-slate-600">40</span>
+                        </div>
+                      </>
+                    ) : (
+                      <p className="text-[10px] text-slate-600 mt-1.5">Science skipped — composite averaged from English, Math &amp; Reading only.</p>
+                    )}
+                  </div>
+
+                  {/* Composite total */}
+                  <div className="border-t border-white/8 pt-4 flex items-center justify-between">
+                    <span className="text-sm text-slate-400">Estimated composite</span>
+                    <span className="text-2xl font-bold text-white tabular-nums">{displayComposite}</span>
+                  </div>
+                  <p className="text-[10px] text-slate-600 -mt-2 leading-relaxed">
+                    Based on Enhanced ACT (post-April 2025) question counts: English 50 Q · Math 45 Q · Reading 36 Q · Science 40 Q (optional). Scaled scores are estimates — actual conversions vary by test form.
+                  </p>
                 </div>
 
                 {/* ACT → SAT */}
@@ -630,7 +727,7 @@ export default function ACTCalculatorPage() {
                       { score: 21, pct: 57, label: 'National average' },
                       { score: 18, pct: 38, label: 'Below average' },
                     ].map(b => (
-                      <div key={b.score} className={`flex items-center justify-between py-1 ${displayComposite === b.score ? 'opacity-100' : 'opacity-50'}`}>
+                      <div key={b.score} className={`flex items-center justify-between py-1 transition-opacity ${displayComposite === b.score ? 'opacity-100' : 'opacity-50'}`}>
                         <div>
                           <span className="text-xs font-mono text-white">{b.score}</span>
                           <span className="text-[10px] text-slate-500 ml-2">{b.label}</span>
@@ -642,7 +739,7 @@ export default function ACTCalculatorPage() {
                 </div>
               </div>
 
-              {/* RIGHT */}
+              {/* RIGHT — results */}
               <div className="lg:col-span-3 space-y-5">
                 <div className="bg-[#12141f] border border-white/8 rounded-2xl p-7">
                   <div key={compositePerc}>
@@ -669,53 +766,56 @@ export default function ACTCalculatorPage() {
                   </div>
                 </div>
 
-                {/* Section percentiles */}
-                {mode === 'sections' && (
-                  <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
-                    <h3 className="text-sm font-semibold text-slate-300 mb-4">Section percentiles</h3>
-                    <div className="space-y-4">
-                      {[
-                        { label: 'English', score: english, pct: englishPerc, color: COLOR },
-                        { label: 'Math',    score: math,    pct: mathPerc,    color: '#6366f1' },
-                        { label: 'Reading', score: reading, pct: readingPerc, color: '#a855f7' },
-                        { label: 'Science', score: science, pct: sciencePerc, color: '#34d399' },
-                      ].map(s => (
-                        <div key={s.label} className="flex items-center gap-4">
-                          <div className="w-16 shrink-0">
-                            <p className="text-xs text-slate-500">{s.label}</p>
-                            <p className="text-sm font-bold text-white">{s.score}</p>
-                          </div>
-                          <div className="flex-1">
-                            <div className="h-2 bg-white/8 rounded-full overflow-hidden">
-                              <div className="h-full rounded-full" style={{ width: `${s.pct}%`, backgroundColor: s.color, transition: 'width 0.5s ease' }} />
-                            </div>
-                          </div>
-                          <div className="w-12 text-right shrink-0">
-                            <p className="text-sm font-bold tabular-nums" style={{ color: s.color }}>{ordinal(s.pct)}</p>
+                {/* Section percentiles — always visible */}
+                <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
+                  <h3 className="text-sm font-semibold text-slate-300 mb-4">Section scores &amp; percentiles</h3>
+                  <div className="space-y-4">
+                    {[
+                      { label: 'English', scaled: scaledEng,     pct: englishPerc, color: COLOR      },
+                      { label: 'Math',    scaled: scaledMath,    pct: mathPerc,    color: '#6366f1'  },
+                      { label: 'Reading', scaled: scaledReading, pct: readingPerc, color: '#a855f7'  },
+                      ...(!scienceOptOut ? [{ label: 'Science', scaled: scaledScience, pct: sciencePerc, color: '#34d399' }] : []),
+                    ].map(s => (
+                      <div key={s.label} className="flex items-center gap-4">
+                        <div className="w-16 shrink-0">
+                          <p className="text-[10px] text-slate-500">{s.label}</p>
+                          <p className="text-sm font-bold text-white">{s.scaled}</p>
+                        </div>
+                        <div className="flex-1">
+                          <div className="h-2 bg-white/8 rounded-full overflow-hidden">
+                            <div className="h-full rounded-full"
+                              style={{ width: `${s.pct}%`, backgroundColor: s.color, transition: 'width 0.5s ease' }} />
                           </div>
                         </div>
-                      ))}
-                    </div>
+                        <div className="w-12 text-right shrink-0">
+                          <p className="text-sm font-bold tabular-nums" style={{ color: s.color }}>{ordinal(s.pct)}</p>
+                        </div>
+                      </div>
+                    ))}
+                    {scienceOptOut && (
+                      <p className="text-[10px] text-slate-600 pt-1">Science skipped — not included in composite.</p>
+                    )}
                   </div>
-                )}
+                </div>
 
                 {/* ACT format explainer */}
                 <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
                   <h3 className="text-sm font-semibold text-slate-300 mb-1">ACT format overview</h3>
-                  <p className="text-[10px] text-amber-400/80 mb-3">⚠ Classic ACT shown. See the 2025 Enhanced ACT section below for updated question counts.</p>
+                  <p className="text-[10px] text-amber-400/80 mb-3">⚠ Enhanced ACT (post-April 2025) question counts shown.</p>
                   <div className="space-y-3">
                     {[
-                      { icon: '📝', label: 'English',     color: COLOR,      time: '45 min', q: '75 questions', detail: 'Grammar, punctuation, sentence structure, rhetorical skills' },
-                      { icon: '📐', label: 'Mathematics', color: '#6366f1',  time: '60 min', q: '60 questions', detail: 'Pre-algebra through trig. Calculator permitted the entire section' },
-                      { icon: '📖', label: 'Reading',     color: '#a855f7',  time: '35 min', q: '40 questions', detail: 'Literary narrative, social science, humanities, natural science' },
-                      { icon: '🔬', label: 'Science',     color: '#34d399',  time: '35 min', q: '40 questions', detail: 'Scientific reasoning, data interpretation, experimental design' },
+                      { icon: '📝', label: 'English',     color: COLOR,      time: '35 min', q: '50 questions',           detail: 'Grammar, punctuation, sentence structure, rhetorical skills' },
+                      { icon: '📐', label: 'Mathematics', color: '#6366f1',  time: '50 min', q: '45 questions',           detail: 'Pre-algebra through trig. Calculator permitted the entire section' },
+                      { icon: '📖', label: 'Reading',     color: '#a855f7',  time: '40 min', q: '36 questions',           detail: 'Literary narrative, social science, humanities, natural science' },
+                      { icon: '🔬', label: 'Science',     color: '#34d399',  time: '40 min', q: '40 questions (optional)', detail: 'Scientific reasoning, data interpretation, experimental design' },
                     ].map(s => (
                       <div key={s.label} className="flex gap-3 p-3 bg-white/3 rounded-xl">
                         <span className="text-base mt-0.5" aria-hidden="true">{s.icon}</span>
                         <div>
                           <div className="flex items-center gap-2 mb-1">
                             <span className="text-sm font-semibold text-white">{s.label}</span>
-                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded" style={{ backgroundColor: `${s.color}20`, color: s.color }}>{s.time}</span>
+                            <span className="text-[10px] font-mono px-1.5 py-0.5 rounded"
+                              style={{ backgroundColor: `${s.color}20`, color: s.color }}>{s.time}</span>
                             <span className="text-[10px] text-slate-500">{s.q}</span>
                           </div>
                           <p className="text-xs text-slate-500">{s.detail}</p>
@@ -728,7 +828,7 @@ export default function ACTCalculatorPage() {
             </div>
           </section>
 
-          {/* ── 2025 ENHANCED ACT — NEW MAJOR SECTION ── */}
+          {/* ── 2025 ENHANCED ACT ── */}
           <section id="enhanced-act" aria-labelledby="enhanced-heading">
             <div className="flex items-center gap-3 mb-4">
               <span className="text-xs font-bold px-2.5 py-1 rounded-full border"
@@ -741,7 +841,6 @@ export default function ACTCalculatorPage() {
               Starting in <strong className="text-white">September 2025</strong>, ACT, Inc. began rolling out the <strong className="text-white">Enhanced ACT</strong> (sometimes referred to as ACT Next). This is the most significant format change to the test since 2015. If you are testing in the 2025–2026 academic year, you will likely take the Enhanced ACT — here is exactly what changed.
             </p>
 
-            {/* Side-by-side comparison */}
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
               <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
                 <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Classic ACT (before Sept 2025)</p>
@@ -774,7 +873,7 @@ export default function ACTCalculatorPage() {
                     { section: 'English',     q: 50, time: '35 min', change: '-25 Q' },
                     { section: 'Mathematics', q: 45, time: '50 min', change: '-15 Q' },
                     { section: 'Reading',     q: 36, time: '40 min', change: '-4 Q' },
-                    { section: 'Science',     q: 36, time: '40 min', change: '-4 Q  (optional in US)', optional: true },
+                    { section: 'Science',     q: 40, time: '40 min', change: 'optional in US', optional: true },
                   ].map(r => (
                     <div key={r.section} className="flex items-center justify-between py-1.5 border-b border-white/5 last:border-0">
                       <div>
@@ -789,13 +888,12 @@ export default function ACTCalculatorPage() {
                   ))}
                   <div className="pt-2 flex items-center justify-between">
                     <span className="text-sm font-semibold text-white">Total</span>
-                    <span className="text-sm font-bold text-white">~167 Q · ~2h 05min</span>
+                    <span className="text-sm font-bold text-white">~171 Q · ~2h 05min</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Key changes explained */}
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
               {[
                 {
@@ -833,7 +931,6 @@ export default function ACTCalculatorPage() {
               ))}
             </div>
 
-            {/* Old → new score conversion per section */}
             <h3 className="text-lg font-semibold text-white mb-3">Classic ACT → Enhanced ACT Raw Score Conversion</h3>
             <p className="text-slate-400 text-sm mb-5 leading-relaxed max-w-3xl">
               Because each section now has fewer questions, the raw score needed to reach a given scaled score has changed. Use this table if you have practice test results from the classic ACT format and want to estimate your equivalent Enhanced ACT score.
@@ -846,18 +943,18 @@ export default function ACTCalculatorPage() {
                     <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase">English<br /><span className="font-normal normal-case text-slate-500">Classic 75 → Enhanced 50</span></th>
                     <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase">Math<br /><span className="font-normal normal-case text-slate-500">Classic 60 → Enhanced 45</span></th>
                     <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase">Reading<br /><span className="font-normal normal-case text-slate-500">Classic 40 → Enhanced 36</span></th>
-                    <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase">Science<br /><span className="font-normal normal-case text-slate-500">Classic 40 → Enhanced 36</span></th>
+                    <th scope="col" className="text-center px-4 py-3 text-xs font-semibold text-slate-400 uppercase">Science<br /><span className="font-normal normal-case text-slate-500">Classic 40 → Enhanced 40</span></th>
                   </tr>
                 </thead>
                 <tbody>
                   {[
-                    { sc: 36, ec: '50',    em: '45',    er: '36',    es: '36',    cc: '75',    cm: '60',    cr: '40',    cs: '40' },
-                    { sc: 34, ec: '48–49', em: '43–44', er: '34–35', es: '34–35', cc: '72–73', cm: '56–57', cr: '38',    cs: '38' },
-                    { sc: 32, ec: '44–46', em: '39–41', er: '31–33', es: '31–33', cc: '68–69', cm: '52–53', cr: '36',    cs: '36' },
-                    { sc: 30, ec: '39–42', em: '35–37', er: '27–29', es: '27–29', cc: '63–65', cm: '47–49', cr: '34',    cs: '33–34' },
-                    { sc: 28, ec: '34–37', em: '30–32', er: '23–26', es: '23–25', cc: '58–60', cm: '43–45', cr: '31–32', cs: '30–31' },
-                    { sc: 26, ec: '29–32', em: '26–28', er: '19–22', es: '19–21', cc: '52–55', cm: '38–40', cr: '27–29', cs: '26–28' },
-                    { sc: 24, ec: '24–27', em: '21–23', er: '16–18', es: '16–18', cc: '46–49', cm: '33–35', cr: '24–26', cs: '23–24' },
+                    { sc: 36, ec: '50',    em: '45',    er: '36',    es: '40',    cc: '75',    cm: '60',    cr: '40',    cs: '40' },
+                    { sc: 34, ec: '48–49', em: '43–44', er: '34–35', es: '37–38', cc: '72–73', cm: '56–57', cr: '38',    cs: '38' },
+                    { sc: 32, ec: '44–46', em: '39–41', er: '31–33', es: '33–34', cc: '68–69', cm: '52–53', cr: '36',    cs: '36' },
+                    { sc: 30, ec: '39–42', em: '35–37', er: '27–29', es: '29–30', cc: '63–65', cm: '47–49', cr: '34',    cs: '33–34' },
+                    { sc: 28, ec: '34–37', em: '30–32', er: '23–26', es: '25–26', cc: '58–60', cm: '43–45', cr: '31–32', cs: '30–31' },
+                    { sc: 26, ec: '29–32', em: '26–28', er: '19–22', es: '21–22', cc: '52–55', cm: '38–40', cr: '27–29', cs: '26–28' },
+                    { sc: 24, ec: '24–27', em: '21–23', er: '16–18', es: '17–18', cc: '46–49', cm: '33–35', cr: '24–26', cs: '23–24' },
                     { sc: 22, ec: '19–22', em: '17–19', er: '13–15', es: '13–14', cc: '40–43', cm: '28–30', cr: '20–22', cs: '19–21' },
                     { sc: 20, ec: '15–17', em: '13–15', er: '10–12', es: '10–11', cc: '33–36', cm: '23–25', cr: '17–19', cs: '16–18' },
                     { sc: 18, ec: '11–13', em: '9–11',  er: '7–9',   es: '7–8',   cc: '27–30', cm: '18–20', cr: '14–15', cs: '13–14' },
@@ -924,7 +1021,6 @@ export default function ACTCalculatorPage() {
               </div>
             </div>
 
-            {/* Raw to scaled conversion table */}
             <h3 className="text-lg font-semibold text-white mb-4">ACT Raw Score to Scaled Score Conversion (Classic Format)</h3>
             <p className="text-slate-400 text-sm mb-5 leading-relaxed max-w-3xl">
               Approximate raw-score-to-scaled-score conversions per section on a typical test form. See the Enhanced ACT section above for updated question counts effective September 2025.
@@ -1006,12 +1102,12 @@ export default function ACTCalculatorPage() {
             </p>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
               {[
-                { range: '33–36', label: 'Exceptional',    desc: 'Top 3% nationally. Competitive at Ivy League, MIT, Stanford, and all highly selective universities. Qualifies for merit aid at virtually every school.', color: '#34d399' },
-                { range: '28–32', label: 'Strong',         desc: 'Top 4–12%. Competitive at selective schools — Michigan, UCLA, Georgetown, Notre Dame, and most top-30 universities.', color: COLOR },
-                { range: '24–27', label: 'Above average',  desc: 'Top 15–26%. Competitive at many solid four-year universities. At or above the median for most state flagship schools.', color: '#6366f1' },
-                { range: '21–23', label: 'Average',        desc: 'Around the national average of 21. Sufficient for many four-year colleges. Most students see meaningful improvement with focused prep.', color: '#a855f7' },
-                { range: '18–20', label: 'Below average',  desc: 'Below the national average. Many four-year schools accept this range. A 3–5 point gain is common with structured preparation.', color: '#f59e0b' },
-                { range: '1–17',  label: 'Needs work',     desc: 'Significantly below average. Community college pathways available. Structured prep with a tutor yields consistent improvement.', color: '#ef4444' },
+                { range: '33–36', label: 'Exceptional',   desc: 'Top 3% nationally. Competitive at Ivy League, MIT, Stanford, and all highly selective universities. Qualifies for merit aid at virtually every school.', color: '#34d399' },
+                { range: '28–32', label: 'Strong',        desc: 'Top 4–12%. Competitive at selective schools — Michigan, UCLA, Georgetown, Notre Dame, and most top-30 universities.', color: COLOR },
+                { range: '24–27', label: 'Above average', desc: 'Top 15–26%. Competitive at many solid four-year universities. At or above the median for most state flagship schools.', color: '#6366f1' },
+                { range: '21–23', label: 'Average',       desc: 'Around the national average of 21. Sufficient for many four-year colleges. Most students see meaningful improvement with focused prep.', color: '#a855f7' },
+                { range: '18–20', label: 'Below average', desc: 'Below the national average. Many four-year schools accept this range. A 3–5 point gain is common with structured preparation.', color: '#f59e0b' },
+                { range: '1–17',  label: 'Needs work',    desc: 'Significantly below average. Community college pathways available. Structured prep with a tutor yields consistent improvement.', color: '#ef4444' },
               ].map(tier => (
                 <article key={tier.range} className="bg-[#12141f] border border-white/7 rounded-xl p-5">
                   <div className="text-xs font-mono font-semibold mb-1.5 px-2 py-1 rounded-md w-fit"
@@ -1022,13 +1118,12 @@ export default function ACTCalculatorPage() {
               ))}
             </div>
 
-            {/* Key facts grid */}
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { icon: '📊', label: 'National average',   value: '21',     sub: 'Composite (51st pct)',         color: COLOR },
-                { icon: '🎯', label: 'Top 10% threshold',  value: '29',     sub: '91st percentile',             color: '#34d399' },
-                { icon: '🏆', label: 'Ivy League range',   value: '34–36',  sub: '98th–99th percentile',         color: '#a855f7' },
-                { icon: '📅', label: 'Test dates / year',  value: '7',      sub: 'Feb Apr Jun Jul Sep Oct Dec',   color: '#f59e0b' },
+                { icon: '📊', label: 'National average',  value: '21',    sub: 'Composite (51st pct)',        color: COLOR },
+                { icon: '🎯', label: 'Top 10% threshold', value: '29',    sub: '91st percentile',            color: '#34d399' },
+                { icon: '🏆', label: 'Ivy League range',  value: '34–36', sub: '98th–99th percentile',       color: '#a855f7' },
+                { icon: '📅', label: 'Test dates / year', value: '7',     sub: 'Feb Apr Jun Jul Sep Oct Dec', color: '#f59e0b' },
               ].map(card => (
                 <article key={card.label} className="bg-[#12141f] border border-white/8 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
@@ -1236,11 +1331,11 @@ export default function ACTCalculatorPage() {
             <h2 id="resources-heading" className="text-2xl font-bold text-white mb-4">Essential ACT Resources</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-3">
               {[
-                { name: 'ACT Study Guide', path: '/guide', icon: '📘' },
-                { name: 'Revision Tips', path: '/revision-tips', icon: '💡' },
-                { name: 'Results Day Guide', path: '/results-day', icon: '📅' },
-                { name: 'Prep Tips', path: '/prep-tips', icon: '🎯' },
-                { name: 'Understanding Scores', path: '/scores', icon: '📊' },
+                { name: 'ACT Study Guide',        path: '/guide',          icon: '📘' },
+                { name: 'Revision Tips',           path: '/revision-tips',  icon: '💡' },
+                { name: 'Results Day Guide',       path: '/results-day',    icon: '📅' },
+                { name: 'Prep Tips',               path: '/prep-tips',      icon: '🎯' },
+                { name: 'Understanding Scores',    path: '/scores',         icon: '📊' },
               ].map(res => (
                 <Link key={res.path} href={`/exams/act${res.path}`}
                   className="bg-[#12141f] border border-white/8 rounded-xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/5 transition-colors group">
@@ -1258,7 +1353,6 @@ export default function ACTCalculatorPage() {
               Most students improve their ACT composite by 2–5 points on a retake with targeted preparation. Because the composite is an average of four sections, improving even one section by 4 points moves your composite by 1 full point.
             </p>
 
-            {/* Improvement data bars */}
             <div className="mb-6">
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Average ACT score gain by hours of official practice</p>
               <div className="space-y-2.5">
@@ -1313,14 +1407,14 @@ export default function ACTCalculatorPage() {
             <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">More free score calculators — SAT, GRE, GMAT &amp; more</h2>
             <div className="flex flex-wrap gap-2">
               {[
-                { id: 'sat',      name: 'SAT Score Calculator',     color: '#6366f1' },
-                { id: 'gre',      name: 'GRE Score Calculator',     color: '#a855f7' },
-                { id: 'gmat',     name: 'GMAT Score Calculator',    color: '#f59e0b' },
-                { id: 'lsat',     name: 'LSAT Score Calculator',    color: '#ef4444' },
-                { id: 'gcse',     name: 'GCSE Grade Calculator',    color: '#34d399' },
-                { id: 'a-levels', name: 'A-Level Calculator',       color: '#ec4899' },
-                { id: 'psat',     name: 'PSAT Score Calculator',    color: '#6366f1' },
-                { id: 'ap',       name: 'AP Score Calculator',      color: '#f59e0b' },
+                { id: 'sat',      name: 'SAT Score Calculator',  color: '#6366f1' },
+                { id: 'gre',      name: 'GRE Score Calculator',  color: '#a855f7' },
+                { id: 'gmat',     name: 'GMAT Score Calculator', color: '#f59e0b' },
+                { id: 'lsat',     name: 'LSAT Score Calculator', color: '#ef4444' },
+                { id: 'gcse',     name: 'GCSE Grade Calculator', color: '#34d399' },
+                { id: 'a-levels', name: 'A-Level Calculator',    color: '#ec4899' },
+                { id: 'psat',     name: 'PSAT Score Calculator', color: '#6366f1' },
+                { id: 'ap',       name: 'AP Score Calculator',   color: '#f59e0b' },
               ].map(e => (
                 <Link key={e.id} href={`/exams/${e.id}`}
                   className="px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all hover:scale-105"
