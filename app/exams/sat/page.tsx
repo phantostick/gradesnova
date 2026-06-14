@@ -320,21 +320,34 @@ function ScoreSlider({ label, value, min, max, step, avg, color, onChange }: {
 function ModuleInput({ label, value, max, color, onChange }: {
   label: string; value: number; max: number; color: string; onChange: (v: number) => void;
 }) {
+  const pct = (value / max) * 100;
   return (
     <div>
       <div className="flex items-center justify-between mb-1.5">
         <label className="text-xs font-medium text-slate-300">{label}</label>
-        <div className="flex items-center gap-1.5">
-          <button onClick={() => onChange(Math.max(0, value - 1))}
-            className="w-6 h-6 rounded-md bg-white/8 text-slate-300 hover:bg-white/15 transition-colors text-sm font-bold flex items-center justify-center">−</button>
-          <span className="text-sm font-bold tabular-nums w-8 text-center" style={{ color }}>{value}</span>
-          <button onClick={() => onChange(Math.min(max, value + 1))}
-            className="w-6 h-6 rounded-md bg-white/8 text-slate-300 hover:bg-white/15 transition-colors text-sm font-bold flex items-center justify-center">+</button>
-        </div>
+        <span className="text-sm font-bold tabular-nums" style={{ color }}>{value}</span>
       </div>
-      <div className="h-1.5 bg-white/8 rounded-full overflow-hidden">
-        <div className="h-full rounded-full transition-all duration-200"
-          style={{ width: `${(value / max) * 100}%`, backgroundColor: color }} />
+      <div className="relative h-6 flex items-center">
+        <div className="absolute w-full h-1.5 rounded-full bg-white/8" />
+        <div
+          className="absolute h-1.5 rounded-full"
+          style={{ width: `${pct}%`, backgroundColor: color, opacity: 0.7, transition: 'width 0.075s' }}
+        />
+        <input
+          type="range"
+          min={0}
+          max={max}
+          step={1}
+          value={value}
+          onChange={e => onChange(Number(e.target.value))}
+          aria-label={label}
+          className="absolute w-full h-full opacity-0 cursor-pointer"
+          style={{ zIndex: 10 }}
+        />
+        <div
+          className="absolute w-5 h-5 rounded-full border-2 border-white shadow-lg shadow-black/40 pointer-events-none"
+          style={{ left: `calc(${pct}% - 10px)`, backgroundColor: color, transition: 'left 0.075s' }}
+        />
       </div>
       <div className="flex justify-between mt-0.5">
         <span className="text-[10px] text-slate-600">0</span>
