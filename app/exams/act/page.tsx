@@ -656,13 +656,17 @@ export default function ACTCalculatorPage() {
                         <span className="text-[10px] text-amber-400/80 font-medium">(optional)</span>
                       </div>
                       <button
-                        onClick={() => setScienceOptOut(v => !v)}
-                        className="text-[10px] font-semibold px-2.5 py-1 rounded-full border transition-all"
-                        style={scienceOptOut
-                          ? { backgroundColor: 'rgba(255,255,255,0.06)', borderColor: 'rgba(255,255,255,0.1)', color: '#64748b' }
-                          : { backgroundColor: '#34d39920', borderColor: '#34d39940', color: '#34d399' }}>
-                        {scienceOptOut ? 'Skipped' : 'Taken'}
-                      </button>
+  onClick={() => setScienceOptOut(v => !v)}
+  className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-semibold transition-all hover:scale-105 active:scale-95 border"
+  style={scienceOptOut
+    ? { backgroundColor: 'rgba(255,255,255,0.06)', borderColor: 'rgba(255,255,255,0.12)', color: '#64748b' }
+    : { backgroundColor: '#34d39922', borderColor: '#34d39960', color: '#34d399', boxShadow: '0 0 10px #34d39930' }}>
+  <span
+    className="w-1.5 h-1.5 rounded-full shrink-0"
+    style={{ backgroundColor: scienceOptOut ? '#475569' : '#34d399' }}
+  />
+  {scienceOptOut ? 'Skipped' : 'Taken'}
+</button>
                     </div>
 
                     {!scienceOptOut ? (
