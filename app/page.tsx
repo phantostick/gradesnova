@@ -1,14 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Navbar } from '@/components/navbar';
+import { Footer } from '@/components/footer';
 
 const currentYear = new Date().getFullYear();
 const cycle = `${currentYear - 1}–${currentYear}`;
 
 export const metadata: Metadata = {
-  title: `GradesNova — ACT Score Calculator, SAT Score Calculator & GCSE Grade Boundaries ${currentYear}`,
+  title: `GradesNova | Free ACT & SAT Calculators + GCSE Grade Boundaries`,
   description: `Free ACT score calculator, SAT score calculator, and GCSE grade boundary checker. Instantly see your score, rank, and what it means for college admissions. No signup. Updated for ${currentYear}.`,
   openGraph: {
-    title: `GradesNova — ACT Score Calculator, SAT Score Calculator & GCSE Grade Boundaries ${currentYear}`,
+    title: `GradesNova | Free ACT & SAT Calculators + GCSE Grade Boundaries`,
     description: `Free ACT score calculator, SAT score calculator, GCSE grade boundary checker for AQA, Edexcel, OCR & WJEC. Enter your score and instantly see where you stand.`,
     type: 'website',
     url: 'https://gradesnova.com',
@@ -173,28 +175,50 @@ const HOW_STEPS = [
   },
 ];
 
-const TESTIMONIALS = [
+const FAQS = [
   {
-    quote: 'Checked my AQA Maths boundary the moment results dropped. Knew my grade before I even opened the envelope.',
-    name: 'Amara O.',
-    context: 'GCSE Results 2025 · AQA Maths',
+    q: 'What is a good ACT score?',
+    a: 'A score of 24 or above is above average (above the 50th percentile). Selective universities typically look for 30+, while highly selective schools like MIT or Stanford admit students with scores of 34–36.',
   },
   {
-    quote: 'Got my ACT score and immediately came here. Knowing I hit the 91st percentile made the whole day.',
-    name: 'Marcus T.',
-    context: 'ACT · Class of 2026',
+    q: 'What ACT score is the 90th percentile?',
+    a: 'A score of 31 or above places you in approximately the 90th percentile nationally, meaning you scored higher than 90% of all test takers.',
   },
   {
-    quote: 'The SAT score calculator even showed me my ACT equivalent. Made it so easy to decide which test to send.',
-    name: 'Priya S.',
-    context: 'SAT 1490 · Applying to US colleges',
+    q: 'What is a good SAT score?',
+    a: 'The average SAT score is around 1060. A score of 1200+ is generally considered good (above the 75th percentile). For competitive colleges, aim for 1400+. Top-tier schools typically see admitted students averaging 1500 or higher.',
   },
   {
-    quote: 'WJEC boundaries are always hard to find. GradesNova had them up before any other site.',
-    name: 'Rhys M.',
-    context: 'GCSE Wales · WJEC',
+    q: 'What SAT score puts you in the top 10%?',
+    a: 'Scoring approximately 1370 or above places you in the top 10% of SAT test takers nationally.',
+  },
+  {
+    q: 'What is a Grade 5 in GCSE?',
+    a: 'A Grade 5 is a "strong pass" under the 9–1 grading system, roughly equivalent to a high C or low B under the old A*–G system. Many universities and employers use Grade 5 as a minimum benchmark in core subjects like Maths and English.',
+  },
+  {
+    q: 'How do GCSE grade boundaries work?',
+    a: "GCSE grade boundaries are the minimum marks required to achieve each grade (9 to 1). They are set after each exam series by awarding bodies (AQA, Edexcel, OCR, WJEC) based on that year's paper difficulty and student performance, so they differ every year.",
+  },
+  {
+    q: 'Is the ACT or SAT better?',
+    a: 'Neither test is universally better — all US colleges accept both equally. The ACT has a Science section and slightly faster pacing; the SAT has more time per question and a stronger focus on reading comprehension. Try a practice test for each to see which suits you.',
+  },
+  {
+    q: 'When are GCSE grade boundaries published?',
+    a: 'Grade boundaries are typically published on GCSE results day in late August, at the same time as students receive their grades. AQA, Edexcel, OCR, and WJEC each publish boundaries on their own websites.',
   },
 ];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: FAQS.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
 
 const ARTICLES = [
   { href: '/articles/sat-vs-act-complete-comparison', title: 'SAT vs ACT: Which test should you take in 2026?', tag: 'Guide' },
@@ -210,427 +234,415 @@ const ARTICLES = [
 /* ─── component ──────────────────────────────────────────────────── */
 export default function Home() {
   return (
-    <main className="overflow-hidden bg-[#0a0c14] text-white">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <Navbar />
+      <main className="overflow-hidden bg-[#0a0c14] text-white">
 
-      {/* ── HERO ───────────────────────────────────────────────────── */}
-      <section className="relative pt-28 pb-20 px-4 text-center">
-        {/* ambient glow */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.18) 0%, transparent 70%)',
-          }}
-        />
-
-        <p className="inline-flex items-center gap-2 text-xs font-medium tracking-widest uppercase text-indigo-400 mb-6">
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
-          Free · No signup · Updated {currentYear}
-        </p>
-
-        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] max-w-4xl mx-auto mb-6">
-          ACT Score Calculator,{' '}
-          <span className="text-indigo-400">SAT Score Calculator</span>
-          {' '}&amp; GCSE Grade Boundaries
-        </h1>
-
-        <p className="text-lg text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Enter your score and instantly see your percentile, grade boundary, and what it means for
-          college admission or sixth form. Covers ACT, SAT, GRE, GMAT, LSAT, GCSE (AQA, Edexcel,
-          OCR, WJEC) and A-Levels. No account needed.
-        </p>
-
-        {/* CTA pill nav */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {[
-            { href: '/exams/act', label: 'ACT Calculator' },
-            { href: '/exams/sat', label: 'SAT Calculator' },
-            { href: '/exams/gcse', label: 'GCSE Boundaries' },
-            { href: '/exams/a-levels', label: 'A-Level Boundaries' },
-            { href: '/exams/gre', label: 'GRE Calculator' },
-            { href: '/exams/lsat', label: 'LSAT Calculator' },
-          ].map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-medium text-white/80 hover:bg-indigo-600/30 hover:border-indigo-500/50 hover:text-white transition-all duration-200"
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Hero stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
-          {STATS.map(({ value, label }) => (
-            <div key={label} className="rounded-xl border border-white/8 bg-white/4 p-4 text-center">
-              <p className="text-2xl font-bold text-indigo-300">{value}</p>
-              <p className="text-xs text-white/50 mt-1">{label}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── US COLLEGE ADMISSIONS ──────────────────────────────────── */}
-      <section id="us-exams" className="py-20 px-4 max-w-6xl mx-auto">
-        <div className="mb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">US College Admissions</p>
-          <h2 className="text-3xl font-bold">ACT &amp; SAT Score Calculators</h2>
-          <p className="text-white/50 mt-3 max-w-xl">
-            Free calculators for both major US standardised tests. See your percentile, what
-            colleges your score reaches, and your conversion between tests.
+        {/* ── HERO ───────────────────────────────────────────────────── */}
+        <section className="relative pt-28 pb-20 px-4 text-center">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10"
+            style={{
+              background:
+                'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(99,102,241,0.18) 0%, transparent 70%)',
+            }}
+          />
+          <p className="inline-flex items-center gap-2 text-xs font-medium tracking-widest uppercase text-indigo-400 mb-6">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse" />
+            Free · No signup · Updated {currentYear}
           </p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6">
-          {US_EXAMS.map((exam) => (
-            <Link
-              key={exam.href}
-              href={exam.href}
-              className="group relative rounded-2xl border border-white/10 bg-white/4 p-7 hover:border-indigo-500/40 hover:bg-indigo-950/30 transition-all duration-300"
-            >
-              {exam.badge && (
-                <span className="absolute top-5 right-5 text-[10px] font-bold tracking-wider uppercase bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 rounded-full px-3 py-1">
-                  {exam.badge}
-                </span>
-              )}
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-2xl">{exam.emoji}</span>
-                <div>
-                  <p className="text-xs text-white/40 font-mono">{exam.label}</p>
-                  <h3 className="text-xl font-bold">{exam.title}</h3>
-                </div>
-              </div>
-              <p className="text-xs text-indigo-400 font-medium mb-3">{exam.subtitle}</p>
-              <p className="text-white/60 text-sm leading-relaxed mb-5">{exam.desc}</p>
-              <ul className="space-y-1.5 mb-6">
-                {exam.facts.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-white/70">
-                    <CheckIcon />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <span className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-300 group-hover:text-indigo-200 transition-colors">
-                {exam.cta} <ArrowRight />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ── ACT NATIONAL PERCENTILES (mini section) ────────────────── */}
-      <section className="py-14 px-4 bg-white/[0.025] border-y border-white/6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-            <div>
-              <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-2">Quick reference</p>
-              <h2 className="text-2xl font-bold">ACT National Percentiles {currentYear}</h2>
-              <p className="text-white/50 text-sm mt-1">National average composite: <strong className="text-white">21</strong> (57th percentile)</p>
-            </div>
-            <Link
-              href="/exams/act"
-              className="text-sm font-semibold text-indigo-300 hover:text-indigo-200 inline-flex items-center gap-1.5 shrink-0"
-            >
-              Full ACT score calculator <ArrowRight />
-            </Link>
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b border-white/10">
-                  <th className="text-left py-2.5 pr-6 text-white/40 font-medium">ACT Score</th>
-                  <th className="text-left py-2.5 pr-6 text-white/40 font-medium">Percentile</th>
-                  <th className="text-left py-2.5 text-white/40 font-medium hidden sm:table-cell">What it means</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ACT_PERCENTILES.map(({ score, pct, label }) => (
-                  <tr key={score} className="border-b border-white/5 hover:bg-white/3 transition-colors">
-                    <td className="py-3 pr-6 font-bold text-indigo-300">{score}</td>
-                    <td className="py-3 pr-6 text-white/80">{pct}</td>
-                    <td className="py-3 text-white/50 hidden sm:table-cell">{label}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="text-xs text-white/30 mt-4">Source: ACT, Inc. national norms {cycle}. <Link href="/exams/act" className="text-indigo-400 hover:underline">See full table with all scores →</Link></p>
-        </div>
-      </section>
-
-      {/* ── SAT MILESTONES ─────────────────────────────────────────── */}
-      <section className="py-14 px-4 border-b border-white/6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
-            <div>
-              <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-2">Quick reference</p>
-              <h2 className="text-2xl font-bold">SAT Score Ranges &amp; What They Mean</h2>
-              <p className="text-white/50 text-sm mt-1">National average: <strong className="text-white">1060</strong> (57th percentile)</p>
-            </div>
-            <Link
-              href="/exams/sat"
-              className="text-sm font-semibold text-indigo-300 hover:text-indigo-200 inline-flex items-center gap-1.5 shrink-0"
-            >
-              Full SAT score calculator <ArrowRight />
-            </Link>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {SAT_MILESTONES.map(({ score, pct, context }) => (
-              <div key={score} className="rounded-xl border border-white/8 bg-white/4 p-4">
-                <p className="text-lg font-bold text-indigo-300">{score}</p>
-                <p className="text-xs text-white/40 mt-0.5">{pct} percentile</p>
-                <p className="text-sm text-white/70 mt-2">{context}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── GCSE GRADE BOUNDARIES ─────────────────────────────────── */}
-      <section id="gcse" className="py-20 px-4 max-w-6xl mx-auto">
-        <div className="mb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">UK Qualifications</p>
-          <h2 className="text-3xl font-bold">GCSE Grade Boundaries by Exam Board</h2>
-          <p className="text-white/50 mt-3 max-w-2xl leading-relaxed">
-            Grade boundaries differ between AQA, Edexcel, OCR, and WJEC — and between subjects and
-            years. Select your board below to find the exact mark you need for each grade.
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.1] max-w-4xl mx-auto mb-6">
+            ACT Score Calculator,{' '}
+            <span className="text-indigo-400">SAT Score Calculator</span>
+            {' '}&amp; GCSE Grade Boundaries
+          </h1>
+          <p className="text-lg text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">
+            Enter your score and instantly see your percentile, grade boundary, and what it means for
+            college admission or sixth form. Covers ACT, SAT, GRE, GMAT, LSAT, GCSE (AQA, Edexcel,
+            OCR, WJEC) and A-Levels. No account needed.
           </p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 gap-5 mb-12">
-          {GCSE_BOARDS.map((board) => (
-            <Link
-              key={board.href}
-              href={board.href}
-              className="group rounded-2xl border border-white/10 bg-white/4 p-6 hover:border-indigo-500/40 hover:bg-indigo-950/30 transition-all duration-300"
-            >
-              <h3 className="text-lg font-bold mb-2 group-hover:text-indigo-300 transition-colors">
-                {board.title}
-              </h3>
-              <p className="text-sm text-white/55 leading-relaxed mb-4">{board.desc}</p>
-              <div className="flex flex-wrap gap-1.5 mb-5">
-                {board.subjects.map((s) => (
-                  <span key={s} className="text-[11px] bg-white/6 border border-white/8 rounded-full px-2.5 py-0.5 text-white/60">
-                    {s}
-                  </span>
-                ))}
-              </div>
-              <span className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-300 group-hover:text-indigo-200 transition-colors">
-                {board.cta} <ArrowRight />
-              </span>
-            </Link>
-          ))}
-        </div>
-
-        {/* GCSE grade scale explainer */}
-        <div className="rounded-2xl border border-white/8 bg-white/3 p-6 md:p-8">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-            <div>
-              <h3 className="text-lg font-bold">GCSE Grading Scale: 9–1 Explained</h3>
-              <p className="text-sm text-white/50 mt-1">England, Wales &amp; Northern Ireland · 2025 results</p>
-            </div>
-            <Link href="/exams/gcse" className="text-sm font-semibold text-indigo-300 hover:text-indigo-200 inline-flex items-center gap-1.5 shrink-0">
-              GCSE grade boundary checker <ArrowRight />
-            </Link>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
-            {GCSE_GRADE_INFO.map(({ grade, label, pct, color }) => (
-              <div key={grade} className="rounded-xl border border-white/8 bg-white/4 p-3 text-center">
-                <p className="text-2xl font-bold" style={{ color }}>{grade}</p>
-                <p className="text-xs text-white/60 mt-1">{label}</p>
-                <p className="text-[10px] text-white/35 mt-0.5">{pct}</p>
-              </div>
-            ))}
-          </div>
-          <p className="text-xs text-white/30 mt-5">
-            Approximate national proportions. Grade 5 is the "strong pass" required by many sixth forms and employers.{' '}
-            <Link href="/exams/gcse/grade-boundaries-explained" className="text-indigo-400 hover:underline">How grade boundaries work →</Link>
-          </p>
-        </div>
-      </section>
-
-      {/* ── A-LEVELS ──────────────────────────────────────────────── */}
-      <section className="py-14 px-4 bg-white/[0.025] border-y border-white/6">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center gap-8">
-          <div className="flex-1">
-            <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">UK Advanced Qualifications</p>
-            <h2 className="text-2xl font-bold mb-3">A-Level Grade Boundaries &amp; UCAS Points</h2>
-            <p className="text-white/55 leading-relaxed mb-4 max-w-lg">
-              Find A-Level grade boundaries for AQA, Edexcel, OCR, and WJEC. See how your predicted
-              or actual grades convert to UCAS Tariff points and understand what's needed for your
-              university offer.
-            </p>
-            <ul className="space-y-2 text-sm">
-              {['A* = 56 UCAS points', 'A = 48 UCAS points', 'B = 40 UCAS points', 'C = 32 UCAS points'].map((f) => (
-                <li key={f} className="flex items-center gap-2 text-white/65">
-                  <CheckIcon /> {f}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="md:w-64 shrink-0">
-            <Link
-              href="/exams/a-levels"
-              className="block w-full rounded-2xl border border-indigo-500/30 bg-indigo-600/15 px-6 py-5 text-center hover:bg-indigo-600/25 transition-colors"
-            >
-              <span className="text-3xl mb-2 block">📚</span>
-              <p className="font-bold text-lg text-indigo-200">A-Level Boundaries</p>
-              <p className="text-sm text-white/50 mt-1">All boards · {currentYear}</p>
-              <p className="mt-4 text-sm font-semibold text-indigo-300 inline-flex items-center gap-1.5">
-                Check grade boundaries <ArrowRight />
-              </p>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ── GRAD ADMISSIONS ────────────────────────────────────────── */}
-      <section className="py-20 px-4 max-w-6xl mx-auto">
-        <div className="mb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">Graduate Admissions</p>
-          <h2 className="text-3xl font-bold">GRE, GMAT &amp; LSAT Score Calculators</h2>
-          <p className="text-white/50 mt-3 max-w-xl">
-            Applying to grad school, business school, or law school? Find your score percentile and
-            compare against program medians.
-          </p>
-        </div>
-        <div className="grid sm:grid-cols-3 gap-5">
-          {GRAD_EXAMS.map((exam) => (
-            <Link
-              key={exam.href}
-              href={exam.href}
-              className="group rounded-2xl border border-white/10 bg-white/4 p-6 hover:border-indigo-500/40 hover:bg-indigo-950/30 transition-all duration-300"
-            >
-              <span className="text-3xl mb-4 block">{exam.emoji}</span>
-              <h3 className="text-lg font-bold mb-1 group-hover:text-indigo-300 transition-colors">{exam.title}</h3>
-              <p className="text-xs text-indigo-400 font-medium mb-3">{exam.subtitle}</p>
-              <p className="text-sm text-white/55 leading-relaxed mb-5">{exam.desc}</p>
-              <span className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-300 group-hover:text-indigo-200 transition-colors">
-                {exam.cta} <ArrowRight />
-              </span>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* ── HOW IT WORKS ──────────────────────────────────────────── */}
-      <section id="how-it-works" className="py-20 px-4 bg-white/[0.025] border-y border-white/6">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-14">
-            <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">How it works</p>
-            <h2 className="text-3xl font-bold">From score to insight in seconds</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-8">
-            {HOW_STEPS.map(({ n, title, body }) => (
-              <div key={n} className="relative">
-                <p className="text-5xl font-black text-white/6 absolute -top-3 -left-1 select-none">{n}</p>
-                <div className="relative pl-3">
-                  <h3 className="text-lg font-bold mb-2">{title}</h3>
-                  <p className="text-white/55 text-sm leading-relaxed">{body}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <p className="text-sm text-white/40">
-              No account. No email. No ads obscuring your result.{' '}
-              <Link href="/exams/act" className="text-indigo-400 hover:underline">Start with the ACT calculator →</Link>
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TESTIMONIALS ─────────────────────────────────────────── */}
-      <section className="py-20 px-4 max-w-6xl mx-auto">
-        <div className="text-center mb-12">
-          <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">What students say</p>
-          <h2 className="text-3xl font-bold">Used on results day worldwide</h2>
-        </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {TESTIMONIALS.map(({ quote, name, context }) => (
-            <div key={name} className="rounded-2xl border border-white/8 bg-white/4 p-5">
-              <p className="text-yellow-400 text-sm mb-3">★★★★★</p>
-              <p className="text-sm text-white/70 leading-relaxed mb-4">"{quote}"</p>
-              <p className="text-sm font-semibold text-white">{name}</p>
-              <p className="text-xs text-white/35 mt-0.5">{context}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ── ARTICLES / RESOURCES ─────────────────────────────────── */}
-      <section className="py-20 px-4 bg-white/[0.025] border-y border-white/6">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
-            <div>
-              <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">Guides &amp; resources</p>
-              <h2 className="text-3xl font-bold">Score guides, prep tips &amp; deep dives</h2>
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {ARTICLES.map(({ href, title, tag }) => (
+          <div className="flex flex-wrap justify-center gap-3 mb-12">
+            {[
+              { href: '/exams/act', label: 'ACT Calculator' },
+              { href: '/exams/sat', label: 'SAT Calculator' },
+              { href: '/exams/gcse', label: 'GCSE Boundaries' },
+              { href: '/exams/a-levels', label: 'A-Level Boundaries' },
+              { href: '/exams/gre', label: 'GRE Calculator' },
+              { href: '/exams/lsat', label: 'LSAT Calculator' },
+            ].map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="group rounded-xl border border-white/8 bg-white/4 p-5 hover:border-indigo-500/30 hover:bg-indigo-950/20 transition-all duration-200"
+                className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-medium text-white/80 hover:bg-indigo-600/30 hover:border-indigo-500/50 hover:text-white transition-all duration-200"
               >
-                <span className="inline-block text-[10px] font-bold tracking-wider uppercase bg-indigo-600/20 text-indigo-400 border border-indigo-500/20 rounded-full px-2.5 py-0.5 mb-3">
-                  {tag}
-                </span>
-                <p className="text-sm font-medium text-white/80 leading-snug group-hover:text-white transition-colors">
-                  {title}
-                </p>
-                <span className="inline-flex items-center gap-1 mt-3 text-xs text-indigo-400">
-                  Read guide <ArrowRight />
+                {label}
+              </Link>
+            ))}
+          </div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+            {STATS.map(({ value, label }) => (
+              <div key={label} className="rounded-xl border border-white/8 bg-white/4 p-4 text-center">
+                <p className="text-2xl font-bold text-indigo-300">{value}</p>
+                <p className="text-xs text-white/50 mt-1">{label}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── US COLLEGE ADMISSIONS ──────────────────────────────────── */}
+        <section id="us-exams" className="py-20 px-4 max-w-6xl mx-auto">
+          <div className="mb-12">
+            <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">US College Admissions</p>
+            <h2 className="text-3xl font-bold">ACT &amp; SAT Score Calculators</h2>
+            <p className="text-white/50 mt-3 max-w-xl">
+              Free calculators for both major US standardised tests. See your percentile, what
+              colleges your score reaches, and your conversion between tests.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {US_EXAMS.map((exam) => (
+              <Link
+                key={exam.href}
+                href={exam.href}
+                className="group relative rounded-2xl border border-white/10 bg-white/4 p-7 hover:border-indigo-500/40 hover:bg-indigo-950/30 transition-all duration-300"
+              >
+                {exam.badge && (
+                  <span className="absolute top-5 right-5 text-[10px] font-bold tracking-wider uppercase bg-indigo-600/30 text-indigo-300 border border-indigo-500/30 rounded-full px-3 py-1">
+                    {exam.badge}
+                  </span>
+                )}
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-2xl">{exam.emoji}</span>
+                  <div>
+                    <p className="text-xs text-white/40 font-mono">{exam.label}</p>
+                    <h3 className="text-xl font-bold">{exam.title}</h3>
+                  </div>
+                </div>
+                <p className="text-xs text-indigo-400 font-medium mb-3">{exam.subtitle}</p>
+                <p className="text-white/60 text-sm leading-relaxed mb-5">{exam.desc}</p>
+                <ul className="space-y-1.5 mb-6">
+                  {exam.facts.map((f) => (
+                    <li key={f} className="flex items-center gap-2 text-sm text-white/70">
+                      <CheckIcon />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-300 group-hover:text-indigo-200 transition-colors">
+                  {exam.cta} <ArrowRight />
                 </span>
               </Link>
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* ── BOTTOM CTA ───────────────────────────────────────────── */}
-      <section className="py-24 px-4 text-center relative">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 60% at 50% 100%, rgba(99,102,241,0.12) 0%, transparent 70%)',
-          }}
-        />
-        <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to see your score?</h2>
-        <p className="text-white/50 mb-10 max-w-lg mx-auto">
-          Pick your exam below. Free, instant, no signup required.
-        </p>
-        <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
-          {[
-            { href: '/exams/act', label: 'ACT Score Calculator' },
-            { href: '/exams/sat', label: 'SAT Score Calculator' },
-            { href: '/exams/gcse', label: 'GCSE Grade Boundaries' },
-            { href: '/exams/gcse/aqa', label: 'AQA Boundaries' },
-            { href: '/exams/gcse/edexcel', label: 'Edexcel Boundaries' },
-            { href: '/exams/gcse/ocr', label: 'OCR Boundaries' },
-            { href: '/exams/gcse/wjec', label: 'WJEC Boundaries' },
-            { href: '/exams/a-levels', label: 'A-Level Boundaries' },
-            { href: '/exams/gre', label: 'GRE Calculator' },
-            { href: '/exams/gmat', label: 'GMAT Calculator' },
-            { href: '/exams/lsat', label: 'LSAT Calculator' },
-          ].map(({ href, label }) => (
-            <Link
-              key={href}
-              href={href}
-              className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-medium text-white/75 hover:bg-indigo-600/25 hover:border-indigo-500/40 hover:text-white transition-all duration-200"
-            >
-              {label}
-            </Link>
-          ))}
-        </div>
-      </section>
+        {/* ── ACT NATIONAL PERCENTILES ───────────────────────────────── */}
+        <section className="py-14 px-4 bg-white/[0.025] border-y border-white/6">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+              <div>
+                <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-2">Quick reference</p>
+                <h2 className="text-2xl font-bold">ACT National Percentiles {currentYear}</h2>
+                <p className="text-white/50 text-sm mt-1">National average composite: <strong className="text-white">21</strong> (57th percentile)</p>
+              </div>
+              <Link href="/exams/act" className="text-sm font-semibold text-indigo-300 hover:text-indigo-200 inline-flex items-center gap-1.5 shrink-0">
+                Full ACT score calculator <ArrowRight />
+              </Link>
+            </div>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="border-b border-white/10">
+                    <th className="text-left py-2.5 pr-6 text-white/40 font-medium">ACT Score</th>
+                    <th className="text-left py-2.5 pr-6 text-white/40 font-medium">Percentile</th>
+                    <th className="text-left py-2.5 text-white/40 font-medium hidden sm:table-cell">What it means</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {ACT_PERCENTILES.map(({ score, pct, label }) => (
+                    <tr key={score} className="border-b border-white/5 hover:bg-white/3 transition-colors">
+                      <td className="py-3 pr-6 font-bold text-indigo-300">{score}</td>
+                      <td className="py-3 pr-6 text-white/80">{pct}</td>
+                      <td className="py-3 text-white/50 hidden sm:table-cell">{label}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="text-xs text-white/30 mt-4">
+              Source: ACT, Inc. national norms {cycle}.{' '}
+              <Link href="/exams/act" className="text-indigo-400 hover:underline">See full table with all scores →</Link>
+            </p>
+          </div>
+        </section>
 
-    </main>
+        {/* ── SAT MILESTONES ─────────────────────────────────────────── */}
+        <section className="py-14 px-4 border-b border-white/6">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
+              <div>
+                <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-2">Quick reference</p>
+                <h2 className="text-2xl font-bold">SAT Score Ranges &amp; What They Mean</h2>
+                <p className="text-white/50 text-sm mt-1">National average: <strong className="text-white">1060</strong> (57th percentile)</p>
+              </div>
+              <Link href="/exams/sat" className="text-sm font-semibold text-indigo-300 hover:text-indigo-200 inline-flex items-center gap-1.5 shrink-0">
+                Full SAT score calculator <ArrowRight />
+              </Link>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {SAT_MILESTONES.map(({ score, pct, context }) => (
+                <div key={score} className="rounded-xl border border-white/8 bg-white/4 p-4">
+                  <p className="text-lg font-bold text-indigo-300">{score}</p>
+                  <p className="text-xs text-white/40 mt-0.5">{pct} percentile</p>
+                  <p className="text-sm text-white/70 mt-2">{context}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── GCSE GRADE BOUNDARIES ─────────────────────────────────── */}
+        <section id="gcse" className="py-20 px-4 max-w-6xl mx-auto">
+          <div className="mb-12">
+            <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">UK Qualifications</p>
+            <h2 className="text-3xl font-bold">GCSE Grade Boundaries by Exam Board</h2>
+            <p className="text-white/50 mt-3 max-w-2xl leading-relaxed">
+              Grade boundaries differ between AQA, Edexcel, OCR, and WJEC — and between subjects and
+              years. Select your board below to find the exact mark you need for each grade.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-5 mb-12">
+            {GCSE_BOARDS.map((board) => (
+              <Link
+                key={board.href}
+                href={board.href}
+                className="group rounded-2xl border border-white/10 bg-white/4 p-6 hover:border-indigo-500/40 hover:bg-indigo-950/30 transition-all duration-300"
+              >
+                <h3 className="text-lg font-bold mb-2 group-hover:text-indigo-300 transition-colors">{board.title}</h3>
+                <p className="text-sm text-white/55 leading-relaxed mb-4">{board.desc}</p>
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {board.subjects.map((s) => (
+                    <span key={s} className="text-[11px] bg-white/6 border border-white/8 rounded-full px-2.5 py-0.5 text-white/60">{s}</span>
+                  ))}
+                </div>
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-300 group-hover:text-indigo-200 transition-colors">
+                  {board.cta} <ArrowRight />
+                </span>
+              </Link>
+            ))}
+          </div>
+          <div className="rounded-2xl border border-white/8 bg-white/3 p-6 md:p-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+              <div>
+                <h3 className="text-lg font-bold">GCSE Grading Scale: 9–1 Explained</h3>
+                <p className="text-sm text-white/50 mt-1">England, Wales &amp; Northern Ireland · 2025 results</p>
+              </div>
+              <Link href="/exams/gcse" className="text-sm font-semibold text-indigo-300 hover:text-indigo-200 inline-flex items-center gap-1.5 shrink-0">
+                GCSE grade boundary checker <ArrowRight />
+              </Link>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
+              {GCSE_GRADE_INFO.map(({ grade, label, pct, color }) => (
+                <div key={grade} className="rounded-xl border border-white/8 bg-white/4 p-3 text-center">
+                  <p className="text-2xl font-bold" style={{ color }}>{grade}</p>
+                  <p className="text-xs text-white/60 mt-1">{label}</p>
+                  <p className="text-[10px] text-white/35 mt-0.5">{pct}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-white/30 mt-5">
+              Approximate national proportions. Grade 5 is the "strong pass" required by many sixth forms and employers.{' '}
+              <Link href="/exams/gcse/grade-boundaries-explained" className="text-indigo-400 hover:underline">How grade boundaries work →</Link>
+            </p>
+          </div>
+        </section>
+
+        {/* ── A-LEVELS ──────────────────────────────────────────────── */}
+        <section className="py-14 px-4 bg-white/[0.025] border-y border-white/6">
+          <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center gap-8">
+            <div className="flex-1">
+              <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">UK Advanced Qualifications</p>
+              <h2 className="text-2xl font-bold mb-3">A-Level Grade Boundaries &amp; UCAS Points</h2>
+              <p className="text-white/55 leading-relaxed mb-4 max-w-lg">
+                Find A-Level grade boundaries for AQA, Edexcel, OCR, and WJEC. See how your predicted
+                or actual grades convert to UCAS Tariff points and understand what's needed for your
+                university offer.
+              </p>
+              <ul className="space-y-2 text-sm">
+                {['A* = 56 UCAS points', 'A = 48 UCAS points', 'B = 40 UCAS points', 'C = 32 UCAS points'].map((f) => (
+                  <li key={f} className="flex items-center gap-2 text-white/65">
+                    <CheckIcon /> {f}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="md:w-64 shrink-0">
+              <Link
+                href="/exams/a-levels"
+                className="block w-full rounded-2xl border border-indigo-500/30 bg-indigo-600/15 px-6 py-5 text-center hover:bg-indigo-600/25 transition-colors"
+              >
+                <span className="text-3xl mb-2 block">📚</span>
+                <p className="font-bold text-lg text-indigo-200">A-Level Boundaries</p>
+                <p className="text-sm text-white/50 mt-1">All boards · {currentYear}</p>
+                <p className="mt-4 text-sm font-semibold text-indigo-300 inline-flex items-center gap-1.5">
+                  Check grade boundaries <ArrowRight />
+                </p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ── GRAD ADMISSIONS ────────────────────────────────────────── */}
+        <section className="py-20 px-4 max-w-6xl mx-auto">
+          <div className="mb-12">
+            <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">Graduate Admissions</p>
+            <h2 className="text-3xl font-bold">GRE, GMAT &amp; LSAT Score Calculators</h2>
+            <p className="text-white/50 mt-3 max-w-xl">
+              Applying to grad school, business school, or law school? Find your score percentile and
+              compare against program medians.
+            </p>
+          </div>
+          <div className="grid sm:grid-cols-3 gap-5">
+            {GRAD_EXAMS.map((exam) => (
+              <Link
+                key={exam.href}
+                href={exam.href}
+                className="group rounded-2xl border border-white/10 bg-white/4 p-6 hover:border-indigo-500/40 hover:bg-indigo-950/30 transition-all duration-300"
+              >
+                <span className="text-3xl mb-4 block">{exam.emoji}</span>
+                <h3 className="text-lg font-bold mb-1 group-hover:text-indigo-300 transition-colors">{exam.title}</h3>
+                <p className="text-xs text-indigo-400 font-medium mb-3">{exam.subtitle}</p>
+                <p className="text-sm text-white/55 leading-relaxed mb-5">{exam.desc}</p>
+                <span className="inline-flex items-center gap-2 text-sm font-semibold text-indigo-300 group-hover:text-indigo-200 transition-colors">
+                  {exam.cta} <ArrowRight />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ── HOW IT WORKS ──────────────────────────────────────────── */}
+        <section id="how-it-works" className="py-20 px-4 bg-white/[0.025] border-y border-white/6">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-14">
+              <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">How it works</p>
+              <h2 className="text-3xl font-bold">From score to insight in seconds</h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8">
+              {HOW_STEPS.map(({ n, title, body }) => (
+                <div key={n} className="relative">
+                  <p className="text-5xl font-black text-white/6 absolute -top-3 -left-1 select-none">{n}</p>
+                  <div className="relative pl-3">
+                    <h3 className="text-lg font-bold mb-2">{title}</h3>
+                    <p className="text-white/55 text-sm leading-relaxed">{body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="mt-12 text-center">
+              <p className="text-sm text-white/40">
+                No account. No email. No ads obscuring your result.{' '}
+                <Link href="/exams/act" className="text-indigo-400 hover:underline">Start with the ACT calculator →</Link>
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── FAQ ───────────────────────────────────────────────────── */}
+        <section id="faq" className="py-20 px-4 border-b border-white/6">
+          <div className="max-w-3xl mx-auto">
+            <div className="text-center mb-12">
+              <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">FAQ</p>
+              <h2 className="text-3xl font-bold">Frequently Asked Questions</h2>
+              <p className="text-white/45 text-sm mt-3">
+                Common questions about ACT scores, SAT scores, and GCSE grade boundaries.
+              </p>
+            </div>
+            <div className="divide-y divide-white/8">
+              {FAQS.map(({ q, a }) => (
+                <details key={q} className="group py-5 cursor-pointer list-none">
+                  <summary className="flex items-center justify-between gap-4 text-white font-medium text-sm leading-snug select-none marker:hidden [&::-webkit-details-marker]:hidden">
+                    {q}
+                    <span className="shrink-0 text-white/35 group-open:rotate-45 transition-transform duration-200 text-lg leading-none">+</span>
+                  </summary>
+                  <p className="mt-3 text-sm text-white/55 leading-relaxed">{a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── ARTICLES / RESOURCES ─────────────────────────────────── */}
+        <section className="py-20 px-4 bg-white/[0.025] border-b border-white/6">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+              <div>
+                <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">Guides &amp; resources</p>
+                <h2 className="text-3xl font-bold">Score guides, prep tips &amp; deep dives</h2>
+              </div>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {ARTICLES.map(({ href, title, tag }) => (
+                <Link
+                  key={href}
+                  href={href}
+                  className="group rounded-xl border border-white/8 bg-white/4 p-5 hover:border-indigo-500/30 hover:bg-indigo-950/20 transition-all duration-200"
+                >
+                  <span className="inline-block text-[10px] font-bold tracking-wider uppercase bg-indigo-600/20 text-indigo-400 border border-indigo-500/20 rounded-full px-2.5 py-0.5 mb-3">
+                    {tag}
+                  </span>
+                  <p className="text-sm font-medium text-white/80 leading-snug group-hover:text-white transition-colors">{title}</p>
+                  <span className="inline-flex items-center gap-1 mt-3 text-xs text-indigo-400">Read guide <ArrowRight /></span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── BOTTOM CTA ───────────────────────────────────────────── */}
+        <section className="py-24 px-4 text-center relative">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10"
+            style={{
+              background:
+                'radial-gradient(ellipse 60% 60% at 50% 100%, rgba(99,102,241,0.12) 0%, transparent 70%)',
+            }}
+          />
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to see your score?</h2>
+          <p className="text-white/50 mb-10 max-w-lg mx-auto">Pick your exam below. Free, instant, no signup required.</p>
+          <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
+            {[
+              { href: '/exams/act', label: 'ACT Score Calculator' },
+              { href: '/exams/sat', label: 'SAT Score Calculator' },
+              { href: '/exams/gcse', label: 'GCSE Grade Boundaries' },
+              { href: '/exams/gcse/aqa', label: 'AQA Boundaries' },
+              { href: '/exams/gcse/edexcel', label: 'Edexcel Boundaries' },
+              { href: '/exams/gcse/ocr', label: 'OCR Boundaries' },
+              { href: '/exams/gcse/wjec', label: 'WJEC Boundaries' },
+              { href: '/exams/a-levels', label: 'A-Level Boundaries' },
+              { href: '/exams/gre', label: 'GRE Calculator' },
+              { href: '/exams/gmat', label: 'GMAT Calculator' },
+              { href: '/exams/lsat', label: 'LSAT Calculator' },
+            ].map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="rounded-full border border-white/10 bg-white/5 px-5 py-2 text-sm font-medium text-white/75 hover:bg-indigo-600/25 hover:border-indigo-500/40 hover:text-white transition-all duration-200"
+              >
+                {label}
+              </Link>
+            ))}
+          </div>
+        </section>
+
+      </main>
+      <Footer />
+    </>
   );
 }
