@@ -613,7 +613,7 @@ export default function ACTScoreReleasePage() {
             <div className="mt-5 grid sm:grid-cols-2 gap-4">
               {[
                 { icon: '🆓', title: 'Four free sends at registration', body: 'You can designate up to 4 colleges to receive your scores for free — but only if you choose them before your test (during registration or up to 3 days before). Post-test score sends cost $16 each.', color: '#34d399' },
-                { icon: '🎯', title: 'Score Choice: you control what's sent', body: 'ACT Score Choice lets you choose which test date\'s scores to send to each college. Most colleges only see what you send — but check each school\'s policy, as some require all scores.', color: '#6366f1' },
+                { icon: '🎯', title: "Score Choice: you control what's sent", body: 'ACT Score Choice lets you choose which test date\'s scores to send to each college. Most colleges only see what you send — but check each school\'s policy, as some require all scores.', color: '#6366f1' },
                 { icon: '📊', title: 'Superscores are sent automatically', body: 'When you send any ACT score report, your superscore (if you have multiple sittings) is included automatically. Colleges with a superscore policy will use it.', color: '#a855f7' },
                 { icon: '⏳', title: 'College application deadlines', body: 'Score reports take 3–8 business days to reach colleges after you request them. Do not leave score sends until the week of a deadline — build in at least 2 weeks.', color: '#f59e0b' },
               ].map(tip => (
