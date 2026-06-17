@@ -1,23 +1,28 @@
-'use client';
-
-import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
+import type { Metadata } from 'next';
+import { GCSECalculatorClient } from '@/components/gcse-client-component';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import {
-  GCSE_GRADE_INFO, GCSE_KEY_THRESHOLDS,
-  getGradeFromMark, getPercentageFromMark,
+  GCSE_GRADE_INFO,
   type GCSEBoundary,
 } from '@/lib/gcse-data';
 import { ChevronDown } from 'lucide-react';
 import Link from 'next/link';
 
-const COLOR = '#a855f7'; // Purple-500 for OCR visual identity
+// ─────────────────────────────────────────────
+// METADATA (server-side, deduped by Next.js)
+// ─────────────────────────────────────────────
+export const metadata: Metadata = {
+  title: 'OCR GCSE Grade Boundaries 2026 | Raw Mark Calculator',
+  description:
+    'Enter your raw mark → see your OCR GCSE grade in 3 seconds. Official OCR grade boundaries 2026 for Maths (out of 300), English, Sciences. Updates live 20 Aug 2026.',
+};
+
+const COLOR = '#a855f7';
 
 // ─────────────────────────────────────────────
 // OCR 2025 GRADE BOUNDARIES
 // Source: OCR official grade boundary documents, June 2025
-// Note: OCR Maths raw marks out of 300; other subjects vary
 // ─────────────────────────────────────────────
 const OCR_2025: GCSEBoundary[] = [
   { subject: 'Maths', board: 'OCR', tier: 'Higher', maxMark: 300,
@@ -62,16 +67,13 @@ const OCR_MATHS_YOY = [
 ];
 
 const CROSS_BOARD_2025 = [
-  { label: 'OCR Maths Higher',       g9: '258 (86%)', g5: '86 (29%)',  g4: '47 (16%)',  max: 300, color: '#a855f7' },
-  { label: 'AQA Maths Higher',       g9: '219 (91%)', g5: '96 (40%)',  g4: '63 (26%)',  max: 240, color: '#34d399' },
-  { label: 'Edexcel Maths Higher',   g9: '217 (90%)', g5: '87 (36%)',  g4: '53 (22%)',  max: 240, color: '#6366f1' },
-  { label: 'OCR English Language',   g9: '120 (75%)', g5: '81 (51%)',  g4: '71 (44%)',  max: 160, color: '#a855f7' },
-  { label: 'AQA English Language',   g9: '119 (74%)', g5: '82 (51%)',  g4: '73 (46%)',  max: 160, color: '#34d399' },
+  { label: 'OCR Maths Higher',        g9: '258 (86%)', g5: '86 (29%)',  g4: '47 (16%)',  max: 300, color: '#a855f7' },
+  { label: 'AQA Maths Higher',        g9: '219 (91%)', g5: '96 (40%)',  g4: '63 (26%)',  max: 240, color: '#34d399' },
+  { label: 'Edexcel Maths Higher',    g9: '217 (90%)', g5: '87 (36%)',  g4: '53 (22%)',  max: 240, color: '#6366f1' },
+  { label: 'OCR English Language',    g9: '120 (75%)', g5: '81 (51%)',  g4: '71 (44%)',  max: 160, color: '#a855f7' },
+  { label: 'AQA English Language',    g9: '119 (74%)', g5: '82 (51%)',  g4: '73 (46%)',  max: 160, color: '#34d399' },
   { label: 'Edexcel English Language',g9: '122 (76%)', g5: '83 (52%)',  g4: '73 (46%)',  max: 160, color: '#6366f1' },
 ];
-
-const SUBJECTS = [...new Set(OCR_2025.map(b => b.subject))];
-const TIERS_FOR = (subject: string) => OCR_2025.filter(b => b.subject === subject).map(b => b.tier);
 
 const OCR_FAQS = [
   {
@@ -101,24 +103,50 @@ const OCR_FAQS = [
 ];
 
 // ─────────────────────────────────────────────
-// COMPONENTS
+// SCHEMA MARKUP (static, defined at module level)
 // ─────────────────────────────────────────────
-function GradeBox({ grade, info }: { grade: number; info: typeof GCSE_GRADE_INFO[number] }) {
-  return (
-    <motion.div key={grade} initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }}
-      className="flex flex-col items-center gap-3">
-      <div className="w-28 h-28 rounded-2xl flex items-center justify-center border-2 shadow-lg"
-        style={{ backgroundColor: `${info.color}15`, borderColor: `${info.color}40` }}>
-        <span className="text-7xl font-bold leading-none" style={{ color: info.color }}>{grade}</span>
-      </div>
-      <div className="text-center">
-        <p className="text-sm font-semibold text-white">{info.label}</p>
-        <p className="text-xs text-slate-400">{info.equiv}</p>
-      </div>
-    </motion.div>
-  );
-}
+const schemaBreadcrumb = {
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gradesnova.com' },
+    { '@type': 'ListItem', position: 2, name: 'GCSE Calculators', item: 'https://gradesnova.com/exams/gcse' },
+    { '@type': 'ListItem', position: 3, name: 'OCR Grade Boundaries', item: 'https://gradesnova.com/exams/gcse/ocr' },
+  ],
+};
+const schemaFAQ = {
+  '@context': 'https://schema.org', '@type': 'FAQPage',
+  mainEntity: OCR_FAQS.map(f => ({
+    '@type': 'Question', name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.answer },
+  })),
+};
+const schemaTool = {
+  '@context': 'https://schema.org', '@type': 'WebApplication',
+  name: 'OCR GCSE Grade Boundaries Calculator 2026',
+  url: 'https://gradesnova.com/exams/gcse/ocr',
+  description: 'OCR GCSE grade boundaries calculator 2026. Enter your raw mark, instantly find your grade. Official OCR data. 2026 boundaries live on 20 Aug 2026.',
+  applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
+  provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
+  dateModified: '2026-05-26',
+};
+const schemaDataset = {
+  '@context': 'https://schema.org', '@type': 'Dataset',
+  name: 'OCR GCSE Grade Boundaries 2026',
+  description: 'Official GCSE grade boundary data for OCR (Oxford Cambridge and RSA) from the June 2025 exam series. Includes Maths, English Language, English Literature, Biology, Chemistry, Physics, History, Geography and Computer Science.',
+  url: 'https://gradesnova.com/exams/gcse/ocr',
+  creator: { '@type': 'Organization', name: 'GradesNova' },
+  datePublished: '2025-08-21',
+  dateModified: '2026-05-26',
+  keywords: 'GCSE, grade boundaries, OCR, Oxford Cambridge and RSA, 2026, raw marks',
+  temporalCoverage: '2025/2026',
+  spatialCoverage: 'United Kingdom',
+  isBasedOn: ['https://www.ocr.org.uk/administration/grade-boundaries/'],
+};
 
+// ─────────────────────────────────────────────
+// SUB-COMPONENTS (server-renderable)
+// ─────────────────────────────────────────────
 function OCRSubjectsTable({ rows }: { rows: GCSEBoundary[] }) {
   return (
     <div className="overflow-x-auto">
@@ -183,96 +211,22 @@ function FAQSection() {
 }
 
 // ─────────────────────────────────────────────
-// PAGE EXPORT
+// PAGE (SERVER COMPONENT)
 // ─────────────────────────────────────────────
 export default function OCRGCSEPage() {
-  const [subject,  setSubject]  = useState('Maths');
-  const [tier,     setTier]     = useState<'Higher'|'Foundation'>('Higher');
-  const [inputVal, setInputVal] = useState('');
-  const [mark,     setMark]     = useState(0);
-
-  const availTiers = TIERS_FOR(subject);
-
-  useMemo(() => {
-    if (!availTiers.includes(tier) && availTiers.length > 0) {
-      setTier(availTiers[0] as 'Higher' | 'Foundation');
-    }
-  }, [subject, tier, availTiers]);
-
-  const boundary = useMemo<GCSEBoundary | undefined>(() =>
-    OCR_2025.find(b => b.subject === subject && b.tier === tier)
-    ?? OCR_2025.find(b => b.subject === subject)
-  , [subject, tier]);
-
-  const grade     = useMemo(() => boundary && mark > 0 ? getGradeFromMark(mark, boundary) : null, [mark, boundary]);
-  const gradeInfo = useMemo(() => grade ? GCSE_GRADE_INFO[grade] : null, [grade]);
-  const pct       = useMemo(() => boundary && mark > 0 ? getPercentageFromMark(mark, boundary.maxMark) : null, [mark, boundary]);
-
-  // DYNAMIC PATHWAY URL
-  const subjectSlug = subject.toLowerCase().replace(/\s+/g, '-');
-  const pathwayUrl = `/exams/gcse/${subjectSlug}`;
-
-  // SCHEMA MARKUP
-  const schemaBreadcrumb = {
-    '@context': 'https://schema.org', '@type': 'BreadcrumbList',
-    itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://gradesnova.com' },
-      { '@type': 'ListItem', position: 2, name: 'GCSE Calculators', item: 'https://gradesnova.com/exams/gcse' },
-      { '@type': 'ListItem', position: 3, name: 'OCR Grade Boundaries', item: 'https://gradesnova.com/exams/gcse/ocr' },
-    ],
-  };
-  const schemaFAQ = {
-    '@context': 'https://schema.org', '@type': 'FAQPage',
-    mainEntity: OCR_FAQS.map(f => ({
-      '@type': 'Question', name: f.question,
-      acceptedAnswer: { '@type': 'Answer', text: f.answer },
-    })),
-  };
-  const schemaTool = {
-    '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'OCR GCSE Grade Boundaries Calculator 2026',
-    url: 'https://gradesnova.com/exams/gcse/ocr',
-    description: 'OCR GCSE grade boundaries calculator 2026. Enter your raw mark, instantly find your grade. Official OCR data. 2026 boundaries live on 20 Aug 2026.',
-    applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
-    offers: { '@type': 'Offer', price: '0', priceCurrency: 'GBP' },
-    provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
-    dateModified: '2026-05-26',
-  };
-  const schemaDataset = {
-    '@context': 'https://schema.org', '@type': 'Dataset',
-    name: 'OCR GCSE Grade Boundaries 2026',
-    description: 'Official GCSE grade boundary data for OCR (Oxford Cambridge and RSA) from the June 2025 exam series. Includes Maths, English Language, English Literature, Biology, Chemistry, Physics, History, Geography and Computer Science.',
-    url: 'https://gradesnova.com/exams/gcse/ocr',
-    creator: { '@type': 'Organization', name: 'GradesNova' },
-    datePublished: '2025-08-21',
-    dateModified: '2026-05-26',
-    license: 'https://creativecommons.org/licenses/by/4.0/',
-    keywords: 'GCSE, grade boundaries, OCR, Oxford Cambridge and RSA, 2026, raw marks',
-    temporalCoverage: '2025/2026',
-    spatialCoverage: 'United Kingdom',
-    isBasedOn: [
-      "https://www.ocr.org.uk/administration/grade-boundaries/"
-    ]
-  };
-
   return (
     <>
-      <title>OCR GCSE Grade Boundaries 2026 | Raw Mark Calculator</title>
-      <meta name="description" content="Enter your raw mark → see your OCR GCSE grade in 3 seconds. Official OCR grade boundaries 2026 for Maths (out of 300), English, Sciences. Updates live 20 Aug 2026." />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaBreadcrumb) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFAQ) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaTool) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaDataset) }} />
 
       <main className="bg-[#0a0c14] min-h-screen text-white">
-        {/* We can safely remove <Navbar /> and <Footer /> here if they are already in the layout,
-            but keeping them exactly as requested so we don't change anything else. */}
         <Navbar />
 
         {/* HEADER */}
         <header className="bg-[#0d0f1a] border-b border-white/6 py-10 mt-16 relative overflow-hidden">
           <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
-          
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <nav aria-label="Breadcrumb" className="mb-4">
               <ol className="flex items-center gap-2 text-xs text-slate-500">
@@ -290,24 +244,27 @@ export default function OCRGCSEPage() {
                 OCR · Oxford Cambridge and RSA · GCSE
               </span>
             </div>
-            
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
               OCR GCSE Grade Boundaries 2026
             </h1>
-            
             <div className="flex items-center gap-3 mb-5 py-2">
               <span className="text-xs text-slate-400 flex items-center gap-1.5 bg-white/5 px-3 py-1.5 rounded-full border border-white/10">
-                <svg className="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <svg className="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
                 Verified against official OCR releases. Updated: 26 May 2026
               </span>
             </div>
-
             <p className="text-lg text-slate-400 max-w-2xl">
-              Dedicated grade boundary calculator for <strong className="text-white font-medium">OCR</strong> exams. Enter your raw mark to instantly see your exact 9 to 1 grade. Covers Maths (out of 300 marks), English, Sciences, Computer Science and more. Showing <strong className="text-white font-medium">official 2025 boundaries</strong>, the most recent available. 2026 boundaries published <strong className="text-white font-medium">20 August 2026</strong>.
+              Dedicated grade boundary calculator for <strong className="text-white font-medium">OCR</strong> exams.
+              Enter your raw mark to instantly see your exact 9 to 1 grade. Covers Maths (out of 300 marks), English,
+              Sciences, Computer Science and more. Showing <strong className="text-white font-medium">official 2025
+              boundaries</strong>, the most recent available. 2026 boundaries published{' '}
+              <strong className="text-white font-medium">20 August 2026</strong>.
             </p>
             <div className="flex flex-wrap gap-3 mt-4">
               <span className="text-xs bg-purple-500/15 text-purple-400 border border-purple-500/20 px-3 py-1 rounded-full font-medium">
-                2025 data -- official OCR
+                2025 data — official OCR
               </span>
               <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">
                 2026 boundaries: 20 Aug 2026
@@ -318,206 +275,18 @@ export default function OCRGCSEPage() {
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
 
-          {/* CALCULATOR */}
-          <div className="grid lg:grid-cols-5 gap-8" id="calculator">
-            {/* Controls */}
-            <div className="lg:col-span-2 space-y-5">
-              <div className="bg-[#12141f] border border-white/8 rounded-2xl p-5 space-y-5 shadow-lg shadow-black/20">
-
-                <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl px-4 py-3 flex items-center justify-between">
-                  <span className="text-sm font-medium text-purple-400">Exam Board</span>
-                  <span className="text-xs font-bold bg-purple-500 text-white px-2 py-0.5 rounded">OCR</span>
-                </div>
-
-                <div>
-                  <label htmlFor="subj" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Subject</label>
-                  <select id="subj" value={subject}
-                    onChange={e => { setSubject(e.target.value); setMark(0); setInputVal(''); }}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-purple-500/50 cursor-pointer">
-                    {SUBJECTS.map(s => <option key={s} value={s} className="bg-[#12141f]">{s}</option>)}
-                  </select>
-                </div>
-
-                {availTiers.length > 1 && (
-                  <div>
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Tier</p>
-                    <div className="flex gap-2">
-                      {availTiers.map(t => (
-                        <button key={t} type="button" onClick={(e) => { e.preventDefault(); setTier(t as 'Higher'|'Foundation'); }}
-                          className={`flex-1 py-2 rounded-xl text-sm font-medium border transition-all
-                            ${tier === t ? 'text-white' : 'bg-white/4 border-white/8 text-slate-400 hover:text-white'}`}
-                          style={tier === t ? { backgroundColor: `${COLOR}20`, borderColor: `${COLOR}40` } : {}}>
-                          {t}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                <div>
-                  <label htmlFor="mark-input" className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-                    Your raw mark {boundary ? `(out of ${boundary.maxMark})` : ''}
-                  </label>
-                  {subject === 'Maths' && (
-                    <p className="text-[10px] text-purple-400/80 mb-2 font-medium bg-purple-500/10 px-2 py-1 rounded inline-block">
-                      Note: OCR Maths totals 300 marks (3x 100-mark papers)
-                    </p>
-                  )}
-                  <input id="mark-input" type="number" min={0} max={boundary?.maxMark ?? 300}
-                    value={inputVal}
-                    onChange={e => {
-                      const val = e.target.value;
-                      setInputVal(val);
-                      if (val === '') { setMark(0); return; }
-                      const n = parseInt(val, 10);
-                      if (!isNaN(n) && n >= 0) setMark(Math.min(n, boundary?.maxMark ?? 300));
-                    }}
-                    placeholder={`0 to ${boundary?.maxMark ?? '...'}`}
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-xl font-mono text-white placeholder-slate-700 focus:outline-none focus:border-purple-500/50" />
-
-                  {boundary && (
-                    <div className="mt-4">
-                      <div className="relative h-7 flex items-center mb-1">
-                        <div className="absolute w-full h-2 rounded-full bg-white/8" />
-                        <div className="absolute h-2 rounded-full transition-all duration-75"
-                          style={{ width: `${(mark / boundary.maxMark) * 100}%`, backgroundColor: COLOR, opacity: 0.8 }} />
-                        <input type="range" min={0} max={boundary.maxMark} step={1} value={mark}
-                          onChange={e => { const v = Number(e.target.value); setMark(v); setInputVal(String(v)); }}
-                          className="absolute w-full h-full opacity-0 cursor-pointer" style={{ zIndex: 10 }} />
-                        <div className="absolute w-6 h-6 rounded-full border-2 border-white shadow-lg shadow-black/50 pointer-events-none transition-all duration-75"
-                          style={{ left: `calc(${(mark / boundary.maxMark) * 100}% - 12px)`, backgroundColor: COLOR }} />
-                      </div>
-                      <div className="flex justify-between">
-                        <span className="text-[10px] text-slate-600 font-mono">0</span>
-                        <span className="text-[10px] text-slate-600 font-mono">{boundary.maxMark}</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-
-                {boundary && (
-                  <div>
-                    <p className="text-[10px] text-slate-600 uppercase tracking-wider font-medium mb-2">Jump to boundary</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {([9,8,7,6,5,4,3,2,1] as const).map(g => {
-                        const t = boundary.boundaries[g];
-                        if (!t) return null;
-                        return (
-                          <button key={g} type="button" onClick={(e) => { e.preventDefault(); setMark(t); setInputVal(String(t)); }}
-                            className="px-2.5 py-1 rounded-lg text-xs border transition-all hover:scale-105"
-                            style={{ backgroundColor: `${GCSE_GRADE_INFO[g].color}12`, borderColor: `${GCSE_GRADE_INFO[g].color}25`, color: GCSE_GRADE_INFO[g].color }}>
-                            {g}: {t}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Result */}
-            <div className="lg:col-span-3 space-y-5">
-              <div className="bg-[#12141f] border border-white/8 rounded-2xl p-7 min-h-[280px] flex flex-col justify-center shadow-lg shadow-black/20">
-                {grade && gradeInfo ? (
-                  <motion.div key={`${subject}-${tier}-${grade}`} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-                    <div className="flex items-center justify-center gap-10 mb-6">
-                      <GradeBox grade={grade} info={gradeInfo} />
-                      <div className="space-y-3 text-center">
-                        <div className="bg-white/4 rounded-xl p-4">
-                          <p className="text-3xl font-bold text-white tabular-nums">{pct}%</p>
-                          <p className="text-xs text-slate-500 mt-0.5">of total marks</p>
-                        </div>
-                        <div className="bg-white/4 rounded-xl p-4">
-                          <p className="text-lg font-bold text-white">{mark} / {boundary?.maxMark}</p>
-                          <p className="text-xs text-slate-500 mt-0.5">raw marks</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="rounded-xl p-4 mb-4 border"
-                      style={{ backgroundColor: `${gradeInfo.color}08`, borderColor: `${gradeInfo.color}20` }}>
-                      <p className="text-sm text-slate-300">{gradeInfo.desc}</p>
-                    </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      {[
-                        { label: 'Standard pass (4+)', met: grade >= GCSE_KEY_THRESHOLDS.standardPass },
-                        { label: 'Strong pass (5+)',   met: grade >= GCSE_KEY_THRESHOLDS.strongPass },
-                      ].map(item => (
-                        <div key={item.label}
-                          className={`rounded-xl p-3 text-center border ${item.met ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-white/4 border-white/8'}`}>
-                          <p className={`text-xs font-semibold ${item.met ? 'text-emerald-400' : 'text-slate-600'}`}>
-                            {item.met ? `+ ${item.label}` : `x ${item.label}`}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                ) : (
-                  <div className="flex flex-col items-center justify-center text-center gap-3">
-                    <div className="w-16 h-16 rounded-2xl bg-white/4 flex items-center justify-center text-3xl">🔬</div>
-                    <p className="text-slate-400 text-sm">Select an OCR subject and enter your raw mark</p>
-                    <p className="text-xs text-slate-600">Based on official 2025 OCR grade boundaries</p>
-                  </div>
-                )}
-              </div>
-
-              {/* --- DYNAMIC PATHWAY CTA --- */}
-              <Link href={pathwayUrl} className="block group">
-                <div className="bg-gradient-to-r from-purple-500/10 to-indigo-500/10 border border-purple-500/20 rounded-2xl p-6 hover:border-purple-500/40 transition-all flex items-center justify-between shadow-lg shadow-black/10">
-                  <div>
-                    <h3 className="text-purple-400 font-bold text-lg mb-1 group-hover:text-purple-300 transition-colors">
-                      {grade ? `Check what a Grade ${grade} in ${subject} can get you` : `Check what a GCSE in ${subject} can get you`}
-                    </h3>
-                    <p className="text-slate-400 text-sm">
-                      Explore A-Level requirements, university degrees, and career pathways.
-                    </p>
-                  </div>
-                  <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center group-hover:bg-purple-500/30 group-hover:scale-105 transition-all">
-                    <span className="text-purple-400 text-xl font-bold">→</span>
-                  </div>
-                </div>
-              </Link>
-              {/* ----------------------------- */}
-
-              {boundary && mark > 0 && (
-                <div className="bg-[#12141f] border border-white/8 rounded-2xl p-5">
-                  <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">
-                    {subject} {tier} -- OCR 2025 boundaries
-                  </p>
-                  <div className="space-y-2">
-                    {([9,8,7,6,5,4,3,2,1] as const).map(g => {
-                      const t = boundary.boundaries[g];
-                      if (!t) return null;
-                      const info   = GCSE_GRADE_INFO[g];
-                      const barPct = Math.round((t / boundary.maxMark) * 100);
-                      const isMe   = grade === g;
-                      return (
-                        <div key={g} className={`flex items-center gap-3 py-1.5 px-2 rounded-lg ${isMe ? 'bg-white/6' : ''}`}>
-                          <span className="text-sm font-bold w-4 shrink-0" style={{ color: info.color }}>{g}</span>
-                          <span className="text-[10px] text-slate-500 font-mono w-10 shrink-0">{t}+</span>
-                          <div className="flex-1 h-1.5 bg-white/8 rounded-full overflow-hidden">
-                            <div className="h-full rounded-full" style={{ width: `${barPct}%`, backgroundColor: info.color, opacity: 0.7 }} />
-                          </div>
-                          <span className="text-[10px] text-slate-500 font-mono w-8 text-right">{barPct}%</span>
-                          {isMe && <span className="text-[9px] text-emerald-400 font-semibold shrink-0 w-6">you</span>}
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+          {/* CALCULATOR — reuses shared client component, locked to OCR */}
+          <GCSECalculatorClient initialBoard="OCR" initialSubject="Maths" />
 
           {/* KEY FACTS STRIP */}
           <section aria-labelledby="key-facts-heading">
             <h2 id="key-facts-heading" className="sr-only">Key facts about OCR GCSE grade boundaries 2025</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {[
-                { icon: '🔬', title: 'Maths Higher — Grade 9', value: '258/300', sub: '86% of total marks', color: '#a855f7' },
-                { icon: '🔬', title: 'Maths Higher — Grade 5', value: '86/300',  sub: '28.6% — strong pass', color: '#a855f7' },
-                { icon: '🔬', title: 'Maths Higher — Grade 4', value: '47/300',  sub: '15.6% — standard pass', color: '#a855f7' },
-                { icon: '📝', title: 'English Lang — Grade 9', value: '120/160', sub: '75% of total marks',  color: '#a855f7' },
+                { icon: '🔬', title: 'Maths Higher — Grade 9', value: '258/300', sub: '86% of total marks',    color: COLOR },
+                { icon: '🔬', title: 'Maths Higher — Grade 5', value: '86/300',  sub: '28.6% — strong pass',  color: COLOR },
+                { icon: '🔬', title: 'Maths Higher — Grade 4', value: '47/300',  sub: '15.6% — standard pass', color: COLOR },
+                { icon: '📝', title: 'English Lang — Grade 9', value: '120/160', sub: '75% of total marks',    color: COLOR },
               ].map(card => (
                 <article key={card.title} className="bg-[#12141f] border border-white/8 rounded-xl p-4">
                   <div className="flex items-center gap-2 mb-2">
@@ -550,11 +319,10 @@ export default function OCRGCSEPage() {
               Why OCR Maths grade boundaries look different (The 300-Mark Rule)
             </h2>
             <p className="text-slate-400 leading-relaxed mb-4 text-sm">
-              If you compare OCR GCSE Maths boundaries to AQA or Edexcel, you will notice the raw mark numbers are significantly higher. 
-              This is <strong className="text-white">not</strong> because OCR is harder or grades more harshly—it is simply because 
-              the exams are structured differently.
+              If you compare OCR GCSE Maths boundaries to AQA or Edexcel, you will notice the raw mark numbers are
+              significantly higher. This is <strong className="text-white">not</strong> because OCR is harder or grades
+              more harshly — it is simply because the exams are structured differently.
             </p>
-            
             <div className="mt-5 grid sm:grid-cols-2 gap-4">
               <div className="bg-[#12141f] border border-purple-500/20 rounded-xl p-5">
                 <p className="text-xs font-semibold uppercase tracking-wider text-purple-400 mb-3">OCR Maths Structure</p>
@@ -574,31 +342,35 @@ export default function OCRGCSEPage() {
               </div>
             </div>
             <p className="text-slate-400 leading-relaxed mt-4 text-sm">
-              Because of this difference in maximum marks, you must convert the raw mark into a percentage before comparing boards. A grade 9 represents the exact same national standard regardless of the board.
+              Because of this difference in maximum marks, you must convert the raw mark into a percentage before
+              comparing boards. A grade 9 represents the exact same national standard regardless of the board.
             </p>
           </section>
 
           {/* OCR ALL SUBJECTS 2025 */}
           <section aria-labelledby="ocr-all-heading">
             <h2 id="ocr-all-heading" className="text-2xl font-bold text-white mb-2">
-              OCR GCSE grade boundaries 2025 -- all subjects
+              OCR GCSE grade boundaries 2025 — all subjects
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Official OCR grade boundaries for all major GCSE subjects, June 2025. 2026 boundaries update live on 20 August 2026. Verified against official OCR documents.
+              Official OCR grade boundaries for all major GCSE subjects, June 2025. 2026 boundaries update live on
+              20 August 2026. Verified against official OCR documents.
             </p>
             <OCRSubjectsTable rows={OCR_2025} />
             <p className="text-xs text-slate-600 mt-3">
-              Source: OCR June 2025 grade boundary document, published 21 August 2025. * Grade 5 = strong pass. + Grade 4 = standard pass.
+              Source: OCR June 2025 grade boundary document, published 21 August 2025.
+              * Grade 5 = strong pass. + Grade 4 = standard pass.
             </p>
           </section>
 
           {/* GRADE SYSTEM EXPLAINER */}
           <section aria-labelledby="grades-heading">
             <h2 id="grades-heading" className="text-2xl font-bold text-white mb-2">
-              OCR GCSE grading system explained -- grades 9 to 1
+              OCR GCSE grading system explained — grades 9 to 1
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              OCR uses the standard 9 to 1 grading scale. Grade 4 is the standard pass. Grade 5 is the strong pass. Grade 9 is awarded to roughly the top 4 to 5 percent of students nationally.
+              OCR uses the standard 9 to 1 grading scale. Grade 4 is the standard pass. Grade 5 is the strong pass.
+              Grade 9 is awarded to roughly the top 4 to 5 percent of students nationally.
             </p>
             <div className="bg-[#12141f] border border-white/8 rounded-xl overflow-hidden">
               <div className="px-5 py-3 border-b border-white/8">
@@ -615,12 +387,12 @@ export default function OCRGCSEPage() {
                   </thead>
                   <tbody>
                     {[
-                      { n:'9', o:'A* (top)',  d:'High A* -- top 4% nationally',   c:'#34d399' },
+                      { n:'9', o:'A* (top)',  d:'High A* — top 4% nationally',   c:'#34d399' },
                       { n:'8', o:'A*',        d:'Low A* / high A',                c:'#34d399' },
                       { n:'7', o:'A',         d:'Low A grade',                    c:'#6366f1' },
                       { n:'6', o:'B (high)',  d:'High B grade',                   c:'#6366f1' },
-                      { n:'5', o:'B/C',       d:'Strong pass -- low B / high C',  c:'#a855f7' },
-                      { n:'4', o:'C (low)',   d:'Standard pass -- low C grade',   c:'#f59e0b' },
+                      { n:'5', o:'B/C',       d:'Strong pass — low B / high C',  c:'#a855f7' },
+                      { n:'4', o:'C (low)',   d:'Standard pass — low C grade',   c:'#f59e0b' },
                       { n:'3', o:'D',         d:'D / high E grade',               c:'#f59e0b' },
                       { n:'2', o:'E/F',       d:'Low E / high F grade',           c:'#ef4444' },
                       { n:'1', o:'F/G',       d:'Low F / G grade',                c:'#6b7280' },
@@ -645,7 +417,6 @@ export default function OCRGCSEPage() {
             <p className="text-slate-400 text-sm mb-6">
               Four-year trend for OCR GCSE Maths Higher tier (out of 300). The 2026 boundary will be confirmed on Results Day.
             </p>
-
             <div className="overflow-x-auto rounded-xl border border-white/8">
               <table className="w-full text-sm min-w-[500px]" aria-label="OCR GCSE Maths Higher grade boundaries year on year">
                 <thead>
@@ -661,9 +432,7 @@ export default function OCRGCSEPage() {
                 <tbody>
                   {OCR_MATHS_YOY.map((row, i) => (
                     <tr key={row.year} className={`border-b border-white/5 last:border-0 ${i === 0 ? 'bg-purple-500/5' : i % 2 !== 0 ? 'bg-white/2' : ''}`}>
-                      <td className="px-4 py-3 font-mono font-semibold text-white">
-                        {row.year}
-                      </td>
+                      <td className="px-4 py-3 font-mono font-semibold text-white">{row.year}</td>
                       <td className="px-3 py-3 text-center font-mono text-xs text-emerald-400 font-semibold">{row.g9}</td>
                       <td className="px-3 py-3 text-center font-mono text-xs text-indigo-400">{row.g7}</td>
                       <td className="px-3 py-3 text-center font-mono text-xs text-purple-400 font-semibold">{row.g5}</td>
@@ -676,13 +445,14 @@ export default function OCRGCSEPage() {
             </div>
           </section>
 
-          {/* OCR vs AQA vs EDEXCEL COMPARISON */}
+          {/* OCR vs AQA vs EDEXCEL */}
           <section aria-labelledby="ocr-vs-boards-heading">
             <h2 id="ocr-vs-boards-heading" className="text-2xl font-bold text-white mb-2">
               OCR vs AQA vs Edexcel grade boundaries 2025
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Because OCR Maths is out of 300 marks and AQA/Edexcel are out of 240, we calculate the percentage of total marks required to accurately compare the difficulty.
+              Because OCR Maths is out of 300 marks and AQA/Edexcel are out of 240, we calculate the percentage of
+              total marks required to accurately compare the difficulty.
             </p>
             <div className="overflow-x-auto rounded-xl border border-white/8 mt-6">
               <table className="w-full text-sm min-w-[600px]" aria-label="OCR vs AQA vs Edexcel GCSE grade boundaries comparison 2025">
@@ -718,11 +488,11 @@ export default function OCRGCSEPage() {
             <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">Other free calculators</h2>
             <div className="flex flex-wrap gap-2">
               {[
-                { id: 'gcse/aqa', name: 'AQA Boundaries 2026', color: '#34d399' },
-                { id: 'gcse/edexcel', name: 'Edexcel Boundaries 2026', color: '#6366f1' },
-                { id: 'gcse/wjec', name: 'WJEC Boundaries 2026', color: '#f59e0b' },
-                { id: 'gcse', name: 'All Boards Comparison', color: '#ec4899' },
-                { id: 'a-levels', name: 'A-Level Grade Boundaries', color: '#ec4899' },
+                { id: 'gcse/aqa',     name: 'AQA Boundaries 2026',      color: '#34d399' },
+                { id: 'gcse/edexcel', name: 'Edexcel Boundaries 2026',  color: '#6366f1' },
+                { id: 'gcse/wjec',   name: 'WJEC Boundaries 2026',     color: '#f59e0b' },
+                { id: 'gcse',         name: 'All Boards Comparison',     color: '#ec4899' },
+                { id: 'a-levels',     name: 'A-Level Grade Boundaries',  color: '#ec4899' },
               ].map(e => (
                 <Link key={e.id} href={`/exams/${e.id}`}
                   className="px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all hover:scale-105"
