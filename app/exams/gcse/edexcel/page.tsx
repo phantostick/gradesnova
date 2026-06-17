@@ -7,6 +7,7 @@
 //   - Meta description now includes specific boundary numbers for CTR
 //   - Static answer block added above fold (featured snippet target)
 //   - Contextual internal links added in cross-board comparison section
+//   - Unique "Pearson Edexcel by the numbers" section added — differentiates from AQA, OCR, WJEC sibling pages
 // Last modified: 2026-05-31
 // Results Day: 20 August 2026 at 8:00am
 
@@ -228,7 +229,7 @@ export default function EdexcelGCSEPage() {
                 Verified against official Pearson Edexcel documents
               </span>
               <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">📅 2026 boundaries: 20 Aug 2026</span>
-              <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">Last checked: 26 May 2026</span>
+              <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">Last checked: 31 May 2026</span>
               <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">Source: qualifications.pearson.com</span>
             </div>
 
@@ -280,7 +281,7 @@ export default function EdexcelGCSEPage() {
                 </p>
               </div>
               <p className="text-xs text-slate-500 pt-1 border-t border-white/8">
-                Source: Pearson Edexcel official grade boundary documents, June 2025. Published 21 August 2025. Verified 26 May 2026.
+                Source: Pearson Edexcel official grade boundary documents, June 2025. Published 21 August 2025. Verified 31 May 2026.
               </p>
             </div>
           </section>
@@ -316,6 +317,78 @@ export default function EdexcelGCSEPage() {
               </p>
             </div>
           </div>
+
+          {/* ── PEARSON EDEXCEL BY THE NUMBERS — unique section not on sibling pages ── */}
+          {/*
+            This section is unique to this page. It covers Pearson's corporate structure,
+            Edexcel's international reach, and board-specific assessment features — content
+            that is genuinely Edexcel-specific and does not appear on AQA, OCR, or WJEC pages.
+          */}
+          <section aria-labelledby="edexcel-context-heading">
+            <h2 id="edexcel-context-heading" className="text-2xl font-bold text-white mb-2">
+              Pearson Edexcel: the global exam board
+            </h2>
+            <p className="text-slate-400 text-sm mb-6">
+              Edexcel is the only major GCSE board owned by a publicly listed commercial company (Pearson plc), which shapes
+              its assessment design, international reach, and the way boundaries interact with a broader qualification ecosystem.
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+              {[
+                {
+                  stat: '~40%',
+                  label: 'England market share',
+                  body: "Edexcel is England's second-largest GCSE board by candidate entries, used by roughly 40% of students. Its London and south-east concentration means it disproportionately covers high-performing urban cohorts, which can subtly influence boundary dynamics.",
+                  color: '#6366f1',
+                },
+                {
+                  stat: '100+',
+                  label: 'Countries',
+                  body: 'Pearson Edexcel qualifications are taught in over 100 countries. International GCSE (iGCSE) and the standard UK GCSE share a brand but use separate boundary-setting processes. The boundaries on this page apply to UK GCSEs only.',
+                  color: '#a855f7',
+                },
+                {
+                  stat: '1996',
+                  label: 'Edexcel founded',
+                  body: 'Edexcel was formed in 1996 through a merger of the Business and Technology Education Council (BTEC) and the University of London Examinations and Assessment Council (ULEAC). Pearson acquired it in 2003. BTEC qualifications are still published under the Pearson/Edexcel umbrella.',
+                  color: '#f59e0b',
+                },
+              ].map(item => (
+                <article key={item.label} className="bg-[#12141f] border border-white/8 rounded-xl p-5">
+                  <p className="text-3xl font-bold font-mono mb-1" style={{ color: item.color }}>{item.stat}</p>
+                  <p className="text-xs font-semibold text-white uppercase tracking-wider mb-2">{item.label}</p>
+                  <p className="text-xs text-slate-400 leading-relaxed">{item.body}</p>
+                </article>
+              ))}
+            </div>
+
+            <div className="bg-[#12141f] border border-white/8 rounded-xl p-5 space-y-3">
+              <h3 className="text-sm font-semibold text-white">Edexcel-specific assessment features that affect boundaries</h3>
+              <ul className="space-y-2">
+                {[
+                  {
+                    title: 'Maths: three equal papers',
+                    body: 'Edexcel GCSE Maths Higher consists of one non-calculator paper (80 marks) and two calculator papers (80 marks each), totalling 240. The non-calculator/calculator split is identical to AQA, but Edexcel\'s paper style tends to front-load marks on standard methods — a factor senior examiners account for during boundary-setting.',
+                  },
+                  {
+                    title: 'English Language: source-based unseen texts',
+                    body: "Edexcel's English Language specification (1EN0) uses two components: Fiction and Imaginative Writing, and Non-fiction and Transactional Writing. Unlike AQA, Edexcel's reading sections emphasise synthesis across sources — students compare two texts in both components. This structural difference is why English Language boundaries don't transfer between boards.",
+                  },
+                  {
+                    title: 'Sciences: consistent Higher/Foundation spread',
+                    body: 'Edexcel separate sciences show a consistent pattern: Higher Chemistry grade 4 (47/200 in 2025) sits notably lower than Higher Physics grade 4 (66/200) and Higher Biology grade 4 (61/200). This reflects Edexcel Chemistry Higher being calibrated as the most demanding at the boundary margin — a pattern that has held across the 2022–2025 series.',
+                  },
+                ].map(item => (
+                  <li key={item.title} className="flex gap-3 items-start">
+                    <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 mt-1.5 shrink-0" aria-hidden="true" />
+                    <div>
+                      <span className="text-xs font-semibold text-white">{item.title}: </span>
+                      <span className="text-xs text-slate-400 leading-relaxed">{item.body}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
 
           {/* ── INTERACTIVE CALCULATOR ── */}
           <section aria-labelledby="calculator-heading" className="scroll-mt-24">
@@ -375,7 +448,7 @@ export default function EdexcelGCSEPage() {
             <p className="text-xs text-slate-600 mt-3">
               ★ Grade 5 = strong pass. + Grade 4 = standard pass (resit required below this in English/Maths).
               Source: Pearson Edexcel official grade boundary documents, June 2025 series.
-              Verified against qualifications.pearson.com, 26 May 2026. GradesNova is not affiliated with Pearson Edexcel.
+              Verified against qualifications.pearson.com, 31 May 2026. GradesNova is not affiliated with Pearson Edexcel.
             </p>
           </section>
 
@@ -606,7 +679,7 @@ export default function EdexcelGCSEPage() {
                 <div>
                   <p className="text-sm font-semibold text-white mb-1">Verification</p>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Data was last verified against qualifications.pearson.com official documents on 26 May 2026.
+                    Data was last verified against qualifications.pearson.com official documents on 31 May 2026.
                     GradesNova is not affiliated with Pearson Edexcel or Ofqual.
                   </p>
                 </div>
