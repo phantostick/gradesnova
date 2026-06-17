@@ -12,7 +12,7 @@ import {
   type GCSEBoundary,
 } from '@/lib/gcse-data';
 
-const COLOR = '#34d399'; // Default main theme color
+const COLOR = '#34d399';
 
 // ── LOCAL BOARD DATA ──
 const WJEC_2025: GCSEBoundary[] = [
@@ -88,16 +88,141 @@ function GradeBox({ grade, info }: { grade: number; info: typeof GCSE_GRADE_INFO
   );
 }
 
+// ── PATHWAY CTA ──
+// Separate component so the logic is readable and both states are explicit.
+function PathwayCTA({
+  grade,
+  subject,
+  pathwayUrl,
+  boardColor,
+}: {
+  grade: number | null;
+  subject: string;
+  pathwayUrl: string;
+  boardColor: string;
+}) {
+  // Zero / no mark entered — tease the feature without showing a broken state
+  if (!grade) {
+    return (
+      <Link href={pathwayUrl} className="block group">
+        <div
+          className="relative overflow-hidden rounded-2xl border p-6 transition-all duration-200
+                     hover:scale-[1.015] hover:shadow-xl hover:shadow-black/30
+                     active:scale-[1.01]"
+          style={{
+            background: `linear-gradient(135deg, ${boardColor}14 0%, ${boardColor}08 100%)`,
+            borderColor: `${boardColor}30`,
+          }}
+        >
+          {/* Subtle animated glow on hover */}
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
+            style={{ background: `radial-gradient(ellipse at 20% 50%, ${boardColor}18 0%, transparent 60%)` }}
+          />
+
+          <div className="relative flex items-center justify-between gap-4">
+            <div className="flex-1 min-w-0">
+              <p className="text-[10px] font-semibold uppercase tracking-widest mb-1.5" style={{ color: `${boardColor}99` }}>
+                After your GCSEs →
+              </p>
+              <h3 className="text-base font-bold text-white mb-1 group-hover:text-white/90 transition-colors leading-snug">
+                Where can {subject} take you?
+              </h3>
+              <p className="text-slate-400 text-xs leading-relaxed">
+                Enter your mark above, then explore A-Level options, university courses, and career paths.
+              </p>
+            </div>
+            <div
+              className="shrink-0 w-11 h-11 rounded-full flex items-center justify-center
+                         transition-all duration-200 group-hover:scale-110"
+              style={{ backgroundColor: `${boardColor}25`, border: `1.5px solid ${boardColor}40` }}
+            >
+              <span className="text-lg font-bold" style={{ color: boardColor }}>→</span>
+            </div>
+          </div>
+        </div>
+      </Link>
+    );
+  }
+
+  // Grade known — show the personalised, high-urgency CTA
+  const gradeInfo = GCSE_GRADE_INFO[grade];
+
+  return (
+    <Link href={pathwayUrl} className="block group">
+      <div
+        className="relative overflow-hidden rounded-2xl border p-6 transition-all duration-200
+                   hover:scale-[1.015] hover:shadow-xl hover:shadow-black/30
+                   active:scale-[1.01]"
+        style={{
+          background: `linear-gradient(135deg, ${boardColor}18 0%, ${boardColor}0a 100%)`,
+          borderColor: `${boardColor}45`,
+        }}
+      >
+        {/* Animated glow blob */}
+        <div
+          className="absolute -top-6 -right-6 w-32 h-32 rounded-full blur-2xl opacity-30
+                     group-hover:opacity-50 transition-opacity duration-300 pointer-events-none"
+          style={{ backgroundColor: boardColor }}
+        />
+        {/* Grade badge watermark */}
+        <div
+          className="absolute right-16 top-1/2 -translate-y-1/2 text-8xl font-black opacity-[0.06]
+                     select-none pointer-events-none"
+          style={{ color: gradeInfo.color }}
+        >
+          {grade}
+        </div>
+
+        <div className="relative flex items-center justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <p className="text-[10px] font-semibold uppercase tracking-widest mb-1.5" style={{ color: `${boardColor}bb` }}>
+              You got a Grade {grade} — what's next?
+            </p>
+            <h3 className="text-lg font-bold text-white mb-1.5 group-hover:text-white/90 transition-colors leading-snug">
+              See every door your {subject} grade opens
+            </h3>
+            <p className="text-slate-400 text-xs leading-relaxed max-w-xs">
+              A-Levels that accept Grade {grade}, degree courses, apprenticeships, and real career paths.
+            </p>
+            <div className="mt-3 flex items-center gap-2">
+              <span
+                className="inline-flex items-center gap-1 text-[11px] font-semibold px-2.5 py-1 rounded-full border"
+                style={{
+                  color: boardColor,
+                  backgroundColor: `${boardColor}18`,
+                  borderColor: `${boardColor}35`,
+                }}
+              >
+                Explore pathways
+                <svg className="w-3 h-3 group-hover:translate-x-0.5 transition-transform duration-150" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div
+            className="shrink-0 w-12 h-12 rounded-full flex items-center justify-center
+                       transition-all duration-200 group-hover:scale-110 group-hover:rotate-12"
+            style={{ backgroundColor: `${boardColor}25`, border: `1.5px solid ${boardColor}50` }}
+          >
+            <span className="text-xl font-black" style={{ color: boardColor }}>→</span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
 interface CalculatorProps {
   initialBoard?: 'AQA' | 'Edexcel' | 'OCR' | 'WJEC';
   initialSubject?: string;
 }
 
 // ── MAIN CLIENT EXPORT ──
-// Removed the "default" keyword here so it properly imports as a named component
-export function GCSECalculatorClient({ 
-  initialBoard = 'AQA', 
-  initialSubject = 'Maths' 
+export function GCSECalculatorClient({
+  initialBoard = 'AQA',
+  initialSubject = 'Maths',
 }: CalculatorProps) {
   const [subject,  setSubject]  = useState(initialSubject);
   const [board,    setBoard]    = useState<'AQA'|'Edexcel'|'OCR'|'WJEC'>(initialBoard);
@@ -108,18 +233,12 @@ export function GCSECalculatorClient({
   const availBoards = BOARDS_FOR(subject);
   const availTiers  = TIERS_FOR(subject, board);
 
-  // Auto-adjust board if it's not available for the selected subject
   useMemo(() => {
-    if (!availBoards.includes(board) && availBoards.length > 0) {
-      setBoard(availBoards[0]);
-    }
+    if (!availBoards.includes(board) && availBoards.length > 0) setBoard(availBoards[0]);
   }, [subject, board, availBoards]);
 
-  // Auto-adjust tier if it's not available for the selected subject + board
   useMemo(() => {
-    if (!availTiers.includes(tier) && availTiers.length > 0) {
-      setTier(availTiers[0] as 'Higher' | 'Foundation');
-    }
+    if (!availTiers.includes(tier) && availTiers.length > 0) setTier(availTiers[0] as 'Higher' | 'Foundation');
   }, [subject, board, tier, availTiers]);
 
   const boundary = useMemo<GCSEBoundary | undefined>(() =>
@@ -131,13 +250,19 @@ export function GCSECalculatorClient({
   const gradeInfo = useMemo(() => grade ? GCSE_GRADE_INFO[grade] : null, [grade]);
   const pct       = useMemo(() => boundary && mark > 0 ? getPercentageFromMark(mark, boundary.maxMark) : null, [mark, boundary]);
 
-  // Generate dynamic subject slug for routing
   const subjectSlug = subject.toLowerCase().replace(/\s+/g, '-');
-  const pathwayUrl = `/exams/gcse/${subjectSlug}/sixth-form`;
+  const pathwayUrl  = `/exams/gcse/${subjectSlug}/sixth-form`;
+
+  // Active board colour (used across CTA + tier buttons)
+  const boardColor =
+    board === 'Edexcel' ? '#6366f1' :
+    board === 'OCR'     ? '#a855f7' :
+    board === 'WJEC'    ? '#f59e0b' :
+    COLOR;
 
   return (
     <div className="grid lg:grid-cols-5 gap-8" id="calculator">
-      {/* Controls */}
+      {/* ── CONTROLS ── */}
       <div className="lg:col-span-2 space-y-5">
         <div className="bg-[#12141f] border border-white/8 rounded-2xl p-5 space-y-5 shadow-lg shadow-black/20">
 
@@ -155,17 +280,16 @@ export function GCSECalculatorClient({
             <div className="flex flex-wrap gap-2">
               {(['AQA','Edexcel','OCR','WJEC'] as const).map(b => {
                 const avail = availBoards.includes(b);
-                // Assign brand colors based on the board
-                let activeColor = COLOR;
-                if (b === 'Edexcel') activeColor = '#6366f1';
-                if (b === 'OCR') activeColor = '#a855f7';
-                if (b === 'WJEC') activeColor = '#f59e0b';
-
+                const bColor =
+                  b === 'Edexcel' ? '#6366f1' :
+                  b === 'OCR'     ? '#a855f7' :
+                  b === 'WJEC'    ? '#f59e0b' :
+                  COLOR;
                 return (
                   <button key={b} type="button" onClick={(e) => { e.preventDefault(); if (avail) setBoard(b); }} disabled={!avail}
                     className={`px-3 py-1.5 rounded-lg text-sm font-medium border transition-all
                       ${board === b && avail ? 'text-white' : avail ? 'bg-white/4 border-white/8 text-slate-400 hover:text-white' : 'border-white/5 text-slate-700 cursor-not-allowed'}`}
-                    style={board === b && avail ? { backgroundColor: `${activeColor}20`, borderColor: `${activeColor}40` } : {}}>
+                    style={board === b && avail ? { backgroundColor: `${bColor}20`, borderColor: `${bColor}40` } : {}}>
                     {b}
                   </button>
                 );
@@ -177,21 +301,14 @@ export function GCSECalculatorClient({
             <div>
               <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Tier</p>
               <div className="flex gap-2">
-                {availTiers.map(t => {
-                  let activeColor = COLOR;
-                  if (board === 'Edexcel') activeColor = '#6366f1';
-                  if (board === 'OCR') activeColor = '#a855f7';
-                  if (board === 'WJEC') activeColor = '#f59e0b';
-
-                  return (
-                    <button key={t} type="button" onClick={(e) => { e.preventDefault(); setTier(t as 'Higher'|'Foundation'); }}
-                      className={`flex-1 py-2 rounded-xl text-sm font-medium border transition-all
-                        ${tier === t ? 'text-white' : 'bg-white/4 border-white/8 text-slate-400 hover:text-white'}`}
-                      style={tier === t ? { backgroundColor: `${activeColor}20`, borderColor: `${activeColor}40` } : {}}>
-                      {t}
-                    </button>
-                  );
-                })}
+                {availTiers.map(t => (
+                  <button key={t} type="button" onClick={(e) => { e.preventDefault(); setTier(t as 'Higher'|'Foundation'); }}
+                    className={`flex-1 py-2 rounded-xl text-sm font-medium border transition-all
+                      ${tier === t ? 'text-white' : 'bg-white/4 border-white/8 text-slate-400 hover:text-white'}`}
+                    style={tier === t ? { backgroundColor: `${boardColor}20`, borderColor: `${boardColor}40` } : {}}>
+                    {t}
+                  </button>
+                ))}
               </div>
             </div>
           )}
@@ -220,12 +337,12 @@ export function GCSECalculatorClient({
                 <div className="relative h-7 flex items-center mb-1">
                   <div className="absolute w-full h-2 rounded-full bg-white/8" />
                   <div className="absolute h-2 rounded-full transition-all duration-75"
-                    style={{ width: `${(mark / boundary.maxMark) * 100}%`, backgroundColor: COLOR, opacity: 0.8 }} />
+                    style={{ width: `${(mark / boundary.maxMark) * 100}%`, backgroundColor: boardColor, opacity: 0.8 }} />
                   <input type="range" min={0} max={boundary.maxMark} step={1} value={mark}
                     onChange={e => { const v = Number(e.target.value); setMark(v); setInputVal(String(v)); }}
                     className="absolute w-full h-full opacity-0 cursor-pointer" style={{ zIndex: 10 }} />
                   <div className="absolute w-6 h-6 rounded-full border-2 border-white shadow-lg shadow-black/50 pointer-events-none transition-all duration-75"
-                    style={{ left: `calc(${(mark / boundary.maxMark) * 100}% - 12px)`, backgroundColor: COLOR }} />
+                    style={{ left: `calc(${(mark / boundary.maxMark) * 100}% - 12px)`, backgroundColor: boardColor }} />
                 </div>
                 <div className="flex justify-between">
                   <span className="text-[10px] text-slate-600 font-mono">0</span>
@@ -256,7 +373,7 @@ export function GCSECalculatorClient({
         </div>
       </div>
 
-      {/* Result Area */}
+      {/* ── RESULT AREA ── */}
       <div className="lg:col-span-3 space-y-5">
         <div className="bg-[#12141f] border border-white/8 rounded-2xl p-7 min-h-[280px] flex flex-col justify-center shadow-lg shadow-black/20">
           {grade && gradeInfo ? (
@@ -286,7 +403,7 @@ export function GCSECalculatorClient({
                   <div key={item.label}
                     className={`rounded-xl p-3 text-center border ${item.met ? 'bg-emerald-500/10 border-emerald-500/20' : 'bg-white/4 border-white/8'}`}>
                     <p className={`text-xs font-semibold ${item.met ? 'text-emerald-400' : 'text-slate-600'}`}>
-                      {item.met ? `+ ${item.label}` : `x ${item.label}`}
+                      {item.met ? `✓ ${item.label}` : `✗ ${item.label}`}
                     </p>
                   </div>
                 ))}
@@ -301,23 +418,13 @@ export function GCSECalculatorClient({
           )}
         </div>
 
-        {/* --- DYNAMIC PATHWAY CTA --- */}
-        <Link href={pathwayUrl} className="block group">
-          <div className="bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 rounded-2xl p-6 hover:border-emerald-500/40 transition-all flex items-center justify-between shadow-lg shadow-black/10">
-            <div>
-              <h3 className="text-emerald-400 font-bold text-lg mb-1 group-hover:text-emerald-300 transition-colors">
-                {grade ? `Check what a Grade ${grade} in ${subject} can get you` : `Check what a GCSE in ${subject} can get you`}
-              </h3>
-              <p className="text-slate-400 text-sm">
-                Explore A-Level requirements, university degrees, and career pathways.
-              </p>
-            </div>
-            <div className="w-12 h-12 rounded-full bg-emerald-500/20 flex items-center justify-center group-hover:bg-emerald-500/30 group-hover:scale-105 transition-all">
-              <span className="text-emerald-400 text-xl font-bold">→</span>
-            </div>
-          </div>
-        </Link>
-        {/* ----------------------------- */}
+        {/* ── PATHWAY CTA ── */}
+        <PathwayCTA
+          grade={grade}
+          subject={subject}
+          pathwayUrl={pathwayUrl}
+          boardColor={boardColor}
+        />
 
         {boundary && mark > 0 && (
           <div className="bg-[#12141f] border border-white/8 rounded-2xl p-5 shadow-lg shadow-black/20">
