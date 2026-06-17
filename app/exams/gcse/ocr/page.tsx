@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { GCSECalculatorClient } from '@/gcse-calculator-client';
+import { GCSECalculatorClient } from '../gcse-calculator-client';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import {
