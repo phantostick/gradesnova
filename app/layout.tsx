@@ -3,8 +3,7 @@ import { Inter } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 
-// Import your existing UI components
-import { Navbar } from '@/components/navbar';
+// Import your existing UI components (Navbar removed)
 import { Footer } from '@/components/footer';
 import './globals.css';
 
@@ -56,10 +55,10 @@ export const metadata: Metadata = {
   authors: [{ name: 'GradesNova', url: 'https://gradesnova.com' }],
   creator: 'GradesNova',
   publisher: 'GradesNova',
+  // --- UPDATED ICON CONFIGURATION ---
   icons: {
-    icon: [
-      { url: '/image.svg', type: 'image/svg+xml' }
-    ],
+    icon: '/image.svg',
+    shortcut: '/image.svg',
     apple: '/image.svg',
   },
   robots: {
@@ -172,9 +171,6 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} antialiased bg-[#0a0c14] text-white min-h-screen flex flex-col selection:bg-emerald-500/30 selection:text-emerald-200`}>
         
-        {/* Global Navbar Component */}
-        <Navbar />
-
         {/* Main Content Wrapper (flex-grow ensures footer stays at bottom on short pages) */}
         <main className="flex-grow">
           {children}
