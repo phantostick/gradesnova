@@ -7,10 +7,10 @@ const currentYear = new Date().getFullYear();
 const cycle = `${currentYear - 1}–${currentYear}`;
 
 export const metadata: Metadata = {
-  title: `GradesNova | Free ACT & SAT Calculators + GCSE Grade Boundaries`,
-  description: `Free ACT score calculator, SAT score calculator, and GCSE grade boundary checker. Instantly see your score, rank, and what it means for college admissions. No signup. Updated for ${currentYear}.`,
+  title: `ACT & SAT Score Calculator + GCSE Grade Boundaries ${currentYear} | GradesNova`,
+  description: `Free ACT score percentile calculator, SAT score percentile calculator, and GCSE grade boundary checker for AQA, Edexcel, OCR & WJEC. Enter your score, see your exact percentile and what colleges it unlocks. No signup. Updated for ${currentYear}.`,
   openGraph: {
-    title: `GradesNova | Free ACT & SAT Calculators + GCSE Grade Boundaries`,
+    title: `ACT & SAT Score Calculator + GCSE Grade Boundaries ${currentYear} | GradesNova`,
     description: `Free ACT score calculator, SAT score calculator, GCSE grade boundary checker for AQA, Edexcel, OCR & WJEC. Enter your score and instantly see where you stand.`,
     type: 'website',
     url: 'https://gradesnova.com',
@@ -41,7 +41,7 @@ const US_EXAMS = [
     title: 'ACT Score Calculator',
     subtitle: `${cycle} · Composite 1–36`,
     desc: 'Enter your ACT composite or section scores to see your national percentile, ACT-to-SAT conversion, and which colleges your score unlocks.',
-    cta: 'Calculate ACT score',
+    cta: 'ACT score percentile calculator',
     badge: 'Most popular',
     facts: ['National average: 21', 'Top 10%: score 29+', 'Ivy-competitive: 34+'],
   },
@@ -52,7 +52,7 @@ const US_EXAMS = [
     title: 'SAT Score Calculator',
     subtitle: `${cycle} · 400–1600`,
     desc: 'Find your SAT score percentile instantly. See how you compare nationally, what your score means for top schools, and your SAT-to-ACT equivalent.',
-    cta: 'Calculate SAT score',
+    cta: 'SAT score percentile calculator',
     badge: null,
     facts: ['National average: 1060', 'Top 10%: score 1370+', 'Ivy-competitive: 1520+'],
   },
@@ -66,7 +66,7 @@ const GRAD_EXAMS = [
     title: 'GRE Score Calculator',
     subtitle: '130–170 per section',
     desc: 'Calculate your GRE Verbal and Quantitative percentile rankings for graduate school admissions.',
-    cta: 'Calculate GRE score',
+    cta: 'GRE percentile calculator',
   },
   {
     href: '/exams/gmat',
@@ -75,7 +75,7 @@ const GRAD_EXAMS = [
     title: 'GMAT Score Calculator',
     subtitle: '205–805',
     desc: 'See your GMAT percentile and how it compares against MBA applicant pools at top business schools.',
-    cta: 'Calculate GMAT score',
+    cta: 'GMAT percentile calculator',
   },
   {
     href: '/exams/lsat',
@@ -84,38 +84,38 @@ const GRAD_EXAMS = [
     title: 'LSAT Score Calculator',
     subtitle: '120–180',
     desc: 'Instantly find your LSAT percentile and see median scores for every T14 law school.',
-    cta: 'Calculate LSAT score',
+    cta: 'LSAT percentile calculator',
   },
 ];
 
 const GCSE_BOARDS = [
   {
     href: '/exams/gcse/aqa',
-    title: 'AQA GCSE Grade Boundaries',
-    desc: 'The largest GCSE board in England. Look up grade boundaries for AQA Maths, English Language, English Literature, Sciences, and more.',
+    title: 'AQA GCSE Grade Boundaries 2025',
+    desc: 'The largest GCSE board in England. Look up exact raw-mark grade boundaries for AQA Maths, English Language, English Literature, Sciences, and more.',
     subjects: ['Maths', 'English Language', 'Biology', 'Chemistry', 'Physics', 'History'],
-    cta: 'AQA grade boundaries',
+    cta: 'AQA grade boundaries — all subjects',
   },
   {
     href: '/exams/gcse/edexcel',
-    title: 'Edexcel GCSE Grade Boundaries',
-    desc: 'Pearson Edexcel GCSE boundaries for 2024–2025. Check your grade boundary for Maths, Sciences, English, and all other Edexcel GCSE subjects.',
+    title: 'Edexcel GCSE Grade Boundaries 2025',
+    desc: 'Pearson Edexcel GCSE boundaries from the June 2025 series. Check your exact grade boundary for Maths, Sciences, English, and all other Edexcel GCSE subjects.',
     subjects: ['Maths', 'English Language', 'Combined Science', 'Geography', 'French', 'Spanish'],
-    cta: 'Edexcel grade boundaries',
+    cta: 'Edexcel grade boundaries — all subjects',
   },
   {
     href: '/exams/gcse/ocr',
-    title: 'OCR GCSE Grade Boundaries',
-    desc: 'OCR GCSE and Cambridge Nationals grade boundaries. Includes Gateway Science, 21st Century Science, Maths, and humanities subjects.',
+    title: 'OCR GCSE Grade Boundaries 2025',
+    desc: 'OCR GCSE and Cambridge Nationals grade boundaries, including the 300-mark Maths structure, Gateway Science, and humanities subjects.',
     subjects: ['Gateway Science', 'Maths', 'History', 'Geography', 'Computer Science', 'RS'],
-    cta: 'OCR grade boundaries',
+    cta: 'OCR grade boundaries — all subjects',
   },
   {
     href: '/exams/gcse/wjec',
-    title: 'WJEC GCSE Grade Boundaries',
-    desc: 'WJEC and Eduqas GCSE grade boundaries for Wales and England. The main awarding body for Welsh-medium and English-medium qualifications.',
+    title: 'WJEC GCSE Grade Boundaries 2025',
+    desc: 'WJEC and Eduqas GCSE grade boundaries for Wales and England — the main awarding body for Welsh-medium and English-medium qualifications.',
     subjects: ['Maths', 'Welsh', 'English', 'Science (Double Award)', 'Geography', 'History'],
-    cta: 'WJEC grade boundaries',
+    cta: 'WJEC grade boundaries — all subjects',
   },
 ];
 
@@ -221,14 +221,14 @@ const faqSchema = {
 };
 
 const ARTICLES = [
-  { href: '/articles/sat-vs-act-complete-comparison', title: 'SAT vs ACT: Which test should you take in 2026?', tag: 'Guide' },
-  { href: '/articles/understanding-grade-boundaries-explained', title: 'GCSE Grade Boundaries Explained — how they work and why they change', tag: 'Guide' },
+  { href: '/articles/sat-vs-act-complete-comparison', title: 'SAT vs ACT 2026: Which test should you take?', tag: 'Comparison' },
+  { href: '/articles/understanding-grade-boundaries-explained', title: 'GCSE Grade Boundaries Explained: how they work and why they change', tag: 'Guide' },
   { href: '/articles/gcse-maths-grade-boundaries-trends', title: 'GCSE Maths Grade Boundary Trends: 5 years of data', tag: 'Analysis' },
-  { href: '/articles/gre-vs-gmat-which-exam-should-you-take', title: 'GRE vs GMAT: Which exam do business schools prefer?', tag: 'Guide' },
+  { href: '/articles/gre-vs-gmat-which-exam-should-you-take', title: 'GRE vs GMAT 2026: Which exam do business schools prefer?', tag: 'Comparison' },
   { href: '/exams/act/scores', title: 'What is a Good ACT Score? College ranges & percentiles', tag: 'ACT' },
   { href: '/exams/sat/scores', title: 'What is a Good SAT Score? Full breakdown by school selectivity', tag: 'SAT' },
-  { href: '/exams/gcse/grade-boundaries-explained', title: 'How GCSE Grade Boundaries Are Set — the official process', tag: 'GCSE' },
-  { href: '/exams/act/prep-tips', title: 'ACT Prep Tips: How to improve your composite score', tag: 'ACT' },
+  { href: '/exams/gcse/grade-boundaries-explained', title: 'How GCSE Grade Boundaries Are Set: the official Ofqual process', tag: 'GCSE' },
+  { href: '/exams/act/prep-tips', title: 'ACT Prep Tips 2026: How to improve your composite score', tag: 'ACT' },
 ];
 
 /* ─── component ──────────────────────────────────────────────────── */
@@ -268,12 +268,12 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-12">
             {[
-              { href: '/exams/act', label: 'ACT Calculator' },
-              { href: '/exams/sat', label: 'SAT Calculator' },
-              { href: '/exams/gcse', label: 'GCSE Boundaries' },
-              { href: '/exams/a-levels', label: 'A-Level Boundaries' },
-              { href: '/exams/gre', label: 'GRE Calculator' },
-              { href: '/exams/lsat', label: 'LSAT Calculator' },
+              { href: '/exams/act', label: 'ACT Score Calculator' },
+              { href: '/exams/sat', label: 'SAT Score Calculator' },
+              { href: '/exams/gcse', label: 'GCSE Grade Boundaries 2026' },
+              { href: '/exams/a-levels', label: 'A-Level Grade Boundaries' },
+              { href: '/exams/gre', label: 'GRE Percentile Calculator' },
+              { href: '/exams/lsat', label: 'LSAT Percentile Calculator' },
             ].map(({ href, label }) => (
               <Link
                 key={href}
@@ -298,10 +298,10 @@ export default function Home() {
         <section id="us-exams" className="py-20 px-4 max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">US College Admissions</p>
-            <h2 className="text-3xl font-bold">ACT &amp; SAT Score Calculators</h2>
+            <h2 className="text-3xl font-bold">ACT Score Calculator &amp; SAT Score Calculator — National Percentiles {currentYear}</h2>
             <p className="text-white/50 mt-3 max-w-xl">
-              Free calculators for both major US standardised tests. See your percentile, what
-              colleges your score reaches, and your conversion between tests.
+              Free calculators for both major US standardised tests. See your exact percentile, the
+              colleges your score reaches, and your ACT-to-SAT (or SAT-to-ACT) conversion.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
@@ -339,6 +339,14 @@ export default function Home() {
               </Link>
             ))}
           </div>
+
+          {/* High-intent comparison anchor */}
+          <p className="mt-6 text-sm text-white/40">
+            Deciding between the two?{' '}
+            <Link href="/exams/sat/vs-act" className="text-indigo-400 hover:underline font-medium">
+              SAT vs ACT 2026 comparison — which test should you take →
+            </Link>
+          </p>
         </section>
 
         {/* ── ACT NATIONAL PERCENTILES ───────────────────────────────── */}
@@ -347,11 +355,11 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
               <div>
                 <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-2">Quick reference</p>
-                <h2 className="text-2xl font-bold">ACT National Percentiles {currentYear}</h2>
+                <h2 className="text-2xl font-bold">ACT Percentile Chart {currentYear} — What Is a Good ACT Score?</h2>
                 <p className="text-white/50 text-sm mt-1">National average composite: <strong className="text-white">21</strong> (57th percentile)</p>
               </div>
               <Link href="/exams/act" className="text-sm font-semibold text-indigo-300 hover:text-indigo-200 inline-flex items-center gap-1.5 shrink-0">
-                Full ACT score calculator <ArrowRight />
+                ACT score percentile calculator <ArrowRight />
               </Link>
             </div>
             <div className="overflow-x-auto">
@@ -376,7 +384,7 @@ export default function Home() {
             </div>
             <p className="text-xs text-white/30 mt-4">
               Source: ACT, Inc. national norms {cycle}.{' '}
-              <Link href="/exams/act" className="text-indigo-400 hover:underline">See full table with all scores →</Link>
+              <Link href="/exams/act" className="text-indigo-400 hover:underline">Full ACT percentile chart — every score 1 to 36 →</Link>
             </p>
           </div>
         </section>
@@ -387,11 +395,11 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
               <div>
                 <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-2">Quick reference</p>
-                <h2 className="text-2xl font-bold">SAT Score Ranges &amp; What They Mean</h2>
+                <h2 className="text-2xl font-bold">SAT Percentile Chart {currentYear} — What Is a Good SAT Score?</h2>
                 <p className="text-white/50 text-sm mt-1">National average: <strong className="text-white">1060</strong> (57th percentile)</p>
               </div>
               <Link href="/exams/sat" className="text-sm font-semibold text-indigo-300 hover:text-indigo-200 inline-flex items-center gap-1.5 shrink-0">
-                Full SAT score calculator <ArrowRight />
+                SAT score percentile calculator <ArrowRight />
               </Link>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -410,10 +418,10 @@ export default function Home() {
         <section id="gcse" className="py-20 px-4 max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">UK Qualifications</p>
-            <h2 className="text-3xl font-bold">GCSE Grade Boundaries by Exam Board</h2>
+            <h2 className="text-3xl font-bold">GCSE Grade Boundaries 2025–26 by Exam Board</h2>
             <p className="text-white/50 mt-3 max-w-2xl leading-relaxed">
               Grade boundaries differ between AQA, Edexcel, OCR, and WJEC — and between subjects and
-              years. Select your board below to find the exact mark you need for each grade.
+              years. Select your board below to find the exact raw mark you need for each grade.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 gap-5 mb-12">
@@ -436,14 +444,23 @@ export default function Home() {
               </Link>
             ))}
           </div>
+
+          {/* High-intent comparison anchor */}
+          <p className="-mt-6 mb-8 text-sm text-white/40">
+            Not sure which board your school uses?{' '}
+            <Link href="/exams/gcse/grade-boundaries-explained" className="text-indigo-400 hover:underline font-medium">
+              AQA vs Edexcel vs OCR vs WJEC grade boundaries compared →
+            </Link>
+          </p>
+
           <div className="rounded-2xl border border-white/8 bg-white/3 p-6 md:p-8">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
               <div>
-                <h3 className="text-lg font-bold">GCSE Grading Scale: 9–1 Explained</h3>
+                <h3 className="text-lg font-bold">GCSE 9–1 Grading Scale Explained</h3>
                 <p className="text-sm text-white/50 mt-1">England, Wales &amp; Northern Ireland · 2025 results</p>
               </div>
               <Link href="/exams/gcse" className="text-sm font-semibold text-indigo-300 hover:text-indigo-200 inline-flex items-center gap-1.5 shrink-0">
-                GCSE grade boundary checker <ArrowRight />
+                GCSE grade boundary calculator — all boards <ArrowRight />
               </Link>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
@@ -457,7 +474,7 @@ export default function Home() {
             </div>
             <p className="text-xs text-white/30 mt-5">
               Approximate national proportions. Grade 5 is the "strong pass" required by many sixth forms and employers.{' '}
-              <Link href="/exams/gcse/grade-boundaries-explained" className="text-indigo-400 hover:underline">How grade boundaries work →</Link>
+              <Link href="/exams/gcse/grade-boundaries-explained" className="text-indigo-400 hover:underline">Why do GCSE grade boundaries change every year? →</Link>
             </p>
           </div>
         </section>
@@ -467,7 +484,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center gap-8">
             <div className="flex-1">
               <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">UK Advanced Qualifications</p>
-              <h2 className="text-2xl font-bold mb-3">A-Level Grade Boundaries &amp; UCAS Points</h2>
+              <h2 className="text-2xl font-bold mb-3">A-Level Grade Boundaries &amp; UCAS Points Calculator</h2>
               <p className="text-white/55 leading-relaxed mb-4 max-w-lg">
                 Find A-Level grade boundaries for AQA, Edexcel, OCR, and WJEC. See how your predicted
                 or actual grades convert to UCAS Tariff points and understand what's needed for your
@@ -487,10 +504,10 @@ export default function Home() {
                 className="block w-full rounded-2xl border border-indigo-500/30 bg-indigo-600/15 px-6 py-5 text-center hover:bg-indigo-600/25 transition-colors"
               >
                 <span className="text-3xl mb-2 block">📚</span>
-                <p className="font-bold text-lg text-indigo-200">A-Level Boundaries</p>
-                <p className="text-sm text-white/50 mt-1">All boards · {currentYear}</p>
+                <p className="font-bold text-lg text-indigo-200">A-Level Grade Boundaries 2026</p>
+                <p className="text-sm text-white/50 mt-1">All boards · UCAS calculator</p>
                 <p className="mt-4 text-sm font-semibold text-indigo-300 inline-flex items-center gap-1.5">
-                  Check grade boundaries <ArrowRight />
+                  A-Level UCAS points calculator <ArrowRight />
                 </p>
               </Link>
             </div>
@@ -501,9 +518,9 @@ export default function Home() {
         <section className="py-20 px-4 max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">Graduate Admissions</p>
-            <h2 className="text-3xl font-bold">GRE, GMAT &amp; LSAT Score Calculators</h2>
+            <h2 className="text-3xl font-bold">GRE, GMAT &amp; LSAT Percentile Calculators</h2>
             <p className="text-white/50 mt-3 max-w-xl">
-              Applying to grad school, business school, or law school? Find your score percentile and
+              Applying to grad school, business school, or law school? Find your exact score percentile and
               compare against program medians.
             </p>
           </div>
@@ -524,6 +541,13 @@ export default function Home() {
               </Link>
             ))}
           </div>
+
+          <p className="mt-6 text-sm text-white/40">
+            Applying to business school?{' '}
+            <Link href="/articles/gre-vs-gmat-which-exam-should-you-take" className="text-indigo-400 hover:underline font-medium">
+              GRE vs GMAT 2026 — which exam do MBA programs prefer →
+            </Link>
+          </p>
         </section>
 
         {/* ── HOW IT WORKS ──────────────────────────────────────────── */}
@@ -531,7 +555,7 @@ export default function Home() {
           <div className="max-w-5xl mx-auto">
             <div className="text-center mb-14">
               <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">How it works</p>
-              <h2 className="text-3xl font-bold">From score to insight in seconds</h2>
+              <h2 className="text-3xl font-bold">From score to percentile in seconds</h2>
             </div>
             <div className="grid md:grid-cols-3 gap-8">
               {HOW_STEPS.map(({ n, title, body }) => (
@@ -547,7 +571,7 @@ export default function Home() {
             <div className="mt-12 text-center">
               <p className="text-sm text-white/40">
                 No account. No email. No ads obscuring your result.{' '}
-                <Link href="/exams/act" className="text-indigo-400 hover:underline">Start with the ACT calculator →</Link>
+                <Link href="/exams/act" className="text-indigo-400 hover:underline">Try the ACT score calculator now →</Link>
               </p>
             </div>
           </div>
@@ -583,7 +607,7 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
               <div>
                 <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">Guides &amp; resources</p>
-                <h2 className="text-3xl font-bold">Score guides, prep tips &amp; deep dives</h2>
+                <h2 className="text-3xl font-bold">Score guides, prep tips &amp; comparison deep dives</h2>
               </div>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -614,21 +638,21 @@ export default function Home() {
                 'radial-gradient(ellipse 60% 60% at 50% 100%, rgba(99,102,241,0.12) 0%, transparent 70%)',
             }}
           />
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to see your score?</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to see your exact percentile?</h2>
           <p className="text-white/50 mb-10 max-w-lg mx-auto">Pick your exam below. Free, instant, no signup required.</p>
           <div className="flex flex-wrap justify-center gap-3 max-w-2xl mx-auto">
             {[
               { href: '/exams/act', label: 'ACT Score Calculator' },
               { href: '/exams/sat', label: 'SAT Score Calculator' },
               { href: '/exams/gcse', label: 'GCSE Grade Boundaries' },
-              { href: '/exams/gcse/aqa', label: 'AQA Boundaries' },
-              { href: '/exams/gcse/edexcel', label: 'Edexcel Boundaries' },
-              { href: '/exams/gcse/ocr', label: 'OCR Boundaries' },
-              { href: '/exams/gcse/wjec', label: 'WJEC Boundaries' },
-              { href: '/exams/a-levels', label: 'A-Level Boundaries' },
-              { href: '/exams/gre', label: 'GRE Calculator' },
-              { href: '/exams/gmat', label: 'GMAT Calculator' },
-              { href: '/exams/lsat', label: 'LSAT Calculator' },
+              { href: '/exams/gcse/aqa', label: 'AQA Grade Boundaries 2025' },
+              { href: '/exams/gcse/edexcel', label: 'Edexcel Grade Boundaries 2025' },
+              { href: '/exams/gcse/ocr', label: 'OCR Grade Boundaries 2025' },
+              { href: '/exams/gcse/wjec', label: 'WJEC Grade Boundaries 2025' },
+              { href: '/exams/a-levels', label: 'A-Level UCAS Points Calculator' },
+              { href: '/exams/gre', label: 'GRE Percentile Calculator' },
+              { href: '/exams/gmat', label: 'GMAT Percentile Calculator' },
+              { href: '/exams/lsat', label: 'LSAT Percentile Calculator' },
             ].map(({ href, label }) => (
               <Link
                 key={href}
