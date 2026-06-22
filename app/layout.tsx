@@ -3,8 +3,6 @@ import { Inter } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 
-// Import your existing UI components (Navbar removed)
-import { Footer } from '@/components/footer';
 import './globals.css';
 
 // 1. HIGH-PERFORMANCE FONT LOADING 
@@ -55,7 +53,6 @@ export const metadata: Metadata = {
   authors: [{ name: 'GradesNova', url: 'https://gradesnova.com' }],
   creator: 'GradesNova',
   publisher: 'GradesNova',
-  // --- UPDATED ICON CONFIGURATION ---
   icons: {
     icon: '/image.svg',
     shortcut: '/image.svg',
@@ -170,30 +167,27 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} antialiased bg-[#0a0c14] text-white min-h-screen flex flex-col selection:bg-emerald-500/30 selection:text-emerald-200`}>
-        
-        {/* Main Content Wrapper (flex-grow ensures footer stays at bottom on short pages) */}
+
+        {/* Main Content Wrapper — each page is responsible for its own Navbar/Footer */}
         <main className="flex-grow">
           {children}
         </main>
-
-        {/* Global Footer Component */}
-        <Footer />
 
         {/* VERCEL ANALYTICS */}
         <Analytics />
 
         {/* GOOGLE ADSENSE */}
-        <Script 
-          async 
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8146074127975041" 
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8146074127975041"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
 
         {/* GOOGLE ANALYTICS (Next.js Optimized) */}
-        <Script 
-          strategy="afterInteractive" 
-          src="https://www.googletagmanager.com/gtag/js?id=G-H5FHMWEGLB" 
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-H5FHMWEGLB"
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
