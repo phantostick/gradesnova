@@ -279,7 +279,7 @@ export default function ACTCalculatorPage() {
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
               ACT resources on GradesNova
             </p>
-            <div className="grid sm:grid-cols-3 gap-3">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 {
                   href: '/exams/act/guide',
@@ -288,6 +288,14 @@ export default function ACTCalculatorPage() {
                   badge: 'Full guide',
                   title: 'Complete ACT Guide 2026',
                   desc: 'ACT format, Enhanced ACT changes, section breakdowns, and ACT vs SAT comparison.',
+                },
+                {
+                  href: '/exams/act/colleges',
+                  icon: '🎓',
+                  color: '#a855f7',
+                  badge: 'College match',
+                  title: 'What Colleges Can I Get Into?',
+                  desc: 'Every ACT score 1–36, broken down with example schools and percentile.',
                 },
                 {
                   href: '/exams/act/prep-tips',
