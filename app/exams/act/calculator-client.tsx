@@ -290,6 +290,14 @@ export default function ACTCalculatorClient() {
             Reading 36 Q · Science 40 Q (optional). Scaled scores are estimates — actual
             conversions vary by test form.
           </p>
+
+          <Link
+            href={`/exams/act/colleges#score-${displayComposite}`}
+            className="flex items-center justify-center gap-2 w-full rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] active:scale-95"
+            style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}
+          >
+            🎓 What colleges can I get into with a {displayComposite}?
+          </Link>
         </div>
 
         {/* ACT → SAT */}
