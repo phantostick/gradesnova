@@ -198,6 +198,14 @@ const HUB_PAGES = [
     badge: 'Calculator',
   },
   {
+    title: 'What Colleges Can I Get Into?',
+    desc: 'Every ACT score 1–36 explained in detail, with example schools at each level.',
+    href: '/exams/act/colleges',
+    color: '#a855f7',
+    icon: '🎓',
+    badge: 'New',
+  },
+  {
     title: 'ACT Scores: When They Come Out & What They Mean',
     desc: 'Score release dates, how to read your report, superscoring, and what to do if you need a rescore.',
     href: '/exams/act/scores',
