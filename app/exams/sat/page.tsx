@@ -572,7 +572,7 @@ export default function SATCalculatorPage() {
           {/* ── HUB NAV ── */}
           <nav aria-label="SAT hub pages">
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">SAT resources on GradesNova</p>
-            <div className="grid sm:grid-cols-3 gap-3">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
               {[
                 {
                   href: '/exams/sat/guide',
@@ -581,6 +581,14 @@ export default function SATCalculatorPage() {
                   badge: 'Full guide',
                   title: 'Complete SAT Guide 2026',
                   desc: 'Digital SAT format, adaptive scoring explained, section breakdowns, and SAT vs ACT comparison.',
+                },
+                {
+                  href: '/exams/sat/colleges',
+                  icon: '🎓',
+                  color: '#a855f7',
+                  badge: 'College match',
+                  title: 'What Colleges Can I Get Into?',
+                  desc: 'Every SAT score 400–1600, broken down with example schools and percentile.',
                 },
                 {
                   href: '/exams/sat/prep-tips',
@@ -761,6 +769,15 @@ export default function SATCalculatorPage() {
                     </div>
                   </div>
                 )}
+
+                <Link
+                  href={`/exams/sat/colleges#score-${Math.round(compositeScore / 10) * 10}`}
+                  className="flex items-center justify-center gap-2 w-full rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] active:scale-95"
+                  style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}
+                >
+                  🎓 What colleges can I get into with a {compositeScore}?
+                </Link>
+
 
                 {/* Benchmarks */}
                 <div className="bg-[#12141f] border border-white/8 rounded-xl p-5">
