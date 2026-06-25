@@ -489,6 +489,7 @@ export default function SATScoreReleasePage() {
             <div className="grid sm:grid-cols-2 gap-3">
               {[
                 { title: 'Complete SAT Guide 2026', href: '/exams/sat/guide', color: '#6366f1' },
+                { title: 'What Colleges Can I Get Into?', href: '/exams/sat/colleges', color: '#a855f7' },
                 { title: 'SAT Prep Tips & Digital SAT Strategy', href: '/exams/sat/prep-tips', color: '#f59e0b' },
                 { title: 'SAT vs ACT: Which Should You Take?', href: '/exams/sat/vs-act', color: '#06b6d4' },
                 { title: 'SAT Score Percentile Calculator', href: '/exams/sat', color: '#34d399' },
