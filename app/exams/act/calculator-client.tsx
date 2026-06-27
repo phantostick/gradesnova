@@ -4,7 +4,7 @@
 // Interactive island: sliders, Science opt-out toggle, gauge, FAQ accordion.
 // All static content lives in page.tsx (server component).
 
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import {
   ACT_COMPOSITE_PERCENTILES,
   ACT_ENGLISH_PERCENTILES,
@@ -73,29 +73,56 @@ function rawToScaled(raw: number, table: Record<number, number>): number {
   return table[Math.max(0, raw)] ?? 1;
 }
 
-// ─── CSS-animated gauge ───────────────────────────────────────────────────────
-function PercentileGauge({ percentile, color }: { percentile: number; color: string }) {
-  const r = 72;
-  const circ = 2 * Math.PI * r;
-  const dash = circ * Math.min(percentile / 100, 1);
-  const animName = `gaugeStroke_${percentile}`;
+// ─── Static lookup data (hoisted — never recreated on render) ────────────────
+// These used to be inline array literals inside JSX, which meant JavaScript
+// reallocated them on every single render — i.e. on every slider drag tick.
+// Hoisting them to module scope means they're created exactly once.
+
+const SCORE_BENCHMARKS = [
+  { score: 36, pct: 99, label: 'Perfect score' },
+  { score: 33, pct: 97, label: 'Ivy-competitive' },
+  { score: 30, pct: 93, label: 'Top 7%' },
+  { score: 27, pct: 85, label: 'Top 15%' },
+  { score: 24, pct: 74, label: 'Above average' },
+  { score: 21, pct: 57, label: 'National average' },
+  { score: 18, pct: 38, label: 'Below average' },
+];
+
+const FORMAT_OVERVIEW = [
+  { icon: '📝', label: 'English',     color: COLOR,     time: '35 min', q: '50 questions',            detail: 'Grammar, punctuation, sentence structure, rhetorical skills' },
+  { icon: '📐', label: 'Mathematics', color: '#6366f1', time: '50 min', q: '45 questions',            detail: 'Pre-algebra through trig. Calculator permitted the entire section' },
+  { icon: '📖', label: 'Reading',     color: '#a855f7', time: '40 min', q: '36 questions',            detail: 'Literary narrative, social science, humanities, natural science' },
+  { icon: '🔬', label: 'Science',     color: '#34d399', time: '40 min', q: '40 questions (optional, scored separately)', detail: 'Scientific reasoning, data interpretation, experimental design' },
+];
+
+const GAUGE_RADIUS = 72;
+const GAUGE_CIRC = 2 * Math.PI * GAUGE_RADIUS;
+
+// ─── CSS-transitioned gauge ────────────────────────────────────────────────────
+// PERFORMANCE FIX: this previously remounted on every percentile change
+// (parent wrapped it in `key={compositePerc}`) and injected a brand-new
+// <style> tag with a uniquely-named @keyframes rule on every remount. While
+// dragging a slider, that fires dozens of times per second — forcing a style
+// recalculation + reflow on every tick, which directly hurts INP (Interaction
+// to Next Paint), a Core Web Vital.
+// Fix: no remount, no per-value <style> tag. Just transition stroke-dasharray
+// directly via a static CSS transition — the browser animates it smoothly on
+// its own compositor thread without any DOM/stylesheet churn.
+const PercentileGauge = React.memo(function PercentileGauge({
+  percentile, color,
+}: { percentile: number; color: string }) {
+  const dash = GAUGE_CIRC * Math.min(percentile / 100, 1);
 
   return (
     <div className="relative w-44 h-44 mx-auto" role="img" aria-label={`${ordinal(percentile)} percentile`}>
-      <style>{`
-        @keyframes ${animName} {
-          from { stroke-dasharray: 0 ${circ}; }
-          to   { stroke-dasharray: ${dash} ${circ - dash}; }
-        }
-      `}</style>
       <svg className="w-full h-full -rotate-90" viewBox="0 0 160 160">
-        <circle cx="80" cy="80" r={r} fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="14" />
+        <circle cx="80" cy="80" r={GAUGE_RADIUS} fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="14" />
         <circle
-          cx="80" cy="80" r={r} fill="none"
+          cx="80" cy="80" r={GAUGE_RADIUS} fill="none"
           stroke={color} strokeWidth="14" strokeLinecap="round"
           style={{
-            strokeDasharray: `${dash} ${circ - dash}`,
-            animation: `${animName} 0.9s cubic-bezier(0.4,0,0.2,1) both`,
+            strokeDasharray: `${dash} ${GAUGE_CIRC - dash}`,
+            transition: 'stroke-dasharray 0.35s cubic-bezier(0.4,0,0.2,1), stroke 0.35s ease',
           }}
         />
       </svg>
@@ -107,10 +134,13 @@ function PercentileGauge({ percentile, color }: { percentile: number; color: str
       </div>
     </div>
   );
-}
+});
 
 // ─── Raw score module input ───────────────────────────────────────────────────
-function ModuleInput({
+// PERFORMANCE FIX: wrapped in React.memo. This is a pure presentational
+// component, so memoizing it means dragging the English slider no longer
+// re-renders the Math, Reading, and Science sliders too.
+const ModuleInput = React.memo(function ModuleInput({
   label, value, max, color, scaledScore, onChange,
 }: {
   label: string; value: number; max: number; color: string; scaledScore: number; onChange: (v: number) => void;
@@ -148,7 +178,7 @@ function ModuleInput({
       </div>
     </div>
   );
-}
+});
 
 // ─── FAQ accordion (client — needs open/close state) ─────────────────────────
 export function FAQSection() {
@@ -233,6 +263,17 @@ export default function ACTCalculatorClient() {
     () => ACT_SAT_CROSSWALK.find(r => r.act === displayComposite)?.sat ?? null,
     [displayComposite],
   );
+
+  // PERFORMANCE NOTE: this array depends on state (scaledEng/Math/Reading/
+  // Science + scienceOptOut), so it has to be rebuilt on render — that's
+  // unavoidable and cheap. Only the truly static arrays (benchmarks, format
+  // overview) were hoisted above, since those never change.
+  const sectionRows = useMemo(() => ([
+    { label: 'English', scaled: scaledEng,     pct: englishPerc, color: COLOR      },
+    { label: 'Math',    scaled: scaledMath,    pct: mathPerc,    color: '#6366f1'  },
+    { label: 'Reading', scaled: scaledReading, pct: readingPerc, color: '#a855f7'  },
+    ...(!scienceOptOut ? [{ label: 'Science*', scaled: scaledScience, pct: sciencePerc, color: '#34d399' }] : []),
+  ]), [scaledEng, scaledMath, scaledReading, scaledScience, englishPerc, mathPerc, readingPerc, sciencePerc, scienceOptOut]);
 
   return (
     <div className="grid lg:grid-cols-5 gap-8">
@@ -348,15 +389,7 @@ export default function ACTCalculatorClient() {
         <div className="bg-[#12141f] border border-white/8 rounded-xl p-5">
           <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">Score benchmarks</p>
           <div className="space-y-1.5">
-            {[
-              { score: 36, pct: 99, label: 'Perfect score' },
-              { score: 33, pct: 97, label: 'Ivy-competitive' },
-              { score: 30, pct: 93, label: 'Top 7%' },
-              { score: 27, pct: 85, label: 'Top 15%' },
-              { score: 24, pct: 74, label: 'Above average' },
-              { score: 21, pct: 57, label: 'National average' },
-              { score: 18, pct: 38, label: 'Below average' },
-            ].map(b => (
+            {SCORE_BENCHMARKS.map(b => (
               <div key={b.score}
                 className={`flex items-center justify-between py-1 transition-opacity ${displayComposite === b.score ? 'opacity-100' : 'opacity-50'}`}>
                 <div>
@@ -373,9 +406,7 @@ export default function ACTCalculatorClient() {
       {/* ── RIGHT: results ── */}
       <div className="lg:col-span-3 space-y-5">
         <div className="bg-[#12141f] border border-white/8 rounded-2xl p-7">
-          <div key={compositePerc}>
-            <PercentileGauge percentile={compositePerc} color={context.color} />
-          </div>
+          <PercentileGauge percentile={compositePerc} color={context.color} />
           <div className="text-center mt-5 mb-6">
             <div
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-sm font-semibold border mb-2"
@@ -406,12 +437,7 @@ export default function ACTCalculatorClient() {
             reference only.
           </p>
           <div className="space-y-4">
-            {[
-              { label: 'English', scaled: scaledEng,     pct: englishPerc, color: COLOR      },
-              { label: 'Math',    scaled: scaledMath,    pct: mathPerc,    color: '#6366f1'  },
-              { label: 'Reading', scaled: scaledReading, pct: readingPerc, color: '#a855f7'  },
-              ...(!scienceOptOut ? [{ label: 'Science*', scaled: scaledScience, pct: sciencePerc, color: '#34d399' }] : []),
-            ].map(s => (
+            {sectionRows.map(s => (
               <div key={s.label} className="flex items-center gap-4">
                 <div className="w-16 shrink-0">
                   <p className="text-[10px] text-slate-500">{s.label}</p>
@@ -420,7 +446,7 @@ export default function ACTCalculatorClient() {
                 <div className="flex-1">
                   <div className="h-2 bg-white/8 rounded-full overflow-hidden">
                     <div className="h-full rounded-full"
-                      style={{ width: `${s.pct}%`, backgroundColor: s.color, transition: 'width 0.5s ease' }} />
+                      style={{ width: `${s.pct}%`, backgroundColor: s.color, transition: 'width 0.35s ease' }} />
                   </div>
                 </div>
                 <div className="w-12 text-right shrink-0">
@@ -452,12 +478,7 @@ export default function ACTCalculatorClient() {
           <h3 className="text-sm font-semibold text-slate-300 mb-1">ACT format overview</h3>
           <p className="text-[10px] text-amber-400/80 mb-3">⚠ Enhanced ACT (post-April 2025) question counts shown.</p>
           <div className="space-y-3">
-            {[
-              { icon: '📝', label: 'English',     color: COLOR,     time: '35 min', q: '50 questions',            detail: 'Grammar, punctuation, sentence structure, rhetorical skills' },
-              { icon: '📐', label: 'Mathematics', color: '#6366f1', time: '50 min', q: '45 questions',            detail: 'Pre-algebra through trig. Calculator permitted the entire section' },
-              { icon: '📖', label: 'Reading',     color: '#a855f7', time: '40 min', q: '36 questions',            detail: 'Literary narrative, social science, humanities, natural science' },
-              { icon: '🔬', label: 'Science',     color: '#34d399', time: '40 min', q: '40 questions (optional, scored separately)', detail: 'Scientific reasoning, data interpretation, experimental design' },
-            ].map(s => (
+            {FORMAT_OVERVIEW.map(s => (
               <div key={s.label} className="flex gap-3 p-3 bg-white/3 rounded-xl">
                 <span className="text-base mt-0.5" aria-hidden="true">{s.icon}</span>
                 <div>
