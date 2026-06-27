@@ -34,8 +34,13 @@ function ordinal(n: number): string {
 }
 
 // ─── Enhanced ACT (post-April 2025) raw → scaled conversion tables ────────────
-// Source: ACT, Inc. published score guides — act.org/content/dam/act/unsecured/documents/NormsChartMCandWriting.pdf
+// Source: ACT, Inc. published score guides —
+// act.org/content/dam/act/unsecured/documents/ACT-Ntl-Enhancements-Scoring-Key-and-Conversion-Tables.pdf
 // English: 50 Q, Math: 45 Q, Reading: 36 Q, Science: 40 Q (optional)
+// NOTE: On the Enhanced ACT, the composite is the average of English + Math +
+// Reading ONLY. Science is always reported as a separate score (plus a STEM
+// score combined with Math) and never factors into the composite, regardless
+// of whether the student takes it.
 
 const ENG_CONVERSION: Record<number, number> = {
   50:36,49:36,48:36,47:35,46:35,45:34,44:34,43:33,42:32,41:31,
@@ -192,6 +197,10 @@ export default function ACTCalculatorClient() {
   const [rawMath,     setRawMath]     = useState(30);
   const [rawReading,  setRawReading]  = useState(24);
   const [rawScience,  setRawScience]  = useState(28);
+  // Whether the student is taking/reporting the optional Science section.
+  // This ONLY controls whether Science inputs/results are shown — it never
+  // changes the composite, because Science is never part of the Enhanced
+  // ACT composite (English + Math + Reading only).
   const [scienceOptOut, setScienceOptOut] = useState(false);
 
   const scaledEng     = useMemo(() => rawToScaled(rawEng,     ENG_CONVERSION),     [rawEng]);
@@ -199,12 +208,19 @@ export default function ACTCalculatorClient() {
   const scaledReading = useMemo(() => rawToScaled(rawReading, READING_CONVERSION), [rawReading]);
   const scaledScience = useMemo(() => rawToScaled(rawScience, SCIENCE_CONVERSION), [rawScience]);
 
+  // Enhanced ACT composite = average of English, Math, and Reading ONLY.
+  // Science is always excluded — taking it produces a separate Science score
+  // and a combined STEM score (with Math), but neither affects the composite.
   const displayComposite = useMemo(() => {
-    const sections = scienceOptOut
-      ? [scaledEng, scaledMath, scaledReading]
-      : [scaledEng, scaledMath, scaledReading, scaledScience];
+    const sections = [scaledEng, scaledMath, scaledReading];
     return Math.round(sections.reduce((a, b) => a + b, 0) / sections.length);
-  }, [scaledEng, scaledMath, scaledReading, scaledScience, scienceOptOut]);
+  }, [scaledEng, scaledMath, scaledReading]);
+
+  // STEM score: average of Math and Science, only meaningful if Science was taken.
+  const stemScore = useMemo(() => {
+    if (scienceOptOut) return null;
+    return Math.round((scaledMath + scaledScience) / 2);
+  }, [scaledMath, scaledScience, scienceOptOut]);
 
   const compositePerc = useMemo(() => getPercentile(displayComposite, ACT_COMPOSITE_PERCENTILES), [displayComposite]);
   const englishPerc   = useMemo(() => getPercentile(scaledEng,     ACT_ENGLISH_PERCENTILES),  [scaledEng]);
@@ -245,12 +261,12 @@ export default function ACTCalculatorClient() {
             onChange={setRawReading}
           />
 
-          {/* Science (optional) */}
+          {/* Science (optional — does not affect composite) */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <div className="flex items-center gap-2">
                 <label className="text-xs font-medium text-slate-300">Science — correct out of 40</label>
-                <span className="text-[10px] text-amber-400/80 font-medium">(optional)</span>
+                <span className="text-[10px] text-amber-400/80 font-medium">(optional · not in composite)</span>
               </div>
               <button
                 onClick={() => setScienceOptOut(v => !v)}
@@ -267,15 +283,22 @@ export default function ACTCalculatorClient() {
             </div>
 
             {!scienceOptOut ? (
-              <ModuleInput
-                label="correct out of 40"
-                value={rawScience} max={40} color="#34d399"
-                scaledScore={scaledScience}
-                onChange={setRawScience}
-              />
+              <>
+                <ModuleInput
+                  label="correct out of 40"
+                  value={rawScience} max={40} color="#34d399"
+                  scaledScore={scaledScience}
+                  onChange={setRawScience}
+                />
+                <p className="text-[10px] text-slate-600 mt-1.5">
+                  Science is reported as its own score and combined with Math into a STEM score —
+                  it does not change your composite either way.
+                </p>
+              </>
             ) : (
               <p className="text-[10px] text-slate-600 mt-1.5">
-                Science skipped — composite averaged from English, Math &amp; Reading only.
+                Science skipped. This has no effect on your composite — Science never counts
+                toward it, even when taken.
               </p>
             )}
           </div>
@@ -286,9 +309,10 @@ export default function ACTCalculatorClient() {
             <span className="text-2xl font-bold text-white tabular-nums">{displayComposite}</span>
           </div>
           <p className="text-[10px] text-slate-600 -mt-2 leading-relaxed">
-            Based on Enhanced ACT (post-April 2025) question counts: English 50 Q · Math 45 Q ·
-            Reading 36 Q · Science 40 Q (optional). Scaled scores are estimates — actual
-            conversions vary by test form.
+            Composite = average of English, Math &amp; Reading only (Enhanced ACT, post-April 2025
+            rules). Question counts: English 50 Q · Math 45 Q · Reading 36 Q · Science 40 Q
+            (optional, scored separately). Scaled scores are estimates — actual conversions vary by
+            test form.
           </p>
 
           <Link
@@ -376,13 +400,17 @@ export default function ACTCalculatorClient() {
 
         {/* Section percentiles */}
         <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
-          <h3 className="text-sm font-semibold text-slate-300 mb-4">Section scores &amp; percentiles</h3>
+          <h3 className="text-sm font-semibold text-slate-300 mb-1">Section scores &amp; percentiles</h3>
+          <p className="text-[10px] text-slate-600 mb-4">
+            English, Math &amp; Reading make up your composite. Science (if taken) is shown for
+            reference only.
+          </p>
           <div className="space-y-4">
             {[
               { label: 'English', scaled: scaledEng,     pct: englishPerc, color: COLOR      },
               { label: 'Math',    scaled: scaledMath,    pct: mathPerc,    color: '#6366f1'  },
               { label: 'Reading', scaled: scaledReading, pct: readingPerc, color: '#a855f7'  },
-              ...(!scienceOptOut ? [{ label: 'Science', scaled: scaledScience, pct: sciencePerc, color: '#34d399' }] : []),
+              ...(!scienceOptOut ? [{ label: 'Science*', scaled: scaledScience, pct: sciencePerc, color: '#34d399' }] : []),
             ].map(s => (
               <div key={s.label} className="flex items-center gap-4">
                 <div className="w-16 shrink-0">
@@ -400,10 +428,23 @@ export default function ACTCalculatorClient() {
                 </div>
               </div>
             ))}
-            {scienceOptOut && (
-              <p className="text-[10px] text-slate-600 pt-1">Science skipped — not included in composite.</p>
-            )}
           </div>
+          {!scienceOptOut && stemScore !== null && (
+            <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/6">
+              <p className="text-[11px] text-slate-500">
+                STEM score* <span className="text-slate-600">(avg. of Math + Science)</span>
+              </p>
+              <p className="text-sm font-bold text-white tabular-nums">{stemScore}</p>
+            </div>
+          )}
+          {!scienceOptOut && (
+            <p className="text-[10px] text-slate-600 mt-3">
+              *Science and STEM scores are reported separately and do not affect your composite.
+            </p>
+          )}
+          {scienceOptOut && (
+            <p className="text-[10px] text-slate-600 pt-1">Science skipped — not reported.</p>
+          )}
         </div>
 
         {/* ACT format overview */}
@@ -415,7 +456,7 @@ export default function ACTCalculatorClient() {
               { icon: '📝', label: 'English',     color: COLOR,     time: '35 min', q: '50 questions',            detail: 'Grammar, punctuation, sentence structure, rhetorical skills' },
               { icon: '📐', label: 'Mathematics', color: '#6366f1', time: '50 min', q: '45 questions',            detail: 'Pre-algebra through trig. Calculator permitted the entire section' },
               { icon: '📖', label: 'Reading',     color: '#a855f7', time: '40 min', q: '36 questions',            detail: 'Literary narrative, social science, humanities, natural science' },
-              { icon: '🔬', label: 'Science',     color: '#34d399', time: '40 min', q: '40 questions (optional)', detail: 'Scientific reasoning, data interpretation, experimental design' },
+              { icon: '🔬', label: 'Science',     color: '#34d399', time: '40 min', q: '40 questions (optional, scored separately)', detail: 'Scientific reasoning, data interpretation, experimental design' },
             ].map(s => (
               <div key={s.label} className="flex gap-3 p-3 bg-white/3 rounded-xl">
                 <span className="text-base mt-0.5" aria-hidden="true">{s.icon}</span>
