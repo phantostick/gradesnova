@@ -142,9 +142,9 @@ export default function ACTCalculatorPage() {
 
   const schemaTool = {
     '@context': 'https://schema.org', '@type': 'WebApplication',
-    name: 'ACT Score Calculator 2026',
+    name: 'ACT Score Calculator',
     url: 'https://gradesnova.com/exams/act',
-    description: 'Free ACT score calculator 2026. Enter your raw correct answers per section to instantly calculate your scaled scores and national percentile ranking. Includes 2025 Enhanced ACT format, ACT-to-SAT conversion and top college score ranges. Updated for 2025–2026.',
+    description: 'Free ACT score calculator. Enter your raw correct answers per section to instantly calculate your scaled scores and national percentile ranking. Includes the 2025 Enhanced ACT format, ACT-to-SAT conversion and top college score ranges. Updated for 2025–2026.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
@@ -158,13 +158,13 @@ export default function ACTCalculatorPage() {
     url: 'https://gradesnova.com/exams/act',
     creator: { '@type': 'Organization', name: 'GradesNova' },
     dateModified: ACT_LAST_MODIFIED,
-    keywords: 'ACT score calculator 2026, ACT score percentile, ACT national average, ACT score chart, enhanced ACT 2025',
+    keywords: 'ACT score calculator, ACT score calculator 2026, ACT score percentile, ACT national average, ACT score chart, enhanced ACT 2025',
     spatialCoverage: 'United States',
   };
 
   const schemaArticle = {
     '@context': 'https://schema.org', '@type': 'Article',
-    headline: 'ACT Score Calculator 2026 — National Percentile, College Ranges & Score Guide',
+    headline: 'ACT Score Calculator — National Percentile, College Ranges & Score Guide',
     description: 'Free ACT score calculator for 2025–2026. Includes the 2025 Enhanced ACT format change, raw-to-scaled conversion, national percentile rankings, college ranges, and expert prep tips.',
     url: 'https://gradesnova.com/exams/act',
     dateModified: ACT_LAST_MODIFIED,
@@ -225,17 +225,20 @@ export default function ACTCalculatorPage() {
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight mb-3">
-              ACT Score Calculator 2026
+              ACT Score Calculator
             </h1>
             <p className="text-lg text-slate-400 max-w-2xl mb-4">
-              Free <strong className="text-white font-medium">ACT score calculator</strong> for 2025–2026.
-              Enter your raw correct answers per section to instantly convert them to scaled scores and
-              calculate your{' '}
-              <strong className="text-white font-medium">national percentile ranking</strong>. The{' '}
-              <strong className="text-white font-medium">national average ACT score in 2026 is 21</strong>{' '}
-              — see exactly how you compare. Includes the{' '}
-              <strong className="text-white font-medium">2025 Enhanced ACT format</strong>,
-              ACT-to-SAT conversion, and college score ranges. Updated with official ACT norms.
+              Enter your raw correct answers and this{' '}
+              <strong className="text-white font-medium">ACT score calculator</strong> instantly
+              converts them into scaled section scores, a composite, and your national percentile.
+              It's built for the{' '}
+              <strong className="text-white font-medium">2025 Enhanced ACT</strong> format, but
+              also supports the classic 4-section test if you're working from older practice scores.
+            </p>
+            <p className="text-sm text-slate-500 max-w-2xl mb-4">
+              The national average ACT score is currently <strong className="text-white">21</strong> —
+              once you run the calculator below, scroll down to see exactly how your result compares,
+              what it means for college admissions, and how to improve it.
             </p>
             <div className="flex flex-wrap gap-2">
               {[
@@ -366,14 +369,14 @@ export default function ACTCalculatorPage() {
           {/* ── CALCULATOR (client island) ── */}
           <section id="calculator" aria-labelledby="calculator-heading">
             <h2 id="calculator-heading" className="text-2xl font-bold text-white mb-2">
-              ACT Score Calculator — Enhanced ACT (2025 Format)
+              ACT Score Calculator: Enter Your Raw Scores
             </h2>
             <p className="text-slate-400 text-sm mb-6 max-w-3xl">
               Enter the number of questions you answered correctly in each section of the{' '}
               <strong className="text-white">Enhanced ACT</strong> (post-April 2025: English 50 Q,
-              Math 45 Q, Reading 36 Q, Science 40 Q optional). The calculator converts your raw
-              correct answers to scaled scores (1–36) and computes your composite and national
-              percentile instantly.
+              Math 45 Q, Reading 36 Q, Science 40 Q optional). The ACT score calculator converts
+              your raw correct answers to scaled scores (1–36) and computes your composite and
+              national percentile instantly.
             </p>
             <ACTCalculatorClient />
           </section>
@@ -423,6 +426,9 @@ export default function ACTCalculatorPage() {
                     <span className="text-sm font-semibold text-white">Total</span>
                     <span className="text-sm font-bold text-white">215 Q · ~2h 55min</span>
                   </div>
+                  <p className="text-[10px] text-slate-600 pt-1">
+                    Composite = average of all 4 sections (English, Math, Reading, Science).
+                  </p>
                 </div>
               </div>
 
@@ -458,6 +464,10 @@ export default function ACTCalculatorPage() {
                     <span className="text-sm font-semibold text-white">Total</span>
                     <span className="text-sm font-bold text-white">~171 Q · ~2h 05min</span>
                   </div>
+                  <p className="text-[10px] pt-1" style={{ color: '#fbbf24' }}>
+                    Composite = average of only 3 sections (English, Math, Reading). Science is
+                    scored separately and does not count toward your composite, even if you take it.
+                  </p>
                 </div>
               </div>
             </div>
@@ -472,8 +482,8 @@ export default function ACTCalculatorPage() {
                 },
                 {
                   icon: '🔬',
-                  title: 'Science is now optional (US)',
-                  desc: 'US students can choose to skip the Science section. If skipped, the composite is averaged from three sections (English, Math, Reading). Most competitive colleges still prefer all four sections — check individual school policies.',
+                  title: 'Science no longer counts toward your composite',
+                  desc: 'On the Enhanced ACT, the composite is the average of English, Math, and Reading only. US students can still choose to take the optional Science section — it produces a separate Science score and a combined STEM score with Math, but neither affects your composite.',
                   color: '#f59e0b',
                 },
                 {
@@ -484,8 +494,8 @@ export default function ACTCalculatorPage() {
                 },
                 {
                   icon: '📊',
-                  title: 'Same composite scoring method',
-                  desc: 'The 1–36 composite is still an average of your section scores. The conversion tables changed to reflect fewer questions per section, but the percentile benchmarks remain the same.',
+                  title: 'Same 1–36 scoring scale',
+                  desc: 'Each section is still scored on a 1–36 scale. The conversion tables changed to reflect fewer questions per section, but the percentile benchmarks remain comparable across formats.',
                   color: '#34d399',
                 },
               ].map(c => (
@@ -574,7 +584,7 @@ export default function ACTCalculatorPage() {
             <p className="text-xs text-slate-600">
               Enhanced ACT raw counts are approximate and based on{' '}
               <a
-                href="https://act.org/content/dam/act/unsecured/documents/NormsChartMCandWriting.pdf"
+                href="https://www.act.org/content/dam/act/unsecured/documents/ACT-Ntl-Enhancements-Scoring-Key-and-Conversion-Tables.pdf"
                 className="text-slate-500 hover:text-slate-300 underline underline-offset-2"
                 target="_blank" rel="noopener noreferrer">
                 ACT, Inc. published score guides
@@ -587,13 +597,14 @@ export default function ACTCalculatorPage() {
           {/* ── HOW IS YOUR ACT SCORE CALCULATED ── */}
           <section id="how-scored" aria-labelledby="scoring-heading">
             <h2 id="scoring-heading" className="text-2xl font-bold text-white mb-4">
-              How is Your ACT Score Calculated?
+              How Does the ACT Score Calculator Work?
             </h2>
             <p className="text-slate-400 text-sm mb-5 max-w-3xl leading-relaxed">
               Understanding how ACT scoring works helps you set realistic improvement targets and
               interpret your score report accurately. The ACT uses a two-stage process — raw scores
               are first tallied, then converted to scaled scores — before a final composite is
-              calculated from your section scores.
+              calculated from your section scores. The ACT score calculator above automates all
+              three steps below.
             </p>
             <div className="space-y-5 mb-8">
               <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
@@ -631,14 +642,20 @@ export default function ACTCalculatorPage() {
 
               <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
                 <h3 className="text-base font-semibold text-white mb-3">Step 3: ACT Composite Score</h3>
+                <p className="text-sm text-slate-400 leading-relaxed mb-2">
+                  On the <strong className="text-white">Enhanced ACT (2025 onward)</strong>, your
+                  composite is the{' '}
+                  <strong className="text-white">simple arithmetic average of English, Math, and
+                  Reading only</strong>, rounded to the nearest whole number. For example: English 28
+                  + Math 30 + Reading 26 = 84 ÷ 3 = <strong className="text-white">28.0</strong>.
+                  Science is reported separately and does not factor into the composite, even if you
+                  take it.
+                </p>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  Your ACT composite is the{' '}
-                  <strong className="text-white">simple arithmetic average</strong> of your section
-                  scores, rounded to the nearest whole number. For example: English 28 + Math 30 +
-                  Reading 26 + Science 28 = 112 ÷ 4 ={' '}
-                  <strong className="text-white">28.0</strong>. If the average is 28.5 it rounds up
-                  to 29. This rounding rule matters — improving one section by just 2 points can
-                  move your composite up by 1 point.
+                  If you tested before September 2025 (classic ACT), the composite instead averages
+                  all <strong className="text-white">four</strong> sections, including Science. This
+                  rounding rule matters either way — improving one section by a few points can move
+                  your composite up by a full point.
                 </p>
               </div>
             </div>
@@ -703,7 +720,7 @@ export default function ACTCalculatorPage() {
             <p className="text-xs text-slate-600">
               Approximate values based on typical ACT test-form difficulty. Actual conversions vary
               by administration date. Source:{' '}
-              <a href="https://act.org/content/dam/act/unsecured/documents/NormsChartMCandWriting.pdf"
+              <a href="https://www.act.org/content/dam/act/unsecured/documents/ACT-Ntl-Enhancements-Scoring-Key-and-Conversion-Tables.pdf"
                 className="text-slate-500 hover:text-slate-300 underline underline-offset-2"
                 target="_blank" rel="noopener noreferrer">
                 ACT, Inc. published score conversion guides
@@ -715,7 +732,7 @@ export default function ACTCalculatorPage() {
           {/* ── NATIONAL AVERAGE ── */}
           <section id="national-average" aria-labelledby="avg-heading">
             <h2 id="avg-heading" className="text-2xl font-bold text-white mb-4">
-              What is the National Average ACT Score in 2025–2026?
+              National Average ACT Score (2025–2026)
             </h2>
             <p className="text-slate-400 text-sm mb-6 leading-relaxed max-w-3xl">
               The national average ACT composite score in 2025–2026 is{' '}
@@ -746,7 +763,7 @@ export default function ACTCalculatorPage() {
           {/* ── WHAT IS A GOOD ACT SCORE ── */}
           <section id="what-is-good" aria-labelledby="tiers-heading">
             <h2 id="tiers-heading" className="text-2xl font-bold text-white mb-4">
-              What is a Good ACT Score in 2025–2026?
+              What Is a Good ACT Score?
             </h2>
             <p className="text-slate-400 text-sm mb-6 max-w-3xl">
               A good ACT score depends entirely on your target colleges. Here is how score ranges
@@ -794,7 +811,7 @@ export default function ACTCalculatorPage() {
           {/* ── FULL PERCENTILE TABLE ── */}
           <section id="percentile-table" aria-labelledby="chart-heading">
             <h2 id="chart-heading" className="text-2xl font-bold text-white mb-2">
-              ACT Score Percentile Chart 2026 — Full Table
+              ACT Score Percentile Chart — Full Table
             </h2>
             <p className="text-slate-400 text-sm mb-6">
               Complete ACT composite score to national percentile table based on official ACT, Inc.
@@ -831,7 +848,7 @@ export default function ACTCalculatorPage() {
             </div>
             <p className="text-xs text-slate-600 mt-2">
               Source:{' '}
-              <a href="https://act.org/content/dam/act/unsecured/documents/NormsChartMCandWriting.pdf"
+              <a href="https://www.act.org/content/dam/act/unsecured/documents/ACT-Ntl-Enhancements-Scoring-Key-and-Conversion-Tables.pdf"
                 className="text-slate-500 hover:text-slate-300 underline underline-offset-2"
                 target="_blank" rel="noopener noreferrer">
                 ACT National Norms
@@ -843,7 +860,7 @@ export default function ACTCalculatorPage() {
           {/* ── COLLEGES ── */}
           <section id="colleges" aria-labelledby="colleges-heading">
             <h2 id="colleges-heading" className="text-2xl font-bold text-white mb-2">
-              ACT Scores for Top Colleges 2025–2026
+              ACT Scores for Top Colleges (2025–2026)
             </h2>
             <p className="text-slate-400 text-sm mb-6">
               Middle 50% ACT composite ranges for admitted students at competitive US universities.
@@ -948,7 +965,7 @@ export default function ACTCalculatorPage() {
           {/* ── ACT TO SAT CONVERSION ── */}
           <section id="act-sat" aria-labelledby="crosswalk-heading">
             <h2 id="crosswalk-heading" className="text-2xl font-bold text-white mb-2">
-              ACT to SAT Score Conversion Chart 2025
+              ACT to SAT Score Conversion Chart
             </h2>
             <p className="text-slate-400 text-sm mb-6">
               Official College Board and ACT concordance table. Convert your ACT score to its SAT
@@ -1003,7 +1020,7 @@ export default function ACTCalculatorPage() {
           {/* ── AVERAGE ACT SCORE BY STATE ── */}
           <section id="state-averages" aria-labelledby="state-heading">
             <h2 id="state-heading" className="text-2xl font-bold text-white mb-2">
-              Average ACT Score by State 2025–2026
+              Average ACT Score by State (2025–2026)
             </h2>
             <p className="text-slate-400 text-sm mb-6 leading-relaxed max-w-3xl">
               Average ACT scores vary widely by state, largely because states with mandatory ACT
@@ -1048,10 +1065,10 @@ export default function ACTCalculatorPage() {
             </div>
             <p className="text-xs text-slate-600">
               Source:{' '}
-              <a href="https://act.org/content/dam/act/unsecured/documents/NormsChartMCandWriting.pdf"
+              <a href="https://www.act.org/content/dam/act/unsecured/documents/ACT-Ntl-Enhancements-Scoring-Key-and-Conversion-Tables.pdf"
                 className="text-slate-500 hover:text-slate-300 underline underline-offset-2"
                 target="_blank" rel="noopener noreferrer">
-                ACT National Profile Report 2025
+                ACT National Profile Report
               </a>
               . States with lower participation have a self-selection bias that inflates average scores.
             </p>
@@ -1091,8 +1108,8 @@ export default function ACTCalculatorPage() {
             </h2>
             <p className="text-slate-400 text-sm mb-6 max-w-3xl">
               Most students improve their ACT composite by 2–5 points on a retake with targeted
-              preparation. Because the composite is an average of four sections, improving even one
-              section by 4 points moves your composite by 1 full point.
+              preparation. On the Enhanced ACT, the composite averages only three sections, so
+              improving even one section by 3 points moves your composite by a full point.
             </p>
 
             <div className="mb-6">
@@ -1124,7 +1141,7 @@ export default function ACTCalculatorPage() {
                 {
                   step: '01',
                   title: 'Identify your weakest section',
-                  desc: 'Use official ACT practice tests to identify which of the four sections is limiting your composite. Gaining 4 points in one section increases your composite by 1 point — focused prep beats studying everything equally.',
+                  desc: 'Use official ACT practice tests to identify which section is limiting your composite. On the Enhanced ACT, a 3-point gain in one section raises your composite by a full point — focused prep beats studying everything equally.',
                 },
                 {
                   step: '02',
