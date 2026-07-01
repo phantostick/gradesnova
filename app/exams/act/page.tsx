@@ -106,7 +106,8 @@ const IMPROVEMENT_DATA = [
 
 const TOC_ITEMS = [
   { href: '#calculator',       label: 'ACT score calculator' },
-  { href: '#enhanced-act',     label: '2025 Enhanced ACT format' },
+  { href: '#act-2026',         label: 'The ACT in 2026: format & scoring' },
+  { href: '#enhanced-act',     label: 'Enhanced ACT format change' },
   { href: '#how-scored',       label: 'How ACT scoring works' },
   { href: '#national-average', label: 'National average ACT score' },
   { href: '#what-is-good',     label: 'What is a good ACT score?' },
@@ -144,7 +145,7 @@ export default function ACTCalculatorPage() {
     '@context': 'https://schema.org', '@type': 'WebApplication',
     name: 'ACT Score Calculator',
     url: 'https://gradesnova.com/exams/act',
-    description: 'Free ACT score calculator. Enter your raw correct answers per section to instantly calculate your scaled scores and national percentile ranking. Includes the 2025 Enhanced ACT format, ACT-to-SAT conversion and top college score ranges. Updated for 2025–2026.',
+    description: 'Free ACT score calculator. Enter your raw correct answers per section to instantly calculate your scaled scores and national percentile ranking. Covers only the current Enhanced ACT format, ACT-to-SAT conversion and top college score ranges. Updated for 2025–2026.',
     applicationCategory: 'EducationalApplication', operatingSystem: 'Any',
     offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
     provider: { '@type': 'Organization', name: 'GradesNova', url: 'https://gradesnova.com' },
@@ -154,18 +155,18 @@ export default function ACTCalculatorPage() {
   const schemaDataset = {
     '@context': 'https://schema.org', '@type': 'Dataset',
     name: 'ACT Score Calculator & Percentile Chart 2026',
-    description: 'Complete ACT composite score to national percentile mapping based on official ACT national norms. Free ACT score calculator for 2025–2026. Includes section percentiles for English, Math, Reading, and Science, plus 2025 Enhanced ACT format changes.',
+    description: 'Complete ACT composite score to national percentile mapping based on official ACT national norms. Free ACT score calculator for 2025–2026, built for the current Enhanced ACT format. Includes section percentiles for English, Math, Reading, and optional Science.',
     url: 'https://gradesnova.com/exams/act',
     creator: { '@type': 'Organization', name: 'GradesNova' },
     dateModified: ACT_LAST_MODIFIED,
-    keywords: 'ACT score calculator, ACT score calculator 2026, ACT score percentile, ACT national average, ACT score chart, enhanced ACT 2025',
+    keywords: 'ACT score calculator, ACT score calculator 2026, ACT score percentile, ACT national average, ACT score chart, enhanced ACT',
     spatialCoverage: 'United States',
   };
 
   const schemaArticle = {
     '@context': 'https://schema.org', '@type': 'Article',
     headline: 'ACT Score Calculator — National Percentile, College Ranges & Score Guide',
-    description: 'Free ACT score calculator for 2025–2026. Includes the 2025 Enhanced ACT format change, raw-to-scaled conversion, national percentile rankings, college ranges, and expert prep tips.',
+    description: 'Free ACT score calculator for 2025–2026, built for the current Enhanced ACT format. Includes raw-to-scaled conversion, national percentile rankings, college ranges, and expert prep tips.',
     url: 'https://gradesnova.com/exams/act',
     dateModified: ACT_LAST_MODIFIED,
     datePublished: ACT_DATE_PUBLISHED,
@@ -209,7 +210,7 @@ export default function ACTCalculatorPage() {
               </span>
               <span className="text-[11px] px-2.5 py-1 rounded-full border font-medium"
                 style={{ backgroundColor: '#f59e0b15', borderColor: '#f59e0b30', color: '#fbbf24' }}>
-                Covers 2025 Enhanced ACT format
+                Covers the Enhanced ACT format
               </span>
               <span className="text-[11px] px-2.5 py-1 rounded-full border font-medium"
                 style={{ backgroundColor: '#a855f715', borderColor: '#a855f730', color: '#c084fc' }}>
@@ -232,7 +233,7 @@ export default function ACTCalculatorPage() {
               <strong className="text-white font-medium">ACT score calculator</strong> instantly
               converts them into scaled section scores, a composite, and your national percentile.
               It's built for the{' '}
-              <strong className="text-white font-medium">2025 Enhanced ACT</strong> format, but
+              <strong className="text-white font-medium">Enhanced ACT</strong> format, but
               also supports the classic 4-section test if you're working from older practice scores.
             </p>
             <p className="text-sm text-slate-500 max-w-2xl mb-4">
@@ -244,7 +245,7 @@ export default function ACTCalculatorPage() {
               {[
                 ['Official ACT norms 2025–2026', COLOR],
                 ['Raw → scaled score converter', '#a855f7'],
-                ['2025 Enhanced ACT covered', '#f59e0b'],
+                ['Enhanced ACT format covered', '#f59e0b'],
                 ['ACT → SAT conversion', '#6366f1'],
                 ['Last updated: June 2026', '#34d399'],
               ].map(([label, color]) => (
@@ -373,38 +374,151 @@ export default function ACTCalculatorPage() {
             </h2>
             <p className="text-slate-400 text-sm mb-6 max-w-3xl">
               Enter the number of questions you answered correctly in each section of the{' '}
-              <strong className="text-white">Enhanced ACT</strong> (post-April 2025: English 50 Q,
+              <strong className="text-white">Enhanced ACT</strong> (English 50 Q,
               Math 45 Q, Reading 36 Q, Science 40 Q optional). The ACT score calculator converts
               your raw correct answers to scaled scores (1–36) and computes your composite and
-              national percentile instantly.
+              national percentile instantly.{' '}
+              <strong className="text-white">This calculator only supports the current Enhanced ACT
+              format</strong> — it does not calculate scores for the retired classic 4-section ACT.
             </p>
             <ACTCalculatorClient />
           </section>
 
-          {/* ── 2025 ENHANCED ACT ── */}
+          {/* ── THE ACT IN 2026: FORMAT & SCORING ── */}
+          <section id="act-2026" aria-labelledby="act-2026-heading">
+            <h2 id="act-2026-heading" className="text-2xl font-bold text-white mb-4">
+              The ACT in 2026: Format and How Your Score Is Calculated
+            </h2>
+            <p className="text-slate-400 text-sm mb-5 max-w-3xl leading-relaxed">
+              If you're testing in 2026, the version of the ACT you'll sit is the{' '}
+              <strong className="text-white">Enhanced ACT</strong>. By this point the rollout is
+              complete across every testing channel — national weekend testing (both digital and
+              paper) and school-day testing administered through high schools. This is the only
+              version of the ACT currently offered, and it's the only format this calculator
+              supports.
+            </p>
+
+            <div className="grid sm:grid-cols-2 gap-4 mb-6">
+              <div className="bg-[#12141f] border border-white/8 rounded-xl p-5">
+                <h3 className="text-sm font-semibold text-white mb-3">Required core sections</h3>
+                <div className="space-y-2.5">
+                  {[
+                    { section: 'English',  q: '50 questions', time: '35 minutes' },
+                    { section: 'Math',     q: '45 questions', time: '50 minutes' },
+                    { section: 'Reading',  q: '36 questions', time: '40 minutes' },
+                  ].map(r => (
+                    <div key={r.section} className="flex items-center justify-between text-sm">
+                      <span className="text-slate-300">{r.section}</span>
+                      <span className="font-mono text-xs text-slate-500">{r.q} · {r.time}</span>
+                    </div>
+                  ))}
+                  <div className="pt-2 mt-1 border-t border-white/8 flex items-center justify-between">
+                    <span className="text-sm font-semibold text-white">Core total</span>
+                    <span className="text-sm font-mono font-bold" style={{ color: COLOR }}>131 Q · ~2h 05m</span>
+                  </div>
+                </div>
+              </div>
+              <div className="bg-[#12141f] border rounded-xl p-5" style={{ borderColor: '#f59e0b30' }}>
+                <h3 className="text-sm font-semibold text-white mb-3">Optional add-on</h3>
+                <div className="flex items-center justify-between text-sm mb-2.5">
+                  <span className="text-slate-300">Science</span>
+                  <span className="font-mono text-xs text-slate-500">40 questions · 40 minutes</span>
+                </div>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Taken only if you opt in at registration (small added fee). Produces its own
+                  1–36 Science score and, combined with Math, a STEM score. Adds roughly 40 minutes
+                  to your seat time, bringing the total to around 2 hours 45 minutes if you take it.
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6 mb-6">
+              <h3 className="text-base font-semibold text-white mb-3">How your composite is actually calculated</h3>
+              <p className="text-sm text-slate-400 leading-relaxed mb-3">
+                Each of the three core sections — English, Math, and Reading — is independently
+                converted from a raw score (questions answered correctly) to a scaled score between
+                1 and 36. Your <strong className="text-white">composite score is the simple average
+                of those three scaled scores, rounded to the nearest whole number</strong>. That's it
+                — no weighting, no bonus points, no adjustment for which questions you missed.
+              </p>
+              <div className="bg-white/5 rounded-lg p-4 mb-3 font-mono text-xs text-slate-300 leading-relaxed">
+                Example: English 27 + Math 31 + Reading 29 = 87 ÷ 3 = 29.0 → <span style={{ color: COLOR }}>Composite 29</span>
+              </div>
+              <p className="text-sm text-slate-400 leading-relaxed mb-3">
+                <strong className="text-amber-400">Science is not part of this calculation, even if
+                you take it.</strong> If you opt into the Science section, ACT reports it as a
+                standalone 1–36 score on your score report, separate from the composite entirely. You
+                will also receive a STEM score, which averages your Math and Science scores — but
+                this STEM score is a supplemental figure, not your composite, and most colleges look
+                at the composite first.
+              </p>
+              <p className="text-sm text-slate-400 leading-relaxed">
+                Practically, this means two students can both earn a 29 composite — one who skipped
+                Science entirely and one who took it and scored a 20 on it. The composite treats them
+                identically. Whether a particular college also wants to see a Science score is a
+                separate, school-specific question worth checking directly with each admissions
+                office, since policies differ.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              {[
+                {
+                  icon: '🧮',
+                  title: 'Only three sections set your composite',
+                  desc: 'English, Math, and Reading are required for everyone and are the only inputs to your 1–36 composite score.',
+                },
+                {
+                  icon: '🔬',
+                  title: 'Science is optional and separate',
+                  desc: 'Choosing Science gives you extra data for colleges that want it, plus a STEM score, but it never changes your composite.',
+                },
+                {
+                  icon: '💻',
+                  title: 'Digital or paper, your choice',
+                  desc: 'Most test centers let you pick a digital or paper administration. Both use the same linear (non-adaptive) question set.',
+                },
+                {
+                  icon: '⏱️',
+                  title: 'Roughly 2 hours core, 2h45m with Science',
+                  desc: 'The core test (no Science) runs about 2 hours 5 minutes. Adding Science brings your total seat time closer to 2 hours 45 minutes.',
+                },
+              ].map(c => (
+                <div key={c.title} className="bg-[#12141f] border border-white/8 rounded-xl p-4 flex gap-3">
+                  <span className="text-xl shrink-0" aria-hidden="true">{c.icon}</span>
+                  <div>
+                    <h4 className="text-sm font-semibold text-white mb-1">{c.title}</h4>
+                    <p className="text-xs text-slate-500 leading-relaxed">{c.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ── ENHANCED ACT FORMAT CHANGE ── */}
           <section id="enhanced-act" aria-labelledby="enhanced-heading">
             <div className="flex items-center gap-3 mb-4">
               <span className="text-xs font-bold px-2.5 py-1 rounded-full border"
                 style={{ backgroundColor: '#f59e0b15', borderColor: '#f59e0b30', color: '#f59e0b' }}>
-                🆕 2025 Format Change
+                🆕 Format Change
               </span>
               <h2 id="enhanced-heading" className="text-2xl font-bold text-white">
-                The 2025 Enhanced ACT: What Changed?
+                The Enhanced ACT: What Changed?
               </h2>
             </div>
             <p className="text-slate-400 text-sm mb-6 max-w-3xl leading-relaxed">
-              Starting in <strong className="text-white">September 2025</strong>, ACT, Inc. began
-              rolling out the <strong className="text-white">Enhanced ACT</strong> (sometimes
-              referred to as ACT Next). This is the most significant format change to the test since
-              2015. If you are testing in the 2025–2026 academic year, you will likely take the
-              Enhanced ACT — here is exactly what changed.
+              ACT, Inc. rolled out the <strong className="text-white">Enhanced ACT</strong> (sometimes
+              referred to as ACT Next) in phases starting in September 2025, replacing the classic
+              4-section format. This was the most significant format change to the test since 2015.
+              If you're testing now, you will take the Enhanced ACT — here is exactly what changed
+              from the classic format.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
               {/* Classic format */}
               <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
                 <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">
-                  Classic ACT (before Sept 2025)
+                  Classic ACT (retired)
                 </p>
                 <div className="space-y-3">
                   {[
@@ -435,14 +549,14 @@ export default function ACTCalculatorPage() {
               {/* Enhanced format */}
               <div className="bg-[#12141f] border rounded-2xl p-6" style={{ borderColor: `${COLOR}40` }}>
                 <p className="text-xs font-semibold uppercase tracking-wider mb-4" style={{ color: COLOR }}>
-                  Enhanced ACT (Sept 2025 onwards)
+                  Enhanced ACT (current)
                 </p>
                 <div className="space-y-3">
                   {[
                     { section: 'English',     q: 50, time: '35 min', change: '-25 Q' },
                     { section: 'Mathematics', q: 45, time: '50 min', change: '-15 Q' },
                     { section: 'Reading',     q: 36, time: '40 min', change: '-4 Q' },
-                    { section: 'Science',     q: 40, time: '40 min', change: 'optional in US', optional: true },
+                    { section: 'Science',     q: 40, time: '40 min', change: 'optional', optional: true },
                   ].map(r => (
                     <div key={r.section}
                       className="flex items-center justify-between py-1.5 border-b border-white/5 last:border-0">
@@ -483,7 +597,7 @@ export default function ACTCalculatorPage() {
                 {
                   icon: '🔬',
                   title: 'Science no longer counts toward your composite',
-                  desc: 'On the Enhanced ACT, the composite is the average of English, Math, and Reading only. US students can still choose to take the optional Science section — it produces a separate Science score and a combined STEM score with Math, but neither affects your composite.',
+                  desc: 'On the Enhanced ACT, the composite is the average of English, Math, and Reading only. Students can still choose to take the optional Science section — it produces a separate Science score and a combined STEM score with Math, but neither affects your composite.',
                   color: '#f59e0b',
                 },
                 {
@@ -643,7 +757,7 @@ export default function ACTCalculatorPage() {
               <div className="bg-[#12141f] border border-white/8 rounded-2xl p-6">
                 <h3 className="text-base font-semibold text-white mb-3">Step 3: ACT Composite Score</h3>
                 <p className="text-sm text-slate-400 leading-relaxed mb-2">
-                  On the <strong className="text-white">Enhanced ACT (2025 onward)</strong>, your
+                  On the <strong className="text-white">Enhanced ACT</strong>, your
                   composite is the{' '}
                   <strong className="text-white">simple arithmetic average of English, Math, and
                   Reading only</strong>, rounded to the nearest whole number. For example: English 28
