@@ -74,10 +74,6 @@ function rawToScaled(raw: number, table: Record<number, number>): number {
 }
 
 // ─── Static lookup data (hoisted — never recreated on render) ────────────────
-// These used to be inline array literals inside JSX, which meant JavaScript
-// reallocated them on every single render — i.e. on every slider drag tick.
-// Hoisting them to module scope means they're created exactly once.
-
 const SCORE_BENCHMARKS = [
   { score: 36, pct: 99, label: 'Perfect score' },
   { score: 33, pct: 97, label: 'Ivy-competitive' },
@@ -99,15 +95,6 @@ const GAUGE_RADIUS = 72;
 const GAUGE_CIRC = 2 * Math.PI * GAUGE_RADIUS;
 
 // ─── CSS-transitioned gauge ────────────────────────────────────────────────────
-// PERFORMANCE FIX: this previously remounted on every percentile change
-// (parent wrapped it in `key={compositePerc}`) and injected a brand-new
-// <style> tag with a uniquely-named @keyframes rule on every remount. While
-// dragging a slider, that fires dozens of times per second — forcing a style
-// recalculation + reflow on every tick, which directly hurts INP (Interaction
-// to Next Paint), a Core Web Vital.
-// Fix: no remount, no per-value <style> tag. Just transition stroke-dasharray
-// directly via a static CSS transition — the browser animates it smoothly on
-// its own compositor thread without any DOM/stylesheet churn.
 const PercentileGauge = React.memo(function PercentileGauge({
   percentile, color,
 }: { percentile: number; color: string }) {
@@ -137,9 +124,6 @@ const PercentileGauge = React.memo(function PercentileGauge({
 });
 
 // ─── Raw score module input ───────────────────────────────────────────────────
-// PERFORMANCE FIX: wrapped in React.memo. This is a pure presentational
-// component, so memoizing it means dragging the English slider no longer
-// re-renders the Math, Reading, and Science sliders too.
 const ModuleInput = React.memo(function ModuleInput({
   label, value, max, color, scaledScore, onChange,
 }: {
@@ -227,10 +211,6 @@ export default function ACTCalculatorClient() {
   const [rawMath,     setRawMath]     = useState(30);
   const [rawReading,  setRawReading]  = useState(24);
   const [rawScience,  setRawScience]  = useState(28);
-  // Whether the student is taking/reporting the optional Science section.
-  // This ONLY controls whether Science inputs/results are shown — it never
-  // changes the composite, because Science is never part of the Enhanced
-  // ACT composite (English + Math + Reading only).
   const [scienceOptOut, setScienceOptOut] = useState(false);
 
   const scaledEng     = useMemo(() => rawToScaled(rawEng,     ENG_CONVERSION),     [rawEng]);
@@ -238,15 +218,11 @@ export default function ACTCalculatorClient() {
   const scaledReading = useMemo(() => rawToScaled(rawReading, READING_CONVERSION), [rawReading]);
   const scaledScience = useMemo(() => rawToScaled(rawScience, SCIENCE_CONVERSION), [rawScience]);
 
-  // Enhanced ACT composite = average of English, Math, and Reading ONLY.
-  // Science is always excluded — taking it produces a separate Science score
-  // and a combined STEM score (with Math), but neither affects the composite.
   const displayComposite = useMemo(() => {
     const sections = [scaledEng, scaledMath, scaledReading];
     return Math.round(sections.reduce((a, b) => a + b, 0) / sections.length);
   }, [scaledEng, scaledMath, scaledReading]);
 
-  // STEM score: average of Math and Science, only meaningful if Science was taken.
   const stemScore = useMemo(() => {
     if (scienceOptOut) return null;
     return Math.round((scaledMath + scaledScience) / 2);
@@ -264,16 +240,19 @@ export default function ACTCalculatorClient() {
     [displayComposite],
   );
 
-  // PERFORMANCE NOTE: this array depends on state (scaledEng/Math/Reading/
-  // Science + scienceOptOut), so it has to be rebuilt on render — that's
-  // unavoidable and cheap. Only the truly static arrays (benchmarks, format
-  // overview) were hoisted above, since those never change.
   const sectionRows = useMemo(() => ([
     { label: 'English', scaled: scaledEng,     pct: englishPerc, color: COLOR      },
     { label: 'Math',    scaled: scaledMath,    pct: mathPerc,    color: '#6366f1'  },
     { label: 'Reading', scaled: scaledReading, pct: readingPerc, color: '#a855f7'  },
     ...(!scienceOptOut ? [{ label: 'Science*', scaled: scaledScience, pct: sciencePerc, color: '#34d399' }] : []),
   ]), [scaledEng, scaledMath, scaledReading, scaledScience, englishPerc, mathPerc, readingPerc, sciencePerc, scienceOptOut]);
+
+  // Micro-copy label above CTA headline, tailored to score tier.
+  const ctaEyebrow = useMemo(() => {
+    if (displayComposite >= 30) return 'Strong score — see your range';
+    if (displayComposite >= 24) return 'See where you stand';
+    return 'Find your best-fit schools';
+  }, [displayComposite]);
 
   return (
     <div className="grid lg:grid-cols-5 gap-8">
@@ -356,13 +335,37 @@ export default function ACTCalculatorClient() {
             test form.
           </p>
 
+          {/* ── College match CTA — dynamic by score tier + social proof ── */}
           <Link
             href={`/exams/act/colleges#score-${displayComposite}`}
-            className="flex items-center justify-center gap-2 w-full rounded-xl px-4 py-3 text-sm font-semibold text-white transition-all hover:scale-[1.02] active:scale-95"
+            className="group relative flex items-center gap-4 w-full rounded-xl px-5 py-4 text-white transition-all hover:scale-[1.02] active:scale-95 overflow-hidden"
             style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}
           >
-            🎓 What colleges can I get into with a {displayComposite}?
+            {/* subtle diagonal shine sweep on hover */}
+            <span
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{ background: 'linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%)' }}
+              aria-hidden="true"
+            />
+
+            <span className="text-2xl shrink-0 relative" aria-hidden="true">🎓</span>
+
+            <div className="flex-1 text-left relative">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-white/70 mb-0.5">
+                {ctaEyebrow}
+              </p>
+              <p className="text-sm font-bold leading-snug">
+                Which colleges accept a {displayComposite}?
+              </p>
+            </div>
+
+            <span className="text-lg shrink-0 transition-transform group-hover:translate-x-1 relative" aria-hidden="true">
+              →
+            </span>
           </Link>
+          <p className="text-[10px] text-slate-500 text-center -mt-1">
+            👀 5,000+ students have checked their college match this month
+          </p>
         </div>
 
         {/* ACT → SAT */}
