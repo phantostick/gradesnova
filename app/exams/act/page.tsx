@@ -279,62 +279,7 @@ export default function ACTCalculatorPage() {
           </nav>
 
           {/* ── HUB NAV ── */}
-          <nav aria-label="ACT hub pages">
-            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
-              ACT resources on GradesNova
-            </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {[
-                {
-                  href: '/exams/act/guide',
-                  icon: '📘',
-                  color: COLOR,
-                  badge: 'Full guide',
-                  title: 'Complete ACT Guide 2026',
-                  desc: 'ACT format, Enhanced ACT changes, section breakdowns, and ACT vs SAT comparison.',
-                },
-                {
-                  href: '/exams/act/colleges',
-                  icon: '🎓',
-                  color: '#a855f7',
-                  badge: 'College match',
-                  title: 'What Colleges Can I Get Into?',
-                  desc: 'Every ACT score 1–36, broken down with example schools and percentile.',
-                },
-                {
-                  href: '/exams/act/prep-tips',
-                  icon: '🎯',
-                  color: '#f59e0b',
-                  badge: 'Strategy',
-                  title: 'ACT Prep Tips 2026',
-                  desc: 'Section-by-section strategies, timing tactics, and a 10-week study plan.',
-                },
-                {
-                  href: '/exams/act/scores',
-                  icon: '📅',
-                  color: '#34d399',
-                  badge: 'Score release',
-                  title: 'ACT Score Release Guide',
-                  desc: 'When scores come out, how to read your report, superscoring, and what to do next.',
-                },
-              ].map(page => (
-                <Link key={page.href} href={page.href}
-                  className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all hover:-translate-y-0.5 group flex gap-3">
-                  <span className="text-xl shrink-0 mt-0.5" aria-hidden="true">{page.icon}</span>
-                  <div>
-                    <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full border mb-1 inline-block"
-                      style={{ backgroundColor: `${page.color}15`, borderColor: `${page.color}30`, color: page.color }}>
-                      {page.badge}
-                    </span>
-                    <p className="text-xs font-bold text-white group-hover:brightness-110 leading-snug mb-0.5">
-                      {page.title}
-                    </p>
-                    <p className="text-[10px] text-slate-500 leading-relaxed">{page.desc}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </nav>
+          
 
           {/* ── TRUST / AUTHOR BLOCK ── */}
           <aside className="bg-[#12141f] border border-white/8 rounded-2xl p-5 flex flex-col sm:flex-row gap-5 items-start">
@@ -383,7 +328,94 @@ export default function ACTCalculatorPage() {
             </p>
             <ACTCalculatorClient />
           </section>
-
+<nav aria-label="ACT hub pages">
+            <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
+              ACT resources on GradesNova
+            </p>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              {[
+                {
+                  href: '/exams/act/guide',
+                  icon: '📘',
+                  color: COLOR,
+                  badge: 'Full guide',
+                  title: 'Complete ACT Guide 2026',
+                  desc: 'ACT format, Enhanced ACT changes, section breakdowns, and ACT vs SAT comparison.',
+                },
+                {
+                  href: '/exams/act/colleges',
+                  icon: '🎓',
+                  color: '#a855f7',
+                  badge: 'College match',
+                  title: 'What Colleges Can I Get Into?',
+                  desc: 'Every ACT score 1–36, broken down with example schools and percentile.',
+                },
+                {
+                  href: '/exams/act/prep-tips',
+                  icon: '🎯',
+                  color: '#f59e0b',
+                  badge: 'Strategy',
+                  title: 'ACT Prep Tips 2026',
+                  desc: 'Section-by-section strategies, timing tactics, and a 10-week study plan.',
+                },
+                {
+                  href: '/exams/act/scores',
+                  icon: '📅',
+                  color: '#34d399',
+                  badge: 'Score release',
+                  title: 'ACT Score Release Guide',
+                  desc: 'When scores come out, how to read your report, superscoring, and what to do next.',
+                },
+                {
+                  href: '/exams/act/enhanced-act',
+                  icon: '🆕',
+                  color: '#6366f1',
+                  badge: 'Format change',
+                  title: 'Enhanced ACT Explained',
+                  desc: 'What changed in the 2025 ACT redesign — sections, timing, and scoring.',
+                },
+                {
+                  href: '/exams/act/superscore',
+                  icon: '⭐',
+                  color: '#ec4899',
+                  badge: 'Superscoring',
+                  title: 'ACT Superscore Explained',
+                  desc: 'How superscoring works across attempts and which colleges accept it.',
+                },
+                {
+                  href: '/exams/act/writing',
+                  icon: '✍️',
+                  color: '#a855f7',
+                  badge: 'Optional essay',
+                  title: 'ACT Writing (Essay) Guide',
+                  desc: 'Format, the 2–12 scoring scale, and which colleges still require it.',
+                },
+                {
+                  href: '/exams/act/retake',
+                  icon: '🔁',
+                  color: '#34d399',
+                  badge: 'Retaking',
+                  title: 'Should You Retake the ACT?',
+                  desc: 'How to decide, typical score gains, and how many attempts make sense.',
+                },
+              ].map(page => (
+                <Link key={page.href} href={page.href}
+                  className="bg-[#12141f] border border-white/8 rounded-xl p-4 hover:border-white/20 transition-all hover:-translate-y-0.5 group flex gap-3">
+                  <span className="text-xl shrink-0 mt-0.5" aria-hidden="true">{page.icon}</span>
+                  <div>
+                    <span className="text-[10px] font-semibold px-1.5 py-0.5 rounded-full border mb-1 inline-block"
+                      style={{ backgroundColor: `${page.color}15`, borderColor: `${page.color}30`, color: page.color }}>
+                      {page.badge}
+                    </span>
+                    <p className="text-xs font-bold text-white group-hover:brightness-110 leading-snug mb-0.5">
+                      {page.title}
+                    </p>
+                    <p className="text-[10px] text-slate-500 leading-relaxed">{page.desc}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </nav>
           {/* ── THE ACT IN 2026: FORMAT & SCORING ── */}
           <section id="act-2026" aria-labelledby="act-2026-heading">
             <h2 id="act-2026-heading" className="text-2xl font-bold text-white mb-4">
@@ -511,7 +543,10 @@ export default function ACTCalculatorPage() {
               referred to as ACT Next) in phases starting in September 2025, replacing the classic
               4-section format. This was the most significant format change to the test since 2015.
               If you're testing now, you will take the Enhanced ACT — here is exactly what changed
-              from the classic format.
+              from the classic format. For the full deep-dive breakdown, see our{' '}
+              <Link href="/exams/act/enhanced-act" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">
+                dedicated Enhanced ACT guide
+              </Link>.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
@@ -769,7 +804,11 @@ export default function ACTCalculatorPage() {
                   If you tested before September 2025 (classic ACT), the composite instead averages
                   all <strong className="text-white">four</strong> sections, including Science. This
                   rounding rule matters either way — improving one section by a few points can move
-                  your composite up by a full point.
+                  your composite up by a full point. If you&apos;ve tested more than once, see our{' '}
+                  <Link href="/exams/act/superscore" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">
+                    ACT superscore guide
+                  </Link>{' '}
+                  for how your best sections across dates can combine into a higher composite.
                 </p>
               </div>
             </div>
@@ -1200,6 +1239,10 @@ export default function ACTCalculatorPage() {
                 { name: 'Results Day Guide',   path: '/results-day',   icon: '📅' },
                 { name: 'Prep Tips',           path: '/prep-tips',     icon: '🎯' },
                 { name: 'Understanding Scores', path: '/scores',       icon: '📊' },
+                { name: 'Enhanced ACT',        path: '/enhanced-act',  icon: '🆕' },
+                { name: 'Superscore Guide',    path: '/superscore',    icon: '⭐' },
+                { name: 'Writing (Essay)',     path: '/writing',       icon: '✍️' },
+                { name: 'Should You Retake?',  path: '/retake',        icon: '🔁' },
               ].map(res => (
                 <Link key={res.path} href={`/exams/act${res.path}`}
                   className="bg-[#12141f] border border-white/8 rounded-xl p-4 flex flex-col items-center justify-center text-center hover:bg-white/5 transition-colors group">
@@ -1223,7 +1266,11 @@ export default function ACTCalculatorPage() {
             <p className="text-slate-400 text-sm mb-6 max-w-3xl">
               Most students improve their ACT composite by 2–5 points on a retake with targeted
               preparation. On the Enhanced ACT, the composite averages only three sections, so
-              improving even one section by 3 points moves your composite by a full point.
+              improving even one section by 3 points moves your composite by a full point. If
+              you&apos;re weighing whether another attempt is worth it, see our{' '}
+              <Link href="/exams/act/retake" className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2">
+                full guide on deciding whether to retake the ACT
+              </Link>.
             </p>
 
             <div className="mb-6">
@@ -1295,6 +1342,16 @@ export default function ACTCalculatorPage() {
                 className="text-xs px-3.5 py-1.5 rounded-full font-medium border transition-all hover:scale-105"
                 style={{ backgroundColor: `${COLOR}12`, borderColor: `${COLOR}25`, color: COLOR }}>
                 Complete ACT Guide →
+              </Link>
+              <Link href="/exams/act/retake"
+                className="text-xs px-3.5 py-1.5 rounded-full font-medium border transition-all hover:scale-105"
+                style={{ backgroundColor: '#34d39912', borderColor: '#34d39925', color: '#34d399' }}>
+                Should You Retake the ACT? →
+              </Link>
+              <Link href="/exams/act/superscore"
+                className="text-xs px-3.5 py-1.5 rounded-full font-medium border transition-all hover:scale-105"
+                style={{ backgroundColor: '#ec489912', borderColor: '#ec489925', color: '#ec4899' }}>
+                ACT Superscore Explained →
               </Link>
             </div>
           </section>
