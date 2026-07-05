@@ -13,12 +13,12 @@ import Link from 'next/link';
 import { GCSECalculatorClient } from '../gcse-calculator-client';
 
 export const metadata: Metadata = {
-  title: 'AQA GCSE Grade Boundaries 2025-26 | Raw Mark Calculator',
+  title: 'AQA Grade Boundaries 2026',
   description:
     'Official AQA GCSE grade boundaries from June 2025. Maths Higher grade 9 was 219/240, grade 4 was 63/240. English Language grade 9 was 119/160. All subjects — Biology, Chemistry, Physics, History, Geography. 2026 boundaries published 20 August 2026.',
   alternates: { canonical: 'https://gradesnova.com/exams/gcse/aqa' },
   openGraph: {
-    title: 'AQA GCSE Grade Boundaries 2025-26 | Raw Mark Calculator',
+    title: 'AQA Grade Boundaries 2026',
     description:
       'Official AQA grade boundaries June 2025. Maths Higher: grade 9 = 219/240, grade 4 = 63/240. All subjects. Updated live 20 August 2026 on Results Day.',
     url: 'https://gradesnova.com/exams/gcse/aqa',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'AQA GCSE Grade Boundaries 2025-26 | Calculator',
+    title: 'AQA Grade Boundaries 2026',
     description: 'Free AQA grade boundary calculator. Enter raw mark, get grade. Official 2025 data. Updated Results Day 20 Aug 2026.',
   },
   robots: {
@@ -264,11 +264,15 @@ export default function AQAGCSEPage() {
               </span>
               <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">📅 2026 boundaries: 20 Aug 2026</span>
               <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">Last checked: 31 May 2026</span>
-              <span className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full">Source: aqa.org.uk</span>
+              <a href="https://www.aqa.org.uk/exams-administration/results-days/grade-boundaries" target="_blank" rel="noopener noreferrer nofollow" className="text-xs bg-white/5 text-slate-400 border border-white/10 px-3 py-1 rounded-full hover:text-white hover:border-white/25 transition-colors underline decoration-dotted">Source: aqa.org.uk ↗</a>
+              <a href="https://www.google.com/preferences/source?q=gradesnova.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-xs bg-emerald-500/10 text-emerald-400 border border-emerald-500/25 px-3 py-1 rounded-full hover:bg-emerald-500/20 transition-colors font-medium">
+                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.958a1 1 0 00.95.69h4.162c.969 0 1.371 1.24.588 1.81l-3.367 2.446a1 1 0 00-.363 1.118l1.287 3.957c.3.922-.755 1.688-1.539 1.118l-3.366-2.446a1 1 0 00-1.176 0l-3.366 2.446c-.784.57-1.838-.196-1.539-1.118l1.287-3.957a1 1 0 00-.363-1.118L2.075 9.385c-.783-.57-.38-1.81.588-1.81h4.163a1 1 0 00.95-.69l1.273-3.958z" /></svg>
+                Add GradesNova as a Preferred Source
+              </a>
             </div>
 
             <p className="text-lg text-slate-400 max-w-2xl leading-relaxed">
-              Official AQA GCSE grade boundaries from the <strong className="text-white">June 2025 exam series</strong> — the most recent available. Maths Higher grade 9 required <strong className="text-white">219 out of 240</strong>. Covers Maths, English, Sciences, History, Geography, Computer Science and more. <strong className="text-white">2026 boundaries published 20 August 2026.</strong>
+              This page shows the <strong className="text-white">official historic AQA GCSE grade boundaries</strong> from the June 2022–2025 exam series — the most recent data currently available. Maths Higher grade 9 required <strong className="text-white">219 out of 240</strong> in 2025. <strong className="text-white">The official 2026 AQA grade boundaries have not been released yet and will be published here at 8:00am on Thursday 20 August 2026</strong>, the moment AQA makes them public. Covers Maths, English, Sciences, History, Geography, Computer Science and more.
             </p>
           </div>
         </header>
@@ -283,7 +287,7 @@ export default function AQAGCSEPage() {
           */}
           <section aria-labelledby="aqa-direct-answer">
             <h2 id="aqa-direct-answer" className="text-xl font-bold text-white mb-4">
-              AQA GCSE grade boundaries 2025 — key figures
+              AQA grade boundaries 2025-26 (GCSE) — key figures
             </h2>
             <div className="bg-[#12141f] border border-emerald-500/20 rounded-xl p-6 space-y-4">
               <div>
@@ -316,7 +320,7 @@ export default function AQAGCSEPage() {
                 </p>
               </div>
               <p className="text-xs text-slate-500 pt-1 border-t border-white/8">
-                Source: AQA official grade boundary documents, June 2025. Published 21 August 2025. Verified 31 May 2026.
+                Source: AQA official grade boundary documents, June 2025. Published 20 August 2025. Verified 31 May 2026.
               </p>
             </div>
           </section>
@@ -442,7 +446,7 @@ export default function AQAGCSEPage() {
               AQA GCSE grade boundaries 2025 — all subjects
             </h2>
             <p className="text-slate-400 text-sm mb-6">
-              Complete official AQA grade boundaries from the June 2025 examination series, published 21 August 2025.
+              Complete official AQA grade boundaries from the June 2025 examination series, published 20 August 2025.
               2026 boundaries update live on Results Day 20 August 2026. Verified against official AQA documents.
             </p>
 
@@ -737,8 +741,11 @@ export default function AQAGCSEPage() {
                 <div>
                   <p className="text-sm font-semibold text-white mb-1">Source data</p>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    All grade boundaries on this page are taken directly from the official AQA grade boundary
-                    documents published on aqa.org.uk on 21 August 2025. GradesNova does not estimate,
+                    All grade boundaries on this page are taken directly from the official{' '}
+                    <a href="https://www.aqa.org.uk/exams-administration/results-days/grade-boundaries" target="_blank" rel="noopener noreferrer nofollow" className="text-emerald-400 hover:text-emerald-300 underline underline-offset-2">
+                      AQA grade boundary documents
+                    </a>{' '}
+                    published on aqa.org.uk on 20 August 2025. GradesNova does not estimate,
                     interpolate, or adjust boundaries — every figure is copied verbatim from the official document.
                   </p>
                 </div>
