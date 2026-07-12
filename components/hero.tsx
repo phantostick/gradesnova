@@ -1,3 +1,4 @@
+// components/hero.tsx
 // Server component — no 'use client', no Framer Motion bundle
 // Animations done via CSS @keyframes — zero JS cost, instant LCP
 
@@ -7,7 +8,6 @@ const examPills = [
   { name: 'SAT',      href: '/exams/sat',      color: '#6366f1' },
   { name: 'ACT',      href: '/exams/act',      color: '#06b6d4' },
   { name: 'GRE',      href: '/exams/gre',      color: '#a855f7' },
-  { name: 'GMAT',     href: '/exams/gmat',     color: '#f59e0b' },
   { name: 'LSAT',     href: '/exams/lsat',     color: '#ef4444' },
   { name: 'GCSE',     href: '/exams/gcse',     color: '#34d399' },
   { name: 'A-Levels', href: '/exams/a-levels', color: '#ec4899' },
@@ -76,7 +76,7 @@ export function Hero() {
 
             <p className="text-lg text-slate-400 mb-8 leading-relaxed max-w-lg">
               Enter your score and instantly see your percentile, rank, and how you compare nationally.
-              Free calculators for SAT, ACT, GRE, GMAT, LSAT, GCSE and A-Levels.
+              Free calculators for SAT, ACT, GRE, LSAT, GCSE and A-Levels.
             </p>
 
             {/* Exam pills — static, no animation overhead per-pill */}
