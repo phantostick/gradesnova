@@ -1,3 +1,4 @@
+// app/exams/a-levels/page.tsx
 'use client';
 
 import { useState, useMemo } from 'react';
@@ -484,7 +485,6 @@ export default function ALevelCalculatorPage() {
                 { id: 'act',      name: 'ACT Score Calculator',    color: '#06b6d4' },
                 { id: 'gre',      name: 'GRE Score Calculator',    color: '#a855f7' },
                 { id: 'lsat',     name: 'LSAT Score Calculator',   color: '#ef4444' },
-                { id: 'gmat',     name: 'GMAT Score Calculator',   color: '#f59e0b' },
               ].map(e => (
                 <Link key={e.id} href={`/exams/${e.id}`}
                   className="px-3.5 py-1.5 rounded-full text-xs font-medium border transition-all hover:scale-105"
