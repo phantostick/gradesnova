@@ -1,3 +1,4 @@
+// app/exams/[slug]/page.tsx
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { exams } from '@/lib/exam-data';
@@ -14,17 +15,19 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   }
 
   return {
-    title: `${exam.name} Percentile Calculator 2026 | GradesNova`,
-    description: `Free ${exam.name} percentile calculator to estimate grade boundaries and scores. Enter your score to instantly see your percentile.`,
+    title: `${exam.name} — Calculator Coming Soon | GradesNova`,
+    description: `${exam.name} exam information and percentile data. Our full ${exam.name} calculator is in progress — see current exam details below.`,
     alternates: {
       canonical: `https://gradesnova.com/exams/${params.slug}`,
     },
     openGraph: {
-      title: `${exam.name} Percentile Calculator | GradesNova`,
-      description: `Calculate your exact ${exam.name} percentile instantly. See how your score compares to all test takers.`,
+      title: `${exam.name} | GradesNova`,
+      description: `${exam.name} exam information. Full percentile calculator coming soon.`,
       url: `https://gradesnova.com/exams/${params.slug}`,
       type: 'website',
     },
+    // Don't let Google index/serve unbuilt calculator pages as if they were live tools
+    robots: { index: false, follow: true },
   };
 }
 
@@ -36,30 +39,11 @@ export default function ExamPage({ params }: { params: { slug: string } }) {
     notFound(); // Triggers Next.js 404 page if slug is invalid
   }
 
-  // Generate the Rich Snippet Schema for Google
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": `${exam.name} Percentile Calculator`,
-    "applicationCategory": "EducationalApplication",
-    "operatingSystem": "Any",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "description": `Free ${exam.name} percentile calculator to estimate grade boundaries and scores.`,
-    "url": `https://gradesnova.com/exams/${params.slug}`
-  };
+  // No WebApplication schema here — this page has no functional calculator yet.
+  // Adding "app" structured data for a tool that doesn't exist misrepresents the page to Google.
 
   return (
     <>
-      {/* Inject JSON-LD into the head of the document */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      
       {/* Render the interactive UI as a Client Component */}
       <ExamClientPage exam={exam} allExams={exams} />
     </>
