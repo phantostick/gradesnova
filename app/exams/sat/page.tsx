@@ -1,3 +1,4 @@
+// app/exams/sat/page.tsx
 'use client';
 
 // app/exams/sat/page.tsx
@@ -1369,12 +1370,11 @@ export default function SATCalculatorPage() {
 
           {/* ── OTHER CALCULATORS ── */}
           <section className="bg-[#12141f] border border-white/7 rounded-2xl p-6" aria-labelledby="other-tools-heading">
-            <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">More free score calculators — ACT, GRE, GMAT &amp; more</h2>
+            <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">More free score calculators — ACT, GRE &amp; more</h2>
             <div className="flex flex-wrap gap-2">
               {[
                 { id: 'act',      name: 'ACT Score Calculator',  color: '#06b6d4' },
                 { id: 'gre',      name: 'GRE Score Calculator',  color: '#a855f7' },
-                { id: 'gmat',     name: 'GMAT Score Calculator', color: '#f59e0b' },
                 { id: 'lsat',     name: 'LSAT Score Calculator', color: '#ef4444' },
                 { id: 'gcse',     name: 'GCSE Grade Calculator', color: '#34d399' },
                 { id: 'a-levels', name: 'A-Level Calculator',    color: '#ec4899' },
