@@ -1,3 +1,4 @@
+// app/exams/lsat/page.tsx
 'use client';
 
 import { useState, useMemo } from 'react';
@@ -402,7 +403,6 @@ export default function LSATCalculatorPage() {
                 { id: 'sat', name: 'SAT Score Calculator', color: '#6366f1' },
                 { id: 'act', name: 'ACT Score Calculator', color: '#06b6d4' },
                 { id: 'gre', name: 'GRE Score Calculator', color: '#a855f7' },
-                { id: 'gmat', name: 'GMAT Score Calculator', color: '#f59e0b' },
                 { id: 'gcse', name: 'GCSE Grade Boundaries', color: '#34d399' },
                 { id: 'a-levels', name: 'A-Level Grade Boundaries', color: '#ec4899' },
               ].map(e => (
