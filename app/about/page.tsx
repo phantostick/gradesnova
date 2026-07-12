@@ -1,3 +1,4 @@
+// app/about/page.tsx
 import type { Metadata } from 'next';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -6,7 +7,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'About GradesNova | Free Exam Score Percentile Calculators',
   description:
-    'GradesNova provides free, instant exam score percentile calculators for SAT, ACT, GRE, GMAT, LSAT, GCSE, and A-Levels. No signup, no paywall — just your score and where it ranks.',
+    'GradesNova provides free, instant exam score percentile calculators for SAT, ACT, GRE, LSAT, GCSE, and A-Levels. No signup, no paywall — just your score and where it ranks.',
   alternates: { canonical: 'https://gradesnova.com/about' },
 };
 
@@ -14,7 +15,6 @@ const exams = [
   { name: 'SAT',      href: '/exams/sat',      color: '#6366f1', desc: 'US college admissions — 400 to 1600' },
   { name: 'ACT',      href: '/exams/act',      color: '#06b6d4', desc: 'US college admissions — 1 to 36' },
   { name: 'GRE',      href: '/exams/gre',      color: '#a855f7', desc: 'Graduate school admissions — 130 to 170' },
-  { name: 'GMAT',     href: '/exams/gmat',     color: '#f59e0b', desc: 'MBA admissions — 205 to 805' },
   { name: 'LSAT',     href: '/exams/lsat',     color: '#ef4444', desc: 'Law school admissions — 120 to 180' },
   { name: 'GCSE',     href: '/exams/gcse',     color: '#34d399', desc: 'UK secondary — grades 1 to 9' },
   { name: 'A-Levels', href: '/exams/a-levels', color: '#ec4899', desc: 'UK advanced — grades E to A*' },
@@ -53,7 +53,7 @@ export default function AboutPage() {
               You enter your score. We show you your percentile, what it means, and how you compare to every other test taker. That's it. No account required, no email, no premium tier.
             </p>
             <p>
-              We cover seven major exams: SAT, ACT, GRE, GMAT, LSAT for US students, and GCSE and A-Levels for UK students. All data comes from official sources — College Board, ACT Inc., ETS, GMAC, LSAC, AQA, Edexcel, and OCR — and is updated with each new exam series.
+              We cover six major exams: SAT, ACT, GRE, LSAT for US students, and GCSE and A-Levels for UK students. All data comes from official sources — College Board, ACT Inc., ETS, LSAC, AQA, Edexcel, and OCR — and is updated with each new exam series. A GMAT calculator is in progress and will be added once it meets the same data standard as the rest of the site.
             </p>
           </div>
         </section>
@@ -79,7 +79,6 @@ export default function AboutPage() {
                     ['SAT',      'College Board SAT Suite Annual Report',        '2023–2024'],
                     ['ACT',      'ACT National Norms',                           '2023'],
                     ['GRE',      'ETS GRE Guide to the Use of Scores',           '2022–2023'],
-                    ['GMAT',     'GMAC GMAT Percentile Rankings',                '2023–2024'],
                     ['LSAT',     'LSAC Percentile Ranks',                        '2022–2023'],
                     ['GCSE',     'AQA, Edexcel, OCR, WJEC Grade Boundaries',    'June 2025'],
                     ['A-Levels', 'AQA Grade Boundaries',                         'June 2025'],
@@ -127,6 +126,16 @@ export default function AboutPage() {
             </p>
             <p>
               GradesNova is sustained by Google AdSense — unobtrusive ads that appear around the calculator, never in between you and your result. That's the entire monetisation model.
+            </p>
+          </div>
+        </section>
+
+        {/* Team */}
+        <section aria-labelledby="team-heading">
+          <h2 id="team-heading" className="text-2xl font-bold text-white mb-4">Who's behind GradesNova</h2>
+          <div className="space-y-4 text-slate-400 leading-relaxed">
+            <p>
+              GradesNova is built and maintained by the GradesNova team, led by a data analyst with prior experience founding and running an education platform that grew to over 500,000 monthly users. That background is why GradesNova is built the way it is: data pulled directly from official exam board publications, no estimates or shortcuts, and a clear "not affiliated" disclosure on every exam we cover.
             </p>
           </div>
         </section>
