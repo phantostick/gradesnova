@@ -1,3 +1,4 @@
+// app/exams/[slug]/exam-client.tsx
 'use client';
 
 import { motion } from 'framer-motion';
@@ -71,10 +72,10 @@ export default function ExamClientPage({
                 📊
               </div>
               <h2 className="text-2xl font-bold text-white mb-2">
-                {exam.name} Percentile Calculator
+                {exam.name} Calculator — In Progress
               </h2>
               <p className="text-slate-400 text-sm mb-6 max-w-sm mx-auto">
-                Enter your {exam.name} score to instantly see your percentile and how you compare to all test takers.
+                We're building a {exam.name} percentile calculator to the same data standard as our other tools. In the meantime, here's what you need to know about {exam.name}.
               </p>
               <div
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium border"
@@ -85,7 +86,7 @@ export default function ExamClientPage({
                 }}
               >
                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: exam.color }} />
-                Calculator coming soon
+                In development — not yet available
               </div>
             </motion.div>
 
