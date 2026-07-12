@@ -1,7 +1,8 @@
+// components/trust-bar.tsx
 // Server component — no JS needed at all for this section
 
 const stats = [
-  { value: '7',    label: 'Exams covered', sub: 'SAT, ACT, GRE, GMAT, LSAT, GCSE, A-Levels' },
+  { value: '6',    label: 'Exams covered', sub: 'SAT, ACT, GRE, LSAT, GCSE, A-Levels' },
   { value: '100%', label: 'Free forever',  sub: 'No signup, no paywall, no catch' },
   { value: '2026', label: 'Data updated',  sub: 'Latest official percentile tables' },
   { value: '40+',  label: 'Countries',     sub: 'Students worldwide use GradesNova' },
