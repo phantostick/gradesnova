@@ -1,3 +1,4 @@
+// components/navbar.tsx
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -10,7 +11,6 @@ const EXAM_LINKS = [
   { name: 'SAT Calculator', href: '/exams/sat', icon: '📐' },
   { name: 'ACT Calculator', href: '/exams/act', icon: '✏️' },
   { name: 'GRE Calculator', href: '/exams/gre', icon: '🎓' },
-  { name: 'GMAT Calculator', href: '/exams/gmat', icon: '💼' },
   { name: 'LSAT Calculator', href: '/exams/lsat', icon: '⚖️' },
   { name: 'GCSE Boundaries', href: '/exams/gcse', icon: '🏫' },
   { name: 'A-Level Boundaries', href: '/exams/a-levels', icon: '📚' },
