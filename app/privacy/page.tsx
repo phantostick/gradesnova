@@ -1,3 +1,4 @@
+// app/privacy/page.tsx
 import type { Metadata } from 'next';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -29,6 +30,13 @@ export default function PrivacyPage() {
 
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="space-y-10 text-slate-400 leading-relaxed">
+
+          <section aria-labelledby="operator-heading">
+            <h2 id="operator-heading" className="text-xl font-bold text-white mb-3">About the operator</h2>
+            <p>
+              GradesNova is built and maintained by the GradesNova team, led by a data analyst with prior experience running an education platform that grew to over 500,000 monthly users. GradesNova applies the same principle to exam data: every figure comes from an official source, not an estimate.
+            </p>
+          </section>
 
           <section aria-labelledby="overview-heading">
             <h2 id="overview-heading" className="text-xl font-bold text-white mb-3">Overview</h2>
@@ -99,7 +107,7 @@ export default function PrivacyPage() {
               Depending on your location, you may have rights under GDPR (EU/UK), CCPA (California), or other applicable laws, including the right to access, correct, or delete personal data we hold about you.
             </p>
             <p className="mt-3">
-              Since GradesNova does not collect personal data beyond what is described above, most requests can be addressed by clearing cookies in your browser. For any other requests, contact us at <a href="mailto:hello@gradesnova.com" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">hello@gradesnova.com</a>.
+              Since GradesNova does not collect personal data beyond what is described above, most requests can be addressed by clearing cookies in your browser. For any other requests, contact us at <a href="mailto:jeepredictor.in@gmail.com" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">jeepredictor.in@gmail.com</a>.
             </p>
           </section>
 
@@ -121,8 +129,8 @@ export default function PrivacyPage() {
             <h2 id="contact-heading" className="text-xl font-bold text-white mb-3">Contact</h2>
             <p>
               Questions about this privacy policy? Email us at{' '}
-              <a href="mailto:hello@gradesnova.com" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">
-                hello@gradesnova.com
+              <a href="mailto:jeepredictor.in@gmail.com" className="text-indigo-400 hover:text-indigo-300 underline underline-offset-2">
+                jeepredictor.in@gmail.com
               </a>.
             </p>
           </section>
