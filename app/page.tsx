@@ -1,3 +1,4 @@
+// app/page.tsx
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Navbar } from '@/components/navbar';
@@ -67,15 +68,6 @@ const GRAD_EXAMS = [
     subtitle: '130–170 per section',
     desc: 'Calculate your GRE Verbal and Quantitative percentile rankings for graduate school admissions.',
     cta: 'GRE percentile calculator',
-  },
-  {
-    href: '/exams/gmat',
-    emoji: '💼',
-    label: 'GMAT',
-    title: 'GMAT Score Calculator',
-    subtitle: '205–805',
-    desc: 'See your GMAT percentile and how it compares against MBA applicant pools at top business schools.',
-    cta: 'GMAT percentile calculator',
   },
   {
     href: '/exams/lsat',
@@ -161,7 +153,7 @@ const HOW_STEPS = [
   {
     n: '01',
     title: 'Pick your exam',
-    body: 'Choose from ACT, SAT, GCSE (AQA, Edexcel, OCR, WJEC), A-Levels, GRE, GMAT, or LSAT.',
+    body: 'Choose from ACT, SAT, GCSE (AQA, Edexcel, OCR, WJEC), A-Levels, GRE, or LSAT.',
   },
   {
     n: '02',
@@ -263,7 +255,7 @@ export default function Home() {
           </h1>
           <p className="text-lg text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">
             Enter your score and instantly see your percentile, grade boundary, and what it means for
-            college admission or sixth form. Covers ACT, SAT, GRE, GMAT, LSAT, GCSE (AQA, Edexcel,
+            college admission or sixth form. Covers ACT, SAT, GRE, LSAT, GCSE (AQA, Edexcel,
             OCR, WJEC) and A-Levels. No account needed.
           </p>
           <div className="flex flex-wrap justify-center gap-3 mb-12">
@@ -518,7 +510,7 @@ export default function Home() {
         <section className="py-20 px-4 max-w-6xl mx-auto">
           <div className="mb-12">
             <p className="text-xs font-semibold tracking-widest uppercase text-indigo-400 mb-3">Graduate Admissions</p>
-            <h2 className="text-3xl font-bold">GRE, GMAT &amp; LSAT Percentile Calculators</h2>
+            <h2 className="text-3xl font-bold">GRE &amp; LSAT Percentile Calculators</h2>
             <p className="text-white/50 mt-3 max-w-xl">
               Applying to grad school, business school, or law school? Find your exact score percentile and
               compare against program medians.
@@ -651,7 +643,6 @@ export default function Home() {
               { href: '/exams/gcse/wjec', label: 'WJEC Grade Boundaries 2025' },
               { href: '/exams/a-levels', label: 'A-Level UCAS Points Calculator' },
               { href: '/exams/gre', label: 'GRE Percentile Calculator' },
-              { href: '/exams/gmat', label: 'GMAT Percentile Calculator' },
               { href: '/exams/lsat', label: 'LSAT Percentile Calculator' },
             ].map(({ href, label }) => (
               <Link
