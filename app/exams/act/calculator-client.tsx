@@ -1,3 +1,4 @@
+// app/exams/act/calculator-client.tsx
 'use client';
 
 // app/exams/act/calculator-client.tsx
@@ -14,7 +15,7 @@ import {
   getPercentile,
   getACTPercentileContext,
 } from '@/lib/act-data';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronDown, ChevronUp, X } from 'lucide-react';
 import Link from 'next/link';
 import { ACT_LAST_MODIFIED, ACT_SAT_CROSSWALK, ACT_FAQS } from '@/lib/act-meta';
 
@@ -213,6 +214,34 @@ export default function ACTCalculatorClient() {
   const [rawScience,  setRawScience]  = useState(28);
   const [scienceOptOut, setScienceOptOut] = useState(false);
 
+  // ── College match popup: appears 7s after the user first touches a slider ──
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [showCollegePopup, setShowCollegePopup] = useState(false);
+  const [popupDismissed, setPopupDismissed] = useState(false);
+  const popupTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const markInteracted = React.useCallback(() => {
+    if (hasInteracted || popupDismissed) return;
+    setHasInteracted(true);
+    popupTimerRef.current = setTimeout(() => setShowCollegePopup(true), 7000);
+  }, [hasInteracted, popupDismissed]);
+
+  React.useEffect(() => {
+    return () => {
+      if (popupTimerRef.current) clearTimeout(popupTimerRef.current);
+    };
+  }, []);
+
+  const dismissCollegePopup = React.useCallback(() => {
+    setShowCollegePopup(false);
+    setPopupDismissed(true);
+  }, []);
+
+  const handleEngChange = React.useCallback((v: number) => { markInteracted(); setRawEng(v); }, [markInteracted]);
+  const handleMathChange = React.useCallback((v: number) => { markInteracted(); setRawMath(v); }, [markInteracted]);
+  const handleReadingChange = React.useCallback((v: number) => { markInteracted(); setRawReading(v); }, [markInteracted]);
+  const handleScienceChange = React.useCallback((v: number) => { markInteracted(); setRawScience(v); }, [markInteracted]);
+
   const scaledEng     = useMemo(() => rawToScaled(rawEng,     ENG_CONVERSION),     [rawEng]);
   const scaledMath    = useMemo(() => rawToScaled(rawMath,    MATH_CONVERSION),    [rawMath]);
   const scaledReading = useMemo(() => rawToScaled(rawReading, READING_CONVERSION), [rawReading]);
@@ -264,21 +293,21 @@ export default function ACTCalculatorClient() {
             label="English — correct out of 50"
             value={rawEng} max={50} color={COLOR}
             scaledScore={scaledEng}
-            onChange={setRawEng}
+            onChange={handleEngChange}
           />
 
           <ModuleInput
             label="Math — correct out of 45"
             value={rawMath} max={45} color="#6366f1"
             scaledScore={scaledMath}
-            onChange={setRawMath}
+            onChange={handleMathChange}
           />
 
           <ModuleInput
             label="Reading — correct out of 36"
             value={rawReading} max={36} color="#a855f7"
             scaledScore={scaledReading}
-            onChange={setRawReading}
+            onChange={handleReadingChange}
           />
 
           {/* Science (optional — does not affect composite) */}
@@ -308,7 +337,7 @@ export default function ACTCalculatorClient() {
                   label="correct out of 40"
                   value={rawScience} max={40} color="#34d399"
                   scaledScore={scaledScience}
-                  onChange={setRawScience}
+                  onChange={handleScienceChange}
                 />
                 <p className="text-[10px] text-slate-600 mt-1.5">
                   Science is reported as its own score and combined with Math into a STEM score —
@@ -495,6 +524,62 @@ export default function ACTCalculatorClient() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── College match popup — fades/slides in 7s after first slider touch ── */}
+      <div
+        role="dialog"
+        aria-live="polite"
+        aria-label="College match suggestion"
+        className={`fixed z-50 bottom-5 right-5 left-5 sm:left-auto sm:w-96 transition-all duration-500 ease-out ${
+          showCollegePopup
+            ? 'opacity-100 translate-y-0 pointer-events-auto'
+            : 'opacity-0 translate-y-4 pointer-events-none'
+        }`}
+      >
+        <div className="relative bg-[#12141f] border border-white/10 rounded-2xl p-5 shadow-2xl shadow-black/50 overflow-hidden">
+          <span
+            className="absolute inset-0 opacity-50"
+            style={{ background: 'linear-gradient(135deg, #6366f11a, #a855f71a)' }}
+            aria-hidden="true"
+          />
+          <button
+            onClick={dismissCollegePopup}
+            aria-label="Dismiss"
+            className="absolute top-3 right-3 text-slate-500 hover:text-slate-300 transition-colors z-10"
+          >
+            <X size={16} />
+          </button>
+
+          <div className="relative flex items-start gap-3 pr-4">
+            <span className="text-2xl shrink-0" aria-hidden="true">🎓</span>
+            <div className="flex-1">
+              <p className="text-sm font-bold text-white mb-1">
+                Curious what a {displayComposite} gets you?
+              </p>
+              <p className="text-xs text-slate-400 mb-3.5 leading-relaxed">
+                See real admit ranges at colleges that accept ACT scores near yours.
+              </p>
+              <div className="flex items-center gap-2">
+                <Link
+                  href={`/exams/act/colleges#score-${displayComposite}`}
+                  onClick={dismissCollegePopup}
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2 rounded-lg text-white transition-transform hover:scale-105 active:scale-95"
+                  style={{ background: 'linear-gradient(135deg, #6366f1, #a855f7)' }}
+                >
+                  See my college matches
+                  <span aria-hidden="true">→</span>
+                </Link>
+                <button
+                  onClick={dismissCollegePopup}
+                  className="text-xs text-slate-500 hover:text-slate-300 transition-colors px-2 py-2"
+                >
+                  Not now
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
