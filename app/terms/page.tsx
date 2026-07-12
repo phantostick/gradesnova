@@ -1,3 +1,4 @@
+// app/terms/page.tsx
 import type { Metadata } from 'next';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -5,7 +6,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Terms of Service | GradesNova',
-  description: 'Terms of service for GradesNova — free exam score percentile calculators for SAT, ACT, GRE, GMAT, LSAT, GCSE and A-Levels.',
+  description: 'Terms of service for GradesNova — free exam score percentile calculators for SAT, ACT, GRE, LSAT, GCSE and A-Levels.',
   alternates: { canonical: 'https://gradesnova.com/terms' },
   robots: { index: true, follow: true },
 };
@@ -35,7 +36,7 @@ const sections = [
     content: (
       <>
         <p>
-          GradesNova is a free educational tool that provides exam score percentile calculators and grade boundary information for standardised tests including SAT, ACT, GRE, GMAT, LSAT, GCSE and A-Levels.
+          GradesNova is a free educational tool that provides exam score percentile calculators and grade boundary information for standardised tests including SAT, ACT, GRE, LSAT, GCSE and A-Levels, with additional exams added over time.
         </p>
         <p className="mt-3">
           All percentile data and grade boundary figures are sourced from official exam board publications — College Board, ACT Inc., ETS, GMAC, LSAC, AQA, Edexcel, OCR and WJEC. We make reasonable efforts to keep this data accurate and up to date, but we do not guarantee that all figures are current at any given time.
@@ -232,9 +233,19 @@ const sections = [
     ),
   },
   {
+    id: 'operator',
+    icon: '🧑‍💻',
+    title: '11. Who operates GradesNova',
+    content: (
+      <p>
+        GradesNova is built and maintained by the GradesNova team, led by a data analyst with prior experience running an education platform that grew to over 500,000 monthly users. That background shapes how this site is run: data sourced directly from official exam boards, not estimated or modelled.
+      </p>
+    ),
+  },
+  {
     id: 'contact',
     icon: '✉️',
-    title: '11. Contact',
+    title: '12. Contact',
     content: (
       <p>
         Questions about these terms? Email us at{' '}
