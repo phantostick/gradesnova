@@ -1,3 +1,4 @@
+// app/layout.tsx
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import { Analytics } from "@vercel/analytics/react";
@@ -43,7 +44,6 @@ export const metadata: Metadata = {
     'what is a good ACT score',
     'what is a good SAT score',
     'GRE score calculator',
-    'GMAT score calculator',
     'LSAT score calculator',
     'A-level grade boundaries',
     'ACT percentile chart 2026',
