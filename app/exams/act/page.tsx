@@ -1363,13 +1363,12 @@ export default function ACTCalculatorPage() {
           <section className="bg-[#12141f] border border-white/7 rounded-2xl p-6"
             aria-labelledby="other-tools-heading">
             <h2 id="other-tools-heading" className="text-sm font-semibold text-slate-300 mb-4">
-              More free score calculators — SAT, GRE, GMAT &amp; more
+              More free score calculators — SAT, GRE &amp; more
             </h2>
             <div className="flex flex-wrap gap-2">
               {[
                 { id: 'sat',      name: 'SAT Score Calculator',  color: '#6366f1' },
                 { id: 'gre',      name: 'GRE Score Calculator',  color: '#a855f7' },
-                { id: 'gmat',     name: 'GMAT Score Calculator', color: '#f59e0b' },
                 { id: 'lsat',     name: 'LSAT Score Calculator', color: '#ef4444' },
                 { id: 'gcse',     name: 'GCSE Grade Calculator', color: '#34d399' },
                 { id: 'a-levels', name: 'A-Level Calculator',    color: '#ec4899' },
