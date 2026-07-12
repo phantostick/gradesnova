@@ -1,3 +1,4 @@
+// app/contact/page.tsx
 import type { Metadata } from 'next';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
@@ -49,6 +50,9 @@ export default function ContactPage() {
           <h2 className="text-lg font-bold text-white mb-2">Email us</h2>
           <p className="text-slate-400 text-sm mb-5 leading-relaxed">
             The fastest way to reach us. We aim to reply within 48 hours for data corrections and feature requests.
+          </p>
+          <p className="text-slate-500 text-xs mb-5 leading-relaxed">
+            GradesNova is run by the GradesNova team, led by a data analyst who previously built an education platform that reached 500,000+ monthly users.
           </p>
           <a
             href="mailto:jeepredictor.in@gmail.com"
