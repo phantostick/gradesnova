@@ -1,3 +1,4 @@
+// components/footer.tsx
 'use client';
 
 import Link from 'next/link';
@@ -59,9 +60,6 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link href="/exams/gre" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">GRE Calculator</Link>
-              </li>
-              <li>
-                <Link href="/exams/gmat" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">GMAT Calculator</Link>
               </li>
               <li>
                 <Link href="/exams/lsat" className="text-sm text-slate-400 hover:text-emerald-400 transition-colors">LSAT Calculator</Link>
