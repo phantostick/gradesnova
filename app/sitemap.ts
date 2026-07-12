@@ -1,3 +1,4 @@
+// app/sitemap.ts
 import type { MetadataRoute } from 'next';
 
 const BASE_URL = 'https://gradesnova.com';
@@ -45,7 +46,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { id: 'act',      priority: 0.95, freq: 'monthly'  },
     { id: 'lsat',     priority: 0.95, freq: 'monthly'  },
     { id: 'gre',      priority: 0.92, freq: 'monthly'  },
-    { id: 'gmat',     priority: 0.90, freq: 'monthly'  },
     { id: 'gcse',     priority: 0.95, freq: 'monthly'  }, // spikes on results day
     { id: 'a-levels', priority: 0.95, freq: 'monthly'  },
   ].map(({ id, priority, freq }) => ({
